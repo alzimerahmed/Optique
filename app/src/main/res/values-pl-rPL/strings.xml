@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Galeria</string>
     <string name="change_app_name">Nazwa aplikacji</string>
     <string name="change_app_name_summary">Zmień nazwę aplikacji wyświetlanej w launcherze</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Przycisk Wsparcia</string>
     <string name="github_button_cd">Przycisk Github</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Odrzuć powiadomienie</string>
     <string name="dismiss_banner_title">Przenieść powiadomienie?</string>
     <string name="dismiss_banner_message">Przyciski darowizny i GitHub będą przesunięte do paska stanu na dole strony Ustawienia.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">Modele AI umożliwiają inteligentne wyszukiwanie zdjęć i automatyczną klasyfikację mediów. Aplikacja używa modele CLIP (Contrastive Language-Image Pretraining) w formacie ONNX, aby zrozumieć zawartość Twoich zdjęć.</string>
     <string name="ai_models_privacy_description">Całe przetwarzanie AI odbywa się w całości na Twoim urządzeniu. Żadne zdjęcia, wyszukiwania, ani dane klasyfikacyjne nie opuszczają Twojego telefonu. Modele działają lokalnie używając ONNX Runtime i nie potrzebują połączenia z Internetem po pobraniu. Twoje media pozostają w pełni prywatne.</string>
     <string name="ai_models_source">Źródło</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Pliki modelów</string>
     <string name="ai_models_feature_search">Wyszukaj po opisie</string>
     <string name="ai_models_feature_categories">Automatyczne kategorie</string>
@@ -932,7 +932,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1432,7 +1432,7 @@
     <string name="setup_media_access_limited">Wybrane zdjęcia i filmy</string>
     <string name="setup_permission_not_granted">Nie przyznano</string>
     <string name="setup_permission_optional_not_granted">Opcjonalne · Nie przyznano</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Opcjonalne. Umożliwia ReFra odczytywanie danych GPS osadzonych w zdjęciach i filmach na potrzeby mapy i szczegółów lokalizacji. Galeria będzie nadal działać, jeśli pominiesz ten krok.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Opcjonalne. Umożliwia Optique odczytywanie danych GPS osadzonych w zdjęciach i filmach na potrzeby mapy i szczegółów lokalizacji. Galeria będzie nadal działać, jeśli pominiesz ten krok.]]></string>
     <string name="smart_scan_notification_channel">Inteligentne skanowanie</string>
     <string name="smart_scan_notification_title">Skanowanie multimediów</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d z %3$d · %4$d%% w sumie</string>
@@ -1451,7 +1451,7 @@
     <string name="album_delete_confirm_summary">Wszystkie elementy w tym albumie zostaną trwale usunięte. Nie można tego cofnąć.</string>
     <string name="map_appearance_header">Mapa</string>
     <string name="map_appearance_title">Wygląd mapy</string>
-    <string name="map_appearance_description">Wybierz, czy mapy mają podążać za wyglądem aplikacji ReFra, czy zawsze używać jasnych lub ciemnych kolorów mapy.</string>
+    <string name="map_appearance_description">Wybierz, czy mapy mają podążać za wyglądem aplikacji Optique, czy zawsze używać jasnych lub ciemnych kolorów mapy.</string>
     <string name="map_appearance_system">Podążaj za wyglądem aplikacji</string>
     <string name="map_appearance_light">Jasny</string>
     <string name="map_appearance_dark">Ciemny</string>
@@ -1543,7 +1543,7 @@
     <string name="disable_smoothing_summary">Pokaż ostre, kwadratowe piksele podczas powiększania zamiast rozmytego, wygładzonego obrazu</string>
     <string name="disable_smoothing_description">Po włączeniu obrazy są rysowane z użyciem skalowania najbliższego sąsiada, dzięki czemu powiększanie grafiki pikselowej zachowuje czyste, ostre piksele zamiast ich rozmywania. Wyłącz, aby uzyskać płynne skalowanie zdjęć.</string>
     <string name="remove_metadata">Usuń metadane</string>
-    <string name="remove_metadata_warning">Oryginalny plik zostanie zastąpiony dopiero po weryfikacji bezstratnej, oczyszczonej wersji. Jeśli zamiana się nie powiedzie, ReFra przywraca oryginał.</string>
+    <string name="remove_metadata_warning">Oryginalny plik zostanie zastąpiony dopiero po weryfikacji bezstratnej, oczyszczonej wersji. Jeśli zamiana się nie powiedzie, Optique przywraca oryginał.</string>
     <string name="metadata_mode_location">Tylko lokalizacja</string>
     <string name="metadata_mode_location_description">Usuwa współrzędne, wysokość, nazwy miejsc, kierunki i znaczniki GPS.</string>
     <string name="metadata_mode_privacy">Dotyczy prywatności</string>
@@ -1890,7 +1890,7 @@
     <string name="cloud_net_wifi_blank_summary">Brak sieci — zmiana wyłączona</string>
     <string name="cloud_net_wifi_pick_none">Nie ustawiono</string>
     <string name="change_app_logo">Logo aplikacji</string>
-    <string name="change_app_logo_summary">Przełączanie między ikoną uruchamiania galerii ReFra a klasyczną</string>
+    <string name="change_app_logo_summary">Przełączanie między ikoną uruchamiania galerii Optique a klasyczną</string>
     <string name="app_logo_description">Wybierz ikonę uruchamiania używaną na ekranie głównym i w szufladzie aplikacji. Aplikacja zostanie ponownie uruchomiona, aby zastosować zmianę.</string>
     <string name="setup_step_progress">Krok %1$d z %2$d</string>
     <string name="setup_continue">Kontynuuj</string>
@@ -1898,12 +1898,12 @@
     <string name="setup_grant_permissions">Nadaj uprawnienia</string>
     <string name="setup_welcome_subtitle">Twoja prywatna galeria na urządzeniu</string>
     <string name="setup_permissions_title">Uprawnienia</string>
-    <string name="setup_permissions_subtitle">ReFra używa tylko tego, co jest potrzebne do wyświetlania i zarządzania Twoimi mediami. Stuknij uprawnienie, aby dowiedzieć się, dlaczego.</string>
+    <string name="setup_permissions_subtitle">Optique używa tylko tego, co jest potrzebne do wyświetlania i zarządzania Twoimi mediami. Stuknij uprawnienie, aby dowiedzieć się, dlaczego.</string>
     <string name="setup_permission_used_for">Używane do:</string>
     <string name="permission_local_network_title">Bezpośredni dostęp do lokalnej sieci</string>
-    <string name="setup_reason_local_network">Opcjonalne. Przyznaj to tylko wtedy, gdy ReFra łączy się bezpośrednio z serwerem w Twojej aktualnej sieci.</string>
+    <string name="setup_reason_local_network">Opcjonalne. Przyznaj to tylko wtedy, gdy Optique łączy się bezpośrednio z serwerem w Twojej aktualnej sieci.</string>
     <string name="local_network_permission_dialog_title">Zezwolić na bezpośredni dostęp do sieci lokalnej?</string>
-    <string name="local_network_permission_dialog_message">Ten serwer jest przypisany do urządzenia w Twojej aktualnej sieci lokalnej. Android wymaga pozwolenia, zanim ReFra będzie mógł połączyć się z nim bezpośrednio.</string>
+    <string name="local_network_permission_dialog_message">Ten serwer jest przypisany do urządzenia w Twojej aktualnej sieci lokalnej. Android wymaga pozwolenia, zanim Optique będzie mógł połączyć się z nim bezpośrednio.</string>
     <string name="local_network_permission_not_now">Nie teraz</string>
     <string name="setup_reason_read_images"><![CDATA[Wyświetlanie Twoich zdjęć w osi czasu, albumach i przeglądarce. Bez tego galeria pozostaje pusta.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Wyświetlanie i odtwarzanie Twoich filmów w osi czasu, albumach i przeglądarce.]]></string>

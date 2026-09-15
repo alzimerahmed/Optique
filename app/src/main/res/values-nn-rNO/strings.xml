@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Gallery</string>
     <string name="change_app_name">App name</string>
     <string name="change_app_name_summary">Change the app name shown on your launcher</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Doner-knapp</string>
     <string name="github_button_cd">Github-knapp</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Dismiss banner</string>
     <string name="dismiss_banner_title">Move banner?</string>
     <string name="dismiss_banner_message">The Donate and GitHub buttons will move to a compact bar at the bottom of the Settings page.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI models enable intelligent image search and automatic media classification. The app uses CLIP (Contrastive Language-Image Pretraining) models in ONNX format to understand the content of your photos.</string>
     <string name="ai_models_privacy_description">All AI processing is performed entirely on your device. No images, search queries, or classification data ever leave your phone. The models run locally using ONNX Runtime and do not require an internet connection once downloaded. Your media remains fully private.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">Vault Operations</string>
     <string name="vault_notification_channel_description">Progress of encryption / decryption tasks</string>
     <string name="decrypt_vault">Dekrypter kvelvet</string>
-    <string name="restore_vault_summary">Det gjeldande kvelvet og innhaldet i det vert dekryptert og gjenoppretta.\nInnhaldet vert på nytt tilgjengeleg i ReFra.</string>
+    <string name="restore_vault_summary">Det gjeldande kvelvet og innhaldet i det vert dekryptert og gjenoppretta.\nInnhaldet vert på nytt tilgjengeleg i Optique.</string>
     <string name="restore_vault_title">Vil du dekryptera?</string>
     <string name="yes">Ja</string>
     <string name="vault_deletion_title">Vil du sletta?</string>
@@ -928,7 +928,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1428,7 +1428,7 @@
     <string name="setup_media_access_limited">Valde bilete og videoar</string>
     <string name="setup_permission_not_granted">Ikkje gjeve</string>
     <string name="setup_permission_optional_not_granted">Valfritt · Ikkje gjeve</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Valfritt. Lèt ReFra lese GPS-data som er bygde inn i bilete og videoar, for Kartet og posisjonsdetaljar. Galleriet fungerer framleis om du hoppar over dette.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Valfritt. Lèt Optique lese GPS-data som er bygde inn i bilete og videoar, for Kartet og posisjonsdetaljar. Galleriet fungerer framleis om du hoppar over dette.]]></string>
 
     <string name="smart_scan_notification_channel">Smart skanning</string>
     <string name="smart_scan_notification_title">Skannar media</string>
@@ -1448,7 +1448,7 @@
     <string name="album_delete_confirm_summary">Alle elementa i dette albumet blir permanent sletta. Dette kan ikkje angrast.</string>
     <string name="map_appearance_header">Kart</string>
     <string name="map_appearance_title">Kartutsjånad</string>
-    <string name="map_appearance_description">Vel om kart følgjer ReFras utsjånad eller alltid bruka lyse eller mørke kartfargar.</string>
+    <string name="map_appearance_description">Vel om kart følgjer Optiques utsjånad eller alltid bruka lyse eller mørke kartfargar.</string>
     <string name="map_appearance_system">Følg utsjånaden til appen</string>
     <string name="map_appearance_light">Lys</string>
     <string name="map_appearance_dark">Mørkt</string>
@@ -1540,7 +1540,7 @@
     <string name="disable_smoothing_summary">Vis skarpe, firkanta pikslar når du zoomar i staden for eit uskarpt, jamt bilete</string>
     <string name="disable_smoothing_description">Når den er aktivert, blir bilete teikna med skalering av næraste nabo, slik at zooming inn i pikselsgrafikk held reine, skarpe pikslar i staden for å gjera dei uskarpe. La den vera av for jamn skalering av bilete.</string>
     <string name="remove_metadata">Fjernt metadata</string>
-    <string name="remove_metadata_warning">Den originale fila blir først erstatta etter at ein tapsfri desinfisert versjon er stadfesta. Viss erstatning mislykkast, gjenopprettar ReFra originalen.</string>
+    <string name="remove_metadata_warning">Den originale fila blir først erstatta etter at ein tapsfri desinfisert versjon er stadfesta. Viss erstatning mislykkast, gjenopprettar Optique originalen.</string>
     <string name="metadata_mode_location">Berre plassering</string>
     <string name="metadata_mode_location_description">Fjernar koordinatar, høgd, stadnamn, vegbeskrivingar og GPS-tidsstempel.</string>
     <string name="metadata_mode_privacy">Personvernrelatert</string>
@@ -1887,7 +1887,7 @@
     <string name="cloud_net_wifi_blank_summary">Ikkje noko nettverk — byte er deaktivert</string>
     <string name="cloud_net_wifi_pick_none">Ikkje sat</string>
     <string name="change_app_logo">Applogo</string>
-    <string name="change_app_logo_summary">Byt mellom ReFra og det klassiske galleristartikonet</string>
+    <string name="change_app_logo_summary">Byt mellom Optique og det klassiske galleristartikonet</string>
     <string name="app_logo_description">Vel startikonet som blir brukt på startskjermen og appskuffa. Appen startar på nytt for å bruka endringa.</string>
     <string name="setup_step_progress">Trinn %1$d av %2$d</string>
     <string name="setup_continue">Hald fram</string>
@@ -1895,12 +1895,12 @@
     <string name="setup_grant_permissions">Gi løyve</string>
     <string name="setup_welcome_subtitle">Det private galleriet ditt på eininga</string>
     <string name="setup_permissions_title">Løyve</string>
-    <string name="setup_permissions_subtitle">ReFra bruker berre det ho treng for å visa og administrera media dine. Trykk på eit løyve for å finna ut kvifor.</string>
+    <string name="setup_permissions_subtitle">Optique bruker berre det ho treng for å visa og administrera media dine. Trykk på eit løyve for å finna ut kvifor.</string>
     <string name="setup_permission_used_for">Blir brukt til:</string>
     <string name="permission_local_network_title">Direkte lokal nettverkstilgang</string>
-    <string name="setup_reason_local_network">Valfritt. Gi dette berre når ReFra blir kopla direkte til ein server på det noverande nettverket ditt.</string>
+    <string name="setup_reason_local_network">Valfritt. Gi dette berre når Optique blir kopla direkte til ein server på det noverande nettverket ditt.</string>
     <string name="local_network_permission_dialog_title">Vil du tillata direkte tilgang til lokalt nettverk?</string>
-    <string name="local_network_permission_dialog_message">Denne serveren blir løyst til ei eining på det noverande lokalet ditt nettverk. Android krev løyve før ReFra kan kopla til den direkte.</string>
+    <string name="local_network_permission_dialog_message">Denne serveren blir løyst til ei eining på det noverande lokalet ditt nettverk. Android krev løyve før Optique kan kopla til den direkte.</string>
     <string name="local_network_permission_not_now">Ikkje no</string>
     <string name="setup_reason_read_images"><![CDATA[Viser bileta dine i tidslinja, albuma og visninga. Utan dette held fram med å vere galleriet tomt.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Viser og speler av videoane dine på tidslinja, album og visning.]]></string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Thư viện</string>
     <string name="change_app_name">Tên ứng dụng</string>
     <string name="change_app_name_summary">Thay đổi tên ứng dụng hiện trên trình khởi chạy</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Nút khuyên góp</string>
     <string name="github_button_cd">Nút GitHub</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Loại bỏ biểu ngữ</string>
     <string name="dismiss_banner_title">Di chuyển biểu ngữ?</string>
     <string name="dismiss_banner_message">Nút Khuyên góp và GitHub sẽ được thu gọn và di chuyển xuống cuối trang cài đặt.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">Các mô hình AI cho phép tìm kiếm ảnh thông minh và phân loại phương tiện tự động. Ứng dụng sử dụng các mô hình CLIP (Contrastive Language-Image Pretraining) ở định dạng ONNX để hiểu nội dung trong ảnh của bạn.</string>
     <string name="ai_models_privacy_description">Toàn bộ quá trình xử lý AI diễn ra trực tiếp trên thiết bị của bạn. Không có ảnh, truy vấn tìm kiếm hay dữ liệu phân loại nào được gửi ra ngoài điện thoại. Các mô hình hoạt động cục bộ bằng ONNX Runtime và không cần kết nối Internet sau khi tải xuống. Ảnh và đoạn phim của bạn luôn được bảo vệ và giữ riêng tư hoàn toàn.</string>
     <string name="ai_models_source">Nguồn</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Tệp mô hình</string>
     <string name="ai_models_feature_search">Tìm kiếm theo mô tả</string>
     <string name="ai_models_feature_categories">Danh mục tự động</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">Thao tác két</string>
     <string name="vault_notification_channel_description">Tiến trình các tác vụ mã hóa / giải mã</string>
     <string name="decrypt_vault">Giải mã két</string>
-    <string name="restore_vault_summary">Két hiện tại và toàn bộ nội dung của nó sẽ được giải mã và khôi phục.\nThao tác này sẽ làm cho nội dung của bạn có thể truy cập lại trong ReFra.</string>
+    <string name="restore_vault_summary">Két hiện tại và toàn bộ nội dung của nó sẽ được giải mã và khôi phục.\nThao tác này sẽ làm cho nội dung của bạn có thể truy cập lại trong Optique.</string>
     <string name="restore_vault_title">Xác nhận giải mã?</string>
     <string name="yes">Có</string>
     <string name="vault_deletion_title">Xác nhận xóa?</string>
@@ -926,7 +926,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1426,7 +1426,7 @@
     <string name="setup_media_access_limited">Ảnh và video đã chọn</string>
     <string name="setup_permission_not_granted">Chưa cấp</string>
     <string name="setup_permission_optional_not_granted">Không bắt buộc · Chưa cấp</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Không bắt buộc. Cho phép ReFra đọc dữ liệu GPS được nhúng trong ảnh và video để dùng cho Bản đồ và thông tin vị trí. Thư viện của bạn vẫn hoạt động nếu bỏ qua bước này.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Không bắt buộc. Cho phép Optique đọc dữ liệu GPS được nhúng trong ảnh và video để dùng cho Bản đồ và thông tin vị trí. Thư viện của bạn vẫn hoạt động nếu bỏ qua bước này.]]></string>
     <string name="smart_scan_notification_channel">Quét thông minh</string>
     <string name="smart_scan_notification_title">Đang quét phương tiện</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d trong số %3$d · %4$d%% tổng cộng</string>
@@ -1445,7 +1445,7 @@
     <string name="album_delete_confirm_summary">Tất cả các mục trong album này sẽ bị xóa vĩnh viễn. Điều này không thể hoàn tác.</string>
     <string name="map_appearance_header">Bản đồ</string>
     <string name="map_appearance_title">Giao diện bản đồ</string>
-    <string name="map_appearance_description">Chọn xem bản đồ theo giao diện của ReFra hay luôn sử dụng màu bản đồ sáng hoặc tối.</string>
+    <string name="map_appearance_description">Chọn xem bản đồ theo giao diện của Optique hay luôn sử dụng màu bản đồ sáng hoặc tối.</string>
     <string name="map_appearance_system">Theo giao diện ứng dụng</string>
     <string name="map_appearance_light">Sáng</string>
     <string name="map_appearance_dark">Tối</string>
@@ -1537,7 +1537,7 @@
     <string name="disable_smoothing_summary">Hiển thị các điểm ảnh vuông, sắc nét khi phóng to thay vì hình ảnh mờ, được làm mịn</string>
     <string name="disable_smoothing_description">Khi bật, hình ảnh sẽ được vẽ với việc phóng to theo lân cận gần nhất, vì vậy khi phóng to pixel art sẽ giữ được các điểm ảnh sắc nét thay vì làm mờ chúng. Tắt tính năng này để phóng to ảnh mượt mà.</string>
     <string name="remove_metadata">Xóa siêu dữ liệu</string>
-    <string name="remove_metadata_warning">Tệp gốc sẽ chỉ được thay thế sau khi phiên bản được làm sạch không mất dữ liệu được xác minh. Nếu việc thay thế thất bại, ReFra sẽ khôi phục tệp gốc.</string>
+    <string name="remove_metadata_warning">Tệp gốc sẽ chỉ được thay thế sau khi phiên bản được làm sạch không mất dữ liệu được xác minh. Nếu việc thay thế thất bại, Optique sẽ khôi phục tệp gốc.</string>
     <string name="metadata_mode_location">Chỉ vị trí</string>
     <string name="metadata_mode_location_description">Xóa tọa độ, độ cao, tên địa điểm, phương hướng và dấu thời gian GPS.</string>
     <string name="metadata_mode_privacy">Liên quan đến quyền riêng tư</string>
@@ -1884,7 +1884,7 @@
     <string name="cloud_net_wifi_blank_summary">Không có mạng — chuyển đổi bị vô hiệu hóa</string>
     <string name="cloud_net_wifi_pick_none">Chưa được đặt</string>
     <string name="change_app_logo">Biểu tượng ứng dụng</string>
-    <string name="change_app_logo_summary">Chuyển đổi giữa biểu tượng khởi chạy ReFra và một biểu tượng Thư viện cổ điển</string>
+    <string name="change_app_logo_summary">Chuyển đổi giữa biểu tượng khởi chạy Optique và một biểu tượng Thư viện cổ điển</string>
     <string name="app_logo_description">Chọn biểu tượng khởi chạy được sử dụng trên màn hình chính và ngăn ứng dụng của bạn. Ứng dụng sẽ khởi động lại để áp dụng thay đổi.</string>
     <string name="setup_step_progress">Bước %1$d của %2$d</string>
     <string name="setup_continue">Tiếp tục</string>
@@ -1892,12 +1892,12 @@
     <string name="setup_grant_permissions">Cấp quyền</string>
     <string name="setup_welcome_subtitle">Thư viện riêng tư trên thiết bị của bạn</string>
     <string name="setup_permissions_title">Quyền</string>
-    <string name="setup_permissions_subtitle">ReFra chỉ sử dụng những gì nó cần để hiển thị và quản lý phương tiện của bạn. Nhấn vào một quyền để tìm hiểu lý do.</string>
+    <string name="setup_permissions_subtitle">Optique chỉ sử dụng những gì nó cần để hiển thị và quản lý phương tiện của bạn. Nhấn vào một quyền để tìm hiểu lý do.</string>
     <string name="setup_permission_used_for">Được sử dụng cho:</string>
     <string name="permission_local_network_title">Truy cập mạng cục bộ trực tiếp</string>
-    <string name="setup_reason_local_network">Tùy chọn. Chỉ cấp quyền này khi ReFra kết nối trực tiếp với máy chủ trên mạng hiện tại của bạn.</string>
+    <string name="setup_reason_local_network">Tùy chọn. Chỉ cấp quyền này khi Optique kết nối trực tiếp với máy chủ trên mạng hiện tại của bạn.</string>
     <string name="local_network_permission_dialog_title">Cho phép truy cập mạng cục bộ trực tiếp?</string>
-    <string name="local_network_permission_dialog_message">Máy chủ này được phân giải thành một thiết bị trên mạng cục bộ hiện tại của bạn. Android yêu cầu quyền trước khi ReFra có thể kết nối trực tiếp với nó.</string>
+    <string name="local_network_permission_dialog_message">Máy chủ này được phân giải thành một thiết bị trên mạng cục bộ hiện tại của bạn. Android yêu cầu quyền trước khi Optique có thể kết nối trực tiếp với nó.</string>
     <string name="local_network_permission_not_now">Không phải bây giờ</string>
     <string name="setup_reason_read_images"><![CDATA[Hiển thị ảnh của bạn trong dòng thời gian, album và trình xem. Nếu không có điều này, thư viện sẽ trống.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Hiển thị và phát video của bạn trong dòng thời gian, album và trình xem.]]></string>

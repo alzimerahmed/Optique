@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">Découper un sujet</string>
     <string name="help_tip_view_cutout_subtitle">Détacher une personne ou un objet de l\'arrière-plan</string>
     <string name="help_tip_view_cutout_p1_title">Soulever le sujet détecté</string>
-    <string name="help_tip_view_cutout_p1_desc">Dans le visualiseur, ReFra peut détecter le sujet principal sur l\'appareil et montrer une suggestion mise en évidence. Ouvrez-le pour affiner le masque, puis copiez, partagez ou enregistrez une découpe transparente. Vous pouvez également effectuer un appui long pour commencer la découpe depuis les paramètres du visualiseur multimédia.</string>
+    <string name="help_tip_view_cutout_p1_desc">Dans le visualiseur, Optique peut détecter le sujet principal sur l\'appareil et montrer une suggestion mise en évidence. Ouvrez-le pour affiner le masque, puis copiez, partagez ou enregistrez une découpe transparente. Vous pouvez également effectuer un appui long pour commencer la découpe depuis les paramètres du visualiseur multimédia.</string>
     <string name="help_tip_view_cutout_p1_s1">Ouvrir une photo avec un sujet clair</string>
     <string name="help_tip_view_cutout_p1_s2">Appuyer sur la suggestion Découper le sujet</string>
     <string name="help_tip_view_cutout_p1_s3">Affiner le contour avec des points à inclure ou exclure</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">Format de date</string>
     <string name="help_tip_settings_date_format_subtitle">Choisir comment les dates apparaissent</string>
     <string name="help_tip_settings_date_format_p1_title">Choisir votre format</string>
-    <string name="help_tip_settings_date_format_p1_desc">ReFra suit par défaut la date de votre système et les préférences 12/24 heures. Définissez un remplacement uniquement si vous souhaitez un motif personnalisé, et utilisez le bouton d’information pour consulter les symboles de format pris en charge.</string>
+    <string name="help_tip_settings_date_format_p1_desc">Optique suit par défaut la date de votre système et les préférences 12/24 heures. Définissez un remplacement uniquement si vous souhaitez un motif personnalisé, et utilisez le bouton d’information pour consulter les symboles de format pris en charge.</string>
     <string name="help_tip_settings_date_format_p1_s1">Ouvrir le format de date</string>
     <string name="help_tip_settings_date_format_p1_s2">Garder Suivre le système ou entrer un motif personnalisé</string>
     <string name="help_tip_settings_date_format_p1_s3">Prévisualisez le résultat et ouvrez les instructions de format si nécessaire</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">Configuration initiale</string>
     <string name="help_tip_basics_setup_subtitle">Accordez l\'accès et choisissez vos paramètres par défaut</string>
     <string name="help_tip_basics_setup_p1_title">Pour commencer</string>
-    <string name="help_tip_basics_setup_p1_desc">Lors du premier lancement, ReFra vous guide à travers les autorisations, l\'apparence, les modèles d\'IA, les comptes cloud et des conseils utiles. Vous pouvez revenir à la configuration à tout moment.</string>
+    <string name="help_tip_basics_setup_p1_desc">Lors du premier lancement, Optique vous guide à travers les autorisations, l\'apparence, les modèles d\'IA, les comptes cloud et des conseils utiles. Vous pouvez revenir à la configuration à tout moment.</string>
 
     <string name="help_tip_albums_ignored_manage_title">Gérer les albums ignorés</string>
     <string name="help_tip_albums_ignored_manage_subtitle">Examiner et restaurer les dossiers cachés</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">Parcourir par type de média</string>
     <string name="help_tip_media_type_albums_subtitle">Albums automatiques pour photos, vidéos, GIF et fichiers RAW</string>
     <string name="help_tip_media_type_albums_p1_title">Albums par type de média</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra crée des albums virtuels à partir de votre bibliothèque unifiée afin que vous puissiez ouvrir toutes les photos, vidéos, GIF ou fichiers RAW ensemble. Leur visibilité est contrôlée depuis les paramètres Timeline &amp; Albums.</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique crée des albums virtuels à partir de votre bibliothèque unifiée afin que vous puissiez ouvrir toutes les photos, vidéos, GIF ou fichiers RAW ensemble. Leur visibilité est contrôlée depuis les paramètres Timeline &amp; Albums.</string>
     <string name="help_tip_media_type_albums_p1_s1">Ouvrez les Albums et faites défiler jusqu\'à Types de médias</string>
     <string name="help_tip_media_type_albums_p1_s2">Ouvrez un type pour parcourir les médias correspondants</string>
     <string name="help_tip_media_type_albums_p1_s3">Utilisez les paramètres Timeline &amp; Albums pour afficher ou masquer la section</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">Développez les photos RAW</string>
     <string name="help_tip_raw_develop_subtitle">Ajustez les données du capteur avant l’exportation</string>
     <string name="help_tip_raw_develop_p1_title">Utilisez les contrôles de Développement</string>
-    <string name="help_tip_raw_develop_p1_desc">Ouvrez une photo RAW prise en charge dans l’éditeur pour ajuster la balance des blancs, l’exposition, les hautes lumières, la couleur de sortie et le dématriçage. ReFra utilise un aperçu sûr pour la mémoire tout en préservant la sortie en pleine résolution.</string>
+    <string name="help_tip_raw_develop_p1_desc">Ouvrez une photo RAW prise en charge dans l’éditeur pour ajuster la balance des blancs, l’exposition, les hautes lumières, la couleur de sortie et le dématriçage. Optique utilise un aperçu sûr pour la mémoire tout en préservant la sortie en pleine résolution.</string>
     <string name="help_tip_raw_develop_p1_s1">Ouvrez une photo RAW et appuyez sur Modifier</string>
     <string name="help_tip_raw_develop_p1_s2">Choisissez les options dans l’onglet Développement</string>
     <string name="help_tip_raw_develop_p1_s3">Appliquer tout recadrage, filtre ou annotation supplémentaire</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">Grouper des personnes sur l’appareil</string>
     <string name="help_tip_people_grouping_subtitle">Trouver des visages sans télécharger votre bibliothèque</string>
     <string name="help_tip_people_grouping_p1_title">Scanner et organiser les personnes</string>
-    <string name="help_tip_people_grouping_p1_desc">Avec le modèle de reconnaissance faciale installé, ReFra scanne et groupe les personnes localement. Vous pouvez démarrer une nouvelle analyse depuis Personnes, masquer une personne, fusionner des groupes et créer des copies floutées lorsque la confidentialité est importante.</string>
+    <string name="help_tip_people_grouping_p1_desc">Avec le modèle de reconnaissance faciale installé, Optique scanne et groupe les personnes localement. Vous pouvez démarrer une nouvelle analyse depuis Personnes, masquer une personne, fusionner des groupes et créer des copies floutées lorsque la confidentialité est importante.</string>
     <string name="help_tip_people_grouping_p1_s1">Installer le modèle de détection faciale</string>
     <string name="help_tip_people_grouping_p1_s2">Ouvrir la Bibliothèque, puis Personnes</string>
     <string name="help_tip_people_grouping_p1_s3">Appuyer sur Scanner les personnes et attendre l’indexation</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">Supprimer les métadonnées sensibles</string>
     <string name="help_tip_metadata_sanitize_subtitle">Nettoyer les fichiers pris en charge sans recomprimer les pixels</string>
     <string name="help_tip_metadata_sanitize_p1_title">Choisir ce qu\'il faut supprimer</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">Depuis les détails d\'une photo, choisissez Supprimer les métadonnées et sélectionnez uniquement l\'emplacement, les champs descriptifs ou toutes les métadonnées prises en charge. ReFra écrit et vérifie une copie nettoyée sans perte avant de remplacer l\'original.</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">Depuis les détails d\'une photo, choisissez Supprimer les métadonnées et sélectionnez uniquement l\'emplacement, les champs descriptifs ou toutes les métadonnées prises en charge. Optique écrit et vérifie une copie nettoyée sans perte avant de remplacer l\'original.</string>
     <string name="help_tip_metadata_sanitize_p1_s1">Ouvrez une photo locale prise en charge</string>
     <string name="help_tip_metadata_sanitize_p1_s2">Développez ses détails et appuyez sur Supprimer les métadonnées</string>
     <string name="help_tip_metadata_sanitize_p1_s3">Choisissez le niveau de nettoyage</string>

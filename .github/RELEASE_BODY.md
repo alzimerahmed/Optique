@@ -1,6 +1,6 @@
 ## What's new in 5.1.5
 
-ReFra 5.1.5 is a focused reliability update that improves photo location accuracy, slideshow startup, and offline launches.
+Optique 5.1.5 is a focused reliability update that improves photo location accuracy, slideshow startup, and offline launches.
 
 ### Bug Fixes
 

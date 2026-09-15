@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">Izreži subjekt</string>
     <string name="help_tip_view_cutout_subtitle">Podigni osobu ili predmet s pozadine</string>
     <string name="help_tip_view_cutout_p1_title">Podigni otkriveni subjekt</string>
-    <string name="help_tip_view_cutout_p1_desc">U pregledniku, ReFra može detektirati glavni subjekt na uređaju i prikazati istaknuti prijedlog. Otvori ga da poboljšaš masku, zatim kopiraj, podijeli ili spremi prozirni izrezak. Također možeš omogućiti dugim pritiskom pokretanje izreza iz postavki preglednika medija.</string>
+    <string name="help_tip_view_cutout_p1_desc">U pregledniku, Optique može detektirati glavni subjekt na uređaju i prikazati istaknuti prijedlog. Otvori ga da poboljšaš masku, zatim kopiraj, podijeli ili spremi prozirni izrezak. Također možeš omogućiti dugim pritiskom pokretanje izreza iz postavki preglednika medija.</string>
     <string name="help_tip_view_cutout_p1_s1">Otvori fotografiju s jasnim subjektom</string>
     <string name="help_tip_view_cutout_p1_s2">Dodirni prijedlog \'Izreži subjekt\'</string>
     <string name="help_tip_view_cutout_p1_s3">Poboljšaj obris pomoću točaka \'uključi\' ili \'isključi\'</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">Format datuma</string>
     <string name="help_tip_settings_date_format_subtitle">Odaberi kako će se datumi prikazivati</string>
     <string name="help_tip_settings_date_format_p1_title">Odaberi svoj format</string>
-    <string name="help_tip_settings_date_format_p1_desc">ReFra prema zadanim postavkama slijedi datum sustava i 12/24-satne preferencije. Postavi nadjačavanje samo kada želiš prilagođeni obrazac i koristi gumb informacija za pregled podržanih simbola formata.</string>
+    <string name="help_tip_settings_date_format_p1_desc">Optique prema zadanim postavkama slijedi datum sustava i 12/24-satne preferencije. Postavi nadjačavanje samo kada želiš prilagođeni obrazac i koristi gumb informacija za pregled podržanih simbola formata.</string>
     <string name="help_tip_settings_date_format_p1_s1">Otvori format datuma</string>
     <string name="help_tip_settings_date_format_p1_s2">Ostavi Prati sustav ili unesi prilagođeni obrazac</string>
     <string name="help_tip_settings_date_format_p1_s3">Pregledajte rezultat i otvorite upute za format ako je potrebno</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">Prvo pokretanje</string>
     <string name="help_tip_basics_setup_subtitle">Dajte dopuštenja i odaberite svoje zadane postavke</string>
     <string name="help_tip_basics_setup_p1_title">Početak</string>
-    <string name="help_tip_basics_setup_p1_desc">Pri prvom pokretanju ReFra vodi vas kroz dopuštenja, izgled, AI modele, račune u oblaku i korisne savjete. Postavljanje možete ponovo otvoriti u bilo kojem trenutku.</string>
+    <string name="help_tip_basics_setup_p1_desc">Pri prvom pokretanju Optique vodi vas kroz dopuštenja, izgled, AI modele, račune u oblaku i korisne savjete. Postavljanje možete ponovo otvoriti u bilo kojem trenutku.</string>
 
     <string name="help_tip_albums_ignored_manage_title">Upravljanje zanemarenim albumima</string>
     <string name="help_tip_albums_ignored_manage_subtitle">Pregledajte i vratite skrivene mape</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">Pregled po vrsti medija</string>
     <string name="help_tip_media_type_albums_subtitle">Automatski albumi za fotografije, videozapise, GIF-ove i RAW datoteke</string>
     <string name="help_tip_media_type_albums_p1_title">Albumi po vrsti medija</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra stvara virtualne albume iz vaše objedinjene biblioteke kako biste mogli otvoriti sve fotografije, videozapise, GIF-ove ili RAW datoteke zajedno. Njihova vidljivost kontrolira se iz postavki Vremenske crte i Albuma.</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique stvara virtualne albume iz vaše objedinjene biblioteke kako biste mogli otvoriti sve fotografije, videozapise, GIF-ove ili RAW datoteke zajedno. Njihova vidljivost kontrolira se iz postavki Vremenske crte i Albuma.</string>
     <string name="help_tip_media_type_albums_p1_s1">Otvorite Albume i pomaknite se do Vrste medija</string>
     <string name="help_tip_media_type_albums_p1_s2">Otvorite vrstu da pregledate odgovarajući medij</string>
     <string name="help_tip_media_type_albums_p1_s3">Koristite postavke Vremenske crte i Albuma da prikažete ili sakrijete odjeljak</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">Obradite RAW fotografije</string>
     <string name="help_tip_raw_develop_subtitle">Podesite podatke senzora prije izvoza</string>
     <string name="help_tip_raw_develop_p1_title">Koristite kontrole za Obradu</string>
-    <string name="help_tip_raw_develop_p1_desc">Otvorite podržanu RAW fotografiju u uređivaču da prilagodite balans bijele, ekspoziciju, svijetla, izlaznu boju i demosažiranje. ReFra koristi sigurnu predpregled memorije dok čuva izlaz u punoj rezoluciji.</string>
+    <string name="help_tip_raw_develop_p1_desc">Otvorite podržanu RAW fotografiju u uređivaču da prilagodite balans bijele, ekspoziciju, svijetla, izlaznu boju i demosažiranje. Optique koristi sigurnu predpregled memorije dok čuva izlaz u punoj rezoluciji.</string>
     <string name="help_tip_raw_develop_p1_s1">Otvorite RAW fotografiju i dodirnite Uredi</string>
     <string name="help_tip_raw_develop_p1_s2">Odaberite opcije na kartici Obrada</string>
     <string name="help_tip_raw_develop_p1_s3">Primijenite bilo koji dodatni izrez, filtar ili označavanje</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">Grupirajte ljude na uređaju</string>
     <string name="help_tip_people_grouping_subtitle">Pronađite lica bez učitavanja knjižnice</string>
     <string name="help_tip_people_grouping_p1_title">Skenirajte i organizirajte ljude</string>
-    <string name="help_tip_people_grouping_p1_desc">S instaliranim modelom lica, ReFra skenira i grupira ljude lokalno. Možete započeti novo skeniranje iz People, sakriti osobu, spojiti grupe i stvoriti zamagljene kopije kada je privatnost važna.</string>
+    <string name="help_tip_people_grouping_p1_desc">S instaliranim modelom lica, Optique skenira i grupira ljude lokalno. Možete započeti novo skeniranje iz People, sakriti osobu, spojiti grupe i stvoriti zamagljene kopije kada je privatnost važna.</string>
     <string name="help_tip_people_grouping_p1_s1">Instalirajte model za prepoznavanje lica</string>
     <string name="help_tip_people_grouping_p1_s2">Otvorite Knjižnicu, zatim People</string>
     <string name="help_tip_people_grouping_p1_s3">Dodirnite Skeniraj za ljude i pričekajte indeksiranje</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">Uklonite osjetljive metapodatke</string>
     <string name="help_tip_metadata_sanitize_subtitle">Očistite podržane datoteke bez ponovnog komprimiranja piksela</string>
     <string name="help_tip_metadata_sanitize_p1_title">Odaberite što ukloniti</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">Iz detalja fotografije odaberite Ukloni metapodatke i odaberite samo lokaciju, opisna polja ili sve podržane metapodatke. ReFra zapisuje i provjerava gubitak bez gubitka očišćenu kopiju prije nego zamijeni original.</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">Iz detalja fotografije odaberite Ukloni metapodatke i odaberite samo lokaciju, opisna polja ili sve podržane metapodatke. Optique zapisuje i provjerava gubitak bez gubitka očišćenu kopiju prije nego zamijeni original.</string>
     <string name="help_tip_metadata_sanitize_p1_s1">Otvorite podržanu lokalnu fotografiju</string>
     <string name="help_tip_metadata_sanitize_p1_s2">Proširite njezine detalje i dodirnite Ukloni metapodatke</string>
     <string name="help_tip_metadata_sanitize_p1_s3">Odaberite razinu sanitizacije</string>

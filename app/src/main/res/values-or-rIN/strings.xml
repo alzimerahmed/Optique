@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Gallery</string>
     <string name="change_app_name">App name</string>
     <string name="change_app_name_summary">Change the app name shown on your launcher</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Donate Button</string>
     <string name="github_button_cd">Github Button</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Dismiss banner</string>
     <string name="dismiss_banner_title">Move banner?</string>
     <string name="dismiss_banner_message">The Donate and GitHub buttons will move to a compact bar at the bottom of the Settings page.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI models enable intelligent image search and automatic media classification. The app uses CLIP (Contrastive Language-Image Pretraining) models in ONNX format to understand the content of your photos.</string>
     <string name="ai_models_privacy_description">All AI processing is performed entirely on your device. No images, search queries, or classification data ever leave your phone. The models run locally using ONNX Runtime and do not require an internet connection once downloaded. Your media remains fully private.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">Vault Operations</string>
     <string name="vault_notification_channel_description">Progress of encryption / decryption tasks</string>
     <string name="decrypt_vault">Decrypt Vault</string>
-    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the ReFra.</string>
+    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the Optique.</string>
     <string name="restore_vault_title">Confirm Decryption?</string>
     <string name="yes">Yes</string>
     <string name="vault_deletion_title">Confirm Deletion?</string>
@@ -928,7 +928,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1428,7 +1428,7 @@
     <string name="setup_media_access_limited">ବଛାଯାଇଥିବା ଫଟୋ ଏବଂ ଭିଡିଓ</string>
     <string name="setup_permission_not_granted">ଅନୁମତି ଦିଆଯାଇ ନାହିଁ</string>
     <string name="setup_permission_optional_not_granted">ଇଚ୍ଛାଧୀନ · ଅନୁମତି ଦିଆଯାଇ ନାହିଁ</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[ଇଚ୍ଛାଧୀନ। ମାନଚିତ୍ର ଏବଂ ଅବସ୍ଥାନ ବିବରଣୀ ପାଇଁ ReFra କୁ ଫଟୋ ଏବଂ ଭିଡିଓରେ ଏମ୍ବେଡ୍ ହୋଇଥିବା GPS ଡାଟା ପଢ଼ିବାକୁ ଅନୁମତି ଦିଏ। ଆପଣ ଏହାକୁ ଛାଡ଼ିଦେଲେ ମଧ୍ୟ ଆପଣଙ୍କ ଗ୍ୟାଲେରୀ କାମ କରିବ।]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[ଇଚ୍ଛାଧୀନ। ମାନଚିତ୍ର ଏବଂ ଅବସ୍ଥାନ ବିବରଣୀ ପାଇଁ Optique କୁ ଫଟୋ ଏବଂ ଭିଡିଓରେ ଏମ୍ବେଡ୍ ହୋଇଥିବା GPS ଡାଟା ପଢ଼ିବାକୁ ଅନୁମତି ଦିଏ। ଆପଣ ଏହାକୁ ଛାଡ଼ିଦେଲେ ମଧ୍ୟ ଆପଣଙ୍କ ଗ୍ୟାଲେରୀ କାମ କରିବ।]]></string>
     <!-- Odia coverage completion -->
     <string name="smart_scan_notification_channel">ସ୍ମାର୍ଟ ସ୍କ୍ୟାନ୍</string>
     <string name="smart_scan_notification_title">ମାଧ୍ୟମ ତଦନ୍ତ କରାଯାଉଛି</string>
@@ -1448,7 +1448,7 @@
     <string name="album_delete_confirm_summary">ଏହି ଆଲବମ୍‌ର ସମସ୍ତ ଆଇଟମ୍‌ ସ୍ଥାୟୀଭାବେ ଡିଲିଟ୍ ହେବ। ଏହା ପଛକୁ ଫେରାଇବା ଯାଉନାହିଁ।</string>
     <string name="map_appearance_header">ନକଶା</string>
     <string name="map_appearance_title">ନକଶା ଦେଖାଯିବା</string>
-    <string name="map_appearance_description">ନକଶାଗୁଡ଼ିକ ReFraର ଦୃଶ୍ୟକୁ ଅନୁସରଣ କରିବ କି ସବୁବେଳେ ଉଜ୍ଜ୍ୱଳ କିମ୍ବା ଗାଢ଼ ରଙ୍ଗ ବ୍ୟବହାର କରିବ, ତାହା ବାଛନ୍ତୁ।</string>
+    <string name="map_appearance_description">ନକଶାଗୁଡ଼ିକ Optiqueର ଦୃଶ୍ୟକୁ ଅନୁସରଣ କରିବ କି ସବୁବେଳେ ଉଜ୍ଜ୍ୱଳ କିମ୍ବା ଗାଢ଼ ରଙ୍ଗ ବ୍ୟବହାର କରିବ, ତାହା ବାଛନ୍ତୁ।</string>
     <string name="map_appearance_system">ଆପ୍ ଦେଖାଯିବାକୁ ଅନୁସରଣ କରନ୍ତୁ</string>
     <string name="map_appearance_light">ଆଲୋକ</string>
     <string name="map_appearance_dark">ଅନ୍ଧାର</string>
@@ -1540,7 +1540,7 @@
     <string name="disable_smoothing_summary">ଜୁମ୍ କରିବା ସମୟରେ ଧୁସର, ସ୍ମୁଦ୍ ଚିତ୍ରର ପରିବର୍ତ୍ତେ ସ୍ପଷ୍ଟ, ବର୍ଗକାର ପିକ୍ସେଲ୍ ଦର୍ଶାନ୍ତୁ</string>
     <string name="disable_smoothing_description">ସକ୍ରିୟ କରାଯିଲେ, ଛବିଗୁଡ଼ିକୁ ସବୁଠାରୁ ନିକଟ ପଡ଼ିଥିବା ପଡ଼ୋଶୀ ସ୍କେଲିଙ୍ଗ ସହିତ ଚିତ୍ରାଙ୍କିତ କରାଯାଏ, ଯେଉଁଥିରେ ପିକ୍ସେଲ୍ କଳାକୃତିକୁ ଜୁମ୍ କଲେ ସ୍ପଷ୍ଟ, ତୀକ୍ଷ୍ଣ ପିକ୍ସେଲ୍ ରହେ ବଳ୍କି ଧୁସର ନୁହଁଁ। ଫୋଟୋର ସ୍ମୁଦ୍ ସ୍କେଲିଙ୍ଗ ପାଇଁ ଏହାକୁ ବନ୍ଦ ରଖନ୍ତୁ।</string>
     <string name="remove_metadata">ମେଟାଡାଟା ହଟାନ୍ତୁ</string>
-    <string name="remove_metadata_warning">ମୂଳ ଫାଇଲ୍ କେବଳ ଏକ ହାରହୀନ ସଂପାଦିତ ସଂସ୍କରଣ ସଠିକ୍ ଭାବରେ ସତ୍ୟାପିତ ହେବା ପରେ ପରିବର୍ତ୍ତିତ କରାଯିବ। ଯଦି ପରିବର୍ତ୍ତନ ବିଫଳ ହୁଏ, ReFra ମୂଳକୁ ପୁନର୍ସ୍ଥାପନ କରିବ।</string>
+    <string name="remove_metadata_warning">ମୂଳ ଫାଇଲ୍ କେବଳ ଏକ ହାରହୀନ ସଂପାଦିତ ସଂସ୍କରଣ ସଠିକ୍ ଭାବରେ ସତ୍ୟାପିତ ହେବା ପରେ ପରିବର୍ତ୍ତିତ କରାଯିବ। ଯଦି ପରିବର୍ତ୍ତନ ବିଫଳ ହୁଏ, Optique ମୂଳକୁ ପୁନର୍ସ୍ଥାପନ କରିବ।</string>
     <string name="metadata_mode_location">କେବଳ ସ୍ଥାନ</string>
     <string name="metadata_mode_location_description">ସମନ୍ୱୟ, ଉଚ୍ଚତା, ସ୍ଥାନ ନାମ, ଦିଗ, ଏବଂ GPS ସମୟସୂଚୀକୁ ହଟାଏ।</string>
     <string name="metadata_mode_privacy">ଗୋପନୀୟତା ସମ୍ପର୍କିତ</string>
@@ -1887,7 +1887,7 @@
     <string name="cloud_net_wifi_blank_summary">କୌଣସି ନେଟୱର୍କ ନାହିଁ — ସ୍ୱିଚିଂ ନିଷ୍କ୍ରିୟ</string>
     <string name="cloud_net_wifi_pick_none">ସେଟ୍ ହୋଇନି</string>
     <string name="change_app_logo">ଆପ୍ ଲୋଗୋ</string>
-    <string name="change_app_logo_summary">ReFra ଓ କ୍ଲାସିକ୍ ଗ୍ୟାଲେରୀ ଲଞ୍ଚର ଆଇକନ୍ ମଧ୍ୟରେ ସ୍ୱିଚ୍ କରନ୍ତୁ</string>
+    <string name="change_app_logo_summary">Optique ଓ କ୍ଲାସିକ୍ ଗ୍ୟାଲେରୀ ଲଞ୍ଚର ଆଇକନ୍ ମଧ୍ୟରେ ସ୍ୱିଚ୍ କରନ୍ତୁ</string>
     <string name="app_logo_description">ଆପଣଙ୍କ ହୋମ୍ ସ୍କ୍ରୀନ୍ ଓ ଆପ୍ ଡ୍ରାଅର୍‌ରେ ବ୍ୟବହୃତ ଲଞ୍ଚର ଆଇକନ୍ ଚୟନ କରନ୍ତୁ। ପରିବର୍ତ୍ତନ ପ୍ରୟୋଗ କରିବା ପାଇଁ ଆପ୍ ପୁନଃ ଆରମ୍ଭ ହେବ।</string>
     <string name="setup_step_progress">ପଦକ୍ଷେପ %1$d ର %2$d</string>
     <string name="setup_continue">ଚାଲାଣ କରନ୍ତୁ</string>
@@ -1895,12 +1895,12 @@
     <string name="setup_grant_permissions">ଅନୁମତି ଦିଅନ୍ତୁ</string>
     <string name="setup_welcome_subtitle">ଆପଣଙ୍କର ବ୍ୟକ୍ତିଗତ, ଡିଭାଇସ୍ ଉପରେ ଗ୍ୟାଲେରୀ</string>
     <string name="setup_permissions_title">ଅନୁମତିଗୁଡିକ</string>
-    <string name="setup_permissions_subtitle">ReFra କେବଳ ଆପଣଙ୍କର ମାଡ଼ିଆକୁ ପ୍ରଦର୍ଶନ ଓ ପରିଚାଳନା କରିବା ପାଇଁ ଆବଶ୍ୟକ ଯାହା ବ୍ୟବହାର କରେ। କାହିଁକି ଏହା ଚାହିଁରାହିଛି ଜାଣିବା ପାଇଁ ଏକ ଅନୁମତିରେ ଟ୍ୟାପ୍ କରନ୍ତୁ।</string>
+    <string name="setup_permissions_subtitle">Optique କେବଳ ଆପଣଙ୍କର ମାଡ଼ିଆକୁ ପ୍ରଦର୍ଶନ ଓ ପରିଚାଳନା କରିବା ପାଇଁ ଆବଶ୍ୟକ ଯାହା ବ୍ୟବହାର କରେ। କାହିଁକି ଏହା ଚାହିଁରାହିଛି ଜାଣିବା ପାଇଁ ଏକ ଅନୁମତିରେ ଟ୍ୟାପ୍ କରନ୍ତୁ।</string>
     <string name="setup_permission_used_for">ଏହା ପାଇଁ ବ୍ୟବହୃତ:</string>
     <string name="permission_local_network_title">ସିଧାସଳଖ ସ୍ଥାନୀୟ ନେଟୱାର୍କ ଅଭିଗମ</string>
-    <string name="setup_reason_local_network">ଇଚ୍ଛାନୁସାରେ। ଏହାକୁ କେବଳ ସେତେବେଳେ ଅନୁମତି ଦିଅନ୍ତୁ ଯେତେବେଳେ ReFra ଆପଣଙ୍କର ଚାଳୁ ନେଟୱାର୍କରେ ସିଧାସଳଖ ଭାବେ ସେରଭର ସହିତ ଯୋଗାଯୋଗ କରେ।</string>
+    <string name="setup_reason_local_network">ଇଚ୍ଛାନୁସାରେ। ଏହାକୁ କେବଳ ସେତେବେଳେ ଅନୁମତି ଦିଅନ୍ତୁ ଯେତେବେଳେ Optique ଆପଣଙ୍କର ଚାଳୁ ନେଟୱାର୍କରେ ସିଧାସଳଖ ଭାବେ ସେରଭର ସହିତ ଯୋଗାଯୋଗ କରେ।</string>
     <string name="local_network_permission_dialog_title">ସିଧାସଳଖ ସ୍ଥାନୀୟ ନେଟୱାର୍କ ଅଭିଗମକୁ ଅନୁମତି ଦେବେ କି?</string>
-    <string name="local_network_permission_dialog_message">ଏହି ସର୍ଭରଟି ଆପଣଙ୍କର ବର୍ତ୍ତମାନ ସ୍ଥାନୀୟ ନେଟୱାର୍କରେ ଥିବା ଏକ ଡିଭାଇସ୍‌କୁ ସମାଧାନ କରେ। Android କୁ ସଂପୂର୍ଣ୍ଣ ସୂଚନା ପାଇଁ ଅନୁମତି ଆବଶ୍ୟକ, ଯେପର୍ଯ୍ୟନ୍ତ ReFra ପ୍ରତ୍ୟକ୍ଷଭାବେ ଏକାଧିକ କନେକ୍ଟ କରିପାରିବାକୁ ସମର୍ଥ ହୁଏ।</string>
+    <string name="local_network_permission_dialog_message">ଏହି ସର୍ଭରଟି ଆପଣଙ୍କର ବର୍ତ୍ତମାନ ସ୍ଥାନୀୟ ନେଟୱାର୍କରେ ଥିବା ଏକ ଡିଭାଇସ୍‌କୁ ସମାଧାନ କରେ। Android କୁ ସଂପୂର୍ଣ୍ଣ ସୂଚନା ପାଇଁ ଅନୁମତି ଆବଶ୍ୟକ, ଯେପର୍ଯ୍ୟନ୍ତ Optique ପ୍ରତ୍ୟକ୍ଷଭାବେ ଏକାଧିକ କନେକ୍ଟ କରିପାରିବାକୁ ସମର୍ଥ ହୁଏ।</string>
     <string name="local_network_permission_not_now">ବର୍ତ୍ତମାନ ନୁହେଁ</string>
     <string name="setup_reason_read_images"><![CDATA[ଟାଇମଲାଇନ୍, ଆଲବମ୍ ଏବଂ ଭ୍ୟୁଆର୍‌ରେ ଆପଣଙ୍କର ଫଟୋଗୁଡିକୁ ପ୍ରଦର୍ଶନ କରୁଛି। ଏହାବିନା, ଗ୍ୟାଲେରୀ ଖାଲି ରହିବ।]]></string>
     <string name="setup_reason_read_videos"><![CDATA[ଟାଇମଲାଇନ୍, ଆଲବମ୍ ଏବଂ ଭ୍ୟୁଆର୍‌ରେ ଆପଣଙ୍କର ଭିଡିଓଗୁଡିକୁ ଦେଖାଉଛି ଏବଂ ଚଳାଉଛି।]]></string>

@@ -1,7 +1,7 @@
-ReFra v4.1.0 — The Refraction Update
+Optique v4.1.0 — The Refraction Update
 
 App Rebrand
-- Gallery is now ReFra! Reflecting a fresh identity inspired by the refraction of light
+- Gallery is now Optique! Reflecting a fresh identity inspired by the refraction of light
 - New geometric launcher icon with themed monochrome support
 - Google Sans font family across the entire app
 

@@ -1,13 +1,13 @@
-# ReFra
+# Optique
 > An Android Gallery app built with Jetpack Compose.
 > 
 > The goal of this project is to create and bring the Gallery app everyone wants, with the features everyone needs. FOSS
 
-![Downloads](https://img.shields.io/github/downloads/alzimerahmed/Gallery/total?color=%23247EE0&label=Downloads)
-[![CI](https://github.com/alzimerahmed/Gallery/actions/workflows/nightly.yml/badge.svg?branch=main)](https://github.com/alzimerahmed/Gallery/actions/workflows/nightly.yml)
-![License](https://img.shields.io/github/license/alzimerahmed/Gallery?color=%23247EE0)
+![Downloads](https://img.shields.io/github/downloads/alzimerahmed/Optique/total?color=%23247EE0&label=Downloads)
+[![CI](https://github.com/alzimerahmed/Optique/actions/workflows/nightly.yml/badge.svg?branch=main)](https://github.com/alzimerahmed/Optique/actions/workflows/nightly.yml)
+![License](https://img.shields.io/github/license/alzimerahmed/Optique?color=%23247EE0)
 [![Crowdin](https://badges.crowdin.net/gallery-compose/localized.svg)](https://crowdin.com/project/gallery-compose)
-![GitHub Repo stars](https://img.shields.io/github/stars/alzimerahmed/Gallery?color=%23247EE0)
+![GitHub Repo stars](https://img.shields.io/github/stars/alzimerahmed/Optique?color=%23247EE0)
 
 ![](./screenshots/preview.png)
 [![Crowdin](./screenshots/items/support_banner.png)](https://crowdin.com/project/gallery-compose)
@@ -24,11 +24,11 @@
 [<img 
     alt='Get it on GitHub'
     src='./screenshots/items/get-it-on-github.png'
-    height="80" />](https://github.com/alzimerahmed/Gallery/releases/latest)
+    height="80" />](https://github.com/alzimerahmed/Optique/releases/latest)
 [<img
     alt='Get it on Obtainium'
     src='./screenshots/items/get-it-on-obtainium.png'
-    height="80" />](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/alzimerahmed/ReFra)
+    height="80" />](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/alzimerahmed/Optique)
 
 ## Support
 - Translate the project using the link from above
@@ -36,7 +36,7 @@
     - Use the links on the right side of the repo (Sponsor me)
     - More options available in-app (Settings -> Donate)
 ## Frequent Questions
-- Why 'ReFra'?
+- Why 'Optique'?
     - Refra is a short form of 'refraction', which is the bending of light when it passes through different mediums. This app aims to refract our perception of media files, making them more accessible and easier to manage.
 - What is the `offline` variant?
     - The `offline` variant is a version of the app with all online features removed — maps, cloud provider support (Immich, ownCloud, etc.), and any functionality that requires an internet connection, even on a local network. This is useful for users who want a fully self-contained gallery with no network permissions.
@@ -54,4 +54,4 @@
 - Will you add [X] feature?
     - Please open a new feature request under 'Issues' tab and if the feature will be considered useful and possible can be added.
 - Can you remove permission [X]?
-    - Several permissions (e.g. Internet connectivity, location) are for showing a map preview of your current photo location data. If you do not need this feature, you can download an `offline` release from the [Releases page](https://github.com/alzimerahmed/ReFra/releases).
+    - Several permissions (e.g. Internet connectivity, location) are for showing a map preview of your current photo location data. If you do not need this feature, you can download an `offline` release from the [Releases page](https://github.com/alzimerahmed/Optique/releases).

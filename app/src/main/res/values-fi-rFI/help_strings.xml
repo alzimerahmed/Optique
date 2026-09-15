@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">Leikkaa kohde</string>
     <string name="help_tip_view_cutout_subtitle">Nosta henkilö tai esine taustasta</string>
     <string name="help_tip_view_cutout_p1_title">Nosta havaittu kohde</string>
-    <string name="help_tip_view_cutout_p1_desc">Katselussa ReFra voi tunnistaa pääkohteen laitteessa ja näyttää korostetun ehdotuksen. Avaa se tarkentaaksesi maskia, sitten voit kopioida, jakaa tai tallentaa läpinäkyvän leikkeen. Voit myös aloittaa leikkauksen pitkäpainalluksella Media Viewer -asetuksista.</string>
+    <string name="help_tip_view_cutout_p1_desc">Katselussa Optique voi tunnistaa pääkohteen laitteessa ja näyttää korostetun ehdotuksen. Avaa se tarkentaaksesi maskia, sitten voit kopioida, jakaa tai tallentaa läpinäkyvän leikkeen. Voit myös aloittaa leikkauksen pitkäpainalluksella Media Viewer -asetuksista.</string>
     <string name="help_tip_view_cutout_p1_s1">Avaa valokuva, jossa on selkeä kohde</string>
     <string name="help_tip_view_cutout_p1_s2">Napauta Leikkaa kohde -ehdotusta</string>
     <string name="help_tip_view_cutout_p1_s3">Tarkenna ääriviivaa lisäämällä tai poistamalla pisteitä</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">Päivämäärän muoto</string>
     <string name="help_tip_settings_date_format_subtitle">Valitse kuinka päivämäärät näkyvät</string>
     <string name="help_tip_settings_date_format_p1_title">Valitse muodoksi</string>
-    <string name="help_tip_settings_date_format_p1_desc">ReFra seuraa järjestelmäsi päivämäärä- ja 12/24-tunnin asetuksia oletuksena. Aseta ohitus vain, kun haluat mukautetun kaavan, ja käytä tietopainiketta tarkistaaksesi tuetut muotosymbolit.</string>
+    <string name="help_tip_settings_date_format_p1_desc">Optique seuraa järjestelmäsi päivämäärä- ja 12/24-tunnin asetuksia oletuksena. Aseta ohitus vain, kun haluat mukautetun kaavan, ja käytä tietopainiketta tarkistaaksesi tuetut muotosymbolit.</string>
     <string name="help_tip_settings_date_format_p1_s1">Avaa päivämäärän muoto</string>
     <string name="help_tip_settings_date_format_p1_s2">Pidä Järjestelmän mukainen tai syötä mukautettu kaava</string>
     <string name="help_tip_settings_date_format_p1_s3">Esikatsele tulos ja avaa muoto-ohje tarvittaessa</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">Ensimmäisen käyttökerran asennus</string>
     <string name="help_tip_basics_setup_subtitle">Myönnä käyttöoikeudet ja valitse oletukset</string>
     <string name="help_tip_basics_setup_p1_title">Aloittaminen</string>
-    <string name="help_tip_basics_setup_p1_desc">Ensimmäisellä käynnistyksellä ReFra opastaa sinua käyttöoikeuksien, ulkoasun, tekoälymallien, pilvitilien ja hyödyllisten vinkkien läpi. Voit palata asennukseen milloin tahansa.</string>
+    <string name="help_tip_basics_setup_p1_desc">Ensimmäisellä käynnistyksellä Optique opastaa sinua käyttöoikeuksien, ulkoasun, tekoälymallien, pilvitilien ja hyödyllisten vinkkien läpi. Voit palata asennukseen milloin tahansa.</string>
 
     <string name="help_tip_albums_ignored_manage_title">Hallitse ohitettuja albumeita</string>
     <string name="help_tip_albums_ignored_manage_subtitle">Tarkista ja palauta piilotetut kansiot</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">Selaa mediaryhmittäin</string>
     <string name="help_tip_media_type_albums_subtitle">Automaattiset albumit valokuville, videoille, GIF-tiedostoille ja RAW-tiedostoille</string>
     <string name="help_tip_media_type_albums_p1_title">Mediatyypin albumit</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra luo virtuaaliset albumit yhdistetystä kirjastostasi, jotta voit avata kaikki valokuvat, videot, GIF-tiedostot tai RAW-tiedostot yhdessä. Niiden näkyvyyttä hallitaan Aikajana &amp; Albumit -asetuksista.</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique luo virtuaaliset albumit yhdistetystä kirjastostasi, jotta voit avata kaikki valokuvat, videot, GIF-tiedostot tai RAW-tiedostot yhdessä. Niiden näkyvyyttä hallitaan Aikajana &amp; Albumit -asetuksista.</string>
     <string name="help_tip_media_type_albums_p1_s1">Avaa Albumit ja vieritä kohtaan Mediatyypit</string>
     <string name="help_tip_media_type_albums_p1_s2">Avaa tyyppi selataksesi vastaavia medioita</string>
     <string name="help_tip_media_type_albums_p1_s3">Käytä Aikajana- ja Albumiasetuksia näyttääksesi tai piilottaaksesi osion</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">Kehitä RAW-valokuvia</string>
     <string name="help_tip_raw_develop_subtitle">Säädä kennotietoja ennen vientiä</string>
     <string name="help_tip_raw_develop_p1_title">Käytä Kehitys-säätimiä</string>
-    <string name="help_tip_raw_develop_p1_desc">Avaa tuettu RAW-valokuva editorissa säätääksesi valkotasapainoa, valotusta, kohokohtia, lähtövärejä ja demosaikkausta. ReFra käyttää muistisuojaa esikatseluun säilyttäen täysteräväpiirtotuotteen.</string>
+    <string name="help_tip_raw_develop_p1_desc">Avaa tuettu RAW-valokuva editorissa säätääksesi valkotasapainoa, valotusta, kohokohtia, lähtövärejä ja demosaikkausta. Optique käyttää muistisuojaa esikatseluun säilyttäen täysteräväpiirtotuotteen.</string>
     <string name="help_tip_raw_develop_p1_s1">Avaa RAW-valokuva ja napauta Muokkaa</string>
     <string name="help_tip_raw_develop_p1_s2">Valitse vaihtoehtoja Kehitys-välilehdessä</string>
     <string name="help_tip_raw_develop_p1_s3">Tee tarvittaessa lisäleikkaus, suodatin tai merkintä</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">Ryhmittele ihmisiä laitteessa</string>
     <string name="help_tip_people_grouping_subtitle">Löydä kasvot lataamatta kirjastoa</string>
     <string name="help_tip_people_grouping_p1_title">Skannaa ja järjestä ihmisiä</string>
-    <string name="help_tip_people_grouping_p1_desc">Kun kasvomalli on asennettu, ReFra skannaa ja ryhmittelee ihmisiä paikallisesti. Voit aloittaa uuden skannauksen kohdasta Ihmiset, piilottaa henkilön, yhdistää ryhmiä ja luoda sumeita kopioita, kun yksityisyys on tärkeää.</string>
+    <string name="help_tip_people_grouping_p1_desc">Kun kasvomalli on asennettu, Optique skannaa ja ryhmittelee ihmisiä paikallisesti. Voit aloittaa uuden skannauksen kohdasta Ihmiset, piilottaa henkilön, yhdistää ryhmiä ja luoda sumeita kopioita, kun yksityisyys on tärkeää.</string>
     <string name="help_tip_people_grouping_p1_s1">Asenna Kasvojentunnistusmalli</string>
     <string name="help_tip_people_grouping_p1_s2">Avaa Kirjasto, sitten Ihmiset</string>
     <string name="help_tip_people_grouping_p1_s3">Napauta Skannaa ihmisiä ja odota indeksointia</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">Poista arkaluontoiset metatiedot</string>
     <string name="help_tip_metadata_sanitize_subtitle">Puhdista tuetut tiedostot ilman pikseleiden uudelleenpakkaamista</string>
     <string name="help_tip_metadata_sanitize_p1_title">Valitse, mitä poistaa</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">Valokuvan tiedoista valitse Poista metatiedot ja valitse vain sijainti, kuvailevat kentät tai kaikki tuetut metatiedot. ReFra kirjoittaa ja tarkistaa häviöttömän puhdistetun kopion ennen alkuperäisen korvaamista.</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">Valokuvan tiedoista valitse Poista metatiedot ja valitse vain sijainti, kuvailevat kentät tai kaikki tuetut metatiedot. Optique kirjoittaa ja tarkistaa häviöttömän puhdistetun kopion ennen alkuperäisen korvaamista.</string>
     <string name="help_tip_metadata_sanitize_p1_s1">Avaa tuettu paikallinen valokuva</string>
     <string name="help_tip_metadata_sanitize_p1_s2">Laajenna sen tiedot ja napauta Poista metatiedot</string>
     <string name="help_tip_metadata_sanitize_p1_s3">Valitse puhdistustaso</string>

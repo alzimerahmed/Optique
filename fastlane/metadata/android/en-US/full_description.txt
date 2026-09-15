@@ -1,4 +1,4 @@
-<p><strong>ReFra</strong> is a modern, open-source media gallery for Android built with Jetpack Compose. It refracts how you browse, organize, and experience your photos and videos — with AI-powered categories, panorama viewing, motion photo playback, video casting, and a fully customizable Material 3 interface.</p>
+<p><strong>Optique</strong> is a modern, open-source media gallery for Android built with Jetpack Compose. It refracts how you browse, organize, and experience your photos and videos — with AI-powered categories, panorama viewing, motion photo playback, video casting, and a fully customizable Material 3 interface.</p>
 
 <p>&nbsp;</p>
 

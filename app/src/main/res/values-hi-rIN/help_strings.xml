@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">किसी विषय को काटें</string>
     <string name="help_tip_view_cutout_subtitle">पृष्ठभूमि से किसी व्यक्ति या वस्तु को उठाएँ</string>
     <string name="help_tip_view_cutout_p1_title">पहचाने गए विषय को उठाएँ</string>
-    <string name="help_tip_view_cutout_p1_desc">व्यूअर में, ReFra डिवाइस पर मुख्य विषय का पता लगा सकता है और हाइलाइट किया गया सुझाव दिखा सकता है। मास्क को परिष्कृत करने के लिए इसे खोलें, फिर पारदर्शी कटआउट को कॉपी, साझा या सहेजें। आप मीडिया व्यूअर सेटिंग्स से लंबा-प्रेस करके कटआउट भी शुरू कर सकते हैं।</string>
+    <string name="help_tip_view_cutout_p1_desc">व्यूअर में, Optique डिवाइस पर मुख्य विषय का पता लगा सकता है और हाइलाइट किया गया सुझाव दिखा सकता है। मास्क को परिष्कृत करने के लिए इसे खोलें, फिर पारदर्शी कटआउट को कॉपी, साझा या सहेजें। आप मीडिया व्यूअर सेटिंग्स से लंबा-प्रेस करके कटआउट भी शुरू कर सकते हैं।</string>
     <string name="help_tip_view_cutout_p1_s1">एक स्पष्ट विषय वाली फोटो खोलें</string>
     <string name="help_tip_view_cutout_p1_s2">कट आउट सब्जेक्ट सुझाव टैप करें</string>
     <string name="help_tip_view_cutout_p1_s3">शामिल या बाहर करने वाले बिंदुओं के साथ रूपरेखा को परिष्कृत करें</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">तिथि प्रारूप</string>
     <string name="help_tip_settings_date_format_subtitle">निर्धारित करें कि तिथियाँ कैसे दिखाई दें</string>
     <string name="help_tip_settings_date_format_p1_title">अपना प्रारूप चुनें</string>
-    <string name="help_tip_settings_date_format_p1_desc">ReFra डिफ़ॉल्ट रूप से आपके सिस्टम की तिथि और 12/24-घंटे की प्राथमिकताओं का पालन करता है। केवल तब कस्टम पैटर्न सेट करें जब आप चाहते हों, और समर्थित प्रारूप प्रतीकों की समीक्षा करने के लिए सूचना बटन का उपयोग करें।</string>
+    <string name="help_tip_settings_date_format_p1_desc">Optique डिफ़ॉल्ट रूप से आपके सिस्टम की तिथि और 12/24-घंटे की प्राथमिकताओं का पालन करता है। केवल तब कस्टम पैटर्न सेट करें जब आप चाहते हों, और समर्थित प्रारूप प्रतीकों की समीक्षा करने के लिए सूचना बटन का उपयोग करें।</string>
     <string name="help_tip_settings_date_format_p1_s1">तिथि प्रारूप खोलें</string>
     <string name="help_tip_settings_date_format_p1_s2">सिस्टम का पालन रखें या कस्टम पैटर्न दर्ज करें</string>
     <string name="help_tip_settings_date_format_p1_s3">परिणाम का पूर्वावलोकन करें और आवश्यकता होने पर फ़ॉर्मेट मार्गदर्शन खोलें</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">पहली बार सेटअप</string>
     <string name="help_tip_basics_setup_subtitle">एक्सेस दें और अपनी डिफ़ॉल्ट सेटिंग्स चुनें</string>
     <string name="help_tip_basics_setup_p1_title">शुरू करना</string>
-    <string name="help_tip_basics_setup_p1_desc">पहली बार लॉन्च पर ReFra आपको अनुमतियाँ, उपस्थिति, AI मॉडल, क्लाउड अकाउंट और उपयोगी टिप्स के माध्यम से मार्गदर्शन करता है। आप किसी भी समय सेटअप को दोबारा देख सकते हैं।</string>
+    <string name="help_tip_basics_setup_p1_desc">पहली बार लॉन्च पर Optique आपको अनुमतियाँ, उपस्थिति, AI मॉडल, क्लाउड अकाउंट और उपयोगी टिप्स के माध्यम से मार्गदर्शन करता है। आप किसी भी समय सेटअप को दोबारा देख सकते हैं।</string>
 
     <string name="help_tip_albums_ignored_manage_title">इग्नोर किए गए एल्बम प्रबंधित करें</string>
     <string name="help_tip_albums_ignored_manage_subtitle">छिपी हुई फ़ोल्डर्स की समीक्षा और पुनर्स्थापना करें</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">मीडिया प्रकार के अनुसार ब्राउज़ करें</string>
     <string name="help_tip_media_type_albums_subtitle">फोटो, वीडियो, GIF और RAW फ़ाइलों के लिए स्वचालित एल्बम</string>
     <string name="help_tip_media_type_albums_p1_title">मीडिया-प्रकार एल्बम</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra आपके एकीकृत लाइब्रेरी से वर्चुअल एल्बम बनाता है ताकि आप सभी फोटो, वीडियो, GIF या RAW फ़ाइलों को एक साथ खोल सकें। उनकी दृश्यता Timeline &amp; Albums सेटिंग्स से नियंत्रित की जाती है।</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique आपके एकीकृत लाइब्रेरी से वर्चुअल एल्बम बनाता है ताकि आप सभी फोटो, वीडियो, GIF या RAW फ़ाइलों को एक साथ खोल सकें। उनकी दृश्यता Timeline &amp; Albums सेटिंग्स से नियंत्रित की जाती है।</string>
     <string name="help_tip_media_type_albums_p1_s1">एल्बम खोलें और मीडिया प्रकार तक स्क्रॉल करें</string>
     <string name="help_tip_media_type_albums_p1_s2">मेल खाने वाले मीडिया को ब्राउज़ करने के लिए किसी प्रकार को खोलें</string>
     <string name="help_tip_media_type_albums_p1_s3">सेक्शन को दिखाने या छुपाने के लिए Timeline &amp; Albums सेटिंग्स का उपयोग करें</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">RAW फोटो को डिवेलप करें</string>
     <string name="help_tip_raw_develop_subtitle">एक्सपोर्ट करने से पहले सेंसर डेटा समायोजित करें</string>
     <string name="help_tip_raw_develop_p1_title">Develop कंट्रोल्स का उपयोग करें</string>
-    <string name="help_tip_raw_develop_p1_desc">सपोर्टेड RAW फोटो को एडिटर में खोलें ताकि व्हाइट बैलेंस, एक्सपोज़र, हाइलाइट्स, आउटपुट कलर और डेमोसाइकिंग समायोजित कर सकें। ReFra पूर्ण-रिज़ॉल्यूशन आउटपुट को सुरक्षित रखते हुए मेमोरी-सुरक्षित प्रीव्यू का उपयोग करता है।</string>
+    <string name="help_tip_raw_develop_p1_desc">सपोर्टेड RAW फोटो को एडिटर में खोलें ताकि व्हाइट बैलेंस, एक्सपोज़र, हाइलाइट्स, आउटपुट कलर और डेमोसाइकिंग समायोजित कर सकें। Optique पूर्ण-रिज़ॉल्यूशन आउटपुट को सुरक्षित रखते हुए मेमोरी-सुरक्षित प्रीव्यू का उपयोग करता है।</string>
     <string name="help_tip_raw_develop_p1_s1">RAW फोटो खोलें और Edit पर टैप करें</string>
     <string name="help_tip_raw_develop_p1_s2">Develop टैब में विकल्प चुनें</string>
     <string name="help_tip_raw_develop_p1_s3">किसी भी अतिरिक्त क्रॉप, फ़िल्टर या मार्कअप को लागू करें</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">डिवाइस पर लोगों को समूहित करें</string>
     <string name="help_tip_people_grouping_subtitle">अपनी लाइब्रेरी अपलोड किए बिना चेहरे खोजें</string>
     <string name="help_tip_people_grouping_p1_title">लोगों को स्कैन और व्यवस्थित करें</string>
-    <string name="help_tip_people_grouping_p1_desc">चेहरे का मॉडल इंस्टॉल होने के बाद, ReFra स्थानीय रूप से लोगों को स्कैन और समूहित करता है। आप लोग अनुभाग से नया स्कैन शुरू कर सकते हैं, किसी व्यक्ति को छिपा सकते हैं, समूहों को मिला सकते हैं और जब गोपनीयता महत्वपूर्ण हो तो धुंधली प्रतियां बना सकते हैं।</string>
+    <string name="help_tip_people_grouping_p1_desc">चेहरे का मॉडल इंस्टॉल होने के बाद, Optique स्थानीय रूप से लोगों को स्कैन और समूहित करता है। आप लोग अनुभाग से नया स्कैन शुरू कर सकते हैं, किसी व्यक्ति को छिपा सकते हैं, समूहों को मिला सकते हैं और जब गोपनीयता महत्वपूर्ण हो तो धुंधली प्रतियां बना सकते हैं।</string>
     <string name="help_tip_people_grouping_p1_s1">चहरे का पता लगाने वाला मॉडल इंस्टॉल करें</string>
     <string name="help_tip_people_grouping_p1_s2">लाइब्रेरी खोलें, फिर लोग</string>
     <string name="help_tip_people_grouping_p1_s3">लोगों के लिए स्कैन पर टैप करें और इंडेक्सिंग का इंतजार करें</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">संवेदनशील मेटाडेटा हटाएँ</string>
     <string name="help_tip_metadata_sanitize_subtitle">पिक्सेल को पुनः संपीड़न किए बिना समर्थित फ़ाइलों को साफ़ करें</string>
     <string name="help_tip_metadata_sanitize_p1_title">हटाने के लिए क्या चुनें</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">किसी फोटो के विवरण से, \'मेटाडेटा हटाएँ\' चुनें और केवल स्थान, विवरणात्मक फ़ील्ड या सभी समर्थित मेटाडेटा चुनें। ReFra मूल को बदलने से पहले एक हानि रहित साफ़ की हुई प्रति लिखता और सत्यापन करता है।</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">किसी फोटो के विवरण से, \'मेटाडेटा हटाएँ\' चुनें और केवल स्थान, विवरणात्मक फ़ील्ड या सभी समर्थित मेटाडेटा चुनें। Optique मूल को बदलने से पहले एक हानि रहित साफ़ की हुई प्रति लिखता और सत्यापन करता है।</string>
     <string name="help_tip_metadata_sanitize_p1_s1">एक समर्थित स्थानीय फोटो खोलें</string>
     <string name="help_tip_metadata_sanitize_p1_s2">इसके विवरण का विस्तार करें और \'मेटाडेटा हटाएँ\' टैप करें</string>
     <string name="help_tip_metadata_sanitize_p1_s3">सैनिटाइजेशन स्तर चुनें</string>

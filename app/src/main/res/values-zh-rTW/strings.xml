@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">相簿</string>
     <string name="change_app_name">應用程式名稱</string>
     <string name="change_app_name_summary">變更啟動器上顯示的應用程式名稱</string>
@@ -62,7 +62,7 @@
     <string name="github">GitHub</string>
     <string name="donate_button_cd">捐款鼓勵按鈕</string>
     <string name="github_button_cd">GitHub 按鈕</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">關閉橫幅</string>
     <string name="dismiss_banner_title">是否移動橫幅？</string>
     <string name="dismiss_banner_message">「捐款」和「GitHub」按鈕將移至設定頁面底部的精簡工具列中。</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI 模型可實現智慧圖片搜尋與自動媒體分類。此應用程式採用 ONNX 格式的 CLIP（對比式語言-圖像預訓練）模型，以理解照片中的內容。</string>
     <string name="ai_models_privacy_description">所有 AI 處理皆完全在裝置上進行。任何圖片、搜尋查詢或分類資料絕不會離開您的手機。模型透過 ONNX Runtime 在本地執行，下載完成後無需網路連線。您的媒體檔案將完全保持私密。</string>
     <string name="ai_models_source">來源</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">模型檔案</string>
     <string name="ai_models_feature_search">依描述搜尋</string>
     <string name="ai_models_feature_categories">自動分類</string>
@@ -926,7 +926,7 @@
     <string name="backup_encrypt_header">加密</string>
     <string name="backup_restore_header">選擇欲還原的項目</string>
     <string name="backup_restore">還原</string>
-    <string name="backup_made_with_version">由 ReFra 製作 %1$s</string>
+    <string name="backup_made_with_version">由 Optique 製作 %1$s</string>
     <string name="backup_empty">此備份中不包含任何可還原的資料。</string>
     <string name="backup_items_count">%1$d 個項目</string>
     <string name="backup_pick_file_prompt">請選擇要還原的備份檔案。</string>
@@ -1426,7 +1426,7 @@
     <string name="setup_media_access_limited">所選的照片和影片</string>
     <string name="setup_permission_not_granted">未授予</string>
     <string name="setup_permission_optional_not_granted">選用 · 未授予</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[選用。允許 ReFra 讀取照片和影片中嵌入的 GPS 資料，以供地圖和位置詳細資料使用。即使略過此步驟，相簿仍可正常運作。]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[選用。允許 Optique 讀取照片和影片中嵌入的 GPS 資料，以供地圖和位置詳細資料使用。即使略過此步驟，相簿仍可正常運作。]]></string>
     <string name="smart_scan_notification_channel">智慧掃描</string>
     <string name="smart_scan_notification_title">掃描媒體</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d 共 %3$d · %4$d%% 總計</string>
@@ -1445,7 +1445,7 @@
     <string name="album_delete_confirm_summary">此相簿中的所有項目將被永久刪除。此操作無法還原。</string>
     <string name="map_appearance_header">地圖</string>
     <string name="map_appearance_title">地圖外觀</string>
-    <string name="map_appearance_description">選擇地圖是遵循ReFra的外觀，還是始終使用亮色或暗色地圖。</string>
+    <string name="map_appearance_description">選擇地圖是遵循Optique的外觀，還是始終使用亮色或暗色地圖。</string>
     <string name="map_appearance_system">遵循應用程式外觀</string>
     <string name="map_appearance_light">亮色</string>
     <string name="map_appearance_dark">深色</string>
@@ -1537,7 +1537,7 @@
     <string name="disable_smoothing_summary">放大時顯示清晰的方形像素，而不是模糊平滑的影像</string>
     <string name="disable_smoothing_description">啟用後，圖像將使用最近鄰縮放方式繪製，因此放大像素藝術時保持乾淨、銳利的像素，而不會模糊它們。關閉時則可以平滑縮放照片。</string>
     <string name="remove_metadata">移除元資料</string>
-    <string name="remove_metadata_warning">僅在驗證無損清理版本後才會替換原始文件。如果替換失敗，ReFra 可還原原始檔案。</string>
+    <string name="remove_metadata_warning">僅在驗證無損清理版本後才會替換原始文件。如果替換失敗，Optique 可還原原始檔案。</string>
     <string name="metadata_mode_location">僅位置</string>
     <string name="metadata_mode_location_description">移除座標、高度、位置名稱、方向及 GPS 時間戳記。</string>
     <string name="metadata_mode_privacy">隱私相關</string>
@@ -1884,7 +1884,7 @@
     <string name="cloud_net_wifi_blank_summary">無網路 — 已停用切換</string>
     <string name="cloud_net_wifi_pick_none">未設定</string>
     <string name="change_app_logo">應用程式圖示</string>
-    <string name="change_app_logo_summary">在 ReFra 與經典相簿啟動器圖示之間切換</string>
+    <string name="change_app_logo_summary">在 Optique 與經典相簿啟動器圖示之間切換</string>
     <string name="app_logo_description">選擇在主畫面和應用程式抽屜中使用的啟動器圖示。應用程式將重新啟動以套用更改。</string>
     <string name="setup_step_progress">步驟 %1$d / %2$d</string>
     <string name="setup_continue">繼續</string>
@@ -1892,12 +1892,12 @@
     <string name="setup_grant_permissions">授權權限</string>
     <string name="setup_welcome_subtitle">您的私密裝置內相簿</string>
     <string name="setup_permissions_title">權限</string>
-    <string name="setup_permissions_subtitle">ReFra 僅使用顯示和管理您的媒體所需的權限。點擊權限以了解原因。</string>
+    <string name="setup_permissions_subtitle">Optique 僅使用顯示和管理您的媒體所需的權限。點擊權限以了解原因。</string>
     <string name="setup_permission_used_for">用於：</string>
     <string name="permission_local_network_title">直接本地網路存取</string>
-    <string name="setup_reason_local_network">選擇性。僅當 ReFra 直接連接到您當前網路上的伺服器時才授予此權限。</string>
+    <string name="setup_reason_local_network">選擇性。僅當 Optique 直接連接到您當前網路上的伺服器時才授予此權限。</string>
     <string name="local_network_permission_dialog_title">允許直接本地網路存取嗎？</string>
-    <string name="local_network_permission_dialog_message">此伺服器解析為您當前本地網路上的裝置。在 ReFra 可以直接連接之前，Android 需要您的許可。</string>
+    <string name="local_network_permission_dialog_message">此伺服器解析為您當前本地網路上的裝置。在 Optique 可以直接連接之前，Android 需要您的許可。</string>
     <string name="local_network_permission_not_now">現在不要</string>
     <string name="setup_reason_read_images"><![CDATA[在時間軸、相簿和檢視器中顯示您的照片。沒有此權限，相簿將保持空白。]]></string>
     <string name="setup_reason_read_videos"><![CDATA[在時間軸、相簿和檢視器中顯示並播放您的影片。]]></string>

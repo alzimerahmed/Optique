@@ -1,6 +1,6 @@
 # ML Models Directory
 
-This module contains the on-device machine learning models used by the ReFra application. To keep the base APK size compact, models are downloaded on-demand under **Settings > Smart Features**, unless bundled in a specific `withML` build variant.
+This module contains the on-device machine learning models used by the Optique application. To keep the base APK size compact, models are downloaded on-demand under **Settings > Smart Features**, unless bundled in a specific `withML` build variant.
 
 ---
 
@@ -10,19 +10,19 @@ Used for semantic search queries and automatic image classification.
 
 *   **Tokenizer Vocab (`vocab.json`):**
     *   **Source:** OpenAI CLIP / Hugging Face `openai/clip-vit-base-patch32`
-    *   **URL:** `https://raw.githubusercontent.com/alzimerahmed/ReFra/refs/heads/main/ml-models/src/main/assets/vocab.json`
+    *   **URL:** `https://raw.githubusercontent.com/alzimerahmed/Optique/refs/heads/main/ml-models/src/main/assets/vocab.json`
     *   **SHA-256:** `e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349`
 *   **Tokenizer Merges (`merges.txt`):**
     *   **Source:** OpenAI CLIP / Hugging Face `openai/clip-vit-base-patch32`
-    *   **URL:** `https://raw.githubusercontent.com/alzimerahmed/ReFra/refs/heads/main/ml-models/src/main/assets/merges.txt`
+    *   **URL:** `https://raw.githubusercontent.com/alzimerahmed/Optique/refs/heads/main/ml-models/src/main/assets/merges.txt`
     *   **SHA-256:** `9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a`
 *   **Textual Encoder (`textual_quant.onnx`):**
     *   **Description:** Quantized INT8 textual CLIP model for embedding text search queries.
-    *   **URL:** `https://raw.githubusercontent.com/alzimerahmed/ReFra/refs/heads/main/ml-models/src/main/assets/textual_quant.onnx`
+    *   **URL:** `https://raw.githubusercontent.com/alzimerahmed/Optique/refs/heads/main/ml-models/src/main/assets/textual_quant.onnx`
     *   **SHA-256:** `1ebb71a5ea1897823a829af8fc8168c5cfff761969bb62aee1fafdf5a2788aba`
 *   **Visual Encoder (`visual_quant.onnx`):**
     *   **Description:** Quantized INT8 visual CLIP model for indexing gallery images.
-    *   **URL:** `https://raw.githubusercontent.com/alzimerahmed/ReFra/refs/heads/main/ml-models/src/main/assets/visual_quant.onnx`
+    *   **URL:** `https://raw.githubusercontent.com/alzimerahmed/Optique/refs/heads/main/ml-models/src/main/assets/visual_quant.onnx`
     *   **SHA-256:** `a2fbb26b5f6ab5c79dd9bf99ab2dbac4711abc88dc2e20afc02a0827aa3d59c2`
 
 ---

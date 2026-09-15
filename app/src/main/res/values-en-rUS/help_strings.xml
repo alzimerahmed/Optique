@@ -202,7 +202,7 @@
     <string name="help_tip_timeline_date_header_title">Customize date headers</string>
     <string name="help_tip_timeline_date_header_subtitle">Control separator visibility and date formatting</string>
     <string name="help_tip_timeline_date_header_p1_title">Date separators and formats</string>
-    <string name="help_tip_timeline_date_header_p1_desc">Choose which gallery sections show date separators, then customize how those dates are written. ReFra follows your system date and 12/24-hour preferences by default; set a custom pattern only when you want an override.</string>
+    <string name="help_tip_timeline_date_header_p1_desc">Choose which gallery sections show date separators, then customize how those dates are written. Optique follows your system date and 12/24-hour preferences by default; set a custom pattern only when you want an override.</string>
     <string name="help_tip_timeline_date_header_p1_s1">Go to Settings &gt; Timeline &amp; Albums</string>
     <string name="help_tip_timeline_date_header_p1_s2">Choose sections under Date separators</string>
     <string name="help_tip_timeline_date_header_p1_s3">Open Customize date formats to follow the system or enter a custom pattern</string>
@@ -489,7 +489,7 @@
     <string name="help_tip_ai_indexing_title">How Smart indexing works</string>
     <string name="help_tip_ai_indexing_subtitle">Resumable background processing for Smart Features</string>
     <string name="help_tip_ai_indexing_p1_title">Checkpointed Smart scans</string>
-    <string name="help_tip_ai_indexing_p1_desc">Once AI models are installed, ReFra processes your library in recoverable stages that power Smart Search, categories, and people. Progress is checkpointed, so interrupted work resumes instead of starting over, while unchanged and already-current results are skipped.</string>
+    <string name="help_tip_ai_indexing_p1_desc">Once AI models are installed, Optique processes your library in recoverable stages that power Smart Search, categories, and people. Progress is checkpointed, so interrupted work resumes instead of starting over, while unchanged and already-current results are skipped.</string>
     <string name="help_tip_ai_indexing_p2_title">Indexing details</string>
     <string name="help_tip_ai_indexing_p2_desc">Smart scans are scheduled to limit battery and performance impact. You can monitor each stage, retry failures, or request a full refresh from Smart Features settings. New and changed media is picked up automatically.</string>
     <!-- ALBUMS &amp; COLLECTIONS -->
@@ -879,9 +879,9 @@
     <string name="help_tip_security_encrypted_storage_title">Encrypted storage</string>
     <string name="help_tip_security_encrypted_storage_subtitle">Review protection for settings and the database</string>
     <string name="help_tip_security_encrypted_storage_p1_title">What gets encrypted?</string>
-    <string name="help_tip_security_encrypted_storage_p1_desc">ReFra automatically protects preferences with Android Keystore-backed encryption and the Room database with SQLCipher. Existing data is migrated without requiring a manual encryption toggle.</string>
+    <string name="help_tip_security_encrypted_storage_p1_desc">Optique automatically protects preferences with Android Keystore-backed encryption and the Room database with SQLCipher. Existing data is migrated without requiring a manual encryption toggle.</string>
     <string name="help_tip_security_encrypted_storage_p2_title">Check active protection</string>
-    <string name="help_tip_security_encrypted_storage_p2_desc">The Security screen reports the storage protection actually in use. If encrypted settings or the database cannot be opened, ReFra clearly identifies the affected plaintext fallback instead of claiming that everything is encrypted.</string>
+    <string name="help_tip_security_encrypted_storage_p2_desc">The Security screen reports the storage protection actually in use. If encrypted settings or the database cannot be opened, Optique clearly identifies the affected plaintext fallback instead of claiming that everything is encrypted.</string>
     <string name="help_tip_security_encrypted_storage_p2_s1">Go to Settings → Security</string>
     <string name="help_tip_security_encrypted_storage_p2_s2">Find the Encryption status row</string>
     <string name="help_tip_security_encrypted_storage_p2_s3">Review any fallback warning before storing sensitive configuration</string>
@@ -1033,9 +1033,9 @@
     <string name="help_tip_security_aapm_p2_s3">Gallery enforces sandboxing and isolation</string>
     <!-- CLOUD &amp; SYNC (5.0.0) -->
     <string name="help_tip_cloud_connect_title">Connect a cloud server</string>
-    <string name="help_tip_cloud_connect_subtitle">Bring supported self-hosted libraries into ReFra</string>
+    <string name="help_tip_cloud_connect_subtitle">Bring supported self-hosted libraries into Optique</string>
     <string name="help_tip_cloud_connect_p1_title">Your photos, from your servers</string>
-    <string name="help_tip_cloud_connect_p1_desc">ReFra can connect Immich, ownCloud, Nextcloud, WebDAV, SMB, and NFS accounts so remote media appears alongside device photos. Account credentials are stored encrypted, and each account keeps its own browsing, backup, and sync context.</string>
+    <string name="help_tip_cloud_connect_p1_desc">Optique can connect Immich, ownCloud, Nextcloud, WebDAV, SMB, and NFS accounts so remote media appears alongside device photos. Account credentials are stored encrypted, and each account keeps its own browsing, backup, and sync context.</string>
     <string name="help_tip_cloud_connect_p2_title">Add an account</string>
     <string name="help_tip_cloud_connect_p2_desc">Choose a provider, enter its server address, and follow that provider\'s authentication flow. Immich accepts account or API credentials, while Nextcloud opens Login Flow v2 in your browser so two-factor authentication can remain enabled.</string>
     <string name="help_tip_cloud_connect_p2_s1">Open Cloud accounts from Settings or Library</string>
@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">Cut out a subject</string>
     <string name="help_tip_view_cutout_subtitle">Lift a person or object from the background</string>
     <string name="help_tip_view_cutout_p1_title">Lift the detected subject</string>
-    <string name="help_tip_view_cutout_p1_desc">ReFra detects the main subject on-device and lets you refine the mask before copying, sharing, or saving a transparent cutout. Start from Smart tools in the editor, or assign viewer long-press to Subject cutout in Media Viewer settings.</string>
+    <string name="help_tip_view_cutout_p1_desc">Optique detects the main subject on-device and lets you refine the mask before copying, sharing, or saving a transparent cutout. Start from Smart tools in the editor, or assign viewer long-press to Subject cutout in Media Viewer settings.</string>
     <string name="help_tip_view_cutout_p1_s1">Open a photo in the editor and choose Smart</string>
     <string name="help_tip_view_cutout_p1_s2">Choose Cutout or Remove background</string>
     <string name="help_tip_view_cutout_p1_s3">Refine the outline with include or exclude points</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">Date format</string>
     <string name="help_tip_settings_date_format_subtitle">Choose how dates appear</string>
     <string name="help_tip_settings_date_format_p1_title">Pick your format</string>
-    <string name="help_tip_settings_date_format_p1_desc">ReFra follows your system date and 12/24-hour preferences by default. Set an override only when you want a custom pattern, and use the information button to review supported format symbols.</string>
+    <string name="help_tip_settings_date_format_p1_desc">Optique follows your system date and 12/24-hour preferences by default. Set an override only when you want a custom pattern, and use the information button to review supported format symbols.</string>
     <string name="help_tip_settings_date_format_p1_s1">Open Date format</string>
     <string name="help_tip_settings_date_format_p1_s2">Keep Follow system or enter a custom pattern</string>
     <string name="help_tip_settings_date_format_p1_s3">Preview the result and open format guidance if needed</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">First-run setup</string>
     <string name="help_tip_basics_setup_subtitle">Grant access and pick your defaults</string>
     <string name="help_tip_basics_setup_p1_title">Getting started</string>
-    <string name="help_tip_basics_setup_p1_desc">On first launch ReFra guides you through permissions, appearance, AI models, cloud accounts and useful tips. You can revisit the setup at any time.</string>
+    <string name="help_tip_basics_setup_p1_desc">On first launch Optique guides you through permissions, appearance, AI models, cloud accounts and useful tips. You can revisit the setup at any time.</string>
 
     <string name="help_tip_albums_ignored_manage_title">Manage ignored albums</string>
     <string name="help_tip_albums_ignored_manage_subtitle">Review and restore hidden folders</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">Browse by media type</string>
     <string name="help_tip_media_type_albums_subtitle">Automatic albums for photos, videos, GIFs and RAW files</string>
     <string name="help_tip_media_type_albums_p1_title">Media-type albums</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra creates virtual albums from your unified library so you can open all photos, videos, GIFs or RAW files together. Their visibility is controlled from Timeline &amp; Albums settings.</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique creates virtual albums from your unified library so you can open all photos, videos, GIFs or RAW files together. Their visibility is controlled from Timeline &amp; Albums settings.</string>
     <string name="help_tip_media_type_albums_p1_s1">Open Albums and scroll to Media types</string>
     <string name="help_tip_media_type_albums_p1_s2">Open a type to browse matching media</string>
     <string name="help_tip_media_type_albums_p1_s3">Use Timeline &amp; Albums settings to show or hide the section</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">Develop RAW photos</string>
     <string name="help_tip_raw_develop_subtitle">Adjust sensor data before exporting</string>
     <string name="help_tip_raw_develop_p1_title">Use the Develop controls</string>
-    <string name="help_tip_raw_develop_p1_desc">Open a supported RAW photo in the editor to adjust white balance, exposure, highlights, output colour and demosaicing. ReFra uses a memory-safe preview while preserving full-resolution output.</string>
+    <string name="help_tip_raw_develop_p1_desc">Open a supported RAW photo in the editor to adjust white balance, exposure, highlights, output colour and demosaicing. Optique uses a memory-safe preview while preserving full-resolution output.</string>
     <string name="help_tip_raw_develop_p1_s1">Open a RAW photo and tap Edit</string>
     <string name="help_tip_raw_develop_p1_s2">Choose options in the Develop tab</string>
     <string name="help_tip_raw_develop_p1_s3">Apply any additional crop, filter or markup</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">Group people on-device</string>
     <string name="help_tip_people_grouping_subtitle">Find faces without uploading your library</string>
     <string name="help_tip_people_grouping_p1_title">Scan and organize people</string>
-    <string name="help_tip_people_grouping_p1_desc">With the face model installed, ReFra scans and groups people locally. You can start a fresh scan from People, hide a person, merge groups and create blurred copies when privacy matters.</string>
+    <string name="help_tip_people_grouping_p1_desc">With the face model installed, Optique scans and groups people locally. You can start a fresh scan from People, hide a person, merge groups and create blurred copies when privacy matters.</string>
     <string name="help_tip_people_grouping_p1_s1">Install the Face Detection model</string>
     <string name="help_tip_people_grouping_p1_s2">Open Library, then People</string>
     <string name="help_tip_people_grouping_p1_s3">Tap Scan for people and wait for indexing</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">Remove sensitive metadata</string>
     <string name="help_tip_metadata_sanitize_subtitle">Sanitize supported files without recompressing pixels</string>
     <string name="help_tip_metadata_sanitize_p1_title">Choose what to remove</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">From a photo\'s details, choose Remove metadata and select location only, descriptive fields or all supported metadata. ReFra writes and verifies a lossless sanitized copy before replacing the original.</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">From a photo\'s details, choose Remove metadata and select location only, descriptive fields or all supported metadata. Optique writes and verifies a lossless sanitized copy before replacing the original.</string>
     <string name="help_tip_metadata_sanitize_p1_s1">Open a supported local photo</string>
     <string name="help_tip_metadata_sanitize_p1_s2">Expand its details and tap Remove metadata</string>
     <string name="help_tip_metadata_sanitize_p1_s3">Choose the sanitization level</string>

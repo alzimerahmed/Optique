@@ -53,7 +53,7 @@ class MediaTimestampTest {
             ContentValues().apply {
                 put(MediaStore.MediaColumns.DISPLAY_NAME, "timestamp-${System.nanoTime()}.jpg")
                 put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-                put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/ReFraTimestampTest/")
+                put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/OptiqueTimestampTest/")
                 put(MediaStore.MediaColumns.IS_PENDING, 1)
                 put(MediaStore.MediaColumns.DATE_MODIFIED, sourceDateModified)
             }

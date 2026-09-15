@@ -395,7 +395,7 @@ class ModelManager @Inject constructor(
         val REQUIRED_FILES: List<String> get() = ModelGroup.entries.flatMap { it.files }
 
         const val BASE_DOWNLOAD_URL =
-            "https://raw.githubusercontent.com/alzimerahmed/ReFra/refs/heads/main/ml-models/src/main/assets/"
+            "https://raw.githubusercontent.com/alzimerahmed/Optique/refs/heads/main/ml-models/src/main/assets/"
 
         val EXPECTED_CHECKSUMS = mapOf(
             "visual_quant.onnx" to "a2fbb26b5f6ab5c79dd9bf99ab2dbac4711abc88dc2e20afc02a0827aa3d59c2",

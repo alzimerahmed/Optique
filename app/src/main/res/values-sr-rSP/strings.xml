@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Галерија</string>
     <string name="change_app_name">Назив апликације</string>
     <string name="change_app_name_summary">Промените назив апликације који се приказује у покретачу</string>
@@ -62,7 +62,7 @@
     <string name="github">GitHub</string>
     <string name="donate_button_cd">Дугме „Донирај”</string>
     <string name="github_button_cd">Дугме „GitHub”</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Уклони банер</string>
     <string name="dismiss_banner_title">Премести банер?</string>
     <string name="dismiss_banner_message">Дугмад за донацију и GitHub ће се преместити у компактну траку на дну странице Подешавања.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI модели омогућавају интелигентну претрагу слика и аутоматску класификацију медија. Апликација користи CLIP (Contrastive Language-Image Pretraining) моделе у ONNX формату за разумевање садржаја ваших фотографија.</string>
     <string name="ai_models_privacy_description">Целокупна AI обрада се врши искључиво на вашем уређају. Ниједна слика, упит за претрагу или податак о класификацији никада не напуштају ваш телефон. Модели се покрећу локално користећи ONNX Runtime и није им потребна интернет веза након преузимања. Ваши медији остају потпуно приватни.</string>
     <string name="ai_models_source">Извор</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Фајлови модела</string>
     <string name="ai_models_feature_search">Претрага према опису</string>
     <string name="ai_models_feature_categories">Аутоматске категорије</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">Операције у сефу</string>
     <string name="vault_notification_channel_description">Напредак шифровања / дешифровања</string>
     <string name="decrypt_vault">Дешифруј сеф</string>
-    <string name="restore_vault_summary">Тренутни сеф и његов садржај ће бити дешифровани и враћени.\nОва радња ће поново учинити ваш садржај доступним у апликацији ReFra.</string>
+    <string name="restore_vault_summary">Тренутни сеф и његов садржај ће бити дешифровани и враћени.\nОва радња ће поново учинити ваш садржај доступним у апликацији Optique.</string>
     <string name="restore_vault_title">Потврђујете дешифровање?</string>
     <string name="yes">Да</string>
     <string name="vault_deletion_title">Потврђујете брисање?</string>
@@ -930,7 +930,7 @@
     <string name="backup_encrypt_header">Шифровање</string>
     <string name="backup_restore_header">Изаберите шта желите да вратите</string>
     <string name="backup_restore">Врати</string>
-    <string name="backup_made_with_version">Направљено помоћу ReFra %1$s</string>
+    <string name="backup_made_with_version">Направљено помоћу Optique %1$s</string>
     <string name="backup_empty">Ова резервна копија не садржи податке који се могу вратити.</string>
     <string name="backup_items_count">%1$d ставки</string>
     <string name="backup_pick_file_prompt">Изаберите датотеку резервне копије из које желите да вратите податке.</string>
@@ -1430,7 +1430,7 @@
     <string name="setup_media_access_limited">Изабране фотографије и видео снимци</string>
     <string name="setup_permission_not_granted">Није одобрено</string>
     <string name="setup_permission_optional_not_granted">Опционално · Није одобрено</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Опционално. Омогућава апликацији ReFra да чита GPS податке уграђене у фотографије и видео снимке за мапу и детаље локације. Галерија ће и даље радити ако прескочите овај корак.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Опционално. Омогућава апликацији Optique да чита GPS податке уграђене у фотографије и видео снимке за мапу и детаље локације. Галерија ће и даље радити ако прескочите овај корак.]]></string>
     <string name="smart_scan_notification_channel">Смарт скенирање</string>
     <string name="smart_scan_notification_title">Скенирање медија</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d од %3$d · %4$d%% укупно</string>
@@ -1449,7 +1449,7 @@
     <string name="album_delete_confirm_summary">Све ставке у овом албуму ће бити трајно обрисане. Ово се не може поништити.</string>
     <string name="map_appearance_header">Мапа</string>
     <string name="map_appearance_title">Изглед мапе</string>
-    <string name="map_appearance_description">Изаберите да ли мапе следе изглед апликације ReFra или увек користе светле или тамне боје мапе.</string>
+    <string name="map_appearance_description">Изаберите да ли мапе следе изглед апликације Optique или увек користе светле или тамне боје мапе.</string>
     <string name="map_appearance_system">Прати изглед апликације</string>
     <string name="map_appearance_light">Светло</string>
     <string name="map_appearance_dark">Тамно</string>
@@ -1541,7 +1541,7 @@
     <string name="disable_smoothing_summary">Прикажи оштре, квадратне пикселе при увећавању уместо замућене, изглађене слике</string>
     <string name="disable_smoothing_description">Када је омогућено, слике се цртају помоћу скалирања најближег суседа тако да увећавање пиксел арт-а задржава чисте, оштре пикселе уместо да их замућује. Оставите искључено за глатко скалирање фотографија.</string>
     <string name="remove_metadata">Уклони метаподатке</string>
-    <string name="remove_metadata_warning">Оригинална датотека ће бити замењена тек након што се потврди безгубна очишћена верзија. Ако замена не успе, ReFra враћа оригинал.</string>
+    <string name="remove_metadata_warning">Оригинална датотека ће бити замењена тек након што се потврди безгубна очишћена верзија. Ако замена не успе, Optique враћа оригинал.</string>
     <string name="metadata_mode_location">Само локација</string>
     <string name="metadata_mode_location_description">Уклања координате, надморску висину, називе локација, правац и GPS временске ознаке.</string>
     <string name="metadata_mode_privacy">У вези приватности</string>
@@ -1888,7 +1888,7 @@
     <string name="cloud_net_wifi_blank_summary">Нема мреже — прелазак онемогућен</string>
     <string name="cloud_net_wifi_pick_none">Није постављено</string>
     <string name="change_app_logo">Лого апликације</string>
-    <string name="change_app_logo_summary">Пребацивање између ReFra и класичне иконе покретача Галерије</string>
+    <string name="change_app_logo_summary">Пребацивање између Optique и класичне иконе покретача Галерије</string>
     <string name="app_logo_description">Изаберите икону покретача која се користи на вашем почетном екрану и фиоци апликација. Апликација ће поново покренути да би промена ступила на снагу.</string>
     <string name="setup_step_progress">Корак %1$d од %2$d</string>
     <string name="setup_continue">Настави</string>
@@ -1896,12 +1896,12 @@
     <string name="setup_grant_permissions">Дозволи дозволе</string>
     <string name="setup_welcome_subtitle">Ваша приватна, на уређају галерија</string>
     <string name="setup_permissions_title">Дозволе</string>
-    <string name="setup_permissions_subtitle">ReFra користи само оно што је потребно за приказивање и управљање вашим медијима. Додирните дозволу да бисте сазнали зашто.</string>
+    <string name="setup_permissions_subtitle">Optique користи само оно што је потребно за приказивање и управљање вашим медијима. Додирните дозволу да бисте сазнали зашто.</string>
     <string name="setup_permission_used_for">Користи се за:</string>
     <string name="permission_local_network_title">Директан приступ локалној мрежи</string>
-    <string name="setup_reason_local_network">Opcionalno. Dodelite ovo samo kada ReFra direktno poveže sa serverom na vašoj trenutnoj mreži.</string>
+    <string name="setup_reason_local_network">Opcionalno. Dodelite ovo samo kada Optique direktno poveže sa serverom na vašoj trenutnoj mreži.</string>
     <string name="local_network_permission_dialog_title">Dozvoliti direktan pristup lokalnoj mreži?</string>
-    <string name="local_network_permission_dialog_message">Ovaj server se rešava na uređaj na vašoj trenutnoj lokalnoj mreži. Android zahteva dozvolu pre nego što ReFra može direktno da mu pristupi.</string>
+    <string name="local_network_permission_dialog_message">Ovaj server se rešava na uređaj na vašoj trenutnoj lokalnoj mreži. Android zahteva dozvolu pre nego što Optique može direktno da mu pristupi.</string>
     <string name="local_network_permission_not_now">Ne sada</string>
     <string name="setup_reason_read_images"><![CDATA[Prikazivanje vaših fotografija u vremenskoj liniji, albumima i pregledaču. Bez ovoga, galerija ostaje prazna.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Prikazivanje i reprodukcija vaših video zapisa u vremenskoj liniji, albumima i pregledaču.]]></string>

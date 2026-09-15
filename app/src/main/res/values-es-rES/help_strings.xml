@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">Recortar un sujeto</string>
     <string name="help_tip_view_cutout_subtitle">Levantar una persona u objeto del fondo</string>
     <string name="help_tip_view_cutout_p1_title">Levantar el sujeto detectado</string>
-    <string name="help_tip_view_cutout_p1_desc">En el visor, ReFra puede detectar el sujeto principal en el dispositivo y mostrar una sugerencia resaltada. Ábrelo para refinar la máscara, luego copia, comparte o guarda un recorte transparente. También puedes iniciar el recorte con pulsación larga desde la configuración del Visor de medios.</string>
+    <string name="help_tip_view_cutout_p1_desc">En el visor, Optique puede detectar el sujeto principal en el dispositivo y mostrar una sugerencia resaltada. Ábrelo para refinar la máscara, luego copia, comparte o guarda un recorte transparente. También puedes iniciar el recorte con pulsación larga desde la configuración del Visor de medios.</string>
     <string name="help_tip_view_cutout_p1_s1">Abrir una foto con un sujeto claro</string>
     <string name="help_tip_view_cutout_p1_s2">Tocar la sugerencia de Recortar sujeto</string>
     <string name="help_tip_view_cutout_p1_s3">Refinar el contorno con puntos para incluir o excluir</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">Formato de fecha</string>
     <string name="help_tip_settings_date_format_subtitle">Elige cómo se muestran las fechas</string>
     <string name="help_tip_settings_date_format_p1_title">Selecciona tu formato</string>
-    <string name="help_tip_settings_date_format_p1_desc">ReFra sigue la fecha del sistema y las preferencias de hora 12/24 por defecto. Establece una anulación solo cuando desees un patrón personalizado, y utiliza el botón de información para consultar los símbolos de formato soportados.</string>
+    <string name="help_tip_settings_date_format_p1_desc">Optique sigue la fecha del sistema y las preferencias de hora 12/24 por defecto. Establece una anulación solo cuando desees un patrón personalizado, y utiliza el botón de información para consultar los símbolos de formato soportados.</string>
     <string name="help_tip_settings_date_format_p1_s1">Abrir formato de fecha</string>
     <string name="help_tip_settings_date_format_p1_s2">Mantener Seguir sistema o ingresar un patrón personalizado</string>
     <string name="help_tip_settings_date_format_p1_s3">Previsualiza el resultado y abre la guía de formato si es necesario</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">Configuración inicial</string>
     <string name="help_tip_basics_setup_subtitle">Conceder acceso y elegir tus valores predeterminados</string>
     <string name="help_tip_basics_setup_p1_title">Primeros pasos</string>
-    <string name="help_tip_basics_setup_p1_desc">En el primer lanzamiento ReFra te guía a través de permisos, apariencia, modelos de IA, cuentas en la nube y consejos útiles. Puedes volver a la configuración en cualquier momento.</string>
+    <string name="help_tip_basics_setup_p1_desc">En el primer lanzamiento Optique te guía a través de permisos, apariencia, modelos de IA, cuentas en la nube y consejos útiles. Puedes volver a la configuración en cualquier momento.</string>
 
     <string name="help_tip_albums_ignored_manage_title">Administrar álbumes ignorados</string>
     <string name="help_tip_albums_ignored_manage_subtitle">Revisar y restaurar carpetas ocultas</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">Explorar por tipo de medio</string>
     <string name="help_tip_media_type_albums_subtitle">Álbumes automáticos para fotos, videos, GIFs y archivos RAW</string>
     <string name="help_tip_media_type_albums_p1_title">Álbumes por tipo de medio</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra crea álbumes virtuales desde tu biblioteca unificada para que puedas abrir todas las fotos, videos, GIFs o archivos RAW juntos. Su visibilidad se controla desde la configuración de Línea de tiempo y Álbumes.</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique crea álbumes virtuales desde tu biblioteca unificada para que puedas abrir todas las fotos, videos, GIFs o archivos RAW juntos. Su visibilidad se controla desde la configuración de Línea de tiempo y Álbumes.</string>
     <string name="help_tip_media_type_albums_p1_s1">Abre Álbumes y desplázate a Tipos de medios</string>
     <string name="help_tip_media_type_albums_p1_s2">Abrir un tipo para buscar medios coincidentes</string>
     <string name="help_tip_media_type_albums_p1_s3">Usar la configuración de Línea de tiempo y Álbumes para mostrar u ocultar la sección</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">Revelar fotos RAW</string>
     <string name="help_tip_raw_develop_subtitle">Ajustar los datos del sensor antes de exportar</string>
     <string name="help_tip_raw_develop_p1_title">Usar los controles de Revelado</string>
-    <string name="help_tip_raw_develop_p1_desc">Abrir una foto RAW compatible en el editor para ajustar el balance de blancos, la exposición, las luces, el color de salida y el demosaico. ReFra usa una vista previa segura para la memoria mientras se conserva la salida en resolución completa.</string>
+    <string name="help_tip_raw_develop_p1_desc">Abrir una foto RAW compatible en el editor para ajustar el balance de blancos, la exposición, las luces, el color de salida y el demosaico. Optique usa una vista previa segura para la memoria mientras se conserva la salida en resolución completa.</string>
     <string name="help_tip_raw_develop_p1_s1">Abrir una foto RAW y tocar Editar</string>
     <string name="help_tip_raw_develop_p1_s2">Elegir opciones en la pestaña Revelado</string>
     <string name="help_tip_raw_develop_p1_s3">Aplicar cualquier recorte, filtro o marcado adicional</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">Agrupar personas en el dispositivo</string>
     <string name="help_tip_people_grouping_subtitle">Encontrar rostros sin subir tu biblioteca</string>
     <string name="help_tip_people_grouping_p1_title">Escanear y organizar personas</string>
-    <string name="help_tip_people_grouping_p1_desc">Con el modelo de reconocimiento facial instalado, ReFra escanea y agrupa personas localmente. Puedes iniciar un nuevo escaneo desde Personas, ocultar a una persona, fusionar grupos y crear copias difuminadas cuando la privacidad sea importante.</string>
+    <string name="help_tip_people_grouping_p1_desc">Con el modelo de reconocimiento facial instalado, Optique escanea y agrupa personas localmente. Puedes iniciar un nuevo escaneo desde Personas, ocultar a una persona, fusionar grupos y crear copias difuminadas cuando la privacidad sea importante.</string>
     <string name="help_tip_people_grouping_p1_s1">Instala el modelo de detección facial</string>
     <string name="help_tip_people_grouping_p1_s2">Abre Biblioteca, luego Personas</string>
     <string name="help_tip_people_grouping_p1_s3">Toca Escanear personas y espera a que se indexe</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">Eliminar metadatos sensibles</string>
     <string name="help_tip_metadata_sanitize_subtitle">Sanitizar archivos compatibles sin recompresar los píxeles</string>
     <string name="help_tip_metadata_sanitize_p1_title">Elegir qué eliminar</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">En los detalles de una foto, elige Eliminar metadatos y selecciona solo ubicación, campos descriptivos o todos los metadatos compatibles. ReFra escribe y verifica una copia sanitizada sin pérdida antes de reemplazar el original.</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">En los detalles de una foto, elige Eliminar metadatos y selecciona solo ubicación, campos descriptivos o todos los metadatos compatibles. Optique escribe y verifica una copia sanitizada sin pérdida antes de reemplazar el original.</string>
     <string name="help_tip_metadata_sanitize_p1_s1">Abrir una foto local compatible</string>
     <string name="help_tip_metadata_sanitize_p1_s2">Expandir sus detalles y tocar Eliminar metadatos</string>
     <string name="help_tip_metadata_sanitize_p1_s3">Elegir el nivel de sanitización</string>

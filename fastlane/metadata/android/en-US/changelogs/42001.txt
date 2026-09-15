@@ -1,4 +1,4 @@
-ReFra v4.2.0
+Optique v4.2.0
 
 New Features
 

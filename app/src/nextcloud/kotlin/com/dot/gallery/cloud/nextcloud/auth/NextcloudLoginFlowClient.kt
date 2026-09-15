@@ -204,6 +204,6 @@ class NextcloudLoginFlowClient(
 
     private companion object {
         const val LOGIN_TIMEOUT_MILLIS = 20 * 60 * 1000L
-        val userAgent = "ReFra/${BuildConfig.VERSION_NAME}"
+        val userAgent = "Optique/${BuildConfig.VERSION_NAME}"
     }
 }

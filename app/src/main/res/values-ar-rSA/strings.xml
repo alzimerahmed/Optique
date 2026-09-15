@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">المعرض</string>
     <string name="change_app_name">اسم التطبيق</string>
     <string name="change_app_name_summary">غيّر اسم التطبيق الذي يظهر على المُطلق</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">زر التبرع</string>
     <string name="github_button_cd">زر Github</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">أهمِل اللافتة</string>
     <string name="dismiss_banner_title">انقل الشعار؟</string>
     <string name="dismiss_banner_message">سيتم نقل زري «التبرع» و«GitHub» إلى شريط صغير في أسفل صفحة «الإعدادات».</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI models enable intelligent image search and automatic media classification. The app uses CLIP (Contrastive Language-Image Pretraining) models in ONNX format to understand the content of your photos.</string>
     <string name="ai_models_privacy_description">تتم جميع عمليات معالجة الذكاء الاصطناعي بالكامل على جهازك. ولا تغادر أي صور أو استعلامات بحث أو بيانات تصنيف هاتفك أبدًا. تعمل النماذج محليًّا باستخدام ONNX Runtime ولا تتطلب اتصالاً بالإنترنت بمجرد تنزيلها. وتظل ملفاتك الوسائطية سرية تمامًا.</string>
     <string name="ai_models_source">المصدر</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">ملفات النماذج</string>
     <string name="ai_models_feature_search">ابحث حسب الوصف</string>
     <string name="ai_models_feature_categories">الفئات التلقائية</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">عمليات المخزن</string>
     <string name="vault_notification_channel_description">تقدم مهام التشفير / فك التشفير</string>
     <string name="decrypt_vault">فك تشفير الخزنة</string>
-    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the ReFra.</string>
+    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the Optique.</string>
     <string name="restore_vault_title">تأكيد فك التشفير؟</string>
     <string name="yes">نعم</string>
     <string name="vault_deletion_title">تأكيد الحذف؟</string>
@@ -936,7 +936,7 @@
     <string name="backup_encrypt_header">التعمية</string>
     <string name="backup_restore_header">اختر ما تريد استعادته</string>
     <string name="backup_restore">استعِد</string>
-    <string name="backup_made_with_version">أُنشئ باستخدام ReFra %1$s</string>
+    <string name="backup_made_with_version">أُنشئ باستخدام Optique %1$s</string>
     <string name="backup_empty">لا تحتوي هذه النُسخة الاحتياطية على أي بيانات قابلة للاستعادة.</string>
     <string name="backup_items_count">%1$d عناصر</string>
     <string name="backup_pick_file_prompt">اختر ملف النُسخة الاحتياطية الذي تريد الاستعادة منه.</string>
@@ -1436,7 +1436,7 @@
     <string name="setup_media_access_limited">الصور ومقاطع الفيديو المحددة</string>
     <string name="setup_permission_not_granted">لم يُمنح</string>
     <string name="setup_permission_optional_not_granted">اختياري · لم يُمنح</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[اختياري. يسمح لتطبيق ReFra بقراءة بيانات GPS المضمنة في الصور ومقاطع الفيديو لاستخدامها في الخريطة وتفاصيل الموقع. سيظل معرضك يعمل إذا تخطيت هذا الخيار.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[اختياري. يسمح لتطبيق Optique بقراءة بيانات GPS المضمنة في الصور ومقاطع الفيديو لاستخدامها في الخريطة وتفاصيل الموقع. سيظل معرضك يعمل إذا تخطيت هذا الخيار.]]></string>
     <string name="smart_scan_notification_channel">المسح الذكي</string>
     <string name="smart_scan_notification_title">مسح الوسائط</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d من %3$d · %4$d%% بشكل عام</string>
@@ -1455,7 +1455,7 @@
     <string name="album_delete_confirm_summary">سيتم حذف كافة العناصر الموجودة في هذا الألبوم نهائيًا. لا يمكن التراجع عن هذا.</string>
     <string name="map_appearance_header">خريطة</string>
     <string name="map_appearance_title">مظهر الخريطة</string>
-    <string name="map_appearance_description">اختر ما إذا كانت الخرائط تتبع مظهر ReFra أو تستخدم دائمًا ألوان الخريطة الساطعة أو الداكنة.</string>
+    <string name="map_appearance_description">اختر ما إذا كانت الخرائط تتبع مظهر Optique أو تستخدم دائمًا ألوان الخريطة الساطعة أو الداكنة.</string>
     <string name="map_appearance_system">اتبع مظهر التطبيق</string>
     <string name="map_appearance_light">ضوء</string>
     <string name="map_appearance_dark">الظلام</string>
@@ -1547,7 +1547,7 @@
     <string name="disable_smoothing_summary">أظهر وحدات بكسل مربعة واضحة عند التكبير/التصغير بدلاً من الصورة الباهتة والناعمة</string>
     <string name="disable_smoothing_description">عند التمكين، يتم رسم الصور باستخدام مقياس الجوار الأقرب، لذا فإن تكبير صورة البكسل يحافظ على وحدات البكسل نظيفة وحادة بدلاً من تشويشها. اتركه للتحجيم السلس للصور.</string>
     <string name="remove_metadata">إزالة البيانات الوصفية</string>
-    <string name="remove_metadata_warning">لن يتم استبدال الملف الأصلي إلا بعد التحقق من النسخة المعقمة بدون فقدان. في حالة فشل الاستبدال، يقوم ReFra باستعادة النسخة الأصلية.</string>
+    <string name="remove_metadata_warning">لن يتم استبدال الملف الأصلي إلا بعد التحقق من النسخة المعقمة بدون فقدان. في حالة فشل الاستبدال، يقوم Optique باستعادة النسخة الأصلية.</string>
     <string name="metadata_mode_location">الموقع فقط</string>
     <string name="metadata_mode_location_description">يزيل الإحداثيات والارتفاع وأسماء المواقع والاتجاهات والطوابع الزمنية لنظام تحديد المواقع العالمي (GPS).</string>
     <string name="metadata_mode_privacy">المتعلقة بالخصوصية</string>
@@ -1894,7 +1894,7 @@
     <string name="cloud_net_wifi_blank_summary">لا توجد شبكة - تم تعطيل التبديل</string>
     <string name="cloud_net_wifi_pick_none">لم يتم ضبطه</string>
     <string name="change_app_logo">شعار التطبيق</string>
-    <string name="change_app_logo_summary">قم بالتبديل بين أيقونة ReFra وأيقونة مشغل المعرض الكلاسيكي</string>
+    <string name="change_app_logo_summary">قم بالتبديل بين أيقونة Optique وأيقونة مشغل المعرض الكلاسيكي</string>
     <string name="app_logo_description">اختر رمز المشغل المستخدم على شاشتك الرئيسية ودرج التطبيق. سيتم إعادة تشغيل التطبيق لتطبيق التغيير.</string>
     <string name="setup_step_progress">الخطوة %1$d من %2$d</string>
     <string name="setup_continue">متابعة</string>
@@ -1902,12 +1902,12 @@
     <string name="setup_grant_permissions">أذونات المنح</string>
     <string name="setup_welcome_subtitle">معرضك الخاص الموجود على الجهاز</string>
     <string name="setup_permissions_title">الأذونات</string>
-    <string name="setup_permissions_subtitle">يستخدم ReFra فقط ما يحتاجه لعرض وإدارة الوسائط الخاصة بك. اضغط على إذن لمعرفة السبب.</string>
+    <string name="setup_permissions_subtitle">يستخدم Optique فقط ما يحتاجه لعرض وإدارة الوسائط الخاصة بك. اضغط على إذن لمعرفة السبب.</string>
     <string name="setup_permission_used_for">تستخدم ل:</string>
     <string name="permission_local_network_title">الوصول المباشر إلى الشبكة المحلية</string>
-    <string name="setup_reason_local_network">اختياري. امنح هذا فقط عندما يتصل ReFra مباشرة بخادم على شبكتك الحالية.</string>
+    <string name="setup_reason_local_network">اختياري. امنح هذا فقط عندما يتصل Optique مباشرة بخادم على شبكتك الحالية.</string>
     <string name="local_network_permission_dialog_title">هل تريد السماح بالوصول المباشر إلى الشبكة المحلية؟</string>
-    <string name="local_network_permission_dialog_message">ينتقل هذا الخادم إلى جهاز موجود على شبكتك المحلية الحالية. يتطلب Android إذنًا قبل أن يتمكن ReFra من الاتصال به مباشرة.</string>
+    <string name="local_network_permission_dialog_message">ينتقل هذا الخادم إلى جهاز موجود على شبكتك المحلية الحالية. يتطلب Android إذنًا قبل أن يتمكن Optique من الاتصال به مباشرة.</string>
     <string name="local_network_permission_not_now">ليس الآن</string>
     <string name="setup_reason_read_images"><![CDATA[عرض صورك في الجدول الزمني والألبومات والعارض. وبدون ذلك يبقى المعرض فارغا.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[عرض وتشغيل مقاطع الفيديو الخاصة بك في المخطط الزمني والألبومات والعارض.]]></string>

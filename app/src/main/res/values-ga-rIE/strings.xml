@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Gallery</string>
     <string name="change_app_name">App name</string>
     <string name="change_app_name_summary">Change the app name shown on your launcher</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Donate Button</string>
     <string name="github_button_cd">Github Button</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Dismiss banner</string>
     <string name="dismiss_banner_title">Move banner?</string>
     <string name="dismiss_banner_message">The Donate and GitHub buttons will move to a compact bar at the bottom of the Settings page.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI models enable intelligent image search and automatic media classification. The app uses CLIP (Contrastive Language-Image Pretraining) models in ONNX format to understand the content of your photos.</string>
     <string name="ai_models_privacy_description">All AI processing is performed entirely on your device. No images, search queries, or classification data ever leave your phone. The models run locally using ONNX Runtime and do not require an internet connection once downloaded. Your media remains fully private.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">Vault Operations</string>
     <string name="vault_notification_channel_description">Progress of encryption / decryption tasks</string>
     <string name="decrypt_vault">Decrypt Vault</string>
-    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the ReFra.</string>
+    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the Optique.</string>
     <string name="restore_vault_title">Confirm Decryption?</string>
     <string name="yes">Yes</string>
     <string name="vault_deletion_title">Confirm Deletion?</string>
@@ -934,7 +934,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1434,7 +1434,7 @@
     <string name="setup_media_access_limited">Grianghraif agus físeáin roghnaithe</string>
     <string name="setup_permission_not_granted">Níor deonaíodh</string>
     <string name="setup_permission_optional_not_granted">Roghnach · Níor deonaíodh</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Roghnach. Ligeann sé do ReFra sonraí GPS atá leabaithe i ngrianghraif agus i bhfíseáin a léamh don Léarscáil agus do shonraí suímh. Oibríonn do ghailearaí fós má scipeálann tú é.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Roghnach. Ligeann sé do Optique sonraí GPS atá leabaithe i ngrianghraif agus i bhfíseáin a léamh don Léarscáil agus do shonraí suímh. Oibríonn do ghailearaí fós má scipeálann tú é.]]></string>
     <string name="smart_scan_notification_channel">Scanadh Cliste</string>
     <string name="smart_scan_notification_title">Ag scanadh meán</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d de %3$d · %4$d%% san iomlán</string>
@@ -1453,7 +1453,7 @@
     <string name="album_delete_confirm_summary">Beidh gach earra san albam seo scriosta go buan. Ní féidir é seo a aisiompú.</string>
     <string name="map_appearance_header">Léarscáil</string>
     <string name="map_appearance_title">Chuma léarscáile</string>
-    <string name="map_appearance_description">Roghnaigh an ndéanfaidh léarscáileanna cuma ReFra a leanúint nó i gcónaí dathanna geal nó dorcha léarscáile a úsáid.</string>
+    <string name="map_appearance_description">Roghnaigh an ndéanfaidh léarscáileanna cuma Optique a leanúint nó i gcónaí dathanna geal nó dorcha léarscáile a úsáid.</string>
     <string name="map_appearance_system">Leanfar cuma na aip</string>
     <string name="map_appearance_light">Éadrom</string>
     <string name="map_appearance_dark">Dorcha</string>
@@ -1545,7 +1545,7 @@
     <string name="disable_smoothing_summary">Taispeáin picteilíní géire, cearnacha nuair a bhíonn tú ag dul i dtaithí in ionad íomhá doiléire, réidh</string>
     <string name="disable_smoothing_description">Nuair a bhíonn é seo gníomhachtaithe, tarraingítear íomhánna le scálú comharsaigh is gaire ionas go gcoinnítear picteilíní glan, géire nuair a dhéanann tú zoom isteach ar ealaín phixil seachas iad a mhúchadh. Fág é as le haghaidh scálú réidh grianghraif.</string>
     <string name="remove_metadata">Bain meiteashonraí</string>
-    <string name="remove_metadata_warning">Athrófar an comhad bunaidh ach amháin tar éis a dhearbhú go bhfuil leagan glan, neamhchaillteach. Mura n-éiríonn leis an athsholáthar, ReFra téann ar ais chuig an bhfoinse bunaidh.</string>
+    <string name="remove_metadata_warning">Athrófar an comhad bunaidh ach amháin tar éis a dhearbhú go bhfuil leagan glan, neamhchaillteach. Mura n-éiríonn leis an athsholáthar, Optique téann ar ais chuig an bhfoinse bunaidh.</string>
     <string name="metadata_mode_location">Suíomh amháin</string>
     <string name="metadata_mode_location_description">Baineann sé comhordaithe, airde, ainmneacha suíomh, treoracha, agus ama GPS.</string>
     <string name="metadata_mode_privacy">Gaolach le príobháideachas</string>
@@ -1893,7 +1893,7 @@
     <string name="cloud_net_wifi_blank_summary">Gan líonra — aistriú múchta</string>
     <string name="cloud_net_wifi_pick_none">Ní socraithe</string>
     <string name="change_app_logo">Lógó an aip</string>
-    <string name="change_app_logo_summary">Aistrigh idir an íocón seolaithe ReFra agus an íocón Gallerí clasaiceach</string>
+    <string name="change_app_logo_summary">Aistrigh idir an íocón seolaithe Optique agus an íocón Gallerí clasaiceach</string>
     <string name="app_logo_description">Roghnaigh an íocón seolaithe a úsáidtear ar do scáileán baile agus i ndoras na n-aip. Beidh ar an aip atosú chun an t-athrú a chur i bhfeidhm.</string>
     <string name="setup_step_progress">Céim %1$d de %2$d</string>
     <string name="setup_continue">Lean ar aghaidh</string>
@@ -1901,12 +1901,12 @@
     <string name="setup_grant_permissions">Ceadanna a thabhairt</string>
     <string name="setup_welcome_subtitle">Do ghalraí príobháideach ar an bhfeiste</string>
     <string name="setup_permissions_title">Ceadanna</string>
-    <string name="setup_permissions_subtitle">Ní úsáideann ReFra ach an méid atá ag teastáil chun do mheáin a thaispeáint agus a bhainistiú. Beartaigh cead chun a fháil amach cén fáth.</string>
+    <string name="setup_permissions_subtitle">Ní úsáideann Optique ach an méid atá ag teastáil chun do mheáin a thaispeáint agus a bhainistiú. Beartaigh cead chun a fháil amach cén fáth.</string>
     <string name="setup_permission_used_for">Úsáidte do:</string>
     <string name="permission_local_network_title">Rochtain dhíreach ar líonra áitiúil</string>
-    <string name="setup_reason_local_network">Roghnach. Tabhair é seo amháin nuair a nascann ReFra go díreach le freastalaí ar do líonra reatha.</string>
+    <string name="setup_reason_local_network">Roghnach. Tabhair é seo amháin nuair a nascann Optique go díreach le freastalaí ar do líonra reatha.</string>
     <string name="local_network_permission_dialog_title">An ligfidh tú rochtain dhíreach ar líonra áitiúil?</string>
-    <string name="local_network_permission_dialog_message">Réitíonn an freastalaí seo le gléas ar do líonra áitiúil reatha. Teastaíonn cead ó Android sula féidir le ReFra nascadh leis go díreach.</string>
+    <string name="local_network_permission_dialog_message">Réitíonn an freastalaí seo le gléas ar do líonra áitiúil reatha. Teastaíonn cead ó Android sula féidir le Optique nascadh leis go díreach.</string>
 <string name="local_network_permission_not_now">Ní anois</string>
     <string name="setup_reason_read_images"><![CDATA[Ag taispeáint do phoist sa líne ama, albam agus féachadóir. Gan é seo, fanann an gailearaí folamh.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Ag taispeáint agus ag imirt do fhíseáin sa líne ama, albam agus féachadóir.]]></string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Gallery</string>
     <string name="change_app_name">App name</string>
     <string name="change_app_name_summary">Change the app name shown on your launcher</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Lahjoita-painike</string>
     <string name="github_button_cd">Github-painike</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Dismiss banner</string>
     <string name="dismiss_banner_title">Move banner?</string>
     <string name="dismiss_banner_message">The Donate and GitHub buttons will move to a compact bar at the bottom of the Settings page.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI models enable intelligent image search and automatic media classification. The app uses CLIP (Contrastive Language-Image Pretraining) models in ONNX format to understand the content of your photos.</string>
     <string name="ai_models_privacy_description">All AI processing is performed entirely on your device. No images, search queries, or classification data ever leave your phone. The models run locally using ONNX Runtime and do not require an internet connection once downloaded. Your media remains fully private.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">Vault Operations</string>
     <string name="vault_notification_channel_description">Progress of encryption / decryption tasks</string>
     <string name="decrypt_vault">Decrypt Vault</string>
-    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the ReFra.</string>
+    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the Optique.</string>
     <string name="restore_vault_title">Confirm Decryption?</string>
     <string name="yes">Yes</string>
     <string name="vault_deletion_title">Confirm Deletion?</string>
@@ -928,7 +928,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1428,7 +1428,7 @@
     <string name="setup_media_access_limited">Valitut kuvat ja videot</string>
     <string name="setup_permission_not_granted">Ei myönnetty</string>
     <string name="setup_permission_optional_not_granted">Valinnainen · Ei myönnetty</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Valinnainen. Antaa ReFran lukea kuviin ja videoihin upotettuja GPS-tietoja karttaa ja sijaintitietoja varten. Galleria toimii edelleen, jos ohitat tämän.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Valinnainen. Antaa Optiquen lukea kuviin ja videoihin upotettuja GPS-tietoja karttaa ja sijaintitietoja varten. Galleria toimii edelleen, jos ohitat tämän.]]></string>
     <string name="smart_scan_notification_channel">Älykäs skannaus</string>
     <string name="smart_scan_notification_title">Skannataan mediaa</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d / %3$d · %4$d%% yhteensä</string>
@@ -1447,7 +1447,7 @@
     <string name="album_delete_confirm_summary">Kaikki tämän albumin kohteet poistetaan pysyvästi. Tätä ei voi kumota.</string>
     <string name="map_appearance_header">Kartta</string>
     <string name="map_appearance_title">Karttanäkymä</string>
-    <string name="map_appearance_description">Valitse, seuraavatko kartat ReFra:n ulkoasua vai käytetäänkö aina vaaleita tai tummia karttavärejä.</string>
+    <string name="map_appearance_description">Valitse, seuraavatko kartat Optique:n ulkoasua vai käytetäänkö aina vaaleita tai tummia karttavärejä.</string>
     <string name="map_appearance_system">Seuraa sovelluksen ulkoasua</string>
     <string name="map_appearance_light">Vaalea</string>
     <string name="map_appearance_dark">Tumma</string>
@@ -1539,7 +1539,7 @@
     <string name="disable_smoothing_summary">Näytä tarkat, neliönmuotoiset pikselit zoomattaessa sumean, pehmennetyn kuvan sijaan</string>
     <string name="disable_smoothing_description">Kun ominaisuus on käytössä, kuvat piirretään lähimmän naapurin skaalausta käyttäen, joten pikselitaiteeseen zoomatessa pysyvät pikselit selkeinä ja terävinä sen sijaan, että ne sumentuisivat. Jätä pois päältä, jos haluat valokuvien sulavan skaalaamisen.</string>
     <string name="remove_metadata">Poista metatiedot</string>
-    <string name="remove_metadata_warning">Alkuperäinen tiedosto korvataan vasta, kun häviötön puhdistettu versio on vahvistettu. Jos korvaus epäonnistuu, ReFra palauttaa alkuperäisen.</string>
+    <string name="remove_metadata_warning">Alkuperäinen tiedosto korvataan vasta, kun häviötön puhdistettu versio on vahvistettu. Jos korvaus epäonnistuu, Optique palauttaa alkuperäisen.</string>
     <string name="metadata_mode_location">Sijainti vain</string>
     <string name="metadata_mode_location_description">Poistaa koordinaatit, korkeuden, sijaintinimet, suuntaukset ja GPS-aikaleimat.</string>
     <string name="metadata_mode_privacy">Tietosuojaan liittyvät</string>
@@ -1886,7 +1886,7 @@
     <string name="cloud_net_wifi_blank_summary">Ei verkkoa — vaihto pois päältä</string>
     <string name="cloud_net_wifi_pick_none">Ei asetettu</string>
     <string name="change_app_logo">Sovelluksen logo</string>
-    <string name="change_app_logo_summary">Vaihda ReFra ja perinteisen Gallerian käynnistyssymbolin välillä</string>
+    <string name="change_app_logo_summary">Vaihda Optique ja perinteisen Gallerian käynnistyssymbolin välillä</string>
     <string name="app_logo_description">Valitse käynnistyssymboli, jota käytetään kotinäytöllä ja sovellusvalikossa. Sovellus käynnistyy uudelleen muutoksen käyttöönottoa varten.</string>
     <string name="setup_step_progress">Vaihe %1$d / %2$d</string>
     <string name="setup_continue">Jatka</string>
@@ -1894,12 +1894,12 @@
     <string name="setup_grant_permissions">Myönnä luvat</string>
     <string name="setup_welcome_subtitle">Yksityinen, laitteella oleva galleriasi</string>
     <string name="setup_permissions_title">Luvat</string>
-    <string name="setup_permissions_subtitle">ReFra käyttää vain sitä, mitä se tarvitsee mediasi näyttämiseen ja hallintaan. Napauta lupaa nähdäksesi miksi.</string>
+    <string name="setup_permissions_subtitle">Optique käyttää vain sitä, mitä se tarvitsee mediasi näyttämiseen ja hallintaan. Napauta lupaa nähdäksesi miksi.</string>
     <string name="setup_permission_used_for">Käytetään:</string>
     <string name="permission_local_network_title">Suora paikallisverkon käyttö</string>
-    <string name="setup_reason_local_network">Valinnainen. Myönnä tämä vain, kun ReFra yhdistää suoraan palvelimeen nykyisessä verkossasi.</string>
+    <string name="setup_reason_local_network">Valinnainen. Myönnä tämä vain, kun Optique yhdistää suoraan palvelimeen nykyisessä verkossasi.</string>
     <string name="local_network_permission_dialog_title">Salli suora paikallisverkon käyttö?</string>
-    <string name="local_network_permission_dialog_message">Tämä palvelin vastaa laitetta nykyisessä paikallisverkossasi. Android vaatii luvan ennen kuin ReFra voi yhdistää siihen suoraan.</string>
+    <string name="local_network_permission_dialog_message">Tämä palvelin vastaa laitetta nykyisessä paikallisverkossasi. Android vaatii luvan ennen kuin Optique voi yhdistää siihen suoraan.</string>
 <string name="local_network_permission_not_now">Ei nyt</string>
     <string name="setup_reason_read_images"><![CDATA[Näyttääksesi valokuviasi aikajanalla, albumeissa ja katselussa. Ilman tätä galleria pysyy tyhjänä.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Näyttää ja toistaa videoitasi aikajanalla, albumeissa ja katselussa.]]></string>

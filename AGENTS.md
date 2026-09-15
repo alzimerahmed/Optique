@@ -1,8 +1,8 @@
-# ReFra Gallery — Project Rules for AI Agents
+# Optique Gallery — Project Rules for AI Agents
 
 ## Project
 
-ReFra (fork of `alzimerahmed/Gallery`, upstream: https://github.com/alzimerahmed/ReFra) — a FOSS Android gallery app built with Jetpack Compose. Goal: the gallery app everyone wants, with the features everyone needs. applicationId `com.dot.gallery`. Distributed via F-Droid, Google Play (paid support tier), GitHub Releases, and Obtainium.
+Optique (fork of IacobIonut01/ReFra, itself renamed from `IacobIonut01/Gallery`; upstream: https://github.com/IacobIonut01/ReFra) — a FOSS Android gallery app built with Jetpack Compose. Goal: the gallery app everyone wants, with the features everyone needs. Repo: https://github.com/alzimerahmed/Optique — applicationId `com.dot.gallery`. Fully independent from upstream (no sync). Distributed via F-Droid, Google Play (paid support tier), GitHub Releases, and Obtainium.
 
 **Stack:** Kotlin, Jetpack Compose + Material 3, Hilt (DI), Room + KSP, Kotlin Serialization, Kotlin Parcelize, Compose Compiler Gradle plugin, Baseline Profiles (`baselineprofile/`). Min SDK 29 (Android 11 — required by Trash/media APIs), target/compile SDK 37. JDK 17.
 
@@ -37,7 +37,7 @@ Skip this for single-line edits, pure Q&A, or reading files.
 This is a native Android app, not a website. Per the intent-map in `docs/toolset.md`:
 - **Skip web-only sub-agents/skills:** frontend-designer, css-architect, pwa-engineer, seo-specialist, search-optimization, playwright-design-clone (except when auditing Compose UI against design references — use tastemaker/pixel-analyst instead).
 - **Keep universal ones:** code-reviewer, debugger, test-engineer, security-auditor, performance-engineer, git-master, migration-specialist, docs-writer, i18n-specialist (Crowdin-managed translations via Compose string resources), build-optimizer, caveman-compressor, pixel-analyst, vibe-coding-auditor, type-safety-engineer (Kotlin), database-engineer (Room).
-- **ReFra-specific quality gates:** `./gradlew lint` (Android Lint, baseline in `lint-baseline.xml`), unit tests via JUnit/Robolectric, Compose UI tests, a11y via Compose semantics — not axe-core/browser tooling. Baseline Profile generation matters for gallery scroll/jank performance. Respect the `offline` flavor: never add network calls that would break permission-stripped builds; guard online features behind the BuildConfig flags.
+- **Optique-specific quality gates:** `./gradlew lint` (Android Lint, baseline in `lint-baseline.xml`), unit tests via JUnit/Robolectric, Compose UI tests, a11y via Compose semantics — not axe-core/browser tooling. Baseline Profile generation matters for gallery scroll/jank performance. Respect the `offline` flavor: never add network calls that would break permission-stripped builds; guard online features behind the BuildConfig flags.
 - **ML work:** keep models within the `:ml-models` size guard; use the CONTEXT.md ubiquitous language for cutout features.
 
 ## Communication Style

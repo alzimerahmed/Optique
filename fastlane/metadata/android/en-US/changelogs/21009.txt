@@ -10,4 +10,4 @@ Bug Fixes
     Gallery: Fixed some edge cases when navigation bar is showing incorrectly
     Gallery: Fix missing 'Open as' for media
 
-Full Changelog: https://github.com/alzimerahmed/Gallery/releases/tag/2.1.0-21009
+Full Changelog: https://github.com/alzimerahmed/Optique/releases/tag/2.1.0-21009

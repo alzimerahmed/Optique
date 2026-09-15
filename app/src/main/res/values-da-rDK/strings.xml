@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Gallery</string>
     <string name="change_app_name">App name</string>
     <string name="change_app_name_summary">Change the app name shown on your launcher</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Donerknap</string>
     <string name="github_button_cd">Github-knap</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Dismiss banner</string>
     <string name="dismiss_banner_title">Move banner?</string>
     <string name="dismiss_banner_message">The Donate and GitHub buttons will move to a compact bar at the bottom of the Settings page.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI models enable intelligent image search and automatic media classification. The app uses CLIP (Contrastive Language-Image Pretraining) models in ONNX format to understand the content of your photos.</string>
     <string name="ai_models_privacy_description">All AI processing is performed entirely on your device. No images, search queries, or classification data ever leave your phone. The models run locally using ONNX Runtime and do not require an internet connection once downloaded. Your media remains fully private.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -928,7 +928,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1428,7 +1428,7 @@
     <string name="setup_media_access_limited">Valgte billeder og videoer</string>
     <string name="setup_permission_not_granted">Ikke tilladt</string>
     <string name="setup_permission_optional_not_granted">Valgfrit · Ikke tilladt</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Valgfrit. Giver ReFra adgang til at læse GPS-data, der er indlejret i billeder og videoer, til Kort og placeringsoplysninger. Dit galleri fungerer stadig, hvis du springer dette over.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Valgfrit. Giver Optique adgang til at læse GPS-data, der er indlejret i billeder og videoer, til Kort og placeringsoplysninger. Dit galleri fungerer stadig, hvis du springer dette over.]]></string>
     <string name="smart_scan_notification_channel">Smart scanning</string>
     <string name="smart_scan_notification_title">Scanner medier</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d af %3$d · %4$d%% samlet</string>
@@ -1447,7 +1447,7 @@
     <string name="album_delete_confirm_summary">Alle elementer i dette album vil blive slettet permanent. Dette kan ikke fortrydes.</string>
     <string name="map_appearance_header">Kort</string>
     <string name="map_appearance_title">Kortudseende</string>
-    <string name="map_appearance_description">Vælg, om kort følger ReFras udseende eller altid bruger lyse eller mørke kortfarver.</string>
+    <string name="map_appearance_description">Vælg, om kort følger Optiques udseende eller altid bruger lyse eller mørke kortfarver.</string>
     <string name="map_appearance_system">Følg appens udseende</string>
     <string name="map_appearance_light">Lys</string>
     <string name="map_appearance_dark">Mørk</string>
@@ -1539,7 +1539,7 @@
     <string name="disable_smoothing_summary">Vis skarpe, firkantede pixels ved zoom i stedet for et sløret, udjævnet billede</string>
     <string name="disable_smoothing_description">Når det er aktiveret, tegnes billeder med nærmeste-nabo-skaleringsmetode, så zoom ind i pixelkunst bevarer rene, skarpe pixels i stedet for at sløre dem. Lad det være slået fra for glat skalering af fotos.</string>
     <string name="remove_metadata">Fjern metadata</string>
-    <string name="remove_metadata_warning">Den oprindelige fil vil kun blive erstattet efter en tabsfri, renset version er bekræftet. Hvis udskiftningen fejler, gendanner ReFra originalen.</string>
+    <string name="remove_metadata_warning">Den oprindelige fil vil kun blive erstattet efter en tabsfri, renset version er bekræftet. Hvis udskiftningen fejler, gendanner Optique originalen.</string>
     <string name="metadata_mode_location">Kun placering</string>
     <string name="metadata_mode_location_description">Fjerner koordinater, højde, stednavne, retninger og GPS-tidsstempler.</string>
     <string name="metadata_mode_privacy">Privatlivsrelateret</string>
@@ -1886,7 +1886,7 @@
     <string name="cloud_net_wifi_blank_summary">Intet netværk — skift deaktiveret</string>
     <string name="cloud_net_wifi_pick_none">Ikke indstillet</string>
     <string name="change_app_logo">App-logo</string>
-    <string name="change_app_logo_summary">Skift mellem ReFra og klassisk Gallery-launcherikon</string>
+    <string name="change_app_logo_summary">Skift mellem Optique og klassisk Gallery-launcherikon</string>
     <string name="app_logo_description">Vælg launcherikonet, der skal bruges på din startskærm og i appskuffen. Appen genstarter for at anvende ændringen.</string>
     <string name="setup_step_progress">Trin %1$d af %2$d</string>
     <string name="setup_continue">Fortsæt</string>
@@ -1894,12 +1894,12 @@
     <string name="setup_grant_permissions">Giv tilladelser</string>
     <string name="setup_welcome_subtitle">Dit private, lokale fotogalleri</string>
     <string name="setup_permissions_title">Tilladelser</string>
-    <string name="setup_permissions_subtitle">ReFra bruger kun det, der er nødvendigt for at vise og administrere dine medier. Tryk på en tilladelse for at lære hvorfor.</string>
+    <string name="setup_permissions_subtitle">Optique bruger kun det, der er nødvendigt for at vise og administrere dine medier. Tryk på en tilladelse for at lære hvorfor.</string>
     <string name="setup_permission_used_for">Bruges til:</string>
     <string name="permission_local_network_title">Direkte adgang til lokalnetværk</string>
-    <string name="setup_reason_local_network">Valgfri. Giv kun denne tilladelse, når ReFra opretter direkte forbindelse til en server på dit nuværende netværk.</string>
+    <string name="setup_reason_local_network">Valgfri. Giv kun denne tilladelse, når Optique opretter direkte forbindelse til en server på dit nuværende netværk.</string>
     <string name="local_network_permission_dialog_title">Tillad direkte adgang til lokalnetværk?</string>
-    <string name="local_network_permission_dialog_message">Denne server peger på en enhed på dit nuværende lokale netværk. Android kræver tilladelse, før ReFra kan oprette direkte forbindelse til den.</string>
+    <string name="local_network_permission_dialog_message">Denne server peger på en enhed på dit nuværende lokale netværk. Android kræver tilladelse, før Optique kan oprette direkte forbindelse til den.</string>
     <string name="local_network_permission_not_now">Ikke nu</string>
     <string name="setup_reason_read_images"><![CDATA[Viser dine fotos i tidslinjen, albums og viewer. Uden dette forbliver galleriet tomt.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Viser og afspiller dine videoer i tidslinjen, albums og viewer.]]></string>

@@ -9,4 +9,4 @@ New Features
     Fixed moving files not updating the media
     Added copy feature
 
-Full Changelog: https://github.com/alzimerahmed/Gallery/releases/tag/2.0.1-20111
+Full Changelog: https://github.com/alzimerahmed/Optique/releases/tag/2.0.1-20111

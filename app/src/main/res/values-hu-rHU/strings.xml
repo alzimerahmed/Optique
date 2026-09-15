@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Galéria</string>
     <string name="change_app_name">Alkalmazás neve</string>
     <string name="change_app_name_summary">Az alkalmazás megjelenített nevének módosítása</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Adományozás gomb</string>
     <string name="github_button_cd">Github Gomb</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Panel elrejtése</string>
     <string name="dismiss_banner_title">Panel áthelyezése?</string>
     <string name="dismiss_banner_message">Az Adományozás és a GitHub gombok egy kompakt sávba kerülnek át a Beállítások oldal alján.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">Az MI-modellek intelligens képkeresést és automatikus médiabesorolást tesznek lehetővé. Az alkalmazás ONNX formátumú CLIP (Contrastive Language-Image Pretraining) modelleket használ a fényképek tartalmának értelmezéséhez.</string>
     <string name="ai_models_privacy_description">Minden MI-feldolgozás az eszközén történik. A képek, keresések és besorolási adatok soha nem hagyják el a telefonját. A modellek helyben, ONNX Runtime segítségével futnak, és letöltés után nem igényelnek internetkapcsolatot. A médiatartalmai teljesen privátak maradnak.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">Vault Operations</string>
     <string name="vault_notification_channel_description">Progress of encryption / decryption tasks</string>
     <string name="decrypt_vault">Decrypt Vault</string>
-    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the ReFra.</string>
+    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the Optique.</string>
     <string name="restore_vault_title">Confirm Decryption?</string>
     <string name="yes">Yes</string>
     <string name="vault_deletion_title">Confirm Deletion?</string>
@@ -928,7 +928,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1428,7 +1428,7 @@
     <string name="setup_media_access_limited">Kiválasztott fényképek és videók</string>
     <string name="setup_permission_not_granted">Nincs megadva</string>
     <string name="setup_permission_optional_not_granted">Opcionális · Nincs megadva</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Opcionális. Lehetővé teszi, hogy a ReFra elolvassa a fényképekbe és videókba ágyazott GPS-adatokat a Térképhez és a helyadatokhoz. A galéria akkor is működik, ha kihagyja.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Opcionális. Lehetővé teszi, hogy a Optique elolvassa a fényképekbe és videókba ágyazott GPS-adatokat a Térképhez és a helyadatokhoz. A galéria akkor is működik, ha kihagyja.]]></string>
     <string name="smart_scan_notification_channel">Okos szkennelés</string>
     <string name="smart_scan_notification_title">Média keresése</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d / %3$d · %4$d%% összesen</string>
@@ -1447,7 +1447,7 @@
     <string name="album_delete_confirm_summary">Az összes elem ebben az albumban véglegesen törlésre kerül. Ezt nem lehet visszavonni.</string>
     <string name="map_appearance_header">Térkép</string>
     <string name="map_appearance_title">Térkép megjelenése</string>
-    <string name="map_appearance_description">Válaszd ki, hogy a térképek kövessék-e ReFra megjelenését, vagy mindig használjanak világos vagy sötét térkép színeket.</string>
+    <string name="map_appearance_description">Válaszd ki, hogy a térképek kövessék-e Optique megjelenését, vagy mindig használjanak világos vagy sötét térkép színeket.</string>
     <string name="map_appearance_system">Kövesse az alkalmazás megjelenését</string>
     <string name="map_appearance_light">Világos</string>
     <string name="map_appearance_dark">Sötét</string>
@@ -1539,7 +1539,7 @@
     <string name="disable_smoothing_summary">Mutassa a tiszta, négyzet alakú pixeleket nagyításkor a homályos, simított kép helyett</string>
     <string name="disable_smoothing_description">Ha engedélyezve van, a képeket legközelebbi szomszédos skálázással rajzolja ki, így a pixel art nagyításakor tiszta, éles pixelek maradnak homályosítás helyett. Hagyja kikapcsolva a fényképek sima skálázásához.</string>
     <string name="remove_metadata">Metaadatok eltávolítása</string>
-    <string name="remove_metadata_warning">Az eredeti fájl csak egy veszteségmentesen tisztított változat ellenőrzése után kerül cserére. Ha a csere sikertelen, ReFra visszaállítja az eredetit.</string>
+    <string name="remove_metadata_warning">Az eredeti fájl csak egy veszteségmentesen tisztított változat ellenőrzése után kerül cserére. Ha a csere sikertelen, Optique visszaállítja az eredetit.</string>
     <string name="metadata_mode_location">Csak hely</string>
     <string name="metadata_mode_location_description">Eltávolítja a koordinátákat, magasságot, helyneveket, irányokat és a GPS időbélyegeket.</string>
     <string name="metadata_mode_privacy">Adatvédelemhez kapcsolódó</string>
@@ -1886,7 +1886,7 @@
     <string name="cloud_net_wifi_blank_summary">Nincs hálózat — váltás letiltva</string>
     <string name="cloud_net_wifi_pick_none">Nincs beállítva</string>
     <string name="change_app_logo">Alkalmazás logó</string>
-    <string name="change_app_logo_summary">Váltás a ReFra és a klasszikus Galéria indítóikon között</string>
+    <string name="change_app_logo_summary">Váltás a Optique és a klasszikus Galéria indítóikon között</string>
     <string name="app_logo_description">Válaszd ki a kezdőképernyőn és az alkalmazásfiókban használt indítóikont. Az alkalmazás újraindul a változtatás alkalmazásához.</string>
     <string name="setup_step_progress">%2$d lépés %1$d</string>
     <string name="setup_continue">Folytatás</string>
@@ -1894,12 +1894,12 @@
     <string name="setup_grant_permissions">Engedélyek megadása</string>
     <string name="setup_welcome_subtitle">Saját, készüléken tárolt galériád</string>
     <string name="setup_permissions_title">Engedélyek</string>
-    <string name="setup_permissions_subtitle">A ReFra csak azokat a jogosultságokat használja, amelyekre a média megjelenítéséhez és kezeléséhez szükség van. Érintsd meg az engedélyt, hogy megtudd, miért kell.</string>
+    <string name="setup_permissions_subtitle">A Optique csak azokat a jogosultságokat használja, amelyekre a média megjelenítéséhez és kezeléséhez szükség van. Érintsd meg az engedélyt, hogy megtudd, miért kell.</string>
     <string name="setup_permission_used_for">Felhasználásra:</string>
     <string name="permission_local_network_title">Közvetlen helyi hálózati hozzáférés</string>
-    <string name="setup_reason_local_network">Opcionális. Ezt csak akkor engedélyezze, ha ReFra közvetlenül csatlakozik egy szerverhez az aktuális hálózatán.</string>
+    <string name="setup_reason_local_network">Opcionális. Ezt csak akkor engedélyezze, ha Optique közvetlenül csatlakozik egy szerverhez az aktuális hálózatán.</string>
     <string name="local_network_permission_dialog_title">Hagyja, hogy közvetlen legyen a helyi hálózati hozzáférés?</string>
-    <string name="local_network_permission_dialog_message">Ez a szerver az aktuális helyi hálózatán lévő eszközhöz van rendelve. Az Android engedélyt kér, mielőtt ReFra közvetlenül csatlakozhatna hozzá.</string>
+    <string name="local_network_permission_dialog_message">Ez a szerver az aktuális helyi hálózatán lévő eszközhöz van rendelve. Az Android engedélyt kér, mielőtt Optique közvetlenül csatlakozhatna hozzá.</string>
 <string name="local_network_permission_not_now">Most nem</string>
     <string name="setup_reason_read_images"><![CDATA[A fotóinak megjelenítése az idővonalon, albumokban és a nézegetőben. Enélkül a galéria üres marad.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[A videók megjelenítése és lejátszása az idővonalon, albumokban és a nézegetőben.]]></string>

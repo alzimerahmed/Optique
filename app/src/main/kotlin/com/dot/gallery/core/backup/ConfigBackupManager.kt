@@ -53,7 +53,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Exports and imports a complete ReFra configuration backup as a ZIP archive.
+ * Exports and imports a complete Optique configuration backup as a ZIP archive.
  *
  * The archive contains a [BackupManifest] (`manifest.json`) plus the fully decrypted
  * binary content of every vault media item under `vaults/<uuid>/<mediaId>`.

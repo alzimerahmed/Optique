@@ -24,4 +24,4 @@ Bug Fixes
     Gallery: Moved Media Manager request to Setup to fix potential issues.
     Gallery: Fixed various bugs and migrated to Coil for better performance and stability.
 
-Full Changelog: https://github.com/alzimerahmed/Gallery/releases/tag/2.1.0-21000
+Full Changelog: https://github.com/alzimerahmed/Optique/releases/tag/2.1.0-21000

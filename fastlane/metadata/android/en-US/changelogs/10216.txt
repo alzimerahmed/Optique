@@ -10,4 +10,4 @@ What's Changed
 - Improve media grouping in Photos Screen
 
 
-Full Changelog: "https://github.com/alzimerahmed/Gallery/releases/tag/v1.0.2
+Full Changelog: "https://github.com/alzimerahmed/Optique/releases/tag/v1.0.2

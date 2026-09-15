@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">ギャラリー</string>
     <string name="change_app_name">アプリ名</string>
     <string name="change_app_name_summary">ランチャーに表示されるアプリ名を変更する</string>
@@ -62,7 +62,7 @@
     <string name="github">GitHub</string>
     <string name="donate_button_cd">寄付ボタン</string>
     <string name="github_button_cd">GitHub ボタン</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">バナーを閉じる</string>
     <string name="dismiss_banner_title">バナーを移動しますか？</string>
     <string name="dismiss_banner_message">寄付ボタンとGitHubボタンは、設定ページの下部にあるコンパクトなバーに移動します。</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AIモデルにより、インテリジェント画像検索と自動メディア分類が可能になります。 アプリは、あなたの写真の内容を理解するためにONNX形式のCLIP(Contrastive Language-Image Pretraining)モデルを使用します。</string>
     <string name="ai_models_privacy_description">すべてのAI処理はデバイス上で完全に実行されます。画像、検索クエリ、または分類データは端末から離れることはありません。 モデルはONNXランタイムを使用してローカルで実行され、ダウンロード後はインターネット接続を必要としません。メディアは完全に非公開のままです。</string>
     <string name="ai_models_source">ソース</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">モデルファイル</string>
     <string name="ai_models_feature_search">説明で検索</string>
     <string name="ai_models_feature_categories">自動カテゴリ</string>
@@ -926,7 +926,7 @@
     <string name="backup_encrypt_header">暗号化</string>
     <string name="backup_restore_header">復元するものを選択してください</string>
     <string name="backup_restore">復元</string>
-    <string name="backup_made_with_version">ReFra %1$s で作成されました</string>
+    <string name="backup_made_with_version">Optique %1$s で作成されました</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d アイテム</string>
     <string name="backup_pick_file_prompt">復元するバックアップファイルを選択してください。</string>
@@ -1426,7 +1426,7 @@
     <string name="setup_media_access_limited">選択した写真と動画</string>
     <string name="setup_permission_not_granted">許可されていません</string>
     <string name="setup_permission_optional_not_granted">任意 · 許可されていません</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[任意。ReFra が写真や動画に埋め込まれた GPS データを読み取り、マップや位置情報の詳細に使用できるようにします。スキップしてもギャラリーは引き続き使用できます。]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[任意。Optique が写真や動画に埋め込まれた GPS データを読み取り、マップや位置情報の詳細に使用できるようにします。スキップしてもギャラリーは引き続き使用できます。]]></string>
 
     <string name="smart_scan_notification_channel">スマートスキャン</string>
     <string name="smart_scan_notification_title">メディアのスキャン</string>
@@ -1446,7 +1446,7 @@
     <string name="album_delete_confirm_summary">このアルバム内のすべてのアイテムは完全に削除されます。これを元に戻すことはできません。</string>
     <string name="map_appearance_header">地図</string>
     <string name="map_appearance_title">マップの外観</string>
-    <string name="map_appearance_description">マップが ReFra の外観に従うか、常に明るいマップ色または暗いマップ色を使用するかを選択します。</string>
+    <string name="map_appearance_description">マップが Optique の外観に従うか、常に明るいマップ色または暗いマップ色を使用するかを選択します。</string>
     <string name="map_appearance_system">アプリの外観をフォローする</string>
     <string name="map_appearance_light">ライト</string>
     <string name="map_appearance_dark">暗い</string>
@@ -1538,7 +1538,7 @@
     <string name="disable_smoothing_summary">ズーム時にぼやけた滑らかな画像ではなく、鮮明な正方形のピクセルを表示します。</string>
     <string name="disable_smoothing_description">有効にすると、画像は最近傍スケーリングで描画されるため、ピクセル アートにズームすると、ピクセルがぼやけるのではなく、きれいで鮮明なピクセルが維持されます。写真をスムーズに拡大縮小するには、オフのままにします。</string>
     <string name="remove_metadata">メタデータを削除する</string>
-    <string name="remove_metadata_warning">元のファイルは、ロスレスでサニタイズされたバージョンが検証された後にのみ置き換えられます。交換に失敗した場合は、ReFra が元に​​戻します。</string>
+    <string name="remove_metadata_warning">元のファイルは、ロスレスでサニタイズされたバージョンが検証された後にのみ置き換えられます。交換に失敗した場合は、Optique が元に​​戻します。</string>
     <string name="metadata_mode_location">場所のみ</string>
     <string name="metadata_mode_location_description">座標、高度、場所の名前、方向、GPS タイムスタンプを削除します。</string>
     <string name="metadata_mode_privacy">プライバシー関連</string>
@@ -1885,7 +1885,7 @@
     <string name="cloud_net_wifi_blank_summary">ネットワークなし - スイッチングが無効になっています</string>
     <string name="cloud_net_wifi_pick_none">未設定</string>
     <string name="change_app_logo">アプリのロゴ</string>
-    <string name="change_app_logo_summary">ReFra とクラシック ギャラリー ランチャー アイコンを切り替える</string>
+    <string name="change_app_logo_summary">Optique とクラシック ギャラリー ランチャー アイコンを切り替える</string>
     <string name="app_logo_description">ホーム画面とアプリドロワーで使用されるランチャーアイコンを選択します。変更を適用するためにアプリが再起動されます。</string>
     <string name="setup_step_progress">ステップ %1$d/%2$d</string>
     <string name="setup_continue">続ける</string>
@@ -1893,12 +1893,12 @@
     <string name="setup_grant_permissions">権限の付与</string>
     <string name="setup_welcome_subtitle">あなたのプライベートなデバイス上のギャラリー</string>
     <string name="setup_permissions_title">権限</string>
-    <string name="setup_permissions_subtitle">ReFra は、メディアの表示と管理に必要なもののみを使用します。権限をタップしてその理由を確認してください。</string>
+    <string name="setup_permissions_subtitle">Optique は、メディアの表示と管理に必要なもののみを使用します。権限をタップしてその理由を確認してください。</string>
     <string name="setup_permission_used_for">用途:</string>
     <string name="permission_local_network_title">ローカルネットワークへの直接アクセス</string>
-    <string name="setup_reason_local_network">オプション。これは、ReFra が現在のネットワーク上のサーバーに直接接続する場合にのみ許可してください。</string>
+    <string name="setup_reason_local_network">オプション。これは、Optique が現在のネットワーク上のサーバーに直接接続する場合にのみ許可してください。</string>
     <string name="local_network_permission_dialog_title">ローカルネットワークへの直接アクセスを許可しますか?</string>
-    <string name="local_network_permission_dialog_message">このサーバーは、現在のローカル ネットワーク上のデバイスに解決されます。 ReFra が Android に直接接続するには、Android に許可が必要です。</string>
+    <string name="local_network_permission_dialog_message">このサーバーは、現在のローカル ネットワーク上のデバイスに解決されます。 Optique が Android に直接接続するには、Android に許可が必要です。</string>
     <string name="local_network_permission_not_now">今ではありません</string>
     <string name="setup_reason_read_images"><![CDATA[タイムライン、アルバム、ビューアに写真を表示します。これがなければ、ギャラリーは空のままになります。]]></string>
     <string name="setup_reason_read_videos"><![CDATA[タイムライン、アルバム、ビューアでビデオを表示および再生します。]]></string>

@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">Potong subjek</string>
     <string name="help_tip_view_cutout_subtitle">Angkat seseorang atau objek dari latar belakang</string>
     <string name="help_tip_view_cutout_p1_title">Angkat subjek yang terdeteksi</string>
-    <string name="help_tip_view_cutout_p1_desc">Di penampil, ReFra dapat mendeteksi subjek utama di perangkat dan menampilkan saran yang disorot. Buka untuk menyempurnakan masker, lalu salin, bagikan, atau simpan potongan transparan. Anda juga dapat menekan lama untuk memulai pemotongan dari pengaturan Penampil Media.</string>
+    <string name="help_tip_view_cutout_p1_desc">Di penampil, Optique dapat mendeteksi subjek utama di perangkat dan menampilkan saran yang disorot. Buka untuk menyempurnakan masker, lalu salin, bagikan, atau simpan potongan transparan. Anda juga dapat menekan lama untuk memulai pemotongan dari pengaturan Penampil Media.</string>
     <string name="help_tip_view_cutout_p1_s1">Buka foto dengan subjek yang jelas</string>
     <string name="help_tip_view_cutout_p1_s2">Ketuk saran Potong subjek</string>
     <string name="help_tip_view_cutout_p1_s3">Sempurnakan garis tepi dengan titik sertakan atau kecualikan</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">Format tanggal</string>
     <string name="help_tip_settings_date_format_subtitle">Pilih bagaimana tanggal ditampilkan</string>
     <string name="help_tip_settings_date_format_p1_title">Pilih format Anda</string>
-    <string name="help_tip_settings_date_format_p1_desc">ReFra mengikuti tanggal sistem dan preferensi 12/24 jam secara default. Atur pengganti hanya jika Anda ingin pola khusus, dan gunakan tombol informasi untuk meninjau simbol format yang didukung.</string>
+    <string name="help_tip_settings_date_format_p1_desc">Optique mengikuti tanggal sistem dan preferensi 12/24 jam secara default. Atur pengganti hanya jika Anda ingin pola khusus, dan gunakan tombol informasi untuk meninjau simbol format yang didukung.</string>
     <string name="help_tip_settings_date_format_p1_s1">Buka format tanggal</string>
     <string name="help_tip_settings_date_format_p1_s2">Pertahankan Ikuti sistem atau masukkan pola khusus</string>
     <string name="help_tip_settings_date_format_p1_s3">Pratinjau hasil dan buka panduan format jika diperlukan</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">Pengaturan pertama kali</string>
     <string name="help_tip_basics_setup_subtitle">Berikan akses dan pilih default Anda</string>
     <string name="help_tip_basics_setup_p1_title">Memulai</string>
-    <string name="help_tip_basics_setup_p1_desc">Saat peluncuran pertama ReFra akan memandu Anda melalui izin, tampilan, model AI, akun cloud, dan tips berguna. Anda dapat mengulangi pengaturan ini kapan saja.</string>
+    <string name="help_tip_basics_setup_p1_desc">Saat peluncuran pertama Optique akan memandu Anda melalui izin, tampilan, model AI, akun cloud, dan tips berguna. Anda dapat mengulangi pengaturan ini kapan saja.</string>
 
     <string name="help_tip_albums_ignored_manage_title">Kelola album yang diabaikan</string>
     <string name="help_tip_albums_ignored_manage_subtitle">Tinjau dan pulihkan folder tersembunyi</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">Jelajah berdasarkan jenis media</string>
     <string name="help_tip_media_type_albums_subtitle">Album otomatis untuk foto, video, GIF, dan file RAW</string>
     <string name="help_tip_media_type_albums_p1_title">Album berdasarkan jenis media</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra membuat album virtual dari perpustakaan terintegrasi Anda sehingga Anda dapat membuka semua foto, video, GIF, atau file RAW secara bersamaan. Visibilitasnya dikontrol melalui pengaturan Timeline &amp; Albums.</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique membuat album virtual dari perpustakaan terintegrasi Anda sehingga Anda dapat membuka semua foto, video, GIF, atau file RAW secara bersamaan. Visibilitasnya dikontrol melalui pengaturan Timeline &amp; Albums.</string>
     <string name="help_tip_media_type_albums_p1_s1">Buka Albums dan gulir ke Jenis Media</string>
     <string name="help_tip_media_type_albums_p1_s2">Buka satu jenis untuk menelusuri media yang sesuai</string>
     <string name="help_tip_media_type_albums_p1_s3">Gunakan pengaturan Timeline &amp; Albums untuk menampilkan atau menyembunyikan bagian</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">Kembangkan foto RAW</string>
     <string name="help_tip_raw_develop_subtitle">Sesuaikan data sensor sebelum mengekspor</string>
     <string name="help_tip_raw_develop_p1_title">Gunakan kontrol Develop</string>
-    <string name="help_tip_raw_develop_p1_desc">Buka foto RAW yang didukung di editor untuk menyesuaikan white balance, exposure, highlights, warna output, dan demosaicing. ReFra menggunakan pratinjau yang aman untuk memori sambil mempertahankan output resolusi penuh.</string>
+    <string name="help_tip_raw_develop_p1_desc">Buka foto RAW yang didukung di editor untuk menyesuaikan white balance, exposure, highlights, warna output, dan demosaicing. Optique menggunakan pratinjau yang aman untuk memori sambil mempertahankan output resolusi penuh.</string>
     <string name="help_tip_raw_develop_p1_s1">Buka foto RAW dan ketuk Edit</string>
     <string name="help_tip_raw_develop_p1_s2">Pilih opsi di tab Develop</string>
     <string name="help_tip_raw_develop_p1_s3">Terapkan pemotongan, filter, atau markup tambahan</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">Kelompokkan orang di perangkat</string>
     <string name="help_tip_people_grouping_subtitle">Temukan wajah tanpa mengunggah perpustakaan Anda</string>
     <string name="help_tip_people_grouping_p1_title">Pindai dan atur orang</string>
-    <string name="help_tip_people_grouping_p1_desc">Dengan model wajah terpasang, ReFra memindai dan mengelompokkan orang secara lokal. Anda dapat memulai pemindaian baru dari Orang, menyembunyikan seseorang, menggabungkan grup, dan membuat salinan buram ketika privasi penting.</string>
+    <string name="help_tip_people_grouping_p1_desc">Dengan model wajah terpasang, Optique memindai dan mengelompokkan orang secara lokal. Anda dapat memulai pemindaian baru dari Orang, menyembunyikan seseorang, menggabungkan grup, dan membuat salinan buram ketika privasi penting.</string>
     <string name="help_tip_people_grouping_p1_s1">Pasang model Deteksi Wajah</string>
     <string name="help_tip_people_grouping_p1_s2">Buka Perpustakaan, lalu Orang</string>
     <string name="help_tip_people_grouping_p1_s3">Ketuk Pindai untuk orang dan tunggu pengindeksan</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">Hapus metadata sensitif</string>
     <string name="help_tip_metadata_sanitize_subtitle">Bersihkan file yang didukung tanpa mengompres ulang piksel</string>
     <string name="help_tip_metadata_sanitize_p1_title">Pilih apa yang akan dihapus</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">Dari detail foto, pilih Hapus metadata dan pilih hanya lokasi, bidang deskriptif, atau semua metadata yang didukung. ReFra menulis dan memverifikasi salinan yang disanitasi tanpa kehilangan sebelum mengganti yang asli.</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">Dari detail foto, pilih Hapus metadata dan pilih hanya lokasi, bidang deskriptif, atau semua metadata yang didukung. Optique menulis dan memverifikasi salinan yang disanitasi tanpa kehilangan sebelum mengganti yang asli.</string>
     <string name="help_tip_metadata_sanitize_p1_s1">Buka foto lokal yang didukung</string>
     <string name="help_tip_metadata_sanitize_p1_s2">Perluas detailnya dan ketuk Hapus metadata</string>
     <string name="help_tip_metadata_sanitize_p1_s3">Pilih tingkat sanitasi</string>

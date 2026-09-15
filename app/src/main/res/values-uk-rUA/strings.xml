@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Галерея</string>
     <string name="change_app_name">Назва додатку</string>
     <string name="change_app_name_summary">Змінити назву додатку в запускачі програм</string>
@@ -62,7 +62,7 @@
     <string name="github">GitHub</string>
     <string name="donate_button_cd">Кнопка пожертви</string>
     <string name="github_button_cd">Кнопка GitHub</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Закрити банер</string>
     <string name="dismiss_banner_title">Перемістити банер?</string>
     <string name="dismiss_banner_message">Кнопки \"Пожертвувати\" та \"GitHub\" перемістяться на компактну панель внизу сторінки налаштувань.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">Моделі ШІ забезпечують інтелектуальний пошук зображень та автоматичну класифікацію медіафайлів. Додаток використовує моделі CLIP (Contrastive Language-Image Pretraining) у форматі ONNX для розуміння вмісту ваших фотографій.</string>
     <string name="ai_models_privacy_description">Уся обробка ШІ виконується виключно на вашому пристрої. Жодні зображення, пошукові запити чи дані класифікації ніколи не залишають ваш телефон. Моделі працюють локально за допомогою середовища виконання ONNX і не потребують підключення до Інтернету після завантаження. Ваші медіафайли залишаються повністю конфіденційними.</string>
     <string name="ai_models_source">Джерело</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Файли Моделі</string>
     <string name="ai_models_feature_search">Пошук за описом</string>
     <string name="ai_models_feature_categories">Автоматичні категорії</string>
@@ -932,7 +932,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1432,7 +1432,7 @@
     <string name="setup_media_access_limited">Вибрані фото та відео</string>
     <string name="setup_permission_not_granted">Не надано</string>
     <string name="setup_permission_optional_not_granted">Необов’язково · Не надано</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Необов’язково. Дозволяє ReFra читати дані GPS, вбудовані у фото та відео, для мапи й відомостей про розташування. Якщо пропустити цей крок, галерея продовжить працювати.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Необов’язково. Дозволяє Optique читати дані GPS, вбудовані у фото та відео, для мапи й відомостей про розташування. Якщо пропустити цей крок, галерея продовжить працювати.]]></string>
     <string name="smart_scan_notification_channel">Розумне сканування</string>
     <string name="smart_scan_notification_title">Сканування медіа</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d з %3$d · %4$d%% загалом</string>
@@ -1451,7 +1451,7 @@
     <string name="album_delete_confirm_summary">Усі елементи в цьому альбомі будуть видалені назавжди. Це неможливо скасувати.</string>
     <string name="map_appearance_header">Карта</string>
     <string name="map_appearance_title">Зовнішній вигляд карти</string>
-    <string name="map_appearance_description">Виберіть, чи карти слідують за зовнішнім виглядом додатку ReFra, чи завжди використовують яскраві або темні кольори карт.</string>
+    <string name="map_appearance_description">Виберіть, чи карти слідують за зовнішнім виглядом додатку Optique, чи завжди використовують яскраві або темні кольори карт.</string>
     <string name="map_appearance_system">Слідувати за зовнішнім виглядом додатку</string>
     <string name="map_appearance_light">Світлий</string>
     <string name="map_appearance_dark">Темний</string>
@@ -1543,7 +1543,7 @@
     <string name="disable_smoothing_summary">Показувати чіткі, квадратні пікселі при збільшенні замість розмитого, згладженого зображення</string>
     <string name="disable_smoothing_description">Коли увімкнено, зображення відтворюються з масштабуванням за принципом найближчого сусіда, тому при збільшенні піксельного мистецтва пікселі залишаються чистими та чіткими, а не розмитими. Залиште вимкненим для плавного масштабування фотографій.</string>
     <string name="remove_metadata">Видалити метадані</string>
-    <string name="remove_metadata_warning">Оригінальний файл буде замінено лише після перевірки безвтратного санованого варіанту. Якщо заміна не вдасться, ReFra відновить оригінал.</string>
+    <string name="remove_metadata_warning">Оригінальний файл буде замінено лише після перевірки безвтратного санованого варіанту. Якщо заміна не вдасться, Optique відновить оригінал.</string>
     <string name="metadata_mode_location">Тільки місцезнаходження</string>
     <string name="metadata_mode_location_description">Видаляє координати, висоту, назви місць, напрямки та GPS-мітки часу.</string>
     <string name="metadata_mode_privacy">Пов’язано з конфіденційністю</string>
@@ -1890,7 +1890,7 @@
     <string name="cloud_net_wifi_blank_summary">Мережа відсутня — перемикання вимкнено</string>
     <string name="cloud_net_wifi_pick_none">Не встановлено</string>
     <string name="change_app_logo">Логотип додатку</string>
-    <string name="change_app_logo_summary">Перемикання між значком запуску галереї ReFra та класичним</string>
+    <string name="change_app_logo_summary">Перемикання між значком запуску галереї Optique та класичним</string>
     <string name="app_logo_description">Виберіть значок запуску, який використовується на головному екрані та у шухляді додатків. Додаток перезапуститься для застосування зміни.</string>
     <string name="setup_step_progress">Крок %1$d з %2$d</string>
     <string name="setup_continue">Продовжити</string>
@@ -1898,12 +1898,12 @@
     <string name="setup_grant_permissions">Надати дозволи</string>
     <string name="setup_welcome_subtitle">Ваша приватна галерея на пристрої</string>
     <string name="setup_permissions_title">Дозволи</string>
-    <string name="setup_permissions_subtitle">ReFra використовує лише те, що необхідно для показу та управління вашими медіафайлами. Натисніть на дозвіл, щоб дізнатися чому.</string>
+    <string name="setup_permissions_subtitle">Optique використовує лише те, що необхідно для показу та управління вашими медіафайлами. Натисніть на дозвіл, щоб дізнатися чому.</string>
     <string name="setup_permission_used_for">Використовується для:</string>
     <string name="permission_local_network_title">Прямий доступ до локальної мережі</string>
-    <string name="setup_reason_local_network">За бажанням. Надайте це лише тоді, коли ReFra підключається безпосередньо до сервера у вашій поточній мережі.</string>
+    <string name="setup_reason_local_network">За бажанням. Надайте це лише тоді, коли Optique підключається безпосередньо до сервера у вашій поточній мережі.</string>
     <string name="local_network_permission_dialog_title">Дозволити прямий доступ до локальної мережі?</string>
-    <string name="local_network_permission_dialog_message">Цей сервер відповідає пристрою у вашій поточній локальній мережі. Android вимагає дозволу, щоб ReFra міг підключитися до нього безпосередньо.</string>
+    <string name="local_network_permission_dialog_message">Цей сервер відповідає пристрою у вашій поточній локальній мережі. Android вимагає дозволу, щоб Optique міг підключитися до нього безпосередньо.</string>
     <string name="local_network_permission_not_now">Не зараз</string>
     <string name="setup_reason_read_images"><![CDATA[Відображення ваших фотографій на часовій шкалі, в альбомах та переглядачі. Без цього галерея залишатиметься порожньою.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Відображення та відтворення ваших відео на часовій шкалі, в альбомах та переглядачі.]]></string>

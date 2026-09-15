@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Gallery</string>
     <string name="change_app_name">App name</string>
     <string name="change_app_name_summary">Change the app name shown on your launcher</string>
@@ -62,7 +62,7 @@
     <string name="github">GitHub</string>
     <string name="donate_button_cd">Κουμπί Δωρεάς</string>
     <string name="github_button_cd">Κουμπί Github</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Dismiss banner</string>
     <string name="dismiss_banner_title">Move banner?</string>
     <string name="dismiss_banner_message">The Donate and GitHub buttons will move to a compact bar at the bottom of the Settings page.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI models enable intelligent image search and automatic media classification. The app uses CLIP (Contrastive Language-Image Pretraining) models in ONNX format to understand the content of your photos.</string>
     <string name="ai_models_privacy_description">All AI processing is performed entirely on your device. No images, search queries, or classification data ever leave your phone. The models run locally using ONNX Runtime and do not require an internet connection once downloaded. Your media remains fully private.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">Vault Operations</string>
     <string name="vault_notification_channel_description">Progress of encryption / decryption tasks</string>
     <string name="decrypt_vault">Decrypt Vault</string>
-    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the ReFra.</string>
+    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the Optique.</string>
     <string name="restore_vault_title">Confirm Decryption?</string>
     <string name="yes">Yes</string>
     <string name="vault_deletion_title">Confirm Deletion?</string>
@@ -928,7 +928,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1428,7 +1428,7 @@
     <string name="setup_media_access_limited">Επιλεγμένες φωτογραφίες και βίντεο</string>
     <string name="setup_permission_not_granted">Δεν παραχωρήθηκε</string>
     <string name="setup_permission_optional_not_granted">Προαιρετικό · Δεν παραχωρήθηκε</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Προαιρετικό. Επιτρέπει στο ReFra να διαβάζει δεδομένα GPS που είναι ενσωματωμένα σε φωτογραφίες και βίντεο για τον Χάρτη και τις λεπτομέρειες τοποθεσίας. Η συλλογή σας θα συνεχίσει να λειτουργεί αν το παραλείψετε.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Προαιρετικό. Επιτρέπει στο Optique να διαβάζει δεδομένα GPS που είναι ενσωματωμένα σε φωτογραφίες και βίντεο για τον Χάρτη και τις λεπτομέρειες τοποθεσίας. Η συλλογή σας θα συνεχίσει να λειτουργεί αν το παραλείψετε.]]></string>
     <string name="smart_scan_notification_channel">Έξυπνη Σάρωση</string>
     <string name="smart_scan_notification_title">Σάρωση μέσων</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d από %3$d · %4$d%% συνολικά</string>
@@ -1447,7 +1447,7 @@
     <string name="album_delete_confirm_summary">Όλα τα στοιχεία σε αυτό το άλμπουμ θα διαγραφούν οριστικά. Αυτό δεν μπορεί να αναιρεθεί.</string>
     <string name="map_appearance_header">Χάρτης</string>
     <string name="map_appearance_title">Εμφάνιση χάρτη</string>
-    <string name="map_appearance_description">Επιλέξτε αν οι χάρτες ακολουθούν την εμφάνιση του ReFra ή χρησιμοποιούν πάντα φωτεινά ή σκούρα χρώματα χάρτη.</string>
+    <string name="map_appearance_description">Επιλέξτε αν οι χάρτες ακολουθούν την εμφάνιση του Optique ή χρησιμοποιούν πάντα φωτεινά ή σκούρα χρώματα χάρτη.</string>
     <string name="map_appearance_system">Ακολουθήστε την εμφάνιση της εφαρμογής</string>
     <string name="map_appearance_light">Φωτεινό</string>
     <string name="map_appearance_dark">Σκούρο</string>
@@ -1539,7 +1539,7 @@
     <string name="disable_smoothing_summary">Εμφάνιση καθαρών, τετραγωνισμένων εικονοστοιχείων κατά τη μεγέθυνση αντί για θολή, ομαλή εικόνα</string>
     <string name="disable_smoothing_description">Όταν είναι ενεργοποιημένο, οι εικόνες σχεδιάζονται με ανάλυση πιο κοντινού γείτονα έτσι ώστε κατά τη μεγέθυνση pixel art να διατηρούνται καθαρά, κοφτερά pixels αντί να θολώνουν. Αφήστε το απενεργοποιημένο για ομαλή κλιμάκωση των φωτογραφιών.</string>
     <string name="remove_metadata">Αφαίρεση μεταδεδομένων</string>
-    <string name="remove_metadata_warning">Το αρχικό αρχείο θα αντικατασταθεί μόνο αφού μια ανέπαφη, καθαρισμένη έκδοση επιβεβαιωθεί. Εάν η αντικατάσταση αποτύχει, το ReFra επαναφέρει το αρχικό.</string>
+    <string name="remove_metadata_warning">Το αρχικό αρχείο θα αντικατασταθεί μόνο αφού μια ανέπαφη, καθαρισμένη έκδοση επιβεβαιωθεί. Εάν η αντικατάσταση αποτύχει, το Optique επαναφέρει το αρχικό.</string>
     <string name="metadata_mode_location">Μόνο θέση</string>
     <string name="metadata_mode_location_description">Αφαιρεί συντεταγμένες, υψόμετρο, ονόματα τοποθεσιών, κατευθύνσεις και χρονικές σημάνσεις GPS.</string>
     <string name="metadata_mode_privacy">Σχετικά με την ιδιωτικότητα</string>
@@ -1886,7 +1886,7 @@
     <string name="cloud_net_wifi_blank_summary">Κανένα δίκτυο — αλλαγή απενεργοποιημένη</string>
     <string name="cloud_net_wifi_pick_none">Δεν έχει οριστεί</string>
     <string name="change_app_logo">Λογότυπο εφαρμογής</string>
-    <string name="change_app_logo_summary">Εναλλαγή μεταξύ του ReFra και του κλασικού εικονιδίου εκκίνησης της Συλλογής</string>
+    <string name="change_app_logo_summary">Εναλλαγή μεταξύ του Optique και του κλασικού εικονιδίου εκκίνησης της Συλλογής</string>
     <string name="app_logo_description">Επιλέξτε το εικονίδιο εκκίνησης που θα χρησιμοποιείται στην αρχική οθόνη και στο συρτάρι εφαρμογών. Η εφαρμογή θα επανεκκινηθεί για να εφαρμοστεί η αλλαγή.</string>
     <string name="setup_step_progress">Βήμα %1$d από %2$d</string>
     <string name="setup_continue">Συνέχεια</string>
@@ -1894,12 +1894,12 @@
     <string name="setup_grant_permissions">Χορήγηση αδειών</string>
     <string name="setup_welcome_subtitle">Η προσωπική σας, τοπική γκαλερί</string>
     <string name="setup_permissions_title">Άδειες</string>
-    <string name="setup_permissions_subtitle">Το ReFra χρησιμοποιεί μόνο ό,τι χρειάζεται για να εμφανίζει και να διαχειρίζεται τα μέσα σας. Πατήστε μια άδεια για να μάθετε γιατί.</string>
+    <string name="setup_permissions_subtitle">Το Optique χρησιμοποιεί μόνο ό,τι χρειάζεται για να εμφανίζει και να διαχειρίζεται τα μέσα σας. Πατήστε μια άδεια για να μάθετε γιατί.</string>
     <string name="setup_permission_used_for">Χρησιμοποιείται για:</string>
     <string name="permission_local_network_title">Άμεση πρόσβαση στο τοπικό δίκτυο</string>
-    <string name="setup_reason_local_network">Προαιρετικό. Χορηγήστε το μόνο όταν το ReFra συνδέεται απευθείας σε έναν διακομιστή στο τρέχον δίκτυό σας.</string>
+    <string name="setup_reason_local_network">Προαιρετικό. Χορηγήστε το μόνο όταν το Optique συνδέεται απευθείας σε έναν διακομιστή στο τρέχον δίκτυό σας.</string>
     <string name="local_network_permission_dialog_title">Να επιτραπεί η άμεση πρόσβαση στο τοπικό δίκτυο;</string>
-    <string name="local_network_permission_dialog_message">Αυτός ο διακομιστής αντιστοιχεί σε μια συσκευή στο τρέχον τοπικό σας δίκτυο. Το Android απαιτεί άδεια πριν το ReFra μπορεί να συνδεθεί απευθείας.</string>
+    <string name="local_network_permission_dialog_message">Αυτός ο διακομιστής αντιστοιχεί σε μια συσκευή στο τρέχον τοπικό σας δίκτυο. Το Android απαιτεί άδεια πριν το Optique μπορεί να συνδεθεί απευθείας.</string>
     <string name="local_network_permission_not_now">Όχι τώρα</string>
     <string name="setup_reason_read_images"><![CDATA[Εμφάνιση των φωτογραφιών σας στη χρονογραμμή, στα άλμπουμ και στον προβολέα. Χωρίς αυτό, η γκαλερί παραμένει άδεια.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Εμφάνιση και αναπαραγωγή των βίντεό σας στη χρονογραμμή, στα άλμπουμ και στον προβολέα.]]></string>

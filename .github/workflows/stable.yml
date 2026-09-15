@@ -216,7 +216,7 @@ jobs:
           debugSymbols: app/build/intermediates/merged_native_libs/universalWithMLGplay/mergeUniversalWithMLGplayNativeLibs/out/lib
       - uses: actions/upload-artifact@v5
         with:
-          name: ReFra Release (GPlay Bundle)
+          name: Optique Release (GPlay Bundle)
           path: app/build/outputs/bundle/universalWithMLGplay/*.aab
 
   release:
@@ -259,7 +259,7 @@ jobs:
               local name hash url arch
               name=$(basename "$apk")
               hash=$(sha256sum "$apk" | awk '{print $1}')
-              url="https://github.com/alzimerahmed/ReFra/releases/download/${tag}/${name}"
+              url="https://github.com/alzimerahmed/Optique/releases/download/${tag}/${name}"
               case "$name" in
                 *-arm64-v8a-release.apk) arch="arm64-v8a" ;;
                 *-armeabi-v7a-release.apk) arch="armeabi-v7a" ;;
@@ -287,7 +287,7 @@ jobs:
             if [ -n "$apk" ]; then
               name=$(basename "$apk")
               hash=$(sha256sum "$apk" | awk '{print $1}')
-              url="https://github.com/alzimerahmed/ReFra/releases/download/${tag}/${name}"
+              url="https://github.com/alzimerahmed/Optique/releases/download/${tag}/${name}"
               echo "| Best for most people | Standard (NoML) · Universal | Android 10 (API 29) | [Click Here](${url}) | \`${hash}\` |"
             else
               echo "| Best for most people | Standard (NoML) · Universal | Android 10 (API 29) | _Unavailable_ | |"

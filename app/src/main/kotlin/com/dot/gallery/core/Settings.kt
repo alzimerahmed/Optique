@@ -953,7 +953,7 @@ object Settings {
                 defaultValue = SelectionSheetConfig()
             )
 
-        const val ALIAS_REFRA = "ReFra"
+        const val ALIAS_REFRA = "Optique"
         const val ALIAS_GALLERY = "Gallery"
         private val APP_NAME_ALIAS = stringPreferencesKey("app_name_alias")
 

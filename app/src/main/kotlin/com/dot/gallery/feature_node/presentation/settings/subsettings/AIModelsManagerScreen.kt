@@ -185,7 +185,7 @@ fun AIModelsManagerScreen(
                     downloadSummary = stringResource(R.string.ai_models_group_search_download_summary),
                     readySummary = stringResource(R.string.ai_models_ready_summary),
                     sourceLabel = stringResource(R.string.ai_models_source_url),
-                    sourceUrl = "https://github.com/alzimerahmed/ReFra/tree/main/ml-models/src/main/assets"
+                    sourceUrl = "https://github.com/alzimerahmed/Optique/tree/main/ml-models/src/main/assets"
                 )
             }
             item(key = "group_cutout") {

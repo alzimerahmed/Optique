@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">Gearr amach ábhar</string>
     <string name="help_tip_view_cutout_subtitle">Déan duine nó rud a ardú ón gcúlra</string>
     <string name="help_tip_view_cutout_p1_title">Déan an t-ábhar a aithnítear a ardú</string>
-    <string name="help_tip_view_cutout_p1_desc">Sa lucht féachana, is féidir le ReFra an príomh-ábhar a aithint ar an bhfeiste agus moladh béimnithe a thaispeáint. Oscail é chun an masc a fheabhsú, ansin cóipeáil, roinn nó sábháil gearradh trédhearcach. Is féidir leat freisin gearradh a thosú le brú fada ón socruithe Lucht Féachana Meán.</string>
+    <string name="help_tip_view_cutout_p1_desc">Sa lucht féachana, is féidir le Optique an príomh-ábhar a aithint ar an bhfeiste agus moladh béimnithe a thaispeáint. Oscail é chun an masc a fheabhsú, ansin cóipeáil, roinn nó sábháil gearradh trédhearcach. Is féidir leat freisin gearradh a thosú le brú fada ón socruithe Lucht Féachana Meán.</string>
     <string name="help_tip_view_cutout_p1_s1">Oscail grianghraf le hábhar soiléir</string>
     <string name="help_tip_view_cutout_p1_s2">Tapaigh an moladh Gearr amach ábhar</string>
     <string name="help_tip_view_cutout_p1_s3">Feabhsigh an toirtlín le pointí a chur san áireamh nó a eisiamh</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">Formáid dáta</string>
     <string name="help_tip_settings_date_format_subtitle">Roghnaigh conas a thaispeántar dátaí</string>
     <string name="help_tip_settings_date_format_p1_title">Roghnaigh d\'fhoirmáid</string>
-    <string name="help_tip_settings_date_format_p1_desc">Leanann ReFra do dháta córais agus roghanna 12/24 uair an chloig de ghnáth. Socraigh sárfheidhmiú ach amháin nuair a theastaíonn patrún saincheaptha uait, agus bain úsáid as an gcnaipe eolais chun na siombailí formáide tacaíochta a athbhreithniú.</string>
+    <string name="help_tip_settings_date_format_p1_desc">Leanann Optique do dháta córais agus roghanna 12/24 uair an chloig de ghnáth. Socraigh sárfheidhmiú ach amháin nuair a theastaíonn patrún saincheaptha uait, agus bain úsáid as an gcnaipe eolais chun na siombailí formáide tacaíochta a athbhreithniú.</string>
     <string name="help_tip_settings_date_format_p1_s1">Oscail formáid dáta</string>
     <string name="help_tip_settings_date_format_p1_s2">Coinnigh Lean Córais nó cuir isteach patrún saincheaptha</string>
     <string name="help_tip_settings_date_format_p1_s3">Réamhamharc an toradh agus oscail treoir fhormáide más gá</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">Socrú chéad-raoin</string>
     <string name="help_tip_basics_setup_subtitle">Tabhair cead agus roghnaigh do roghanna réamhshocraithe</string>
     <string name="help_tip_basics_setup_p1_title">Ag tosú</string>
-    <string name="help_tip_basics_setup_p1_desc">Ag seoladh an chéad uair, treoraíonn ReFra tú trí cheadanna, cuma, samhlacha AI, cuntais scamall agus leideanna úsáideacha. Féadfaidh tú filleadh ar an socrú ag am ar bith.</string>
+    <string name="help_tip_basics_setup_p1_desc">Ag seoladh an chéad uair, treoraíonn Optique tú trí cheadanna, cuma, samhlacha AI, cuntais scamall agus leideanna úsáideacha. Féadfaidh tú filleadh ar an socrú ag am ar bith.</string>
 
     <string name="help_tip_albums_ignored_manage_title">Bainistigh albamanna neamhairdithe</string>
     <string name="help_tip_albums_ignored_manage_subtitle">Athbhreithnigh agus aisghabh fillteáin i bhfolach</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">Bhrabhsáil de réir cineál meán</string>
     <string name="help_tip_media_type_albums_subtitle">Albam uathoibríoch do ghrianghraif, físeáin, GIFanna agus comhaid RAW</string>
     <string name="help_tip_media_type_albums_p1_title">Albamanna de chineál meáin</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra cruthaíonn albam fíorúla ó do leabharlann aontaithe ionas gur féidir leat gach grianghraf, físeán, GIF nó comhad RAW a oscailt le chéile. Déantar a le feiceáil a rialú ó shocruithe Amlíne &amp; Albamanna.</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique cruthaíonn albam fíorúla ó do leabharlann aontaithe ionas gur féidir leat gach grianghraf, físeán, GIF nó comhad RAW a oscailt le chéile. Déantar a le feiceáil a rialú ó shocruithe Amlíne &amp; Albamanna.</string>
     <string name="help_tip_media_type_albums_p1_s1">Oscail Albamanna agus scrollaigh go Cineálacha Meán</string>
     <string name="help_tip_media_type_albums_p1_s2">Oscail cineál chun meáin mheaitseála a bhrabhsáil</string>
     <string name="help_tip_media_type_albums_p1_s3">Úsáid socruithe Amlíne &amp; Albamanna chun an rannán a thaispeáint nó a cheilt</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">Fhorbair grianghraif RAW</string>
     <string name="help_tip_raw_develop_subtitle">Cuir an t-eolas braiteora in eagar sula ndéantar onnmhairiú</string>
     <string name="help_tip_raw_develop_p1_title">Úsáid na rialaithe Forbartha</string>
-    <string name="help_tip_raw_develop_p1_desc">Oscail grianghraf RAW tacaithe sa eagarthóir chun cothromaíocht bhán, nochtadh, soilse, dath aschuir agus dí-mhosaiciú a choigeartú. Úsáideann ReFra réamhamharc sábháilte a chuireann cuimhne i bhfeidhm agus coinníonn sé aschur lán-réitigh.</string>
+    <string name="help_tip_raw_develop_p1_desc">Oscail grianghraf RAW tacaithe sa eagarthóir chun cothromaíocht bhán, nochtadh, soilse, dath aschuir agus dí-mhosaiciú a choigeartú. Úsáideann Optique réamhamharc sábháilte a chuireann cuimhne i bhfeidhm agus coinníonn sé aschur lán-réitigh.</string>
     <string name="help_tip_raw_develop_p1_s1">Oscail grianghraf RAW agus sconna Eagar</string>
     <string name="help_tip_raw_develop_p1_s2">Roghnaigh roghanna sa táb Forbartha</string>
     <string name="help_tip_raw_develop_p1_s3">Cuir aon táirge breise, scagaire nó marcáil i bhfeidhm</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">Grúpáil daoine ar an bhfeiste</string>
     <string name="help_tip_people_grouping_subtitle">Aimsigh aghaidheanna gan do leabharlann a uaslódáil</string>
     <string name="help_tip_people_grouping_p1_title">Scanáil agus eagraigh daoine</string>
-    <string name="help_tip_people_grouping_p1_desc">Le samhail aghaidheanna suiteáilte, scanálann ReFra agus grúpálann daoine go háitiúil. Is féidir leat scanáil úr a thosú ó Dhaoine, duine a cheilt, grúpaí a chumasc agus cóipeanna mionghearrtha a dhéanamh nuair atá príobháideachas tábhachtach.</string>
+    <string name="help_tip_people_grouping_p1_desc">Le samhail aghaidheanna suiteáilte, scanálann Optique agus grúpálann daoine go háitiúil. Is féidir leat scanáil úr a thosú ó Dhaoine, duine a cheilt, grúpaí a chumasc agus cóipeanna mionghearrtha a dhéanamh nuair atá príobháideachas tábhachtach.</string>
     <string name="help_tip_people_grouping_p1_s1">Suiteáil an tsamhail Braite Aghaidhe</string>
     <string name="help_tip_people_grouping_p1_s2">Oscail Leabharlann, ansin Daoine</string>
     <string name="help_tip_people_grouping_p1_s3">Bí ag Brú Scanáil do dhaoine agus fan le haghaidh innéacsála</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">Bain metadata íogair</string>
     <string name="help_tip_metadata_sanitize_subtitle">Glan comhaid thacaítear leo gan picteilíní a athchruthú</string>
     <string name="help_tip_metadata_sanitize_p1_title">Roghnaigh cad ba mhaith leat a bhaint</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">Ó miondealtaí grianghraf, roghnaigh Bain metadata agus roghnaigh ach an suíomh, réimsí tuairisciúla nó gach metadata tacaithe. Scríobh agus fíoraíonn ReFra cóip ghlan gan cailliúint sular chuir sé isteach ar an bhunaoriginal.</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">Ó miondealtaí grianghraf, roghnaigh Bain metadata agus roghnaigh ach an suíomh, réimsí tuairisciúla nó gach metadata tacaithe. Scríobh agus fíoraíonn Optique cóip ghlan gan cailliúint sular chuir sé isteach ar an bhunaoriginal.</string>
     <string name="help_tip_metadata_sanitize_p1_s1">Oscail grianghraf áitiúil a thacaítear</string>
     <string name="help_tip_metadata_sanitize_p1_s2">Leathnaigh a mhiondealtaí agus sconna Bain metadata</string>
     <string name="help_tip_metadata_sanitize_p1_s3">Roghnaigh an leibhéal glantacháin</string>

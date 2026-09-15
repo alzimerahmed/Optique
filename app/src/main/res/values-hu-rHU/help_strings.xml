@@ -1097,7 +1097,7 @@
     <string name="help_tip_view_cutout_title">Vágj ki egy témát</string>
     <string name="help_tip_view_cutout_subtitle">Emelj ki egy személyt vagy tárgyat a háttérből</string>
     <string name="help_tip_view_cutout_p1_title">Emeld ki a felismert témát</string>
-    <string name="help_tip_view_cutout_p1_desc">A nézőben a ReFra képes a fő témát a készüléken észlelni, majd kiemelt javaslatot mutatni. Nyisd meg, hogy finomítsd a maszkot, majd másold, oszd meg vagy mentsd el átlátszó kivágásként. A Médiamegjelenítő beállításaiból hosszú nyomással is indíthatod a kivágást.</string>
+    <string name="help_tip_view_cutout_p1_desc">A nézőben a Optique képes a fő témát a készüléken észlelni, majd kiemelt javaslatot mutatni. Nyisd meg, hogy finomítsd a maszkot, majd másold, oszd meg vagy mentsd el átlátszó kivágásként. A Médiamegjelenítő beállításaiból hosszú nyomással is indíthatod a kivágást.</string>
     <string name="help_tip_view_cutout_p1_s1">Nyiss meg egy fényképet egyértelmű témával</string>
     <string name="help_tip_view_cutout_p1_s2">Érintsd meg a Téma kivágása javaslatot</string>
     <string name="help_tip_view_cutout_p1_s3">Finomítsd a körvonalat belefoglaló vagy kizáró pontokkal</string>
@@ -1122,7 +1122,7 @@
     <string name="help_tip_settings_date_format_title">Dátumformátum</string>
     <string name="help_tip_settings_date_format_subtitle">Válassza ki, hogyan jelenjenek meg a dátumok</string>
     <string name="help_tip_settings_date_format_p1_title">Válassza ki a formátumot</string>
-    <string name="help_tip_settings_date_format_p1_desc">A ReFra alapértelmezés szerint a rendszerdátumot és a 12/24 órás beállításokat követi. Csak akkor állítson felül, ha egy egyedi mintát szeretne, és használja az információs gombot a támogatott formátumszimbólumok áttekintéséhez.</string>
+    <string name="help_tip_settings_date_format_p1_desc">A Optique alapértelmezés szerint a rendszerdátumot és a 12/24 órás beállításokat követi. Csak akkor állítson felül, ha egy egyedi mintát szeretne, és használja az információs gombot a támogatott formátumszimbólumok áttekintéséhez.</string>
     <string name="help_tip_settings_date_format_p1_s1">Nyissa meg a Dátumformátumot</string>
     <string name="help_tip_settings_date_format_p1_s2">Tartsa a Rendszer követése beállítást, vagy adjon meg egy egyedi mintát</string>
     <string name="help_tip_settings_date_format_p1_s3">Előnézet a eredményről és nyissa meg a formátum útmutatót, ha szükséges</string>
@@ -1130,7 +1130,7 @@
     <string name="help_tip_basics_setup_title">Első indítási beállítás</string>
     <string name="help_tip_basics_setup_subtitle">Engedélyezés megadása és alapértelmezések kiválasztása</string>
     <string name="help_tip_basics_setup_p1_title">Első lépések</string>
-    <string name="help_tip_basics_setup_p1_desc">Az első indításkor ReFra végigvezeti Önt az engedélyeken, a megjelenésen, az AI modelleken, a felhőfiókokon és hasznos tippeken. A beállítást bármikor újra elvégezheti.</string>
+    <string name="help_tip_basics_setup_p1_desc">Az első indításkor Optique végigvezeti Önt az engedélyeken, a megjelenésen, az AI modelleken, a felhőfiókokon és hasznos tippeken. A beállítást bármikor újra elvégezheti.</string>
 
     <string name="help_tip_albums_ignored_manage_title">Kezelt figyelmen kívül hagyott albumok</string>
     <string name="help_tip_albums_ignored_manage_subtitle">Rejtett mappák áttekintése és visszaállítása</string>
@@ -1182,7 +1182,7 @@
     <string name="help_tip_media_type_albums_title">Böngészés médiatípus szerint</string>
     <string name="help_tip_media_type_albums_subtitle">Automatikus albumok fotók, videók, GIF-ek és RAW fájlok számára</string>
     <string name="help_tip_media_type_albums_p1_title">Médiatípus szerinti albumok</string>
-    <string name="help_tip_media_type_albums_p1_desc">ReFra virtuális albumokat hoz létre az egységes könyvtáradból, így az összes fényképet, videót, GIF-et vagy RAW fájlt együtt nyithatod meg. Láthatóságukat az Idővonal és albumok beállításai szabályozzák.</string>
+    <string name="help_tip_media_type_albums_p1_desc">Optique virtuális albumokat hoz létre az egységes könyvtáradból, így az összes fényképet, videót, GIF-et vagy RAW fájlt együtt nyithatod meg. Láthatóságukat az Idővonal és albumok beállításai szabályozzák.</string>
     <string name="help_tip_media_type_albums_p1_s1">Nyisd meg az albumokat, és görgess a Média típusokhoz</string>
     <string name="help_tip_media_type_albums_p1_s2">Nyiss meg egy típust a megfelelő média tallózásához</string>
     <string name="help_tip_media_type_albums_p1_s3">Használd az Idővonal és albumok beállításait a szakasz megjelenítéséhez vagy elrejtéséhez</string>
@@ -1190,7 +1190,7 @@
     <string name="help_tip_raw_develop_title">Fejleszd a RAW fotókat</string>
     <string name="help_tip_raw_develop_subtitle">Állítsd be az érzékelő adatait exportálás előtt</string>
     <string name="help_tip_raw_develop_p1_title">Használd a Fejlesztés vezérlőit</string>
-    <string name="help_tip_raw_develop_p1_desc">Nyiss meg egy támogatott RAW fotót a szerkesztőben a fehéregyensúly, a expozíció, a csúcsfények, a kimeneti szín és a demosaicing beállításához. ReFra memóriabiztos előnézetet használ, miközben megőrzi a teljes felbontású kimenetet.</string>
+    <string name="help_tip_raw_develop_p1_desc">Nyiss meg egy támogatott RAW fotót a szerkesztőben a fehéregyensúly, a expozíció, a csúcsfények, a kimeneti szín és a demosaicing beállításához. Optique memóriabiztos előnézetet használ, miközben megőrzi a teljes felbontású kimenetet.</string>
     <string name="help_tip_raw_develop_p1_s1">Nyiss meg egy RAW fotót és koppints a Szerkesztésre</string>
     <string name="help_tip_raw_develop_p1_s2">Válassz opciókat a Fejlesztés fülön</string>
     <string name="help_tip_raw_develop_p1_s3">Alkalmazzon további vágást, szűrőt vagy jelölést</string>
@@ -1199,7 +1199,7 @@
     <string name="help_tip_people_grouping_title">Csoportosítsa az embereket a készüléken</string>
     <string name="help_tip_people_grouping_subtitle">Keresse meg az arcokat anélkül, hogy feltöltené a könyvtárát</string>
     <string name="help_tip_people_grouping_p1_title">Olvassa be és szervezze az embereket</string>
-    <string name="help_tip_people_grouping_p1_desc">Az arcmodell telepítése után a ReFra helyben olvassa be és csoportosítja az embereket. A Személyek menüből új beolvasást indíthat, elrejthet egy személyt, összevonhat csoportokat, és elmosott másolatokat hozhat létre, ha a magánélet fontos.</string>
+    <string name="help_tip_people_grouping_p1_desc">Az arcmodell telepítése után a Optique helyben olvassa be és csoportosítja az embereket. A Személyek menüből új beolvasást indíthat, elrejthet egy személyt, összevonhat csoportokat, és elmosott másolatokat hozhat létre, ha a magánélet fontos.</string>
     <string name="help_tip_people_grouping_p1_s1">Telepítse az Arcfelismerő modellt</string>
     <string name="help_tip_people_grouping_p1_s2">Nyissa meg a Könyvtárat, majd a Személyek menüt</string>
     <string name="help_tip_people_grouping_p1_s3">Érintse meg a „Személyek beolvasása” lehetőséget, és várja meg a indexelést</string>
@@ -1216,7 +1216,7 @@
     <string name="help_tip_metadata_sanitize_title">Érzékeny metaadatok eltávolítása</string>
     <string name="help_tip_metadata_sanitize_subtitle">Támogatott fájlok biztonsági törlése a pixelek újrakódolása nélkül</string>
     <string name="help_tip_metadata_sanitize_p1_title">Válaszd ki, mit szeretnél eltávolítani</string>
-    <string name="help_tip_metadata_sanitize_p1_desc">Egy fénykép részleteinél válaszd a Metaadat eltávolítása lehetőséget, majd az csak hely, leíró mezők vagy az összes támogatott metaadat opciót. ReFra létrehoz egy veszteségmentesen megtisztított másolatot, ellenőrzi, majd az eredetit helyettesíti.</string>
+    <string name="help_tip_metadata_sanitize_p1_desc">Egy fénykép részleteinél válaszd a Metaadat eltávolítása lehetőséget, majd az csak hely, leíró mezők vagy az összes támogatott metaadat opciót. Optique létrehoz egy veszteségmentesen megtisztított másolatot, ellenőrzi, majd az eredetit helyettesíti.</string>
     <string name="help_tip_metadata_sanitize_p1_s1">Nyiss meg egy támogatott helyi fényképet</string>
     <string name="help_tip_metadata_sanitize_p1_s2">Bővítsd ki a részleteit, és koppints a Metaadat eltávolítása lehetőségre</string>
     <string name="help_tip_metadata_sanitize_p1_s3">Válaszd ki a tisztítás szintjét</string>

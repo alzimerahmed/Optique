@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Gallery</string>
     <string name="change_app_name">App name</string>
     <string name="change_app_name_summary">Change the app name shown on your launcher</string>
@@ -62,7 +62,7 @@
     <string name="github">GitHub</string>
     <string name="donate_button_cd">Tlačítko přispění</string>
     <string name="github_button_cd">Tlačítko GitHub</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Dismiss banner</string>
     <string name="dismiss_banner_title">Move banner?</string>
     <string name="dismiss_banner_message">The Donate and GitHub buttons will move to a compact bar at the bottom of the Settings page.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">AI models enable intelligent image search and automatic media classification. The app uses CLIP (Contrastive Language-Image Pretraining) models in ONNX format to understand the content of your photos.</string>
     <string name="ai_models_privacy_description">All AI processing is performed entirely on your device. No images, search queries, or classification data ever leave your phone. The models run locally using ONNX Runtime and do not require an internet connection once downloaded. Your media remains fully private.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -932,7 +932,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1432,7 +1432,7 @@
     <string name="setup_media_access_limited">Vybrané fotky a videa</string>
     <string name="setup_permission_not_granted">Nepovoleno</string>
     <string name="setup_permission_optional_not_granted">Volitelné · Nepovoleno</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Volitelné. Umožňuje aplikaci ReFra číst data GPS vložená ve fotkách a videích pro Mapu a podrobnosti o poloze. Galerie bude fungovat, i když tento krok přeskočíte.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Volitelné. Umožňuje aplikaci Optique číst data GPS vložená ve fotkách a videích pro Mapu a podrobnosti o poloze. Galerie bude fungovat, i když tento krok přeskočíte.]]></string>
     <string name="smart_scan_notification_channel">Smart Scan</string>
     <string name="smart_scan_notification_title">Skenování médií</string>
     <string name="smart_scan_notification_stage_progress">%1$s · %2$d z %3$d · %4$d %% celkově</string>
@@ -1451,7 +1451,7 @@
     <string name="album_delete_confirm_summary">Všechny položky v tomto albu budou trvale smazány. Toto nelze vrátit zpět.</string>
     <string name="map_appearance_header">Mapa</string>
     <string name="map_appearance_title">Vzhled mapy</string>
-    <string name="map_appearance_description">Vyberte si, zda mapy odpovídají vzhledu ReFra nebo vždy používají světlé nebo tmavé barvy mapy.</string>
+    <string name="map_appearance_description">Vyberte si, zda mapy odpovídají vzhledu Optique nebo vždy používají světlé nebo tmavé barvy mapy.</string>
     <string name="map_appearance_system">Sledujte vzhled aplikace</string>
     <string name="map_appearance_light">Světlo</string>
     <string name="map_appearance_dark">Tmavý</string>
@@ -1543,7 +1543,7 @@
     <string name="disable_smoothing_summary">Při zoomování zobrazujte ostré čtvercové pixely namísto rozmazaného a vyhlazeného obrazu</string>
     <string name="disable_smoothing_description">Když je tato možnost povolena, obrázky se kreslí s měřítkem nejbližšího souseda, takže přiblížení na pixel art zachová čisté a ostré pixely, místo aby je rozmazalo. Pro plynulé škálování fotografií jej nechte vypnuté.</string>
     <string name="remove_metadata">Odstraňte metadata</string>
-    <string name="remove_metadata_warning">Původní soubor bude nahrazen pouze po ověření bezeztrátové dezinfikované verze. Pokud se výměna nezdaří, ReFra obnoví originál.</string>
+    <string name="remove_metadata_warning">Původní soubor bude nahrazen pouze po ověření bezeztrátové dezinfikované verze. Pokud se výměna nezdaří, Optique obnoví originál.</string>
     <string name="metadata_mode_location">Pouze umístění</string>
     <string name="metadata_mode_location_description">Odstraní souřadnice, nadmořskou výšku, názvy míst, směry a časová razítka GPS.</string>
     <string name="metadata_mode_privacy">Týká se soukromí</string>
@@ -1890,7 +1890,7 @@
     <string name="cloud_net_wifi_blank_summary">Žádná síť – přepínání zakázáno</string>
     <string name="cloud_net_wifi_pick_none">Nenastaveno</string>
     <string name="change_app_logo">Logo aplikace</string>
-    <string name="change_app_logo_summary">Přepínejte mezi ikonou spouštěče ReFra a klasickou galerií</string>
+    <string name="change_app_logo_summary">Přepínejte mezi ikonou spouštěče Optique a klasickou galerií</string>
     <string name="app_logo_description">Vyberte ikonu spouštěče použitou na domovské obrazovce a v zásuvce aplikace. Aplikace se restartuje, aby se změna uplatnila.</string>
     <string name="setup_step_progress">Krok %1$d z %2$d</string>
     <string name="setup_continue">Pokračovat</string>
@@ -1898,12 +1898,12 @@
     <string name="setup_grant_permissions">Udělení oprávnění</string>
     <string name="setup_welcome_subtitle">Vaše soukromá galerie v zařízení</string>
     <string name="setup_permissions_title">Oprávnění</string>
-    <string name="setup_permissions_subtitle">ReFra používá pouze to, co potřebuje k zobrazení a správě vašich médií. Klepnutím na oprávnění zjistíte proč.</string>
+    <string name="setup_permissions_subtitle">Optique používá pouze to, co potřebuje k zobrazení a správě vašich médií. Klepnutím na oprávnění zjistíte proč.</string>
     <string name="setup_permission_used_for">Používá se pro:</string>
     <string name="permission_local_network_title">Přímý přístup k místní síti</string>
-    <string name="setup_reason_local_network">Volitelné. Udělte to pouze tehdy, když se ReFra připojí přímo k serveru ve vaší aktuální síti.</string>
+    <string name="setup_reason_local_network">Volitelné. Udělte to pouze tehdy, když se Optique připojí přímo k serveru ve vaší aktuální síti.</string>
     <string name="local_network_permission_dialog_title">Povolit přímý přístup k místní síti?</string>
-    <string name="local_network_permission_dialog_message">Tento server se překládá na zařízení ve vaší aktuální místní síti. Android vyžaduje povolení, než se k němu ReFra může připojit přímo.</string>
+    <string name="local_network_permission_dialog_message">Tento server se překládá na zařízení ve vaší aktuální místní síti. Android vyžaduje povolení, než se k němu Optique může připojit přímo.</string>
     <string name="local_network_permission_not_now">Teď ne</string>
     <string name="setup_reason_read_images"><![CDATA[Zobrazení vašich fotografií na časové ose, albech a prohlížeči. Bez toho zůstane galerie prázdná.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Zobrazení a přehrávání vašich videí na časové ose, albech a prohlížeči.]]></string>

@@ -99,7 +99,7 @@
         </activity>
 
         <activity-alias
-            android:name=".Launcher_ReFra"
+            android:name=".Launcher_Optique"
             android:label="@string/app_name"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
@@ -134,9 +134,9 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- App name "ReFra" with the legacy Gallery launcher logo -->
+        <!-- App name "Optique" with the legacy Gallery launcher logo -->
         <activity-alias
-            android:name=".Launcher_ReFra_GalleryLogo"
+            android:name=".Launcher_Optique_GalleryLogo"
             android:label="@string/app_name"
             android:icon="@mipmap/ic_launcher_gallery"
             android:roundIcon="@mipmap/ic_launcher_gallery_round"
@@ -321,7 +321,7 @@
         </activity>
 
         <!--
-            Handles the legacy crop intent so ReFra can crop images for callers such as the
+            Handles the legacy crop intent so Optique can crop images for callers such as the
             Settings AvatarPicker (profile picture), matching Gallery2/Google Photos (#997).
         -->
         <activity

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">Gallery</string>
     <string name="smart_scan_notification_channel">Smart Scan</string>
     <string name="smart_scan_notification_title">Scanning media</string>
@@ -76,7 +76,7 @@
     <string name="no_map_app">No app available to show the location</string>
     <string name="map_appearance_header">Map</string>
     <string name="map_appearance_title">Map appearance</string>
-    <string name="map_appearance_description">Choose whether maps follow ReFra’s appearance or always use bright or dark map colors.</string>
+    <string name="map_appearance_description">Choose whether maps follow Optique’s appearance or always use bright or dark map colors.</string>
     <string name="map_appearance_system">Follow app appearance</string>
     <string name="map_appearance_light">Light</string>
     <string name="map_appearance_dark">Dark</string>
@@ -97,7 +97,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">Donate Button</string>
     <string name="github_button_cd">Github Button</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">Dismiss banner</string>
     <string name="dismiss_banner_title">Move banner?</string>
     <string name="dismiss_banner_message">The Donate and GitHub buttons will move to a compact bar at the bottom of the Settings page.</string>
@@ -470,7 +470,7 @@
     <string name="delete_location">Delete Location</string>
     <string name="delete_metadata">Delete Metadata</string>
     <string name="remove_metadata">Remove metadata</string>
-    <string name="remove_metadata_warning">ReFra verifies a separate lossless sanitized file first. Save a copy leaves the original unchanged; Replace moves the original to system trash afterward.</string>
+    <string name="remove_metadata_warning">Optique verifies a separate lossless sanitized file first. Save a copy leaves the original unchanged; Replace moves the original to system trash afterward.</string>
     <string name="metadata_mode_location">Location only</string>
     <string name="metadata_mode_location_description">Removes coordinates, altitude, location names, directions, and GPS timestamps.</string>
     <string name="metadata_mode_privacy">Privacy related</string>
@@ -522,7 +522,7 @@
     <string name="ai_models_description">AI models enable intelligent image search, automatic media classification, and interactive subject cutout extraction. The app uses CLIP (Contrastive Language-Image Pretraining) and MobileSAM (Segment Anything) models in ONNX format to understand the content of your photos and segment subjects.</string>
     <string name="ai_models_privacy_description">All AI processing is performed entirely on your device. No images, search queries, or classification data ever leave your phone. The models run locally using ONNX Runtime and do not require an internet connection once downloaded. Your media remains fully private.</string>
     <string name="ai_models_source">Source</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">Model Files</string>
     <string name="ai_models_feature_search">Search by Description</string>
     <string name="ai_models_feature_categories">Automatic Categories</string>
@@ -655,7 +655,7 @@
     <string name="vault_notification_channel_name">Vault Operations</string>
     <string name="vault_notification_channel_description">Progress of encryption / decryption tasks</string>
     <string name="decrypt_vault">Decrypt Vault</string>
-    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the ReFra.</string>
+    <string name="restore_vault_summary">The current vault and its content will be decrypted and restored.\nThis action will make your content accessible again in the Optique.</string>
     <string name="restore_vault_title">Confirm Decryption?</string>
     <string name="yes">Yes</string>
     <string name="vault_deletion_title">Confirm Deletion?</string>
@@ -1316,7 +1316,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1979,7 +1979,7 @@
     <!-- ============================ Setup wizard ============================ -->
     <!-- App logo -->
     <string name="change_app_logo">App logo</string>
-    <string name="change_app_logo_summary">Switch between the ReFra and classic Gallery launcher icon</string>
+    <string name="change_app_logo_summary">Switch between the Optique and classic Gallery launcher icon</string>
     <string name="app_logo_description">Choose the launcher icon used on your home screen and app drawer. The app will restart to apply the change.</string>
 
     <!-- Common -->
@@ -1994,23 +1994,23 @@
 
     <!-- Permissions page -->
     <string name="setup_permissions_title">Permissions</string>
-    <string name="setup_permissions_subtitle">ReFra only uses what it needs to show and manage your media. Tap a permission to learn why.</string>
+    <string name="setup_permissions_subtitle">Optique only uses what it needs to show and manage your media. Tap a permission to learn why.</string>
     <string name="setup_permission_used_for">Used for:</string>
     <string name="setup_media_access_full">Full media access</string>
     <string name="setup_media_access_limited">Selected photos and videos</string>
     <string name="setup_permission_not_granted">Not granted</string>
     <string name="setup_permission_optional_not_granted">Optional · Not granted</string>
     <string name="permission_local_network_title">Direct local network access</string>
-    <string name="setup_reason_local_network">Optional. Grant this only when ReFra connects directly to a server on your current network.</string>
+    <string name="setup_reason_local_network">Optional. Grant this only when Optique connects directly to a server on your current network.</string>
     <string name="local_network_permission_dialog_title">Allow direct local network access?</string>
-    <string name="local_network_permission_dialog_message">This server resolves to a device on your current local network. Android requires permission before ReFra can connect to it directly.</string>
+    <string name="local_network_permission_dialog_message">This server resolves to a device on your current local network. Android requires permission before Optique can connect to it directly.</string>
 <string name="local_network_permission_not_now">Not now</string>
 
     <!-- Permission reasons (where/why) -->
     <string name="setup_reason_read_images"><![CDATA[Displaying your photos in the timeline, albums and viewer. Without this, the gallery stays empty.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[Showing and playing your videos in the timeline, albums and viewer.]]></string>
     <string name="setup_reason_media_location"><![CDATA[Reading GPS data embedded in your photos & videos to power the Map and location details.]]></string>
-    <string name="setup_reason_media_location_optional"><![CDATA[Optional. Allows ReFra to read GPS data embedded in photos and videos for the Map and location details. Your gallery still works if you skip it.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[Optional. Allows Optique to read GPS data embedded in photos and videos for the Map and location details. Your gallery still works if you skip it.]]></string>
     <string name="setup_reason_internet"><![CDATA[Downloading map tiles for location previews, casting media to nearby devices, downloading optional AI models and syncing with cloud servers. Media never leaves your device unless you set up cloud sync.]]></string>
     <string name="setup_reason_notifications"><![CDATA[Showing progress for background tasks such as backups, encryption and downloads.]]></string>
     <string name="setup_reason_manage_media"><![CDATA[Skipping the extra system confirmation dialog when you favorite, trash or edit several items at once.]]></string>

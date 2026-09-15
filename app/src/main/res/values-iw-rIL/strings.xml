@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ReFra</string>
+    <string name="app_name">Optique</string>
     <string name="app_name_gallery">גלריה</string>
     <string name="change_app_name">שם האפליקציה</string>
     <string name="change_app_name_summary">שינוי שם האפליקציה המוצג במפעיל</string>
@@ -62,7 +62,7 @@
     <string name="github">Github</string>
     <string name="donate_button_cd">לחצן תרומה</string>
     <string name="github_button_cd">לחצן Github</string>
-    <string name="github_url">https://github.com/alzimerahmed/Gallery</string>
+    <string name="github_url">https://github.com/alzimerahmed/Optique</string>
     <string name="dismiss_banner">סגירת הבאנר</string>
     <string name="dismiss_banner_title">להעביר את הבאנר?</string>
     <string name="dismiss_banner_message">לחצני התרומה ו-GitHub יועברו לסרגל קומפקטי בתחתית עמוד ההגדרות.</string>
@@ -341,7 +341,7 @@
     <string name="ai_models_description">מודלי בינה מלאכותית מאפשרים חיפוש תמונות חכם וסיווג מדיה אוטומטי. האפליקציה משתמשת במודלי CLIP (Contrastive Language-Image Pretraining) בפורמט ONNX כדי להבין את התוכן של התמונות שלך.</string>
     <string name="ai_models_privacy_description">כל עיבוד הבינה המלאכותית מתבצע במלואו במכשיר שלך. שום תמונה, שאילתת חיפוש או נתון סיווג לא עוזבים את הטלפון שלך. המודלים פועלים מקומית באמצעות ONNX Runtime ואינם דורשים חיבור אינטרנט לאחר ההורדה. המדיה שלך נשארת פרטית לחלוטין.</string>
     <string name="ai_models_source">מקור</string>
-    <string name="ai_models_source_url">github.com/alzimerahmed/ReFra</string>
+    <string name="ai_models_source_url">github.com/alzimerahmed/Optique</string>
     <string name="ai_models_files">קבצי המודל</string>
     <string name="ai_models_feature_search">חיפוש לפי תיאור</string>
     <string name="ai_models_feature_categories">קטגוריות אוטומטיות</string>
@@ -439,7 +439,7 @@
     <string name="vault_notification_channel_name">פעולות כספת</string>
     <string name="vault_notification_channel_description">התקדמות משימות הצפנה / פענוח</string>
     <string name="decrypt_vault">פענוח הכספת</string>
-    <string name="restore_vault_summary">הכספת הנוכחית ותוכנה יפוענחו וישוחזרו.\nפעולה זו תהפוך את התוכן שלך לנגיש שוב ב-ReFra.</string>
+    <string name="restore_vault_summary">הכספת הנוכחית ותוכנה יפוענחו וישוחזרו.\nפעולה זו תהפוך את התוכן שלך לנגיש שוב ב-Optique.</string>
     <string name="restore_vault_title">לאשר פענוח?</string>
     <string name="yes">כן</string>
     <string name="vault_deletion_title">לאשר מחיקה?</string>
@@ -932,7 +932,7 @@
     <string name="backup_encrypt_header">Encryption</string>
     <string name="backup_restore_header">Choose what to restore</string>
     <string name="backup_restore">Restore</string>
-    <string name="backup_made_with_version">Created with ReFra %1$s</string>
+    <string name="backup_made_with_version">Created with Optique %1$s</string>
     <string name="backup_empty">This backup doesn\'t contain any restorable data.</string>
     <string name="backup_items_count">%1$d items</string>
     <string name="backup_pick_file_prompt">Choose a backup file to restore from.</string>
@@ -1432,7 +1432,7 @@
     <string name="setup_media_access_limited">תמונות וסרטונים שנבחרו</string>
     <string name="setup_permission_not_granted">לא הוענקה</string>
     <string name="setup_permission_optional_not_granted">אופציונלי · לא הוענקה</string>
-    <string name="setup_reason_media_location_optional"><![CDATA[אופציונלי. מאפשר ל-ReFra לקרוא נתוני GPS המוטמעים בתמונות ובסרטונים עבור המפה ופרטי המיקום. הגלריה עדיין תפעל אם תדלגו על כך.]]></string>
+    <string name="setup_reason_media_location_optional"><![CDATA[אופציונלי. מאפשר ל-Optique לקרוא נתוני GPS המוטמעים בתמונות ובסרטונים עבור המפה ופרטי המיקום. הגלריה עדיין תפעל אם תדלגו על כך.]]></string>
 
     <string name="smart_scan_notification_channel">סריקה חכמה</string>
     <string name="smart_scan_notification_title">סריקת מדיה</string>
@@ -1452,7 +1452,7 @@
     <string name="album_delete_confirm_summary">כל הפריטים באלבום הזה יימחקו לצמיתות. לא ניתן לבטל זאת.</string>
     <string name="map_appearance_header">מפה</string>
     <string name="map_appearance_title">מראה המפה</string>
-    <string name="map_appearance_description">בחר אם מפות עוקבות אחר המראה של ReFra או להשתמש תמיד בצבעי מפה בהירים או כהים.</string>
+    <string name="map_appearance_description">בחר אם מפות עוקבות אחר המראה של Optique או להשתמש תמיד בצבעי מפה בהירים או כהים.</string>
     <string name="map_appearance_system">עקוב אחר הופעת האפליקציה</string>
     <string name="map_appearance_light">אור</string>
     <string name="map_appearance_dark">כהה</string>
@@ -1544,7 +1544,7 @@
     <string name="disable_smoothing_summary">הצג פיקסלים חדים ומרובעים בעת התקרבות במקום תמונה מטושטשת ומוחלקת</string>
     <string name="disable_smoothing_description">כאשר מופעלת, תמונות מצוירות בקנה מידה של השכן הקרוב, כך שהתקרבות לאמנות פיקסלים שומרת על פיקסלים נקיים וחדים במקום לטשטש אותם. השאר אותו כבוי להגדלה חלקה של התמונות.</string>
     <string name="remove_metadata">הסר מטא נתונים</string>
-    <string name="remove_metadata_warning">הקובץ המקורי יוחלף רק לאחר אימות גרסה מחוטאת ללא אובדן. אם ההחלפה נכשלת, ReFra משחזר את המקור.</string>
+    <string name="remove_metadata_warning">הקובץ המקורי יוחלף רק לאחר אימות גרסה מחוטאת ללא אובדן. אם ההחלפה נכשלת, Optique משחזר את המקור.</string>
     <string name="metadata_mode_location">מיקום בלבד</string>
     <string name="metadata_mode_location_description">מסיר קואורדינטות, גובה, שמות מיקומים, הוראות הגעה וחותמות זמן של GPS.</string>
     <string name="metadata_mode_privacy">קשור לפרטיות</string>
@@ -1891,7 +1891,7 @@
     <string name="cloud_net_wifi_blank_summary">אין רשת - מיתוג מושבת</string>
     <string name="cloud_net_wifi_pick_none">לא מוגדר</string>
     <string name="change_app_logo">לוגו האפליקציה</string>
-    <string name="change_app_logo_summary">עבור בין סמל ReFra לסמל מפעיל הגלריה הקלאסי</string>
+    <string name="change_app_logo_summary">עבור בין סמל Optique לסמל מפעיל הגלריה הקלאסי</string>
     <string name="app_logo_description">בחר את סמל המפעיל המשמש במסך הבית ובמגירת האפליקציות שלך. האפליקציה תופעל מחדש כדי להחיל את השינוי.</string>
     <string name="setup_step_progress">שלב %1$d של %2$d</string>
     <string name="setup_continue">המשך</string>
@@ -1899,12 +1899,12 @@
     <string name="setup_grant_permissions">הענק הרשאות</string>
     <string name="setup_welcome_subtitle">הגלריה הפרטית שלך במכשיר</string>
     <string name="setup_permissions_title">הרשאות</string>
-    <string name="setup_permissions_subtitle">ReFra משתמש רק במה שהוא צריך כדי להציג ולנהל את המדיה שלך. הקש על הרשאה כדי ללמוד מדוע.</string>
+    <string name="setup_permissions_subtitle">Optique משתמש רק במה שהוא צריך כדי להציג ולנהל את המדיה שלך. הקש על הרשאה כדי ללמוד מדוע.</string>
     <string name="setup_permission_used_for">משמש עבור:</string>
     <string name="permission_local_network_title">גישה ישירה לרשת מקומית</string>
-    <string name="setup_reason_local_network">אופציונלי. הענק זאת רק כאשר ReFra מתחבר ישירות לשרת ברשת הנוכחית שלך.</string>
+    <string name="setup_reason_local_network">אופציונלי. הענק זאת רק כאשר Optique מתחבר ישירות לשרת ברשת הנוכחית שלך.</string>
     <string name="local_network_permission_dialog_title">לאפשר גישה ישירה לרשת מקומית?</string>
-    <string name="local_network_permission_dialog_message">שרת זה הופך למכשיר ברשת המקומית הנוכחית שלך. אנדרואיד דורשת הרשאה לפני ש-ReFra תוכל להתחבר אליו ישירות.</string>
+    <string name="local_network_permission_dialog_message">שרת זה הופך למכשיר ברשת המקומית הנוכחית שלך. אנדרואיד דורשת הרשאה לפני ש-Optique תוכל להתחבר אליו ישירות.</string>
     <string name="local_network_permission_not_now">לא עכשיו</string>
     <string name="setup_reason_read_images"><![CDATA[הצגת התמונות שלך בציר הזמן, באלבומים ובצופה. בלי זה, הגלריה נשארת ריקה.]]></string>
     <string name="setup_reason_read_videos"><![CDATA[הצגת והפעלת הסרטונים שלך בציר הזמן, באלבומים ובצופה.]]></string>
