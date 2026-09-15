@@ -45,7 +45,7 @@
 - Why Android 11 is the minimum version required?
     - Some Media features and APIs require Android 11 as a minimum version [Trash feature, most APIs used in the app]
 - Will you support lower android versions?
-    - While this is not a priority right now, I do have in mind to include support for lower Android versions at a cost of reduced features. If anyone volntueers to do so before me can request a pull request.
+    - While this is not a priority right now, I do have in mind to include support for lower Android versions at a cost of reduced features. If anyone volunteers to do so before me can request a pull request.
 - Can I verify the downloaded APK file?
     - Checksums of APKs are provided in the release notes. The signing certificate fingerprint is listed below:
       - SHA-256: `78:46:05:DD:50:75:BE:05:82:78:A5:42:5C:BD:E5:21:31:62:CB:B4:59:1B:44:28:F4:4E:75:E0:8C:C6:43:8A`

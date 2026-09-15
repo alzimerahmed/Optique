@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: 2023-2026 AlzimerAhmed
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #include <jni.h>
 #include <dlfcn.h>
 #include <cstddef>

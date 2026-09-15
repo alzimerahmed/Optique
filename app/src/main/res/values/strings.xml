@@ -136,9 +136,7 @@
     <string name="settings_navigation_auto_symbol" translatable="false">A</string>
     <string name="version_name_format" translatable="false">v%1$s</string>
     <string name="version_build_format" translatable="false">v%1$s (%2$d)</string>
-    <string name="support_paypal" translatable="false">PayPal</string>
-    <string name="support_revolut" translatable="false">Revolut</string>
-    <string name="support_crypto">Crypto</string>
+    <string name="support_github_sponsors" translatable="false">GitHub Sponsors</string>
     <string name="frame_picker_format_jpeg" translatable="false">JPEG</string>
     <string name="frame_picker_format_png" translatable="false">PNG</string>
     <string name="navigate_up">Navigate up</string>
@@ -451,7 +449,6 @@
     <string name="ignored">Ignored</string>
     <string name="location">Location</string>
     <string name="support_the_project">Support the project</string>
-    <string name="click_to_copy">Click to copy</string>
     <string name="full_brightness_view_title">Full Brightness when viewing</string>
     <string name="full_brightness_view_summary">Increase the screen brightness to maximum when viewing images and videos</string>
     <string name="tap_sides_to_navigate_title">Tap sides to navigate</string>
