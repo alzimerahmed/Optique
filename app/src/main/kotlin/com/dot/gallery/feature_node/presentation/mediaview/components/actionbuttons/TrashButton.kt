@@ -1,0 +1,105 @@
+package com.dot.gallery.feature_node.presentation.mediaview.components.actionbuttons
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.DeleteOutline
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
+import com.dot.gallery.R
+import com.dot.gallery.core.LocalMediaHandler
+import com.dot.gallery.core.Settings.Misc.rememberTrashEnabled
+import com.dot.gallery.core.util.SdkCompat
+import com.dot.gallery.feature_node.domain.model.Media
+import com.dot.gallery.feature_node.domain.model.Vault
+import com.dot.gallery.feature_node.domain.repository.MediaMutationResult
+import com.dot.gallery.feature_node.domain.util.isCloud
+import com.dot.gallery.feature_node.domain.util.isEncrypted
+import com.dot.gallery.feature_node.presentation.trashed.components.TrashDialog
+import com.dot.gallery.feature_node.presentation.trashed.components.TrashDialogAction
+import com.dot.gallery.feature_node.presentation.trashed.components.resolveTrashDialogAction
+import com.dot.gallery.feature_node.presentation.util.rememberActivityResult
+import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
+import kotlinx.coroutines.launch
+
+@Composable
+fun <T : Media> TrashButton(
+    media: T,
+    followTheme: Boolean = false,
+    enabled: Boolean,
+    deleteMedia: ((Vault, T, () -> Unit) -> Unit)?,
+    currentVault: Vault?,
+    cloudSupportsTrash: Boolean = false,
+    onTrashConfirmed: () -> Unit = {}
+) {
+    val handler = LocalMediaHandler.current
+    var shouldMoveToTrash by rememberSaveable { mutableStateOf(true) }
+    val state = rememberAppBottomSheetState()
+    val scope = rememberCoroutineScope()
+    val trashEnabled by rememberTrashEnabled()
+    val effectiveAction = resolveTrashDialogAction(
+        trashRequested = shouldMoveToTrash && !media.isEncrypted,
+        trashEnabled = if (media.isCloud) cloudSupportsTrash else trashEnabled,
+        trashSupported = if (media.isCloud) cloudSupportsTrash else SdkCompat.supportsTrash
+    )
+    val trashEnabledRes = if (effectiveAction == TrashDialogAction.TRASH) {
+        R.string.trash
+    } else {
+        R.string.action_delete_permanently
+    }
+    val result = rememberActivityResult(
+        onResultCanceled = {
+            scope.launch {
+                state.hide()
+                shouldMoveToTrash = true
+            }
+        },
+        onResultOk = onTrashConfirmed
+    )
+    MediaViewButton(
+        currentMedia = media,
+        imageVector = Icons.Outlined.DeleteOutline,
+        followTheme = followTheme,
+        title = stringResource(id = trashEnabledRes),
+        onItemLongClick = {
+            shouldMoveToTrash = false
+            scope.launch {
+                state.show()
+            }
+        },
+        onItemClick = {
+            shouldMoveToTrash = true
+            scope.launch {
+                state.show()
+            }
+        },
+        enabled = enabled
+    )
+
+    TrashDialog(
+        appBottomSheetState = state,
+        data = listOf(media),
+        action = if (deleteMedia != null && currentVault != null) {
+            TrashDialogAction.DELETE
+        } else {
+            effectiveAction
+        }
+    ) {
+        if (deleteMedia != null && currentVault != null) {
+            it.forEach { media ->
+                deleteMedia(currentVault, media) {}
+            }
+            onTrashConfirmed()
+        } else {
+            val mutationResult = if (effectiveAction == TrashDialogAction.TRASH) {
+                handler.trashMedia(result, it, true)
+            } else {
+                handler.deleteMedia(result, it)
+            }
+            if (mutationResult == MediaMutationResult.COMPLETED) onTrashConfirmed()
+        }
+    }
+}

@@ -1,0 +1,10 @@
+What's new in 5.1.5:
+
+• More accurate location maps and complete metadata repair
+• Reliable slideshow loading and crash-free offline startup
+
+Bug fixes:
+
+• Centered static maps on exact GPS coordinates and fixed location grouping
+• Prevented slideshow exit before media finishes loading
+• Prevented offline-build startup crashes from network-state checks
