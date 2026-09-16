@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 native_sha256() {
+    # MSYS2/Git Bash sha256sum prefixes a "\" binary-mode marker to the hash; strip it.
     if command -v sha256sum >/dev/null 2>&1; then
-        sha256sum "$1" | awk '{print $1}'
+        sha256sum "$1" | awk '{sub(/^\\/, "", $1); print $1}'
     else
         shasum -a 256 "$1" | awk '{print $1}'
     fi
@@ -79,13 +80,22 @@ native_prepare_source() {
             echo "ERROR: SHA-256 mismatch for $key: expected $expected_sha, got $actual_sha" >&2
             exit 1
         fi
-        tar -xzf "$archive" --strip-components=1 -C "$destination"
+        native_tar_extract "$archive" "$destination"
     fi
 
     if [ ! -e "$destination/$sentinel" ]; then
         echo "ERROR: Invalid $key source; missing $sentinel in $destination" >&2
         exit 1
     fi
+}
+
+native_tar_extract() {
+    # GNU tar (MSYS2/Git Bash) treats "C:" in Windows paths as a remote host; --force-local
+    # disables that. Other platforms don't need it (and macOS bsdtar lacks the flag).
+    case "$(uname -s)" in
+        MINGW*|MSYS*|CYGWIN*) tar --force-local -xzf "$1" --strip-components=1 -C "$2" ;;
+        *) tar -xzf "$1" --strip-components=1 -C "$2" ;;
+    esac
 }
 
 native_set_reproducible_env() {

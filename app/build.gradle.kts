@@ -73,6 +73,15 @@ val nativeAbiTaskSuffixes = mapOf(
     "x86_64" to "X8664",
     "x86" to "X86"
 )
+val nativeBashExecutable = if (System.getProperty("os.name").startsWith("Windows")) {
+    sequenceOf(
+        System.getenv("ProgramFiles")?.let { file("$it/Git/usr/bin/bash.exe") },
+        System.getenv("LOCALAPPDATA")?.let { file("$it/Programs/Git/usr/bin/bash.exe") }
+    ).filterNotNull().firstOrNull(File::isFile)?.absolutePath
+        ?: error("Git Bash is required to build native codecs on Windows")
+} else {
+    "bash"
+}
 val nativeSourceOverrides = listOf(
     "NATIVE_SOURCES_DIR",
     "LIBDE265_SOURCE_DIR",
@@ -92,7 +101,7 @@ val nativeTasksByAbi = nativeAbiTaskSuffixes.mapValues { (abi, suffix) ->
         tasks.register<Exec>("build${stack}Native$suffix") {
             group = "build"
             workingDir(rootProject.projectDir)
-            commandLine("bash", script.absolutePath, abi)
+            commandLine(nativeBashExecutable, script.absolutePath, abi)
             environment("NATIVE_OFFLINE", "0")
             environment("NATIVE_SOURCE_ARCHIVES_DIR", "")
             environment("NATIVE_DOWNLOAD_CACHE", nativeDownloadCache.absolutePath)

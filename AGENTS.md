@@ -2,7 +2,7 @@
 
 ## Project
 
-Optique (fork of IacobIonut01/ReFra, itself renamed from `IacobIonut01/Gallery`; upstream: https://github.com/IacobIonut01/ReFra) — a FOSS Android gallery app built with Jetpack Compose. Goal: the gallery app everyone wants, with the features everyone needs. Repo: https://github.com/alzimerahmed/Optique — applicationId `com.dot.gallery`. Fully independent from upstream (no sync). Distributed via F-Droid, Google Play (paid support tier), GitHub Releases, and Obtainium.
+Optique (fork of IacobIonut01/ReFra, itself renamed from `IacobIonut01/Gallery`; upstream: https://github.com/IacobIonut01/ReFra) — a FOSS Android gallery app built with Jetpack Compose. Goal: the gallery app everyone wants, with the features everyone needs. Repo: https://github.com/alzimerahmed/Optique — applicationId `com.dot.gallery`. Fully independent from upstream (no sync). Distributed via GitHub Releases ONLY (no Play Store, F-Droid, or other channels; the `gplay` flavor exists in code but is not shipped).
 
 **Stack:** Kotlin, Jetpack Compose + Material 3, Hilt (DI), Room + KSP, Kotlin Serialization, Kotlin Parcelize, Compose Compiler Gradle plugin, Baseline Profiles (`baselineprofile/`). Min SDK 29 (Android 11 — required by Trash/media APIs), target/compile SDK 37. JDK 17.
 

@@ -169,56 +169,6 @@ jobs:
           name: maps-${{ matrix.arch }}
           path: app/build/outputs/apk-renamed/**/*.apk
 
-  build_gplay:
-    needs: prepare
-    runs-on: ubuntu-latest
-    timeout-minutes: 90
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
-      - uses: gradle/actions/setup-gradle@v4
-      - name: Free disk space
-        run: sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/powershell || true
-      - name: Fix permissions
-        run: chmod +x ./gradlew
-      - name: Tune Gradle for CI
-        run: |
-          echo "org.gradle.jvmargs=-Xmx4g -Dfile.encoding=UTF-8" >> gradle.properties
-          echo "org.gradle.workers.max=2" >> gradle.properties
-      - name: Decode Keystore
-        id: decode_keystore
-        uses: timheuer/base64-to-file@v1
-        with:
-          fileName: 'release_key.jks'
-          fileDir: 'app/'
-          encodedString: ${{ secrets.SIGNING_KEY }}
-      - name: Build Google Play Bundle
-        run: test -n "$CARTO_BASEMAP_KEY" && ./gradlew --build-cache :app:bundleUniversalWithMLGplay
-        env:
-          SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          SIGNING_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-          CARTO_BASEMAP_KEY: ${{ secrets.CARTO_BASEMAP_KEY }}
-      - name: Verify 16 KB alignment
-        run: scripts/verify-16kb-alignment.sh app/build/outputs/bundle/universalWithMLGplay/*.aab
-      - uses: r0adkll/upload-google-play@v1
-        continue-on-error: true
-        with:
-          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-          packageName: com.dot.gallery.gplay
-          releaseFiles: app/build/outputs/bundle/universalWithMLGplay/*.aab
-          track: production
-          releaseName: ${{ needs.prepare.outputs.versionName }}-${{ needs.prepare.outputs.versionCode }} Release
-          mappingFile: app/build/outputs/mapping/universalWithMLGplay/mapping.txt
-          debugSymbols: app/build/intermediates/merged_native_libs/universalWithMLGplay/mergeUniversalWithMLGplayNativeLibs/out/lib
-      - uses: actions/upload-artifact@v5
-        with:
-          name: Optique Release (GPlay Bundle)
-          path: app/build/outputs/bundle/universalWithMLGplay/*.aab
-
   release:
     needs: [prepare, build_offline, build_withml, build_maps]
     runs-on: ubuntu-latest
