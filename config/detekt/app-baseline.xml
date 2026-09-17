@@ -186,9 +186,6 @@
     <ID>CyclomaticComplexMethod:MediaViewScreen.kt$@UnstableApi @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalHazeMaterialsApi::class) @Composable fun &lt;T : Media&gt; MediaViewScreen( toggleRotate: () -&gt; Unit, paddingValues: PaddingValues, isStandalone: Boolean = false, initialUiVisible: Boolean = true, mediaId: Long, target: String? = null, mediaState: State&lt;MediaState&lt;out T&gt;&gt;, metadataState: State&lt;MediaMetadataState&gt;, albumsState: State&lt;AlbumState&gt;, vaultState: State&lt;VaultState&gt;, restoreMedia: ((Vault, T, () -&gt; Unit) -&gt; Unit)? = null, deleteMedia: ((Vault, T, () -&gt; Unit) -&gt; Unit)? = null, currentVault: Vault? = null, slideshow: Boolean = false, allowBlur: Boolean, sharedTransitionScope: SharedTransitionScope, animatedContentScope: AnimatedContentScope, ensureMetadataAvailable: (Media?, MediaMetadataState) -&gt; Unit = { _, _ -&gt; }, rotateImage: (Media, Int, Boolean) -&gt; Unit = { _, _, _ -&gt; }, uiEvents: SharedFlow&lt;MediaViewEvent&gt; = MutableSharedFlow(), rotationState: StateFlow&lt;MediaViewViewModel.RotationUiState?&gt; = MutableStateFlow(null), metadataSanitizationState: StateFlow&lt;MediaViewViewModel.MetadataSanitizationUiState&gt; = MutableStateFlow( MediaViewViewModel.MetadataSanitizationUiState.Idle ), probeMetadataSanitization: (Media) -&gt; Unit = {}, sanitizeMetadata: (Media, MetadataRemovalMode, MetadataSaveMode) -&gt; Unit = { _, _, _ -&gt; }, resetMetadataSanitization: () -&gt; Unit = {}, motionPhotoStateFactory: @Composable (Media?) -&gt; MotionPhotoState = { remember { MotionPhotoState() } }, )</ID>
     <ID>CyclomaticComplexMethod:MediaViewSheetActions.kt$@Composable fun &lt;T : Media&gt; MediaViewSheetActions( media: T, albumsState: State&lt;AlbumState&gt;, vaults: State&lt;VaultState&gt;, restoreMedia: ((Vault, T, () -&gt; Unit) -&gt; Unit)?, currentVault: Vault?, isMotionPhoto: Boolean = false, onOpenFramePicker: () -&gt; Unit = {}, )</ID>
     <ID>CyclomaticComplexMethod:MediaViewSheetDetails.kt$@OptIn(ExperimentalHazeMaterialsApi::class, ExperimentalGlideComposeApi::class) @Composable fun &lt;T : Media&gt; MediaViewSheetDetails( albumsState: State&lt;AlbumState&gt;, vaultState: State&lt;VaultState&gt;, metadataState: State&lt;MediaMetadataState&gt;, currentMedia: T?, restoreMedia: ((Vault, T, () -&gt; Unit) -&gt; Unit)?, currentVault: Vault?, motionPhotoState: MotionPhotoState? = null, onOpenFramePicker: () -&gt; Unit = {}, cloudBackups: List&lt;Media.UriMedia&gt; = emptyList(), metadataSanitizationState: MediaViewViewModel.MetadataSanitizationUiState = MediaViewViewModel.MetadataSanitizationUiState.Idle, probeMetadataSanitization: (Media) -&gt; Unit = {}, sanitizeMetadata: (Media, MetadataRemovalMode, MetadataSaveMode) -&gt; Unit = { _, _, _ -&gt; }, resetMetadataSanitization: () -&gt; Unit = {}, )</ID>
-    <ID>CyclomaticComplexMethod:MetadataCollectionWorker.kt$MetadataCollectionWorker$@Suppress("DEPRECATION") private suspend fun reverseGeocodePendingMetadata()</ID>
-    <ID>CyclomaticComplexMethod:MetadataCollectionWorker.kt$MetadataCollectionWorker$override suspend fun doWork(): Result</ID>
-    <ID>CyclomaticComplexMethod:MetadataCollectionWorker.kt$MetadataCollectionWorker$private suspend fun collectCloudMediaMetadata()</ID>
     <ID>CyclomaticComplexMethod:MetadataRemovalSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun MetadataRemovalSheet( state: AppBottomSheetState, capability: SanitizationCapability?, isBusy: Boolean, canReplaceOriginal: Boolean, onConfirm: (MetadataRemovalMode, MetadataSaveMode) -&gt; Unit )</ID>
     <ID>CyclomaticComplexMethod:MetadataSanitizer.kt$AndroidMetadataSanitizer$override suspend fun recoverPendingTransactions()</ID>
     <ID>CyclomaticComplexMethod:MetadataSanitizer.kt$AndroidMetadataSanitizer$override suspend fun sanitize( media: Media, mode: MetadataRemovalMode, saveMode: MetadataSaveMode ): SanitizationResult</ID>
@@ -220,7 +217,6 @@
     <ID>CyclomaticComplexMethod:RawDevelopParams.kt$RawDevelopParams$override fun equals(other: Any?): Boolean</ID>
     <ID>CyclomaticComplexMethod:RotateMediaWorker.kt$RotateMediaWorker$override suspend fun doWork(): Result</ID>
     <ID>CyclomaticComplexMethod:SandboxedJxlBitmapDecoder.kt$SandboxedJxlBitmapDecoder$override fun handles(source: InputStream, options: Options): Boolean</ID>
-    <ID>CyclomaticComplexMethod:SearchIndexerUpdaterWorker.kt$SearchIndexerUpdaterWorker$override suspend fun doWork(): Result</ID>
     <ID>CyclomaticComplexMethod:SearchScreen.kt$@Composable private fun HelpTipsSearchSection( tips: List&lt;HelpSearchItem&gt;, onTipClick: (HelpSearchItem) -&gt; Unit, onSeeAll: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>CyclomaticComplexMethod:SearchScreen.kt$@OptIn( ExperimentalSharedTransitionApi::class, ExperimentalMaterial3ExpressiveApi::class, ExperimentalFoundationApi::class ) @Composable fun SearchScreen( isScrolling: MutableState&lt;Boolean&gt;, sharedTransitionScope: SharedTransitionScope, animatedContentScope: AnimatedContentScope, viewModel: SearchViewModel, )</ID>
     <ID>CyclomaticComplexMethod:SelectionSheet.kt$@OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalHazeMaterialsApi::class, ExperimentalMaterial3Api::class) @Composable fun &lt;T : Media&gt; BoxScope.SelectionSheet( modifier: Modifier = Modifier, allMedia: MediaState&lt;T&gt;, selectedMedia: SnapshotStateList&lt;T&gt;, collectionId: Long? = null, isInVault: Boolean = false, isInPrivateFolder: Boolean = false, currentVault: Vault? = null, )</ID>
@@ -295,7 +291,6 @@
     <ID>ExplicitItLambdaParameter:MediaRepositoryImpl.kt$MediaRepositoryImpl${ it -&gt; it.id == albumId }</ID>
     <ID>ExplicitItLambdaParameter:MediaScreen.kt${ it -&gt; PullToRefreshBox( isRefreshing = isRefreshing, onRefresh = { refreshScope.launch { distributor.invalidate() } }, ) { val timelineLayoutType by rememberTimelineLayoutType() val isMosaicLayout = timelineLayoutType == Settings.Misc.LAYOUT_MOSAIC &amp;&amp; allowHeaders if (isMosaicLayout) { var lastMosaicCellIndex by rememberMosaicGridSize() val mosaicPinchState = rememberMosaicPinchZoomState( initialColumnsIndex = lastMosaicCellIndex, gridState = rememberLazyGridState( cacheWindow = dpCacheWindow ) ) val mosaicGridState = mosaicPinchState.gridState LaunchedEffect(mosaicPinchState.isZooming) { lastMosaicCellIndex = mosaicPinchState.currentColumnsIndex } val mappedData by remember(mediaState, groupMethod) { derivedStateOf { when (groupMethod) { Settings.Misc.GROUP_MONTHLY -&gt; mediaState.value.mappedMediaWithMonthly Settings.Misc.GROUP_YEARLY -&gt; mediaState.value.mappedMediaWithYearly else -&gt; mediaState.value.mappedMedia }.toMutableStateList() } } val headers by remember(mediaState) { derivedStateOf { mediaState.value.headers.toMutableStateList() } } val mosaicPaddingValues = PaddingValues( top = it.calculateTopPadding(), bottom = paddingValues.calculateBottomPadding() + 128.dp ) MosaicPinchZoomLayout( state = mosaicPinchState, indicatorTopPadding = mosaicPaddingValues.calculateTopPadding() + 16.dp, ) { currentColumns -&gt; TimelineScroller( modifier = Modifier .padding(mosaicPaddingValues) .padding(top = 32.dp) .padding(vertical = 32.dp), segments = rememberMosaicMonthSegments( mappedData = mappedData, columns = currentColumns, allowHeaders = true, leadingItemCount = if (aboveGridContent != null) 1 else 0, ), headers = headers, state = mosaicGridState, ) { MosaicMediaGrid( modifier = Modifier.hazeSource(LocalHazeState.current), gridState = mosaicGridState, columns = currentColumns, mediaState = mediaState, metadataState = metadataState, mappedData = mappedData, paddingValues = mosaicPaddingValues, allowSelection = true, canScroll = !mosaicPinchState.isZooming, allowHeaders = true, aboveGridContent = aboveGridContent, isScrolling = isScrolling, emptyContent = emptyContent, sharedTransitionScope = sharedTransitionScope, animatedContentScope = animatedContentScope, onMediaClick = { if (customViewingNavigation == null) { val albumRoute = "albumId=$albumId" val targetRoute = "target=$target" val param = if (target != null) targetRoute else albumRoute eventHandler.navigate(Screen.MediaViewScreen.route + "?mediaId=${it.id}&amp;$param") } else { customViewingNavigation(it) } }, ) } } } else { GridPinchZoomLayout( state = pinchState, modifier = Modifier.hazeSource(LocalHazeState.current), indicatorTopPadding = it.calculateTopPadding() + 16.dp, ) { MediaGridView( mediaState = mediaState, metadataState = metadataState, paddingValues = PaddingValues( top = it.calculateTopPadding(), bottom = paddingValues.calculateBottomPadding() + 128.dp ), searchBarPaddingTop = remember(paddingValues) { paddingValues.calculateTopPadding() }, showSearchBar = showSearchBar, allowSelection = true, canScroll = canScroll, allowHeaders = allowHeaders, enableStickyHeaders = enableStickyHeaders, groupMethod = groupMethod, aboveGridContent = aboveGridContent, isScrolling = isScrolling, emptyContent = emptyContent, sharedTransitionScope = sharedTransitionScope, animatedContentScope = animatedContentScope, onMediaClick = { if (customViewingNavigation == null) { val albumRoute = "albumId=$albumId" val targetRoute = "target=$target" val param = if (target != null) targetRoute else albumRoute eventHandler.navigate(Screen.MediaViewScreen.route + "?mediaId=${it.id}&amp;$param") } else { customViewingNavigation(it) } }, ) } } } // PullToRefreshBox }</ID>
     <ID>ExplicitItLambdaParameter:MediaUriFlow.kt$MediaUriFlow${ it, indexCache -&gt; var i = 0 val id = it.getLong(indexCache[i++]) val volumeName = it.tryGetString(indexCache[i++]).orEmpty() .ifEmpty { MediaStore.VOLUME_EXTERNAL } val path = it.tryGetString(indexCache[i++]).orEmpty() val relativePath = it.tryGetString(indexCache[i++]).orEmpty() val title = it.tryGetString(indexCache[i++]).orEmpty() val albumID = it.getLong(indexCache[i++]) val albumLabel = it.tryGetString(indexCache[i++], Build.MODEL) val takenTimestamp = it.tryGetLong(indexCache[i++]) ?: title.parseTimestampFromFilename() val modifiedTimestamp = it.getLong(indexCache[i++]) val duration = it.tryGetString(indexCache[i++]) val size = it.getLong(indexCache[i++]) val mimeType = MediaQuery.normalizeImageMimeType( path, it.tryGetString(indexCache[i++]).orEmpty() ) // IS_FAVORITE and IS_TRASHED are only available on API 30+ val isFavorite = if (SdkCompat.supportsFavorites) it.getInt(indexCache[i++]) else 0 val isTrashed = if (SdkCompat.supportsTrash) it.getInt(indexCache[i]) else 0 val uri = MediaQuery.mediaStoreItemUri(id, mimeType, path, volumeName) val formattedDate = (takenTimestamp?.div(1000) ?: modifiedTimestamp).getDate(Constants.FULL_DATE_FORMAT) Media.UriMedia( id = id, label = title, uri = uri, path = path, relativePath = relativePath, albumID = albumID, albumLabel = albumLabel ?: Build.MODEL, timestamp = modifiedTimestamp, takenTimestamp = takenTimestamp, expiryTimestamp = null, fullDate = formattedDate, duration = duration, favorite = isFavorite, trashed = isTrashed, size = size, mimeType = mimeType ) }</ID>
-    <ID>ExplicitItLambdaParameter:MetadataCollectionWorker.kt$MetadataCollectionWorker${ index, it -&gt; if (!currentCoroutineContext().isActive || isStopped) return@fastForEachIndexed val pct = if (total &lt;= 1) 100 else (((index + 1).toFloat() / total.toFloat()) * 100f).roundToInt() throttler.emit(pct) { setProgress(workDataOf("progress" to it)) } appContext.retrieveExtraMediaMetadata( isolatedParser = isolatedParser, geocoder = geocoder, media = it, usePerFileIsolation = usePerFile, policy = metadataParsingPolicy(bulk = true) )?.let { metadata -&gt; database.getMetadataDao().addMetadata(metadata) } }</ID>
     <ID>ExplicitItLambdaParameter:MoveMediaSheet.kt${ index, it -&gt; if (handler.moveMedia(media = it, newPath = newPath)) { val movedFilePath = newPath.trimEnd('/') + "/" + it.label MediaScannerConnection.scanFile( context, arrayOf(movedFilePath), arrayOf(it.mimeType), null ) progress = index.toFloat() / mediaList.size } else { return@async false } }</ID>
     <ID>ExplicitItLambdaParameter:TimelineScreen.kt${ it -&gt; PullToRefreshBox( isRefreshing = isRefreshing, onRefresh = { refreshScope.launch { distributor.invalidate() } }, ) { val bottomBarInset = rememberBottomBarInset(paddingValues) TimelineMediaContent( mediaState = filteredMediaState, metadataState = metadataState, scaffoldPadding = it, bottomPadding = bottomBarInset + 128.dp, screenTopPadding = paddingValues.calculateTopPadding(), showSearchBar = true, aboveGridContent = aboveGridContent, isScrolling = isScrolling, sharedTransitionScope = sharedTransitionScope, animatedContentScope = animatedContentScope, onMediaClick = { eventHandler.navigate(Screen.MediaViewScreen.idAndAlbum(it.id, -1L)) }, emptyContent = { EmptyMedia() }, onRetry = { refreshScope.launch { distributor.invalidate() } }, scrollToTopRoute = Screen.TimelineScreen.route, ) } }</ID>
     <ID>ForbiddenComment:HeifBitmapDecoder.kt$HeifBitmapDecoder$// TODO: consider bounded read / streaming if memory pressure observed</ID>
@@ -1099,7 +1094,6 @@
     <ID>InstanceOfCheckForException:FrameSourceMaterializer.kt$FrameSourceMaterializer$error is CancellationException</ID>
     <ID>InstanceOfCheckForException:FrameSourceMaterializer.kt$FrameSourceMaterializer$error is FrameSourceException</ID>
     <ID>InstanceOfCheckForException:MediaMetadata.kt$error is CancellationException</ID>
-    <ID>InstanceOfCheckForException:MetadataCollectionWorker.kt$MetadataCollectionWorker$error is CancellationException</ID>
     <ID>InstanceOfCheckForException:MotionPhotoHelper.kt$MotionPhotoHelper$e is CancellationException</ID>
     <ID>InvalidPackageDeclaration:AlbumDestinationPolicyTest.kt$package com.dot.gallery.feature_node.presentation.exif</ID>
     <ID>InvalidPackageDeclaration:CollectionAlbumSelectorTest.kt$package com.dot.gallery.feature_node.presentation.collection</ID>
@@ -1328,8 +1322,6 @@
     <ID>LongMethod:MediaViewSheetDetails.kt$@OptIn(ExperimentalHazeMaterialsApi::class, ExperimentalGlideComposeApi::class) @Composable fun &lt;T : Media&gt; MediaViewSheetDetails( albumsState: State&lt;AlbumState&gt;, vaultState: State&lt;VaultState&gt;, metadataState: State&lt;MediaMetadataState&gt;, currentMedia: T?, restoreMedia: ((Vault, T, () -&gt; Unit) -&gt; Unit)?, currentVault: Vault?, motionPhotoState: MotionPhotoState? = null, onOpenFramePicker: () -&gt; Unit = {}, cloudBackups: List&lt;Media.UriMedia&gt; = emptyList(), metadataSanitizationState: MediaViewViewModel.MetadataSanitizationUiState = MediaViewViewModel.MetadataSanitizationUiState.Idle, probeMetadataSanitization: (Media) -&gt; Unit = {}, sanitizeMetadata: (Media, MetadataRemovalMode, MetadataSaveMode) -&gt; Unit = { _, _, _ -&gt; }, resetMetadataSanitization: () -&gt; Unit = {}, )</ID>
     <ID>LongMethod:MediaViewerVisualPolicyTest.kt$MediaViewerVisualPolicyTest$@Test fun tapNavigationPromptWaitsForAnEligibleViewer()</ID>
     <ID>LongMethod:MemoriesScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun MemoriesScreen()</ID>
-    <ID>LongMethod:MetadataCollectionWorker.kt$MetadataCollectionWorker$override suspend fun doWork(): Result</ID>
-    <ID>LongMethod:MetadataCollectionWorker.kt$MetadataCollectionWorker$private suspend fun collectCloudMediaMetadata()</ID>
     <ID>LongMethod:MetadataEditSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun &lt;T: Media&gt; MetadataEditSheet( state: AppBottomSheetState, media: T, metadata: MediaMetadata? )</ID>
     <ID>LongMethod:MetadataRemovalSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun MetadataRemovalSheet( state: AppBottomSheetState, capability: SanitizationCapability?, isBusy: Boolean, canReplaceOriginal: Boolean, onConfirm: (MetadataRemovalMode, MetadataSaveMode) -&gt; Unit )</ID>
     <ID>LongMethod:MetadataSanitizer.kt$AndroidMetadataSanitizer$override suspend fun sanitize( media: Media, mode: MetadataRemovalMode, saveMode: MetadataSaveMode ): SanitizationResult</ID>
@@ -1371,7 +1363,6 @@
     <ID>LongMethod:PrivateFolderSecuritySetupScreen.kt$@Composable fun PrivateFolderSecuritySetupScreen( onBack: (() -&gt; Unit)? = null, onNone: () -&gt; Unit, onDeviceSecurity: () -&gt; Unit, onCustomComplete: () -&gt; Unit, )</ID>
     <ID>LongMethod:RotateMediaWorker.kt$RotateMediaWorker$override suspend fun doWork(): Result</ID>
     <ID>LongMethod:SandboxedSketchHeifDecoder.kt$SandboxedSketchHeifDecoder$override suspend fun decode(): ImageData</ID>
-    <ID>LongMethod:SearchIndexerUpdaterWorker.kt$SearchIndexerUpdaterWorker$override suspend fun doWork(): Result</ID>
     <ID>LongMethod:SearchScreen.kt$@Composable private fun SearchIndexStatusCard( state: SearchIndexerState, modifier: Modifier = Modifier )</ID>
     <ID>LongMethod:SearchScreen.kt$@OptIn( ExperimentalSharedTransitionApi::class, ExperimentalMaterial3ExpressiveApi::class, ExperimentalFoundationApi::class ) @Composable fun SearchScreen( isScrolling: MutableState&lt;Boolean&gt;, sharedTransitionScope: SharedTransitionScope, animatedContentScope: AnimatedContentScope, viewModel: SearchViewModel, )</ID>
     <ID>LongMethod:SearchViewModel.kt$SearchViewModel$fun searchByImage(media: Media.UriMedia)</ID>
@@ -1738,7 +1729,6 @@
     <ID>LoopWithTooManyJumpStatements:LosslessMetadataRewriter.kt$LosslessMetadataRewriter$while</ID>
     <ID>LoopWithTooManyJumpStatements:MediaEssenceFingerprint.kt$MediaEssenceFingerprint$while</ID>
     <ID>LoopWithTooManyJumpStatements:MediaHandlerImpl.kt$MediaHandlerImpl$for</ID>
-    <ID>LoopWithTooManyJumpStatements:MetadataCollectionWorker.kt$MetadataCollectionWorker$for</ID>
     <ID>LoopWithTooManyJumpStatements:PrivateFolderRepository.kt$PrivateFolderRepository$while</ID>
     <ID>LoopWithTooManyJumpStatements:PsdImageDecoder.kt$PsdImageDecoder$while</ID>
     <ID>LoopWithTooManyJumpStatements:SingleMediaWidget.kt$SingleMediaWidgetReceiver$for</ID>
@@ -2318,7 +2308,6 @@
     <ID>MagicNumber:CutoutPainter.kt$0xFF34C759</ID>
     <ID>MagicNumber:CutoutPainter.kt$0xFFFF3B30</ID>
     <ID>MagicNumber:CutoutPainter.kt$1.4142f</ID>
-    <ID>MagicNumber:DatabaseUpdaterWorker.kt$DatabaseUpdaterWorker$5000</ID>
     <ID>MagicNumber:DateExt.kt$1000</ID>
     <ID>MagicNumber:DateExt.kt$1000L</ID>
     <ID>MagicNumber:DateExt.kt$12</ID>
@@ -3154,12 +3143,6 @@
     <ID>MagicNumber:MediaViewViewModel.kt$MediaViewViewModel$33</ID>
     <ID>MagicNumber:MergedSubfolderMigration.kt$&lt;no name provided&gt;$41</ID>
     <ID>MagicNumber:MergedSubfolderMigration.kt$&lt;no name provided&gt;$42</ID>
-    <ID>MagicNumber:MetadataCollectionWorker.kt$MetadataCollectionWorker$100</ID>
-    <ID>MagicNumber:MetadataCollectionWorker.kt$MetadataCollectionWorker$1000</ID>
-    <ID>MagicNumber:MetadataCollectionWorker.kt$MetadataCollectionWorker$100f</ID>
-    <ID>MagicNumber:MetadataCollectionWorker.kt$MetadataCollectionWorker$3</ID>
-    <ID>MagicNumber:MetadataCollectionWorker.kt$MetadataCollectionWorker$3600</ID>
-    <ID>MagicNumber:MetadataCollectionWorker.kt$MetadataCollectionWorker$60</ID>
     <ID>MagicNumber:MetadataSanitizer.kt$AndroidMetadataSanitizer$3</ID>
     <ID>MagicNumber:MetadataVerifier.kt$MetadataVerifier$0x21</ID>
     <ID>MagicNumber:MetadataVerifier.kt$MetadataVerifier$0xD0</ID>
@@ -3640,8 +3623,6 @@
     <ID>MagicNumber:Saturation.kt$Saturation$0.213f</ID>
     <ID>MagicNumber:Saturation.kt$Saturation$0.715f</ID>
     <ID>MagicNumber:ScrollToTop.kt$15</ID>
-    <ID>MagicNumber:SearchIndexerUpdaterWorker.kt$SearchIndexerUpdaterWorker$100f</ID>
-    <ID>MagicNumber:SearchIndexerUpdaterWorker.kt$SearchIndexerUpdaterWorker$224</ID>
     <ID>MagicNumber:SearchScreen.kt$3</ID>
     <ID>MagicNumber:SearchScreen.kt$5</ID>
     <ID>MagicNumber:SearchScreen.kt$60</ID>
@@ -4646,9 +4627,6 @@
     <ID>MaxLineLength:PrivateFolderDetailScreen.kt$sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden, enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded))</ID>
     <ID>MaxLineLength:ProviderUiDescriptor.kt$ProviderUiDescriptor$/** When true the icon is tinted with the surrounding content color (monochrome marks); when false it renders at its native colors (e.g. the multi-color Azure logo). */</ID>
     <ID>MaxLineLength:SearchHelperImpl.kt$SearchHelperImpl$override suspend</ID>
-    <ID>MaxLineLength:SearchIndexerUpdaterWorker.kt$SearchIndexerUpdaterWorker$printInfo("Indexed cloud media $globalIndex/${totalItems - 1} in ${System.currentTimeMillis() - startMillis} ms")</ID>
-    <ID>MaxLineLength:SearchIndexerUpdaterWorker.kt$SearchIndexerUpdaterWorker$printInfo("Indexed local media $index/${totalItems - 1} in ${System.currentTimeMillis() - startMillis} ms")</ID>
-    <ID>MaxLineLength:SearchIndexerUpdaterWorker.kt$SearchIndexerUpdaterWorker$printInfo("Skipping cloud media without server preview: ${entity.remoteId} (${entity.providerType})")</ID>
     <ID>MaxLineLength:SearchScreen.kt$optionList = listOf(SettingsEntity.Header(resources.getString(R.string.browse_categories)))</ID>
     <ID>MaxLineLength:SearchScreen.kt$optionList = listOf(SettingsEntity.Header(resources.getString(R.string.media_groupings)))</ID>
     <ID>MaxLineLength:SearchScreen.kt$visible = isModelAvailable &amp;&amp; selectedImageMedia == null &amp;&amp; !searchResults.isSearching</ID>
@@ -4950,7 +4928,6 @@
     <ID>NewLineAtEndOfFile:MediaViewScreen.kt$com.dot.gallery.feature_node.presentation.mediaview.MediaViewScreen.kt</ID>
     <ID>NewLineAtEndOfFile:MediaViewSheetActions.kt$com.dot.gallery.feature_node.presentation.mediaview.components.MediaViewSheetActions.kt</ID>
     <ID>NewLineAtEndOfFile:MetadataCollectionStatus.kt$com.dot.gallery.feature_node.presentation.common.components.MetadataCollectionStatus.kt</ID>
-    <ID>NewLineAtEndOfFile:MetadataCollectionWorker.kt$com.dot.gallery.core.workers.MetadataCollectionWorker.kt</ID>
     <ID>NewLineAtEndOfFile:MetadataEditSheet.kt$com.dot.gallery.feature_node.presentation.exif.MetadataEditSheet.kt</ID>
     <ID>NewLineAtEndOfFile:MockedProviders.kt$com.dot.gallery.feature_node.presentation.util.MockedProviders.kt</ID>
     <ID>NewLineAtEndOfFile:ModifierExt.kt$com.dot.gallery.feature_node.presentation.util.ModifierExt.kt</ID>
@@ -4988,7 +4965,6 @@
     <ID>NewLineAtEndOfFile:SearchHelper.kt$com.dot.gallery.feature_node.presentation.search.SearchHelper.kt</ID>
     <ID>NewLineAtEndOfFile:SearchHelperImpl.kt$com.dot.gallery.feature_node.presentation.search.SearchHelperImpl.kt</ID>
     <ID>NewLineAtEndOfFile:SearchHistory.kt$com.dot.gallery.feature_node.domain.model.SearchHistory.kt</ID>
-    <ID>NewLineAtEndOfFile:SearchIndexerUpdaterWorker.kt$com.dot.gallery.core.workers.SearchIndexerUpdaterWorker.kt</ID>
     <ID>NewLineAtEndOfFile:SearchViewModel.kt$com.dot.gallery.feature_node.presentation.search.SearchViewModel.kt</ID>
     <ID>NewLineAtEndOfFile:SelectVaultSheet.kt$com.dot.gallery.feature_node.presentation.vault.components.SelectVaultSheet.kt</ID>
     <ID>NewLineAtEndOfFile:SelectableItem.kt$com.dot.gallery.feature_node.presentation.edit.components.adjustment.SelectableItem.kt</ID>
@@ -5935,7 +5911,6 @@
     <ID>TooGenericExceptionCaught:MediaStoreThumbnailModelLoader.kt$MediaStoreThumbnailModelLoader.MediaStoreThumbnailFetcher$e: Exception</ID>
     <ID>TooGenericExceptionCaught:MediaViewScreen.kt$error: Throwable</ID>
     <ID>TooGenericExceptionCaught:MediaViewViewModel.kt$MediaViewViewModel$error: Exception</ID>
-    <ID>TooGenericExceptionCaught:MetadataCollectionWorker.kt$MetadataCollectionWorker$error: Exception</ID>
     <ID>TooGenericExceptionCaught:MetadataSanitizer.kt$AndroidMetadataSanitizer$error: Exception</ID>
     <ID>TooGenericExceptionCaught:MimeInputStreamModelLoader.kt$MimeInputStreamModelLoader.MimeInputStreamFetcher$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ModelDownloadWorker.kt$ModelDownloadWorker$e: Exception</ID>

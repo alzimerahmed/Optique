@@ -31,6 +31,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -168,8 +169,13 @@ class SmartFeaturesViewModel @Inject constructor(
     fun refreshMetadata() = request(SmartScanFeature.METADATA.bit)
 
     fun refreshEmbeddings() {
-        if (!semanticIndexingEnabled.value) return
-        request(SmartScanFeature.EMBEDDINGS.bit)
+        viewModelScope.launch {
+            // Read the preference fresh: the StateFlow uses WhileSubscribed(5000), so its
+            // .value can be stale (initialValue=true) right after a just-written toggle.
+            val enabled = Settings.SmartFeatures.semanticIndexing(context).first()
+            if (!enabled) return@launch
+            request(SmartScanFeature.EMBEDDINGS.bit)
+        }
     }
 
     fun refreshCategories() = request(SmartScanFeature.CATEGORIES.bit)

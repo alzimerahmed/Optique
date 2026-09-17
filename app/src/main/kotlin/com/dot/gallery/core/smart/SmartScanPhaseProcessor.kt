@@ -437,7 +437,12 @@ class SearchIndexPhaseProcessor @Inject constructor(
 
     override suspend fun process(context: SmartScanPhaseContext): SmartScanPhaseResult {
         if (!BuildConfig.ENABLE_INDEXING) return SmartScanPhaseResult.Blocked("indexing_disabled")
-        if (!Settings.SmartFeatures.semanticIndexing(appContext).first()) {
+        // Default to enabled if the preference cannot be read (corrupt/locked DataStore)
+        // so a settings-layer failure degrades to current behavior instead of aborting the phase.
+        val semanticIndexingEnabled = runCatching {
+            Settings.SmartFeatures.semanticIndexing(appContext).first()
+        }.getOrDefault(true)
+        if (!semanticIndexingEnabled) {
             return SmartScanPhaseResult.Blocked("semantic_indexing_disabled")
         }
         if (!modelManager.isReady(ModelGroup.SEARCH)) return SmartScanPhaseResult.Blocked("search_model_unavailable")
