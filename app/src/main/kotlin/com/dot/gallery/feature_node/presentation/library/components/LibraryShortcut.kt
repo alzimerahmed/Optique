@@ -21,6 +21,7 @@ enum class LibraryShortcut(val id: String) {
     FAVORITES("favorites"),
     VAULT("vault"),
     IGNORED("ignored"),
+    MEMORIES("memories"),
     PRIVATE_FOLDER("private_folder"),
     CLOUD_ARCHIVE("cloud_archive"),
     CLOUD_SHARED_LINKS("cloud_shared_links"),

@@ -48,6 +48,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.dot.gallery.R
 import com.dot.gallery.core.Constants
 import com.dot.gallery.core.LocalMediaDistributor
@@ -107,6 +108,11 @@ import com.dot.gallery.feature_node.presentation.location.LocationTimelineScreen
 import com.dot.gallery.feature_node.presentation.location.LocationsViewModel
 import com.dot.gallery.feature_node.presentation.mediaview.MediaViewScreenRoute
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
+import com.dot.gallery.feature_node.presentation.memories.MemoriesSectionState
+import com.dot.gallery.feature_node.presentation.memories.MemoriesViewModel
+import com.dot.gallery.feature_node.presentation.memories.OnDeviceMemoriesScreen
+import com.dot.gallery.feature_node.presentation.memories.RecapPlaybackScreen
+import com.dot.gallery.feature_node.presentation.memories.resolvePlaybackMedia
 import com.dot.gallery.feature_node.presentation.search.SearchScreen
 import com.dot.gallery.feature_node.presentation.search.SearchViewModel
 import com.dot.gallery.feature_node.presentation.settings.SettingsScreen
@@ -1551,6 +1557,62 @@ fun NavigationComp(
 
             composable(Screen.MemoriesScreen()) {
                 MemoriesScreen()
+            }
+
+            composable(
+                route = Screen.OnDeviceMemoriesScreen.year(),
+                arguments = listOf(
+                    navArgument(name = "year") {
+                        type = NavType.IntType
+                        defaultValue = -1
+                    }
+                ),
+                // Tapped by the optional on-this-day notification (MemoriesNotifier).
+                deepLinks = listOf(
+                    navDeepLink { uriPattern = "app://optique/memories?year={year}" }
+                )
+            ) { backStackEntry ->
+                val year = remember(backStackEntry) {
+                    backStackEntry.arguments?.getInt("year") ?: -1
+                }
+                OnDeviceMemoriesScreen(
+                    initialYear = year.takeIf { it >= 0 }
+                )
+            }
+
+            composable(
+                route = Screen.RecapPlaybackScreen.year(),
+                arguments = listOf(
+                    navArgument(name = "year") {
+                        type = NavType.IntType
+                        defaultValue = -1
+                    },
+                    navArgument(name = "kind") {
+                        type = NavType.StringType
+                        defaultValue = ""
+                    }
+                )
+            ) { backStackEntry ->
+                val year = remember(backStackEntry) {
+                    backStackEntry.arguments?.getInt("year") ?: -1
+                }
+                val kind = remember(backStackEntry) {
+                    backStackEntry.arguments?.getString("kind")
+                }
+                val memoriesViewModel = hiltViewModel<MemoriesViewModel>()
+                val sectionState by memoriesViewModel.sectionState.collectAsStateWithLifecycle()
+                // null = still loading; empty = resolved with no playable set for the
+                // year (or an upstream error/empty section) — the screen dismisses itself.
+                val recapMedia = when (val content = sectionState) {
+                    is MemoriesSectionState.Content -> resolvePlaybackMedia(content, year, kind)
+                    is MemoriesSectionState.Loading -> null
+                    else -> emptyList()
+                }
+                RecapPlaybackScreen(
+                    year = year,
+                    media = recapMedia,
+                    onDismiss = { navController.navigateUp() }
+                )
             }
 
             composable(

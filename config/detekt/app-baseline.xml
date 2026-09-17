@@ -104,7 +104,6 @@
     <ID>CyclomaticComplexMethod:ConfigBackupManager.kt$ConfigBackupManager$suspend fun importBackup( source: Uri, selection: BackupSelection = BackupSelection(), password: String? = null, onProgress: BackupProgressListener = { _, _, _ -&gt; } ): Result&lt;ImportResult&gt;</ID>
     <ID>CyclomaticComplexMethod:ContentResolverExt.kt$suspend fun ContentResolver.overrideImage( uri: Uri, bitmap: Bitmap, mimeType: String? = null, format: Bitmap.CompressFormat? = null, quality: Int = 95, keepExif: Boolean = true, recycleSource: Boolean = false, sizeLimitBytes: Long? = null, onSizeLimitExceeded: ((Long) -&gt; Unit)? = null ): Boolean</ID>
     <ID>CyclomaticComplexMethod:CopyMediaSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun &lt;T: Media&gt; CopyMediaSheet( sheetState: AppBottomSheetState, albumsState: State&lt;AlbumState&gt;, mediaList: List&lt;T&gt;, onFinish: () -&gt; Unit, )</ID>
-    <ID>CyclomaticComplexMethod:CutoutHelper.kt$CutoutHelper.CutoutSession$private fun refineMask(mask: IntArray, w: Int, h: Int, points: List&lt;PromptPoint&gt;, minX: Int, minY: Int)</ID>
     <ID>CyclomaticComplexMethod:CutoutHelper.kt$CutoutHelper.CutoutSession$suspend fun initAndRunEncoder(): Boolean</ID>
     <ID>CyclomaticComplexMethod:CutoutHelper.kt$CutoutHelper.CutoutSession$suspend fun runDecoder(points: List&lt;PromptPoint&gt;): CutoutResult?</ID>
     <ID>CyclomaticComplexMethod:DecoderExt.kt$fun isAnimatedWebp(bytes: ByteArray): Boolean</ID>
@@ -158,6 +157,7 @@
     <ID>CyclomaticComplexMethod:MarkupPainter.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable fun MarkupPainter( modifier: Modifier = Modifier, bitmap: Any?, paths: List&lt;Pair&lt;Path, PathProperties&gt;&gt;, pathsUndone: List&lt;Pair&lt;Path, PathProperties&gt;&gt;, addPath: (Path, PathProperties) -&gt; Unit, clearPathsUndone: () -&gt; Unit, currentPosition: Offset, setCurrentPosition: (Offset) -&gt; Unit, previousPosition: Offset, setPreviousPosition: (Offset) -&gt; Unit, drawMode: DrawMode, currentPath: Path, setCurrentPath: (Path) -&gt; Unit, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, currentImage: Bitmap?, applyDrawing: (Bitmap, (Boolean) -&gt; Unit) -&gt; Unit, onNavigateBack: () -&gt; Unit = {}, requestApply: Boolean = false, onApplyHandled: () -&gt; Unit = {}, textAnnotations: List&lt;TextAnnotation&gt; = emptyList(), onTextAnnotationsChange: (List&lt;TextAnnotation&gt;) -&gt; Unit = {}, selectedTextIndex: Int = -1, onSelectedTextIndexChange: (Int) -&gt; Unit = {}, pendingFaceRegions: List&lt;android.graphics.RectF&gt; = emptyList(), onFaceRegionsConsumed: () -&gt; Unit = {}, )</ID>
     <ID>CyclomaticComplexMethod:MarkupSelector.kt$@Composable private fun MarkupSelectorPhone( drawMode: DrawMode, setDrawMode: (DrawMode) -&gt; Unit, drawType: DrawType, setDrawType: (DrawType) -&gt; Unit, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, onRequestTextInput: () -&gt; Unit = {}, textAnnotations: List&lt;TextAnnotation&gt; = emptyList(), onTextAnnotationsChange: (List&lt;TextAnnotation&gt;) -&gt; Unit = {}, selectedTextIndex: Int = -1, onDetectFaces: () -&gt; Unit = {}, faceDetectAvailable: Boolean = false, isDetectingFaces: Boolean = false, )</ID>
     <ID>CyclomaticComplexMethod:MarkupSelector.kt$@Composable private fun MarkupSelectorTablet( drawMode: DrawMode, setDrawMode: (DrawMode) -&gt; Unit, drawType: DrawType, setDrawType: (DrawType) -&gt; Unit, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, onRequestTextInput: () -&gt; Unit = {}, textAnnotations: List&lt;TextAnnotation&gt; = emptyList(), onTextAnnotationsChange: (List&lt;TextAnnotation&gt;) -&gt; Unit = {}, selectedTextIndex: Int = -1, onDetectFaces: () -&gt; Unit = {}, faceDetectAvailable: Boolean = false, isDetectingFaces: Boolean = false, )</ID>
+    <ID>CyclomaticComplexMethod:MaskRefinementPipeline.kt$MaskRefinementPipeline$fun refineMask(mask: IntArray, w: Int, h: Int, cropPoints: List&lt;Pair&lt;Int, Int&gt;&gt;)</ID>
     <ID>CyclomaticComplexMethod:Media.kt$Media.Companion$fun createFromUri(context: Context?, uri: Uri): UriMedia?</ID>
     <ID>CyclomaticComplexMethod:Media.kt$Media.EncryptedMedia$override fun equals(other: Any?): Boolean</ID>
     <ID>CyclomaticComplexMethod:Media.kt$Media.EncryptedMedia2$override fun equals(other: Any?): Boolean</ID>
@@ -215,6 +215,7 @@
     <ID>CyclomaticComplexMethod:PsdImageDecoder.kt$PsdImageDecoder$private fun extractThumbnail(bytes: ByteArray): Bitmap?</ID>
     <ID>CyclomaticComplexMethod:PsdImageDecoder.kt$PsdImageDecoder$private fun readRlePlanes( bytes: ByteArray, start: Int, w: Int, h: Int, channels: Int, isPsb: Boolean ): Array&lt;ByteArray&gt;?</ID>
     <ID>CyclomaticComplexMethod:RawDevelopParams.kt$RawDevelopParams$override fun equals(other: Any?): Boolean</ID>
+    <ID>CyclomaticComplexMethod:RecapPlaybackScreen.kt$@Composable private fun RecapPlaybackPager( year: Int, media: List&lt;Media.UriMedia&gt;, onDismiss: () -&gt; Unit, )</ID>
     <ID>CyclomaticComplexMethod:RotateMediaWorker.kt$RotateMediaWorker$override suspend fun doWork(): Result</ID>
     <ID>CyclomaticComplexMethod:SandboxedJxlBitmapDecoder.kt$SandboxedJxlBitmapDecoder$override fun handles(source: InputStream, options: Options): Boolean</ID>
     <ID>CyclomaticComplexMethod:SearchScreen.kt$@Composable private fun HelpTipsSearchSection( tips: List&lt;HelpSearchItem&gt;, onTipClick: (HelpSearchItem) -&gt; Unit, onSeeAll: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
@@ -239,6 +240,7 @@
     <ID>CyclomaticComplexMethod:SmartScanPhaseProcessor.kt$MetadataPhaseProcessor$override suspend fun process(context: SmartScanPhaseContext): SmartScanPhaseResult</ID>
     <ID>CyclomaticComplexMethod:SmartScanPhaseProcessor.kt$SearchIndexPhaseProcessor$override suspend fun process(context: SmartScanPhaseContext): SmartScanPhaseResult</ID>
     <ID>CyclomaticComplexMethod:SmartScanPhaseProcessor.kt$internal fun prepareFeatureWork( existing: MediaFeatureStateEntity?, mediaId: Long, feature: MediaFeature, sourceRevision: String, resultRevision: String, fullRefresh: Boolean, now: Long, terminalOutputPresent: Boolean = true ): FeatureWorkDecision</ID>
+    <ID>CyclomaticComplexMethod:SmartScanPreferenceDetailScreen.kt$@Composable private fun SmartScanDetailContent( activeScan: SmartScanRunEntity?, activePhases: List&lt;SmartScanPhaseEntity&gt;, latestScan: SmartScanRunEntity?, searchReady: Boolean, personsReady: Boolean, semanticIndexingEnabled: Boolean, onMetadata: () -&gt; Unit, onEmbeddings: () -&gt; Unit, onCategories: () -&gt; Unit, onPersons: () -&gt; Unit, onAll: () -&gt; Unit, onFullRefresh: () -&gt; Unit, onCancel: () -&gt; Unit, onRetry: () -&gt; Unit )</ID>
     <ID>CyclomaticComplexMethod:SourceQualityProbe.kt$SourceQualityProbe$private fun firstLuminanceQuantTable(bytes: ByteArray): IntArray?</ID>
     <ID>CyclomaticComplexMethod:SpecialFormatProbe.kt$SpecialFormatProbe$private fun isJxl(b: ByteArray): Boolean</ID>
     <ID>CyclomaticComplexMethod:StateExt.kt$suspend fun &lt;T : Media&gt; mapMediaToItem( data: List&lt;T&gt;, error: String, albumId: Long, groupByMonth: Boolean = false, groupByYear: Boolean = false, withMonthHeader: Boolean = true, groupSimilarMedia: Boolean = false, enabledGroupTypes: Set&lt;MediaGroupType&gt; = MediaGroupType.entries.toSet(), cloudGroupKeyOverrides: Map&lt;Long, String&gt; = emptyMap(), cloudBackups: Map&lt;Long, List&lt;Media.UriMedia&gt;&gt; = emptyMap(), defaultDateFormat: String, extendedDateFormat: String, weeklyDateFormat: String )</ID>
@@ -758,6 +760,7 @@
     <ID>FunctionNaming:MemoriesScreen.kt$@Composable private fun EmptyMemories(modifier: Modifier = Modifier)</ID>
     <ID>FunctionNaming:MemoriesScreen.kt$@Composable private fun MemoryCard(memory: MemoryInfo)</ID>
     <ID>FunctionNaming:MemoriesScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun MemoriesScreen()</ID>
+    <ID>FunctionNaming:MemoryCard.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable fun MemoryCard( group: OnThisDayGroup?, onOpenYear: (Int) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
     <ID>FunctionNaming:MetadataCollectionStatus.kt$@Composable fun MetadataCollectionStatus( modifier: Modifier = Modifier, state: State&lt;MediaMetadataState&gt;, )</ID>
     <ID>FunctionNaming:MetadataEditSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun &lt;T: Media&gt; MetadataEditSheet( state: AppBottomSheetState, media: T, metadata: MediaMetadata? )</ID>
     <ID>FunctionNaming:MetadataRemovalSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun MetadataRemovalSheet( state: AppBottomSheetState, capability: SanitizationCapability?, isBusy: Boolean, canReplaceOriginal: Boolean, onConfirm: (MetadataRemovalMode, MetadataSaveMode) -&gt; Unit )</ID>
@@ -789,6 +792,13 @@
     <ID>FunctionNaming:OfflineModeScreen.kt$@Composable private fun StorageLegendItem(color: Color, label: String, value: String)</ID>
     <ID>FunctionNaming:OfflineModeScreen.kt$@Composable private fun StorageUsageCard( autoBytes: Long, pinnedBytes: Long, budgetMb: Int, downloading: Boolean, downloadDone: Int, downloadTotal: Int, formatBytes: (Long) -&gt; String )</ID>
     <ID>FunctionNaming:OfflineModeScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable private fun AccountCacheSheet( state: AccountCacheSheetState, formatBytes: (Long) -&gt; String, onClearAccount: () -&gt; Unit, onClearAlbum: (String) -&gt; Unit, onDismiss: () -&gt; Unit )</ID>
+    <ID>FunctionNaming:OnDeviceMemoriesScreen.kt$@Composable internal fun OnDeviceMemoriesSection( state: MemoriesSectionState, onPlay: (year: Int, kind: String) -&gt; Unit, onRetry: () -&gt; Unit, onEmptyAction: () -&gt; Unit, initialYear: Int? = null, contentPadding: PaddingValues = PaddingValues(), )</ID>
+    <ID>FunctionNaming:OnDeviceMemoriesScreen.kt$@Composable private fun MemoriesContent( content: MemoriesSectionState.Content, initialYear: Int?, contentPadding: PaddingValues, onPlay: (year: Int, kind: String) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:OnDeviceMemoriesScreen.kt$@Composable private fun MemoriesEmptyState( onAction: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:OnDeviceMemoriesScreen.kt$@Composable private fun MemoriesErrorState( message: String?, onRetry: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:OnDeviceMemoriesScreen.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable private fun OnThisDayCard( group: OnThisDayGroup, onClick: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:OnDeviceMemoriesScreen.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable private fun YearRecapCard( recap: YearRecap, onClick: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:OnDeviceMemoriesScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun OnDeviceMemoriesScreen(initialYear: Int? = null)</ID>
     <ID>FunctionNaming:OnLifecycleEvent.kt$@Composable fun OnLifecycleEvent( lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current, onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) -&gt; Unit )</ID>
     <ID>FunctionNaming:OpenAsButton.kt$@Composable fun &lt;T : Media&gt; OpenAsButton( media: T, enabled: Boolean, followTheme: Boolean = false )</ID>
     <ID>FunctionNaming:OptionItem.kt$@Composable fun OptionItem( icon: ImageVector, title: String, modifier: Modifier = Modifier, tint: Color = MaterialTheme.colorScheme.onSurface, onClick: () -&gt; Unit )</ID>
@@ -850,6 +860,10 @@
     <ID>FunctionNaming:RawDevelopButton.kt$@Composable fun &lt;T : Media&gt; RawDevelopButton( media: T, enabled: Boolean, followTheme: Boolean = false, )</ID>
     <ID>FunctionNaming:RawExportSheet.kt$@Composable private fun FormatRow(label: String, icon: ImageVector, onClick: () -&gt; Unit)</ID>
     <ID>FunctionNaming:RawExportSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun RawExportSheet( allowTiff: Boolean, onFormatSelected: (RawSaveFormat) -&gt; Unit, onDismiss: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:RecapPlaybackScreen.kt$@Composable fun RecapPlaybackScreen( year: Int, media: List&lt;Media.UriMedia&gt;?, onDismiss: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:RecapPlaybackScreen.kt$@Composable private fun RecapPlaybackPager( year: Int, media: List&lt;Media.UriMedia&gt;, onDismiss: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:RecapPlaybackScreen.kt$@Composable private fun SoundtrackToggle( isPlaying: Boolean, isAvailable: Boolean, onToggle: (Boolean) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:RecapPlaybackScreen.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable private fun RecapPage( media: Media.UriMedia, contentDescription: String, )</ID>
     <ID>FunctionNaming:RegexExample.kt$@Composable fun RegexExample( description: String, pattern: String )</ID>
     <ID>FunctionNaming:RegexExample.kt$@Preview(showBackground = true) @Composable private fun RegexExamplePreview()</ID>
     <ID>FunctionNaming:RegexExample.kt$@Preview(showBackground = true, name = "Complex Pattern") @Composable private fun RegexExampleComplexPreview()</ID>
@@ -984,7 +998,7 @@
     <ID>FunctionNaming:SmartScanPreferenceDetailScreen.kt$@Composable private fun ScanAction( title: String, summary: String, position: Position, enabled: Boolean, onClick: () -&gt; Unit )</ID>
     <ID>FunctionNaming:SmartScanPreferenceDetailScreen.kt$@Composable private fun ScanProgressCard(run: SmartScanRunEntity, phases: List&lt;SmartScanPhaseEntity&gt;)</ID>
     <ID>FunctionNaming:SmartScanPreferenceDetailScreen.kt$@Composable private fun ScanResultCard(run: SmartScanRunEntity)</ID>
-    <ID>FunctionNaming:SmartScanPreferenceDetailScreen.kt$@Composable private fun SmartScanDetailContent( activeScan: SmartScanRunEntity?, activePhases: List&lt;SmartScanPhaseEntity&gt;, latestScan: SmartScanRunEntity?, searchReady: Boolean, personsReady: Boolean, onMetadata: () -&gt; Unit, onEmbeddings: () -&gt; Unit, onCategories: () -&gt; Unit, onPersons: () -&gt; Unit, onAll: () -&gt; Unit, onFullRefresh: () -&gt; Unit, onCancel: () -&gt; Unit, onRetry: () -&gt; Unit )</ID>
+    <ID>FunctionNaming:SmartScanPreferenceDetailScreen.kt$@Composable private fun SmartScanDetailContent( activeScan: SmartScanRunEntity?, activePhases: List&lt;SmartScanPhaseEntity&gt;, latestScan: SmartScanRunEntity?, searchReady: Boolean, personsReady: Boolean, semanticIndexingEnabled: Boolean, onMetadata: () -&gt; Unit, onEmbeddings: () -&gt; Unit, onCategories: () -&gt; Unit, onPersons: () -&gt; Unit, onAll: () -&gt; Unit, onFullRefresh: () -&gt; Unit, onCancel: () -&gt; Unit, onRetry: () -&gt; Unit )</ID>
     <ID>FunctionNaming:SmartSelector.kt$@Composable fun SmartSelector( isSupportingPanel: Boolean, onToolClick: (backgroundRemoval: Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
     <ID>FunctionNaming:StateExt.kt$@Composable fun RepeatOnResume(action: () -&gt; Unit)</ID>
     <ID>FunctionNaming:StaticMapPreview.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable internal fun StaticMapPreview( latitude: Double, longitude: Double, appearance: MapAppearance, effectiveAppIsDark: Boolean, zoom: Int, apiKey: String, modifier: Modifier = Modifier, contentDescription: String? = null, )</ID>
@@ -997,7 +1011,7 @@
     <ID>FunctionNaming:StoryCardsRow.kt$@Composable private fun StoryCardItem( card: StoryCard, onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@Composable private fun CardTypeListItem( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
     <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@Composable private fun SectionHeader(title: String, modifier: Modifier = Modifier)</ID>
-    <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
+    <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
     <ID>FunctionNaming:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable fun StoryViewerScreen( cards: List&lt;StoryCard&gt;?, initialCardId: Long = -1L, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit )</ID>
     <ID>FunctionNaming:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable private fun StoryCardViewer( card: StoryCard, isCurrentPage: Boolean, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit, onCardFinished: () -&gt; Unit )</ID>
     <ID>FunctionNaming:SubtitleBottomSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun SubtitleBottomSheet( state: AppBottomSheetState, subtitleTracks: List&lt;SubtitleTrack&gt;, onSelectSubtitle: (SubtitleTrack) -&gt; Unit, onDisableSubtitles: () -&gt; Unit, onAddSubtitle: () -&gt; Unit, onRemoveSubtitle: (SubtitleTrack) -&gt; Unit, )</ID>
@@ -1203,7 +1217,6 @@
     <ID>LongMethod:ConfirmationSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun ConfirmationSheet( state: AppBottomSheetState, title: String, summary: String, confirmText: String = stringResource(R.string.yes), onConfirm: () -&gt; Unit )</ID>
     <ID>LongMethod:CopyMediaSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun &lt;T: Media&gt; CopyMediaSheet( sheetState: AppBottomSheetState, albumsState: State&lt;AlbumState&gt;, mediaList: List&lt;T&gt;, onFinish: () -&gt; Unit, )</ID>
     <ID>LongMethod:CropActivity.kt$CropActivity$@OptIn(ExperimentalMaterial3Api::class) override fun onCreate(savedInstanceState: Bundle?)</ID>
-    <ID>LongMethod:CutoutHelper.kt$CutoutHelper.CutoutSession$private fun refineMask(mask: IntArray, w: Int, h: Int, points: List&lt;PromptPoint&gt;, minX: Int, minY: Int)</ID>
     <ID>LongMethod:CutoutHelper.kt$CutoutHelper.CutoutSession$suspend fun initAndRunEncoder(): Boolean</ID>
     <ID>LongMethod:CutoutHelper.kt$CutoutHelper.CutoutSession$suspend fun runDecoder(points: List&lt;PromptPoint&gt;): CutoutResult?</ID>
     <ID>LongMethod:CutoutOverlay.kt$@Composable internal fun CutoutControlsBar( controller: CutoutController, modifier: Modifier = Modifier )</ID>
@@ -1292,6 +1305,7 @@
     <ID>LongMethod:MarkupSelector.kt$@Composable private fun BrushEffectControls( modifier: Modifier = Modifier, toolIcon: ImageVector, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, onDetectFaces: () -&gt; Unit = {}, faceDetectAvailable: Boolean = false, isDetectingFaces: Boolean = false, )</ID>
     <ID>LongMethod:MarkupSelector.kt$@Composable private fun MarkupSelectorPhone( drawMode: DrawMode, setDrawMode: (DrawMode) -&gt; Unit, drawType: DrawType, setDrawType: (DrawType) -&gt; Unit, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, onRequestTextInput: () -&gt; Unit = {}, textAnnotations: List&lt;TextAnnotation&gt; = emptyList(), onTextAnnotationsChange: (List&lt;TextAnnotation&gt;) -&gt; Unit = {}, selectedTextIndex: Int = -1, onDetectFaces: () -&gt; Unit = {}, faceDetectAvailable: Boolean = false, isDetectingFaces: Boolean = false, )</ID>
     <ID>LongMethod:MarkupSelector.kt$@Composable private fun MarkupSelectorTablet( drawMode: DrawMode, setDrawMode: (DrawMode) -&gt; Unit, drawType: DrawType, setDrawType: (DrawType) -&gt; Unit, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, onRequestTextInput: () -&gt; Unit = {}, textAnnotations: List&lt;TextAnnotation&gt; = emptyList(), onTextAnnotationsChange: (List&lt;TextAnnotation&gt;) -&gt; Unit = {}, selectedTextIndex: Int = -1, onDetectFaces: () -&gt; Unit = {}, faceDetectAvailable: Boolean = false, isDetectingFaces: Boolean = false, )</ID>
+    <ID>LongMethod:MaskRefinementPipeline.kt$MaskRefinementPipeline$fun refineMask(mask: IntArray, w: Int, h: Int, cropPoints: List&lt;Pair&lt;Int, Int&gt;&gt;)</ID>
     <ID>LongMethod:Media.kt$Media.Companion$fun createFromUri(context: Context?, uri: Uri): UriMedia?</ID>
     <ID>LongMethod:MediaCopyWorker.kt$MediaCopyWorker$override suspend fun doWork(): Result</ID>
     <ID>LongMethod:MediaCopyWorker.kt$MediaCopyWorker$private suspend fun copyOne( src: Uri, destPath: String, mimeTypeHint: String? = null, labelHint: String? = null, updateModifiedDate: Boolean, onBytesCopied: suspend (Int) -&gt; Unit = {} ): Boolean</ID>
@@ -1322,6 +1336,7 @@
     <ID>LongMethod:MediaViewSheetDetails.kt$@OptIn(ExperimentalHazeMaterialsApi::class, ExperimentalGlideComposeApi::class) @Composable fun &lt;T : Media&gt; MediaViewSheetDetails( albumsState: State&lt;AlbumState&gt;, vaultState: State&lt;VaultState&gt;, metadataState: State&lt;MediaMetadataState&gt;, currentMedia: T?, restoreMedia: ((Vault, T, () -&gt; Unit) -&gt; Unit)?, currentVault: Vault?, motionPhotoState: MotionPhotoState? = null, onOpenFramePicker: () -&gt; Unit = {}, cloudBackups: List&lt;Media.UriMedia&gt; = emptyList(), metadataSanitizationState: MediaViewViewModel.MetadataSanitizationUiState = MediaViewViewModel.MetadataSanitizationUiState.Idle, probeMetadataSanitization: (Media) -&gt; Unit = {}, sanitizeMetadata: (Media, MetadataRemovalMode, MetadataSaveMode) -&gt; Unit = { _, _, _ -&gt; }, resetMetadataSanitization: () -&gt; Unit = {}, )</ID>
     <ID>LongMethod:MediaViewerVisualPolicyTest.kt$MediaViewerVisualPolicyTest$@Test fun tapNavigationPromptWaitsForAnEligibleViewer()</ID>
     <ID>LongMethod:MemoriesScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun MemoriesScreen()</ID>
+    <ID>LongMethod:MemoryCard.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable fun MemoryCard( group: OnThisDayGroup?, onOpenYear: (Int) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
     <ID>LongMethod:MetadataEditSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun &lt;T: Media&gt; MetadataEditSheet( state: AppBottomSheetState, media: T, metadata: MediaMetadata? )</ID>
     <ID>LongMethod:MetadataRemovalSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun MetadataRemovalSheet( state: AppBottomSheetState, capability: SanitizationCapability?, isBusy: Boolean, canReplaceOriginal: Boolean, onConfirm: (MetadataRemovalMode, MetadataSaveMode) -&gt; Unit )</ID>
     <ID>LongMethod:MetadataSanitizer.kt$AndroidMetadataSanitizer$override suspend fun sanitize( media: Media, mode: MetadataRemovalMode, saveMode: MetadataSaveMode ): SanitizationResult</ID>
@@ -1342,6 +1357,8 @@
     <ID>LongMethod:OfflineModeScreen.kt$@Composable fun OfflineModeScreen( viewModel: OfflineModeViewModel = hiltViewModel() )</ID>
     <ID>LongMethod:OfflineModeScreen.kt$@Composable private fun StorageUsageCard( autoBytes: Long, pinnedBytes: Long, budgetMb: Int, downloading: Boolean, downloadDone: Int, downloadTotal: Int, formatBytes: (Long) -&gt; String )</ID>
     <ID>LongMethod:OfflineModeScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable private fun AccountCacheSheet( state: AccountCacheSheetState, formatBytes: (Long) -&gt; String, onClearAccount: () -&gt; Unit, onClearAlbum: (String) -&gt; Unit, onDismiss: () -&gt; Unit )</ID>
+    <ID>LongMethod:OnDeviceMemoriesScreen.kt$@Composable private fun MemoriesContent( content: MemoriesSectionState.Content, initialYear: Int?, contentPadding: PaddingValues, onPlay: (year: Int, kind: String) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:OnDeviceMemoriesScreen.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable private fun OnThisDayCard( group: OnThisDayGroup, onClick: () -&gt; Unit, )</ID>
     <ID>LongMethod:OptionSheet.kt$@Composable fun OptionButton( modifier: Modifier = Modifier, containerColor: Color = MaterialTheme.colorScheme.surfaceContainerHigh, contentColor: Color = MaterialTheme.colorScheme.onSurface, icon: ImageVector? = null, textContainer: @Composable () -&gt; Unit, summaryContainer: (@Composable () -&gt; Unit)? = null, enabled: Boolean = true, position: OptionPosition = ALONE, onClick: () -&gt; Unit )</ID>
     <ID>LongMethod:OptionSheet.kt$fun LazyListScope.SettingsOptionLayout( modifier: Modifier = Modifier, optionList: List&lt;SettingsEntity&gt;, slimLayout: Boolean = false, swipeToDismiss: Boolean = false, onDismiss: ((SettingsEntity) -&gt; Unit)? = null )</ID>
     <ID>LongMethod:OptionsMenuStep.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable fun IgnoredAlbumThumbnail( primaryAlbum: Album?, secondaryAlbum: Album?, isMultiple: Boolean, isWildcard: Boolean, matchedCount: Int, modifier: Modifier = Modifier )</ID>
@@ -1361,6 +1378,7 @@
     <ID>LongMethod:PrivateFolderDetailScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun PrivateFolderDetailScreen( currentUri: String, onPickFolder: () -&gt; Unit, onClearFolder: () -&gt; Unit, onClearFolderAndReveal: () -&gt; Unit, )</ID>
     <ID>LongMethod:PrivateFolderScreen.kt$@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class, androidx.compose.foundation.ExperimentalFoundationApi::class ) @Composable fun PrivateFolderScreen( paddingValues: PaddingValues, isScrolling: MutableState&lt;Boolean&gt;, metadataState: State&lt;MediaMetadataState&gt;, sharedTransitionScope: SharedTransitionScope, animatedContentScope: AnimatedContentScope, )</ID>
     <ID>LongMethod:PrivateFolderSecuritySetupScreen.kt$@Composable fun PrivateFolderSecuritySetupScreen( onBack: (() -&gt; Unit)? = null, onNone: () -&gt; Unit, onDeviceSecurity: () -&gt; Unit, onCustomComplete: () -&gt; Unit, )</ID>
+    <ID>LongMethod:RecapPlaybackScreen.kt$@Composable private fun RecapPlaybackPager( year: Int, media: List&lt;Media.UriMedia&gt;, onDismiss: () -&gt; Unit, )</ID>
     <ID>LongMethod:RotateMediaWorker.kt$RotateMediaWorker$override suspend fun doWork(): Result</ID>
     <ID>LongMethod:SandboxedSketchHeifDecoder.kt$SandboxedSketchHeifDecoder$override suspend fun decode(): ImageData</ID>
     <ID>LongMethod:SearchScreen.kt$@Composable private fun SearchIndexStatusCard( state: SearchIndexerState, modifier: Modifier = Modifier )</ID>
@@ -1429,13 +1447,13 @@
     <ID>LongMethod:SmartScanPhaseProcessor.kt$MetadataPhaseProcessor$override suspend fun process(context: SmartScanPhaseContext): SmartScanPhaseResult</ID>
     <ID>LongMethod:SmartScanPhaseProcessor.kt$SearchIndexPhaseProcessor$override suspend fun process(context: SmartScanPhaseContext): SmartScanPhaseResult</ID>
     <ID>LongMethod:SmartScanPreferenceDetailScreen.kt$@Composable private fun ScanProgressCard(run: SmartScanRunEntity, phases: List&lt;SmartScanPhaseEntity&gt;)</ID>
-    <ID>LongMethod:SmartScanPreferenceDetailScreen.kt$@Composable private fun SmartScanDetailContent( activeScan: SmartScanRunEntity?, activePhases: List&lt;SmartScanPhaseEntity&gt;, latestScan: SmartScanRunEntity?, searchReady: Boolean, personsReady: Boolean, onMetadata: () -&gt; Unit, onEmbeddings: () -&gt; Unit, onCategories: () -&gt; Unit, onPersons: () -&gt; Unit, onAll: () -&gt; Unit, onFullRefresh: () -&gt; Unit, onCancel: () -&gt; Unit, onRetry: () -&gt; Unit )</ID>
+    <ID>LongMethod:SmartScanPreferenceDetailScreen.kt$@Composable private fun SmartScanDetailContent( activeScan: SmartScanRunEntity?, activePhases: List&lt;SmartScanPhaseEntity&gt;, latestScan: SmartScanRunEntity?, searchReady: Boolean, personsReady: Boolean, semanticIndexingEnabled: Boolean, onMetadata: () -&gt; Unit, onEmbeddings: () -&gt; Unit, onCategories: () -&gt; Unit, onPersons: () -&gt; Unit, onAll: () -&gt; Unit, onFullRefresh: () -&gt; Unit, onCancel: () -&gt; Unit, onRetry: () -&gt; Unit )</ID>
     <ID>LongMethod:SmartScanWorker.kt$SmartScanWorker$private fun foregroundInfo( progress: Int, phase: SmartScanPhase?, processed: Int, total: Int, estimatedRemainingMillis: Long? ): ForegroundInfo</ID>
     <ID>LongMethod:StandaloneActivity.kt$StandaloneActivity$@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalHazeMaterialsApi::class) private fun showIntent(intent: Intent)</ID>
     <ID>LongMethod:StateExt.kt$suspend fun &lt;T : Media&gt; mapMediaToItem( data: List&lt;T&gt;, error: String, albumId: Long, groupByMonth: Boolean = false, groupByYear: Boolean = false, withMonthHeader: Boolean = true, groupSimilarMedia: Boolean = false, enabledGroupTypes: Set&lt;MediaGroupType&gt; = MediaGroupType.entries.toSet(), cloudGroupKeyOverrides: Map&lt;Long, String&gt; = emptyMap(), cloudBackups: Map&lt;Long, List&lt;Media.UriMedia&gt;&gt; = emptyMap(), defaultDateFormat: String, extendedDateFormat: String, weeklyDateFormat: String )</ID>
     <ID>LongMethod:StoryCardsRow.kt$@Composable private fun StoryCardItem( card: StoryCard, onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>LongMethod:StoryCardsSettingsScreen.kt$@Composable private fun CardTypeListItem( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
-    <ID>LongMethod:StoryCardsSettingsScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
+    <ID>LongMethod:StoryCardsSettingsScreen.kt$@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
     <ID>LongMethod:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable fun StoryViewerScreen( cards: List&lt;StoryCard&gt;?, initialCardId: Long = -1L, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit )</ID>
     <ID>LongMethod:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable private fun StoryCardViewer( card: StoryCard, isCurrentPage: Boolean, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit, onCardFinished: () -&gt; Unit )</ID>
     <ID>LongMethod:StripedTiffDecoder.kt$StripedTiffDecoder$private fun decodeInternal(buffer: ByteBuffer, reqW: Int, reqH: Int): Bitmap?</ID>
@@ -1529,7 +1547,6 @@
     <ID>LongParameterList:ConfigBackupManager.kt$ConfigBackupManager$( @ApplicationContext private val context: Context, private val database: InternalDatabase, private val keychainHolder: KeychainHolder, private val cloudMediaDao: CloudMediaDao, private val cloudServerConfigDao: CloudServerConfigDao, private val mediaRepository: MediaRepository, private val pendingCloudFavoriteStore: PendingCloudFavoriteStore, private val providerInitializer: CloudProviderInitializer, private val syncScheduler: CloudSyncScheduler )</ID>
     <ID>LongParameterList:ContentResolverExt.kt$( bitmap: Bitmap, writeFormat: ImageReencoder.ImageWriteFormat, config: ImageReencoder.ReencodeConfig, mimeType: String, relativePath: String, displayName: String )</ID>
     <ID>LongParameterList:ContentResolverExt.kt$( uri: Uri, bitmap: Bitmap, mimeType: String? = null, format: Bitmap.CompressFormat? = null, quality: Int = 95, keepExif: Boolean = true, recycleSource: Boolean = false, sizeLimitBytes: Long? = null, onSizeLimitExceeded: ((Long) -&gt; Unit)? = null )</ID>
-    <ID>LongParameterList:CutoutHelper.kt$CutoutHelper.CutoutSession$(mask: IntArray, w: Int, h: Int, points: List&lt;PromptPoint&gt;, minX: Int, minY: Int)</ID>
     <ID>LongParameterList:CutoutOverlay.kt$( onClick: () -&gt; Unit, icon: ImageVector, label: String, selected: Boolean = false, selectedColor: Color = MaterialTheme.colorScheme.primary, enabled: Boolean = true )</ID>
     <ID>LongParameterList:CutoutState.kt$CutoutController$( val state: CutoutState, val onToolChange: (ZoomablePagerImagePointTool) -&gt; Unit, val onReset: () -&gt; Unit, val onUndo: () -&gt; Unit, val onRedo: () -&gt; Unit, val onCopy: () -&gt; Unit, val onShare: () -&gt; Unit, val onSave: () -&gt; Unit, val onClose: () -&gt; Unit, )</ID>
     <ID>LongParameterList:DateFormatScreen.kt$( modifier: Modifier = Modifier, title: String, location: String, dateFormat: String, rawFormat: String, onDateFormatChange: (String) -&gt; Unit, onInfoClick: () -&gt; Unit, dateFormatPreview: @Composable() (BoxScope.(String) -&gt; Unit), )</ID>
@@ -1567,6 +1584,7 @@
     <ID>LongParameterList:MarkupSelector.kt$( drawMode: DrawMode, setDrawMode: (DrawMode) -&gt; Unit, drawType: DrawType, setDrawType: (DrawType) -&gt; Unit, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, onRequestTextInput: () -&gt; Unit = {}, textAnnotations: List&lt;TextAnnotation&gt; = emptyList(), onTextAnnotationsChange: (List&lt;TextAnnotation&gt;) -&gt; Unit = {}, selectedTextIndex: Int = -1, onDetectFaces: () -&gt; Unit = {}, faceDetectAvailable: Boolean = false, isDetectingFaces: Boolean = false, )</ID>
     <ID>LongParameterList:MarkupSelector.kt$( drawMode: DrawMode, setDrawMode: (DrawMode) -&gt; Unit, drawType: DrawType, setDrawType: (DrawType) -&gt; Unit, isSupportingPanel: Boolean, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, onRequestTextInput: () -&gt; Unit = {}, textAnnotations: List&lt;TextAnnotation&gt; = emptyList(), onTextAnnotationsChange: (List&lt;TextAnnotation&gt;) -&gt; Unit = {}, selectedTextIndex: Int = -1, onDetectFaces: () -&gt; Unit = {}, faceDetectAvailable: Boolean = false, isDetectingFaces: Boolean = false, )</ID>
     <ID>LongParameterList:MarkupSelector.kt$( modifier: Modifier = Modifier, toolIcon: ImageVector, currentPathProperty: PathProperties, setCurrentPathProperty: (PathProperties) -&gt; Unit, onDetectFaces: () -&gt; Unit = {}, faceDetectAvailable: Boolean = false, isDetectingFaces: Boolean = false, )</ID>
+    <ID>LongParameterList:MaskRefinementPipelineTest.kt$MaskRefinementPipelineTest$(mask: IntArray, x0: Int, y0: Int, rw: Int, rh: Int, value: Int)</ID>
     <ID>LongParameterList:MediaActionCapabilityPolicy.kt$( settingsByConfigId: Map&lt;Long, CloudAccountRuntimeSettings&gt;, providerSupportsFavorite: Boolean = false, providerSupportsTrash: Boolean = false, platformSupportsFavorite: Boolean = false, sourceAllowsDelete: Boolean = canMakeActions, vaultRestoreAvailable: Boolean = false, vaultDeleteAvailable: Boolean = false, )</ID>
     <ID>LongParameterList:MediaCopyWorker.kt$MediaCopyWorker$( src: Uri, destPath: String, mimeTypeHint: String? = null, labelHint: String? = null, updateModifiedDate: Boolean, onBytesCopied: suspend (Int) -&gt; Unit = {} )</ID>
     <ID>LongParameterList:MediaDistributorImpl.kt$( localMediaIds: Set&lt;Long&gt;, cloudMedia: List&lt;CloudMediaEntity&gt;, city: String, country: String, latitude: Double? = null, longitude: Double? = null, additionalMediaIds: Set&lt;Long&gt; = emptySet(), )</ID>
@@ -1610,6 +1628,7 @@
     <ID>LongParameterList:NavigationComp.kt$( navController: NavHostController, paddingValues: PaddingValues, bottomBarState: MutableState&lt;Boolean&gt;, systemBarFollowThemeState: MutableState&lt;Boolean&gt;, toggleRotate: () -&gt; Unit, isScrolling: MutableState&lt;Boolean&gt; )</ID>
     <ID>LongParameterList:OfflineModeScreen.kt$( autoBytes: Long, pinnedBytes: Long, budgetMb: Int, downloading: Boolean, downloadDone: Int, downloadTotal: Int, formatBytes: (Long) -&gt; String )</ID>
     <ID>LongParameterList:OfflineModeViewModel.kt$OfflineModeViewModel$( private val manager: OfflineModeManager, private val cache: CloudMediaCache, private val pinDao: CloudOfflinePinDao, private val configDao: CloudServerConfigDao, private val cloudMediaDao: CloudMediaDao, private val registry: ProviderRegistry, private val workManager: WorkManager )</ID>
+    <ID>LongParameterList:OnDeviceMemoriesScreen.kt$( state: MemoriesSectionState, onPlay: (year: Int, kind: String) -&gt; Unit, onRetry: () -&gt; Unit, onEmptyAction: () -&gt; Unit, initialYear: Int? = null, contentPadding: PaddingValues = PaddingValues(), )</ID>
     <ID>LongParameterList:OptionSheet.kt$( modifier: Modifier = Modifier, containerColor: Color = MaterialTheme.colorScheme.surfaceContainerHigh, contentColor: Color = MaterialTheme.colorScheme.onSurface, icon: ImageVector? = null, textContainer: @Composable () -&gt; Unit, summaryContainer: (@Composable () -&gt; Unit)? = null, enabled: Boolean = true, position: OptionPosition = ALONE, onClick: () -&gt; Unit )</ID>
     <ID>LongParameterList:OptionsMenuStep.kt$( ignoredAlbum: IgnoredAlbum, albumState: State&lt;AlbumState&gt;, isWildcard: Boolean, isMultiple: Boolean, onEdit: () -&gt; Unit, onDelete: () -&gt; Unit, onCancel: () -&gt; Unit )</ID>
     <ID>LongParameterList:OptionsMenuStep.kt$( primaryAlbum: Album?, secondaryAlbum: Album?, isMultiple: Boolean, isWildcard: Boolean, matchedCount: Int, modifier: Modifier = Modifier )</ID>
@@ -1679,7 +1698,7 @@
     <ID>LongParameterList:SmartScanPhaseProcessor.kt$FaceIndexPhaseProcessor$( embedding: FloatArray, clusters: MutableList&lt;Cluster&gt;, media: Media.UriMedia, face: DetectedFaceBox, bitmap: Bitmap, touchedPeople: MutableSet&lt;String&gt; )</ID>
     <ID>LongParameterList:SmartScanPhaseProcessor.kt$FaceIndexPhaseProcessor$( repository: MediaRepository, database: InternalDatabase, private val modelManager: ModelManager, private val faceDao: DetectedFaceDao, private val personDao: PersonDao, private val thumbnailLoader: SmartThumbnailLoader, @ApplicationContext private val appContext: Context )</ID>
     <ID>LongParameterList:SmartScanPhaseProcessor.kt$MediaPhaseProcessor$( context: SmartScanPhaseContext, total: Int, processed: Int, succeeded: Int, skipped: Int, failed: Int )</ID>
-    <ID>LongParameterList:SmartScanPreferenceDetailScreen.kt$( activeScan: SmartScanRunEntity?, activePhases: List&lt;SmartScanPhaseEntity&gt;, latestScan: SmartScanRunEntity?, searchReady: Boolean, personsReady: Boolean, onMetadata: () -&gt; Unit, onEmbeddings: () -&gt; Unit, onCategories: () -&gt; Unit, onPersons: () -&gt; Unit, onAll: () -&gt; Unit, onFullRefresh: () -&gt; Unit, onCancel: () -&gt; Unit, onRetry: () -&gt; Unit )</ID>
+    <ID>LongParameterList:SmartScanPreferenceDetailScreen.kt$( activeScan: SmartScanRunEntity?, activePhases: List&lt;SmartScanPhaseEntity&gt;, latestScan: SmartScanRunEntity?, searchReady: Boolean, personsReady: Boolean, semanticIndexingEnabled: Boolean, onMetadata: () -&gt; Unit, onEmbeddings: () -&gt; Unit, onCategories: () -&gt; Unit, onPersons: () -&gt; Unit, onAll: () -&gt; Unit, onFullRefresh: () -&gt; Unit, onCancel: () -&gt; Unit, onRetry: () -&gt; Unit )</ID>
     <ID>LongParameterList:StandaloneViewModel.kt$StandaloneViewModel$( @param:ApplicationContext private val applicationContext: Context, private val repository: MediaRepository, private val workManager: WorkManager, distributor: MediaDistributor, @Assisted("reviewMode") private val reviewMode: Boolean, @Assisted("isSecure") private val isSecure: Boolean, @Assisted private val dataList: List&lt;Uri&gt; )</ID>
     <ID>LongParameterList:StateExt.kt$( albumId: Long, groupByMonth: Boolean = false, groupByYear: Boolean = false, withMonthHeader: Boolean = true, groupSimilarMedia: Boolean = false, enabledGroupTypes: Set&lt;MediaGroupType&gt; = MediaGroupType.entries.toSet(), updateDatabase: () -&gt; Unit, defaultDateFormat: String, extendedDateFormat: String, weeklyDateFormat: String )</ID>
     <ID>LongParameterList:StateExt.kt$( data: List&lt;T&gt;, error: String, albumId: Long, groupByMonth: Boolean = false, groupByYear: Boolean = false, withMonthHeader: Boolean = true, groupSimilarMedia: Boolean = false, enabledGroupTypes: Set&lt;MediaGroupType&gt; = MediaGroupType.entries.toSet(), cloudGroupKeyOverrides: Map&lt;Long, String&gt; = emptyMap(), cloudBackups: Map&lt;Long, List&lt;Media.UriMedia&gt;&gt; = emptyMap(), defaultDateFormat: String, extendedDateFormat: String, weeklyDateFormat: String )</ID>
@@ -1853,12 +1872,7 @@
     <ID>MagicNumber:CategoryEditorViewModel.kt$CategoryEditorViewModel$50</ID>
     <ID>MagicNumber:CategoryEditorViewModel.kt$CategoryEditorViewModel$500</ID>
     <ID>MagicNumber:CategoryViewModel.kt$CategoryViewModel$5000</ID>
-    <ID>MagicNumber:CategoryWorker.kt$CategoryWorker$0.5f</ID>
-    <ID>MagicNumber:CategoryWorker.kt$CategoryWorker$1000</ID>
     <ID>MagicNumber:CategoryWorker.kt$CategoryWorker$100f</ID>
-    <ID>MagicNumber:CategoryWorker.kt$CategoryWorker$5</ID>
-    <ID>MagicNumber:CategoryWorker.kt$CategoryWorker$50f</ID>
-    <ID>MagicNumber:CategoryWorker.kt$CategoryWorker$600</ID>
     <ID>MagicNumber:CategoryWorker.kt$CategoryWorker$99f</ID>
     <ID>MagicNumber:ChangelogRepository.kt$ChangelogRepository$3</ID>
     <ID>MagicNumber:ChangelogRepository.kt$ChangelogRepository$4</ID>
@@ -2277,18 +2291,15 @@
     <ID>MagicNumber:CredentialEncryptor.kt$CredentialEncryptor$256</ID>
     <ID>MagicNumber:CropActivity.kt$CropActivity$100</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper$100</ID>
-    <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$0.002f</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$0.005f</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$0.5</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$0x00FFFFFF</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$0xFF</ID>
-    <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$100f</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$1024</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$1024f</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$12.0</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$16</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$180</ID>
-    <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$2000f</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$24</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$255</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$255.0f</ID>
@@ -2298,8 +2309,6 @@
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$3</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$4</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$4096</ID>
-    <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$500f</ID>
-    <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$50f</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$8</ID>
     <ID>MagicNumber:CutoutHelper.kt$CutoutHelper.CutoutSession$90</ID>
     <ID>MagicNumber:CutoutOverlay.kt$0xFF34C759</ID>
@@ -3015,6 +3024,16 @@
     <ID>MagicNumber:MarkupSelector.kt$255</ID>
     <ID>MagicNumber:MarkupSelector.kt$3</ID>
     <ID>MagicNumber:MarkupSizeSelector.kt$0.5f</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$0.002f</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$0.005f</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$0x00FFFFFF</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$0xFF</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$100f</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$2000f</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$24</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$3</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$500f</ID>
+    <ID>MagicNumber:MaskRefinementPipeline.kt$MaskRefinementPipeline$50f</ID>
     <ID>MagicNumber:Media.kt$Media$1000</ID>
     <ID>MagicNumber:Media.kt$Media.Companion$1000</ID>
     <ID>MagicNumber:Media.kt$Media.Companion$25600000</ID>
@@ -3498,6 +3517,7 @@
     <ID>MagicNumber:RawSaveFormat.kt$RawSaveFormat.PNG$8</ID>
     <ID>MagicNumber:RawSaveFormat.kt$RawSaveFormat.TIFF_16$16</ID>
     <ID>MagicNumber:RawSaveFormat.kt$RawSaveFormat.TIFF_8$8</ID>
+    <ID>MagicNumber:RecapPlaybackScreen.kt$100</ID>
     <ID>MagicNumber:RegularExpression.kt$0xFFD0BCFF</ID>
     <ID>MagicNumber:RegularExpression.kt$10.0417f</ID>
     <ID>MagicNumber:RegularExpression.kt$10.0f</ID>
@@ -4136,6 +4156,7 @@
     <ID>MatchingDeclarationName:MediaImage.kt$MediaCellState</ID>
     <ID>MatchingDeclarationName:PermissionsExt.kt$MediaAccessState</ID>
     <ID>MatchingDeclarationName:PreferenceDetailScreen.kt$PreferenceOption&lt;T&gt;</ID>
+    <ID>MatchingDeclarationName:RecapPlaybackScreen.kt$RecapPlaybackState</ID>
     <ID>MatchingDeclarationName:ScrollToTop.kt$ScrollToTopController</ID>
     <ID>MatchingDeclarationName:SettingsFocus.kt$SettingsFocusState</ID>
     <ID>MatchingDeclarationName:SharedElementsExt.kt$MediaSharedElementKey</ID>
@@ -4155,7 +4176,6 @@
     <ID>MaxLineLength:CategoryDao.kt$CategoryDao$suspend</ID>
     <ID>MaxLineLength:CategoryEditorScreen.kt$contentDescription = if (isEditMode) stringResource(R.string.save) else stringResource(R.string.create)</ID>
     <ID>MaxLineLength:CategoryEditorScreen.kt$val previewSheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden, enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded))</ID>
-    <ID>MaxLineLength:CategoryWorker.kt$CategoryWorker$val isRunning = workInfos.any { it.state == WorkInfo.State.RUNNING || it.state == WorkInfo.State.ENQUEUED }</ID>
     <ID>MaxLineLength:ClassifierDao.kt$ClassifierDao$@Query("SELECT * FROM classified_media WHERE category = :category AND category IS NOT NULL AND category != 'null' ORDER BY timestamp DESC LIMIT 1")</ID>
     <ID>MaxLineLength:ClassifierDao.kt$ClassifierDao$@Query("SELECT * FROM classified_media WHERE category = :category AND category IS NOT NULL AND category != 'null' ORDER BY timestamp DESC")</ID>
     <ID>MaxLineLength:ClassifierDao.kt$ClassifierDao$@Query("SELECT * FROM classified_media WHERE category IN (SELECT category FROM classified_media WHERE category IS NOT NULL AND category != 'null' GROUP BY category ORDER BY COUNT(*) DESC LIMIT 3)")</ID>
@@ -4184,6 +4204,13 @@
     <ID>MaxLineLength:CloudRepositoryImpl.kt$CloudRepositoryImpl$CloudTrace.d("Repo.getRemoteAssets[$type] page=$page -&gt; ${if (it is Resource.Error) "ERROR ${it.message}" else "${it.data?.size ?: 0} items"}")</ID>
     <ID>MaxLineLength:CloudSyncWorker.kt$CloudSyncWorker$printDebug("CloudSyncWorker: ${changed.size} changes for ${config.providerType.displayName} #${config.id}")</ID>
     <ID>MaxLineLength:CloudSyncWorker.kt$CloudSyncWorker$printDebug("CloudSyncWorker: Sync failed for ${config.providerType.displayName} #${config.id}: ${error.message}")</ID>
+    <ID>MaxLineLength:CloudUploadPrefDaoTest.kt$CloudUploadPrefDaoTest$dao.upsert(CloudUploadPrefEntity(serverConfigId = 1, albumId = 10, providerType = ProviderType.IMMICH, uploadEnabled = false))</ID>
+    <ID>MaxLineLength:CloudUploadPrefDaoTest.kt$CloudUploadPrefDaoTest$dao.upsert(CloudUploadPrefEntity(serverConfigId = 1, albumId = 10, providerType = ProviderType.IMMICH, uploadEnabled = true))</ID>
+    <ID>MaxLineLength:CloudUploadPrefDaoTest.kt$CloudUploadPrefDaoTest$dao.upsert(CloudUploadPrefEntity(serverConfigId = 1, albumId = 10, providerType = ProviderType.NFS, uploadEnabled = true))</ID>
+    <ID>MaxLineLength:CloudUploadPrefDaoTest.kt$CloudUploadPrefDaoTest$dao.upsert(CloudUploadPrefEntity(serverConfigId = 1, albumId = 10, providerType = ProviderType.WEBDAV, uploadEnabled = true))</ID>
+    <ID>MaxLineLength:CloudUploadPrefDaoTest.kt$CloudUploadPrefDaoTest$dao.upsert(CloudUploadPrefEntity(serverConfigId = 1, albumId = 11, providerType = ProviderType.SMB, uploadEnabled = true))</ID>
+    <ID>MaxLineLength:CloudUploadPrefDaoTest.kt$CloudUploadPrefDaoTest$dao.upsert(CloudUploadPrefEntity(serverConfigId = 2, albumId = 10, providerType = ProviderType.NFS, uploadEnabled = true))</ID>
+    <ID>MaxLineLength:CloudUploadPrefDaoTest.kt$CloudUploadPrefDaoTest$dao.upsert(CloudUploadPrefEntity(serverConfigId = 2, albumId = 20, providerType = ProviderType.SMB, uploadEnabled = true))</ID>
     <ID>MaxLineLength:CloudUploadSettingsViewModel.kt$CloudUploadSettingsViewModel$flow.value = workInfos.any { it.state == WorkInfo.State.RUNNING || it.state == WorkInfo.State.ENQUEUED }</ID>
     <ID>MaxLineLength:CloudUploadWorker.kt$CloudUploadWorker$KEY_COMPLETED_FILES to completedFiles.takeLast(MAX_TRACKED_FILES).toTypedArray()</ID>
     <ID>MaxLineLength:CloudUploadWorker.kt$CloudUploadWorker$printDebug("CloudUploadWorker: Bulk check failed for $accountLabel: ${error.message}")</ID>
@@ -4218,7 +4245,6 @@
     <ID>MaxLineLength:CutoutHelper.kt$CutoutHelper.CutoutSession$OnnxTensor.createTensor(env, FloatBuffer.wrap(labelsArray), longArrayOf(1, finalN.toLong()))</ID>
     <ID>MaxLineLength:CutoutHelper.kt$CutoutHelper.CutoutSession$OnnxTensor.createTensor(env, floatArrayOf(heightOrig.toFloat(), widthOrig.toFloat()))</ID>
     <ID>MaxLineLength:CutoutHelper.kt$CutoutHelper.CutoutSession$cutoutPixels[idx] = (remappedAlpha shl 24) or (origColor and 0x00FFFFFF)</ID>
-    <ID>MaxLineLength:CutoutHelper.kt$CutoutHelper.CutoutSession$if</ID>
     <ID>MaxLineLength:CutoutHelper.kt$CutoutHelper.CutoutSession$val rotated = Bitmap.createBitmap(rawBitmap, 0, 0, rawBitmap.width, rawBitmap.height, matrix, true)</ID>
     <ID>MaxLineLength:CutoutOverlay.kt$val screenHeight = ((result.originalBounds.bottom - result.originalBounds.top).toFloat() / session.heightOrig.toFloat()) * rect.height</ID>
     <ID>MaxLineLength:CutoutOverlay.kt$val screenStartX = rect.left + (result.originalBounds.left.toFloat() / session.widthOrig.toFloat()) * rect.width</ID>
@@ -4729,7 +4755,6 @@
     <ID>NestedBlockDepth:ConfigBackupManager.kt$ConfigBackupManager$private suspend fun buildArchive( output: OutputStream, selection: BackupSelection, onProgress: BackupProgressListener ): ExportResult</ID>
     <ID>NestedBlockDepth:ConfigBackupManager.kt$ConfigBackupManager$private suspend fun restoreVaults( vaults: List&lt;VaultEntry&gt;, tmpDir: File, issues: MutableList&lt;ImportIssue&gt;, onMediaRestored: (done: Int) -&gt; Unit = {} ): VaultRestoreResult</ID>
     <ID>NestedBlockDepth:ContentResolverExt.kt$private fun ContentResolver.queryDateColumns(uri: Uri): Pair&lt;Long?, Long?&gt;?</ID>
-    <ID>NestedBlockDepth:CutoutHelper.kt$CutoutHelper.CutoutSession$private fun refineMask(mask: IntArray, w: Int, h: Int, points: List&lt;PromptPoint&gt;, minX: Int, minY: Int)</ID>
     <ID>NestedBlockDepth:DecoderExt.kt$private fun hasFtypBrand(bytes: ByteArray, brands: Set&lt;String&gt;): Boolean</ID>
     <ID>NestedBlockDepth:EncryptedDatabaseFactory.kt$EncryptedDatabaseFactory$private fun migrateUnencryptedDbIfNeeded(context: Context, passphrase: ByteArray)</ID>
     <ID>NestedBlockDepth:FileUtils.kt$FileUtils$@SuppressLint("NewApi") fun getPath(uri: Uri): String?</ID>
@@ -4747,6 +4772,7 @@
     <ID>NestedBlockDepth:LosslessMetadataRewriter.kt$LosslessMetadataRewriter$private fun rewriteJpeg(source: File, candidate: File, mode: MetadataRemovalMode)</ID>
     <ID>NestedBlockDepth:LosslessMetadataRewriter.kt$LosslessMetadataRewriter$private fun rewritePng(source: File, candidate: File, mode: MetadataRemovalMode)</ID>
     <ID>NestedBlockDepth:LosslessMetadataRewriter.kt$LosslessMetadataRewriter$private fun rewriteWebp(source: File, candidate: File, mode: MetadataRemovalMode)</ID>
+    <ID>NestedBlockDepth:MaskRefinementPipeline.kt$MaskRefinementPipeline$fun refineMask(mask: IntArray, w: Int, h: Int, cropPoints: List&lt;Pair&lt;Int, Int&gt;&gt;)</ID>
     <ID>NestedBlockDepth:Media.kt$Media.Companion$fun createFromUri(context: Context?, uri: Uri): UriMedia?</ID>
     <ID>NestedBlockDepth:MediaEssenceFingerprint.kt$MediaEssenceFingerprint$private fun hashGif(file: File, digest: MessageDigest)</ID>
     <ID>NestedBlockDepth:MediaInfo.kt$fun Media.retrieveMetadata( context: Context, exifDateFormat: String, mediaMetadata: MediaMetadata?, onLabelClick: () -&gt; Unit ): List&lt;InfoRow&gt;</ID>
@@ -5030,8 +5056,6 @@
     <ID>NewLineAtEndOfFile:rememberHeaderOffset.kt$com.dot.gallery.feature_node.presentation.common.components.rememberHeaderOffset.kt</ID>
     <ID>NewLineAtEndOfFile:rememberStickyHeaderItem.kt$com.dot.gallery.feature_node.presentation.common.components.rememberStickyHeaderItem.kt</ID>
     <ID>NewLineAtEndOfFile:swipe.kt$com.dot.gallery.core.presentation.components.util.swipe.kt</ID>
-    <ID>PackageNaming:MemoriesEngine.kt$package com.dot.gallery.feature_node.domain.memories</ID>
-    <ID>PackageNaming:MemoriesEngineTest.kt$package com.dot.gallery.feature_node.domain.memories</ID>
     <ID>PackageNaming:AIModelsManagerScreen.kt$package com.dot.gallery.feature_node.presentation.settings.subsettings</ID>
     <ID>PackageNaming:ActionsScreen.kt$package com.dot.gallery.feature_node.presentation.actions</ID>
     <ID>PackageNaming:ActionsViewModel.kt$package com.dot.gallery.feature_node.presentation.actions</ID>
@@ -5101,6 +5125,7 @@
     <ID>PackageNaming:ClassifierDao.kt$package com.dot.gallery.feature_node.data.data_source</ID>
     <ID>PackageNaming:ClipByteEncoder.kt$package com.dot.gallery.feature_node.presentation.search.tokenizer</ID>
     <ID>PackageNaming:ClipTokenizer.kt$package com.dot.gallery.feature_node.presentation.search.tokenizer</ID>
+    <ID>PackageNaming:ClipTokenizerTest.kt$package com.dot.gallery.feature_node.presentation.search.tokenizer</ID>
     <ID>PackageNaming:CloudAlbumSyncPkMigration.kt$package com.dot.gallery.feature_node.data.data_source.migration</ID>
     <ID>PackageNaming:CloudDeleteLocalPrefMigration.kt$package com.dot.gallery.feature_node.data.data_source.migration</ID>
     <ID>PackageNaming:CloudMediaPkMigration.kt$package com.dot.gallery.feature_node.data.data_source.migration</ID>
@@ -5241,6 +5266,7 @@
     <ID>PackageNaming:IgnoredViewModel.kt$package com.dot.gallery.feature_node.presentation.ignored</ID>
     <ID>PackageNaming:ImageEmbedding.kt$package com.dot.gallery.feature_node.domain.model</ID>
     <ID>PackageNaming:ImageEmbeddingDao.kt$package com.dot.gallery.feature_node.data.data_source</ID>
+    <ID>PackageNaming:ImageEmbeddingDaoTest.kt$package com.dot.gallery.feature_node.data.data_source</ID>
     <ID>PackageNaming:ImageFilter.kt$package com.dot.gallery.feature_node.domain.model.editor</ID>
     <ID>PackageNaming:ImageFilterTypes.kt$package com.dot.gallery.feature_node.presentation.edit.adjustments.filters</ID>
     <ID>PackageNaming:ImageObscure.kt$package com.dot.gallery.feature_node.presentation.edit.utils</ID>
@@ -5327,6 +5353,14 @@
     <ID>PackageNaming:MediaViewViewModel.kt$package com.dot.gallery.feature_node.presentation.mediaview</ID>
     <ID>PackageNaming:MediaViewerVisualPolicy.kt$package com.dot.gallery.feature_node.presentation.mediaview</ID>
     <ID>PackageNaming:MediaViewerVisualPolicyTest.kt$package com.dot.gallery.feature_node.presentation.mediaview</ID>
+    <ID>PackageNaming:MemoriesCache.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
+    <ID>PackageNaming:MemoriesEngine.kt$package com.dot.gallery.feature_node.domain.memories</ID>
+    <ID>PackageNaming:MemoriesEngineTest.kt$package com.dot.gallery.feature_node.domain.memories</ID>
+    <ID>PackageNaming:MemoriesModule.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
+    <ID>PackageNaming:MemoriesViewModel.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
+    <ID>PackageNaming:MemoriesViewModelTest.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
+    <ID>PackageNaming:MemoryCard.kt$package com.dot.gallery.feature_node.presentation.memories.components</ID>
+    <ID>PackageNaming:MemoryCardTest.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
     <ID>PackageNaming:MergedSubfolderAlbum.kt$package com.dot.gallery.feature_node.domain.model</ID>
     <ID>PackageNaming:MergedSubfolderDao.kt$package com.dot.gallery.feature_node.data.data_source</ID>
     <ID>PackageNaming:MergedSubfolderMigration.kt$package com.dot.gallery.feature_node.data.data_source.migration</ID>
@@ -5358,6 +5392,8 @@
     <ID>PackageNaming:NewFilters.kt$package com.dot.gallery.feature_node.presentation.edit.adjustments.filters</ID>
     <ID>PackageNaming:NewVaultSheet.kt$package com.dot.gallery.feature_node.presentation.vault.components</ID>
     <ID>PackageNaming:None.kt$package com.dot.gallery.feature_node.presentation.edit.adjustments.filters</ID>
+    <ID>PackageNaming:OnDeviceMemoriesScreen.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
+    <ID>PackageNaming:OnDeviceMemoriesScreenTest.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
     <ID>PackageNaming:OpenAsButton.kt$package com.dot.gallery.feature_node.presentation.mediaview.components.actionbuttons</ID>
     <ID>PackageNaming:OptionItem.kt$package com.dot.gallery.feature_node.presentation.ignored.setup.components</ID>
     <ID>PackageNaming:OptionSheet.kt$package com.dot.gallery.feature_node.presentation.common.components</ID>
@@ -5392,6 +5428,12 @@
     <ID>PackageNaming:RawDevelopButton.kt$package com.dot.gallery.feature_node.presentation.mediaview.components.rawdevelop</ID>
     <ID>PackageNaming:RawExportSheet.kt$package com.dot.gallery.feature_node.presentation.edit.components.develop</ID>
     <ID>PackageNaming:RawSaveFormat.kt$package com.dot.gallery.feature_node.presentation.edit.components.develop</ID>
+    <ID>PackageNaming:RecapAudioPlayer.kt$package com.dot.gallery.feature_node.presentation.memories.audio</ID>
+    <ID>PackageNaming:RecapAudioPlayerTest.kt$package com.dot.gallery.feature_node.presentation.memories.audio</ID>
+    <ID>PackageNaming:RecapPlaybackScreen.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
+    <ID>PackageNaming:RecapPlaybackSelectionTest.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
+    <ID>PackageNaming:RecapShare.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
+    <ID>PackageNaming:RecapShareTest.kt$package com.dot.gallery.feature_node.presentation.memories</ID>
     <ID>PackageNaming:RegexExample.kt$package com.dot.gallery.feature_node.presentation.ignored.setup.components</ID>
     <ID>PackageNaming:ReleaseNotes.kt$package com.dot.gallery.feature_node.presentation.help.data</ID>
     <ID>PackageNaming:RemovePasswordSheet.kt$package com.dot.gallery.feature_node.presentation.vault.components</ID>
@@ -5407,6 +5449,7 @@
     <ID>PackageNaming:SearchBackNavigationTest.kt$package com.dot.gallery.feature_node.presentation.search</ID>
     <ID>PackageNaming:SearchHelper.kt$package com.dot.gallery.feature_node.presentation.search</ID>
     <ID>PackageNaming:SearchHelperImpl.kt$package com.dot.gallery.feature_node.presentation.search</ID>
+    <ID>PackageNaming:SearchHelperImplTest.kt$package com.dot.gallery.feature_node.presentation.search</ID>
     <ID>PackageNaming:SearchHistory.kt$package com.dot.gallery.feature_node.domain.model</ID>
     <ID>PackageNaming:SearchIndexerState.kt$package com.dot.gallery.feature_node.presentation.search</ID>
     <ID>PackageNaming:SearchIndexerStateTest.kt$package com.dot.gallery.feature_node.presentation.search</ID>
@@ -5499,6 +5542,7 @@
     <ID>PackageNaming:TileableAdjustment.kt$package com.dot.gallery.feature_node.domain.model.editor</ID>
     <ID>PackageNaming:TiledBakeEngine.kt$package com.dot.gallery.feature_node.presentation.edit.bake</ID>
     <ID>PackageNaming:TimelineFilter.kt$package com.dot.gallery.feature_node.domain.model</ID>
+    <ID>PackageNaming:TimelineFilterChipAccessibilityTest.kt$package com.dot.gallery.feature_node.presentation.timeline</ID>
     <ID>PackageNaming:TimelineFilterSheet.kt$package com.dot.gallery.feature_node.presentation.timeline.components</ID>
     <ID>PackageNaming:TimelineFilterTest.kt$package com.dot.gallery.feature_node.presentation.timeline</ID>
     <ID>PackageNaming:TimelineMediaContent.kt$package com.dot.gallery.feature_node.presentation.timeline</ID>

@@ -339,12 +339,29 @@ suspend fun <T : Media> Context.shareMedia(media: T) {
     }
 }
 
-suspend fun <T : Media> Context.shareMedia(mediaList: List<T>) {
-    val mimeTypes =
-        if (mediaList.find { it.duration != null } != null) {
-            if (mediaList.find { it.duration == null } != null) "video/*,image/*" else "video/*"
-        } else "image/*"
+/**
+ * MIME `type` for a multi-item share intent. A mixed photo+video set has no
+ * single representable type, so it shares as the wildcard type and constrains
+ * handlers via [shareExtraMimeTypes] / [Intent.EXTRA_MIME_TYPES] instead.
+ */
+internal fun List<Media>.shareMimeType(): String = when {
+    any { it.duration != null } && any { it.duration == null } -> "*/*"
+    any { it.duration != null } -> "video/*"
+    else -> "image/*"
+}
 
+/**
+ * [Intent.EXTRA_MIME_TYPES] payload for a mixed photo+video share set, or
+ * `null` when [shareMimeType] already expresses the set exactly.
+ */
+internal fun List<Media>.shareExtraMimeTypes(): Array<String>? =
+    if (any { it.duration != null } && any { it.duration == null }) {
+        arrayOf("image/*", "video/*")
+    } else {
+        null
+    }
+
+suspend fun <T : Media> Context.shareMedia(mediaList: List<T>) {
     val uris = withContext(Dispatchers.IO) {
         mediaList.map { resolveShareableUri(it) }
     }
@@ -352,7 +369,10 @@ suspend fun <T : Media> Context.shareMedia(mediaList: List<T>) {
     withContext(Dispatchers.Main) {
         val shareCompat = ShareCompat
             .IntentBuilder(this@shareMedia)
-            .setType(mimeTypes)
+            .setType(mediaList.shareMimeType())
+        mediaList.shareExtraMimeTypes()?.let {
+            shareCompat.intent.putExtra(Intent.EXTRA_MIME_TYPES, it)
+        }
         uris.forEach { shareCompat.addStream(it) }
         shareCompat.startChooser()
     }

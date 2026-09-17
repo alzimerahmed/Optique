@@ -326,5 +326,22 @@ sealed class Screen(val route: String) {
     // Phase 16 – Memories
     data object MemoriesScreen : Screen("memories_screen")
 
+    // On-device Memories (separate from the cloud MemoriesScreen route above)
+    data object OnDeviceMemoriesScreen : Screen("on_device_memories_screen") {
+        fun year() = "$route?year={year}"
+
+        fun year(year: Int) = "$route?year=$year"
+    }
+
+    data object RecapPlaybackScreen : Screen("on_device_memories_recap_screen") {
+        /** `kind` nav-arg values: which memories list the recap route should resolve first. */
+        const val KIND_RECAP = "recap"
+        const val KIND_ON_THIS_DAY = "onthisday"
+
+        fun year() = "$route?year={year}&kind={kind}"
+
+        fun year(year: Int, kind: String = KIND_RECAP) = "$route?year=$year&kind=$kind"
+    }
+
     operator fun invoke() = route
 }

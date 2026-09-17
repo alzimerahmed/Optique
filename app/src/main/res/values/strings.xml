@@ -2154,5 +2154,46 @@
     <string name="slideshow_next">Next</string>
     <string name="slideshow_previous">Previous</string>
     <string name="slideshow_exit">Exit slideshow</string>
+    <!-- On-device Memories -->
+    <string name="memories_title">Memories</string>
+    <string name="memories_on_this_day">On this day</string>
+    <plurals name="memories_on_this_day_card_cd">
+        <item quantity="one">On this day in %1$d, %2$d item</item>
+        <item quantity="other">On this day in %1$d, %2$d items</item>
+    </plurals>
+    <string name="memories_card_title">On this day in %1$d</string>
+    <string name="memories_recaps">Year recaps</string>
+    <string name="memories_recap_card_cd">Play recap for %1$d</string>
+    <plurals name="memories_photo_count">
+        <item quantity="one">%1$d item</item>
+        <item quantity="other">%1$d items</item>
+    </plurals>
+    <string name="memories_empty_title">No memories yet</string>
+    <string name="memories_empty_body">On this day memories and yearly recaps appear here once your library has photos from past years.</string>
+    <string name="memories_empty_action">Explore your timeline</string>
+    <string name="memories_error_retry">Retry</string>
+    <string name="memories_error_generic">Something went wrong while loading your memories.</string>
+    <string name="memories_share">Share recap</string>
+    <string name="memories_share_no_app">No app available to share this recap</string>
+    <string name="memories_close">Close recap</string>
+    <string name="memories_replay">Replay recap</string>
+    <string name="memories_page_cd">Year %1$d, item %2$d of %3$d</string>
+    <string name="memories_page_cd_generic">Item %1$d of %2$d</string>
+    <string name="memories_recap_complete">Your recap from %1$d is complete</string>
+    <string name="memories_recap_complete_generic">Your recap is complete</string>
+    <string name="memories_pause">Pause recap</string>
+    <string name="memories_resume">Resume recap</string>
+    <!-- Memories recap soundtrack -->
+    <string name="memories_soundtrack">Soundtrack</string>
+    <string name="memories_soundtrack_on_cd">Soundtrack on</string>
+    <string name="memories_soundtrack_off_cd">Soundtrack off</string>
+    <string name="memories_soundtrack_unavailable">The recap soundtrack is not bundled in this build, so playback is unavailable.</string>
+    <!-- Optional on-this-day notification -->
+    <string name="memories_notification_channel">Memories</string>
+    <string name="memories_notification_channel_description">On-this-day memories and year recaps</string>
+    <string name="memories_notification_title">On this day</string>
+    <string name="memories_notification_body">You have photos from this day in past years — take a look back.</string>
+    <string name="memories_notification_toggle">Memory notifications</string>
+    <string name="memories_notification_toggle_summary">Notify me once a day when photos from this day in past years are found</string>
 </resources>
 

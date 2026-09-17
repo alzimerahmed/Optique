@@ -109,6 +109,9 @@ import com.dot.gallery.feature_node.presentation.common.components.rememberMosai
 import com.dot.gallery.feature_node.presentation.common.components.rememberStickyHeaderItem
 import com.dot.gallery.feature_node.presentation.help.components.WhatsNewHeroCard
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
+import com.dot.gallery.feature_node.presentation.memories.MemoriesSectionState
+import com.dot.gallery.feature_node.presentation.memories.MemoriesViewModel
+import com.dot.gallery.feature_node.presentation.memories.components.MemoryCard
 import com.dot.gallery.feature_node.presentation.search.MainSearchBar
 import com.dot.gallery.feature_node.presentation.storycards.StoryCardsViewModel
 import com.dot.gallery.feature_node.presentation.storycards.components.StoryCardsRow
@@ -268,8 +271,27 @@ fun TimelineScreen(
     val storyCardsViewModel = hiltViewModel<StoryCardsViewModel>()
     val storyCards by storyCardsViewModel.allCards.collectAsStateWithLifecycle()
 
+    // On-device memories card (U4): newest on-this-day group from the shared engine cache
+    val memoriesViewModel = hiltViewModel<MemoriesViewModel>()
+    val memoriesSectionState by memoriesViewModel.sectionState.collectAsStateWithLifecycle()
+    val newestMemoryGroup =
+        (memoriesSectionState as? MemoriesSectionState.Content)?.onThisDayGroups?.firstOrNull()
+
+    // U5: optional once-per-day on-this-day notification. `today` is evaluated per
+    // recomposition from the viewModel's injected Clock (it does not observe midnight
+    // rollover); once-per-day is enforced by MemoriesNotifier's DataStore date guard,
+    // so firing on every Content emission is safe.
+    val today = memoriesViewModel.today()
+    LaunchedEffect(today, memoriesSectionState) {
+        val content = memoriesSectionState as? MemoriesSectionState.Content
+        if (content != null && content.onThisDayGroups.isNotEmpty()) {
+            memoriesViewModel.maybePostNotification(content.onThisDayGroups)
+        }
+    }
+
     val hasStoryCards = storyCards?.isNotEmpty() == true
-    val aboveGridContent: @Composable (() -> Unit)? = if (showWhatsNew || hasStoryCards) {
+    val hasMemoryCard = newestMemoryGroup != null
+    val aboveGridContent: @Composable (() -> Unit)? = if (showWhatsNew || hasStoryCards || hasMemoryCard) {
         {
             Column(
                 modifier = Modifier.fillMaxWidth()
@@ -293,6 +315,13 @@ fun TimelineScreen(
                         )
                     }
                 }
+                MemoryCard(
+                    group = newestMemoryGroup,
+                    onOpenYear = { year ->
+                        eventHandler.navigate(Screen.OnDeviceMemoriesScreen.year(year))
+                    },
+                    modifier = Modifier.padding(horizontal = 32.dp, vertical = 8.dp),
+                )
                 if (hasStoryCards) {
                     StoryCardsRow(
                         cards = storyCards.orEmpty(),

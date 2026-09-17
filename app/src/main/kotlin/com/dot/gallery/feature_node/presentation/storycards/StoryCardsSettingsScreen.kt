@@ -5,6 +5,10 @@
 
 package com.dot.gallery.feature_node.presentation.storycards
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
@@ -61,6 +65,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -68,9 +73,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.dot.gallery.R
 import com.dot.gallery.core.Position
 import com.dot.gallery.core.SettingsEntity
+import com.dot.gallery.core.Settings.Memories.rememberNotificationsEnabled
 import com.dot.gallery.core.Settings.Misc.rememberStoryCardsConfig
 import com.dot.gallery.core.Settings.Misc.rememberStoryViewerAutoAdvance
 import com.dot.gallery.core.Settings.Misc.rememberStoryViewerDuration
@@ -78,15 +85,28 @@ import com.dot.gallery.core.presentation.components.NavigationBackButton
 import com.dot.gallery.feature_node.domain.model.StoryCardType
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 
-@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("InlinedApi") // POST_NOTIFICATIONS launch is SDK-gated below
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun StoryCardsSettingsScreen(
     onNavigateBack: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     var config by rememberStoryCardsConfig()
     var autoAdvance by rememberStoryViewerAutoAdvance()
     var duration by rememberStoryViewerDuration()
+    var memoriesNotifications by rememberNotificationsEnabled()
+
+    // API 33+: enabling the on-this-day notification toggle must also fire the
+    // runtime POST_NOTIFICATIONS request. The toggle stays on when denied —
+    // MemoriesNotifier re-checks the permission before every post.
+    val notificationPermission = rememberPermissionState(
+        permission = Manifest.permission.POST_NOTIFICATIONS,
+        onPermissionResult = { }
+    )
 
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
@@ -255,6 +275,46 @@ fun StoryCardsSettingsScreen(
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
+                )
+            }
+
+            // ── Memories ──
+            item(key = "memories_header") {
+                SectionHeader(
+                    title = stringResource(R.string.memories_title),
+                    modifier = Modifier
+                        .widthIn(max = 600.dp)
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp)
+                        .padding(top = 16.dp, bottom = 8.dp)
+                )
+            }
+
+            // ── On-this-day notification (default off) ──
+            item(key = "memories_notification") {
+                SettingsItem(
+                    item = SettingsEntity.SwitchPreference(
+                        title = stringResource(R.string.memories_notification_toggle),
+                        summary = stringResource(R.string.memories_notification_toggle_summary),
+                        isChecked = memoriesNotifications,
+                        onCheck = { enabled ->
+                            memoriesNotifications = enabled
+                            if (enabled &&
+                                Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                                ContextCompat.checkSelfPermission(
+                                    context,
+                                    Manifest.permission.POST_NOTIFICATIONS,
+                                ) != PackageManager.PERMISSION_GRANTED
+                            ) {
+                                notificationPermission.launchPermissionRequest()
+                            }
+                        },
+                        screenPosition = Position.Alone
+                    ),
+                    modifier = Modifier
+                        .widthIn(max = 600.dp)
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
                 )
             }
         }

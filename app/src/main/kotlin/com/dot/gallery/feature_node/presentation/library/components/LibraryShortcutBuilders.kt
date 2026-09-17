@@ -13,6 +13,7 @@ import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.FolderOff
 import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.PhotoAlbum
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -85,6 +86,16 @@ fun rememberLibraryRuntimeShortcuts(
         useIndicator = false,
         indicatorCounter = 0,
         route = Screen.IgnoredScreen.route,
+        available = true
+    )
+    map[LibraryShortcut.MEMORIES] = RuntimeShortcut(
+        shortcut = LibraryShortcut.MEMORIES,
+        title = stringResource(R.string.memories_title),
+        icon = Icons.Outlined.PhotoAlbum,
+        contentColor = colorScheme.primary,
+        useIndicator = false,
+        indicatorCounter = 0,
+        route = Screen.OnDeviceMemoriesScreen.route,
         available = true
     )
     if (privateFolderUri.isNotEmpty()) {

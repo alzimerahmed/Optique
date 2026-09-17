@@ -5,6 +5,7 @@
 
 package com.dot.gallery.feature_node.presentation.main
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.WindowManager
@@ -22,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -71,6 +73,18 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mediaSelector: MediaSelector
 
+    /**
+     * Deep-link intents delivered to the already-running activity (singleTop) — e.g. the
+     * on-this-day memories notification — are forwarded to the NavController from
+     * composition. Cold starts are handled automatically when the NavHost graph is set.
+     */
+    private var pendingDeepLink by mutableStateOf<Intent?>(null)
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        pendingDeepLink = intent
+    }
+
     @OptIn(ExperimentalHazeMaterialsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         val activitySpan = StartupTracer.begin("MainActivity.onCreate")
@@ -101,6 +115,13 @@ class MainActivity : AppCompatActivity() {
                     blurEnabled = allowBlur
                 )
                 val navController = rememberNavController()
+                val pending = pendingDeepLink
+                LaunchedEffect(pending) {
+                    if (pending != null) {
+                        pendingDeepLink = null
+                        navController.handleDeepLink(pending)
+                    }
+                }
                 val isScrolling = remember { mutableStateOf(false) }
                 val bottomBarState = rememberSaveable { mutableStateOf(true) }
                 val systemBarFollowThemeState = rememberSaveable { mutableStateOf(true) }

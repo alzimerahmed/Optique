@@ -14,37 +14,43 @@ import kotlin.random.Random
 
 data class OnThisDayGroup(
     val year: Int,
-    val media: List<Media.UriMedia>
+    val media: List<Media.UriMedia>,
 )
 
 data class YearRecap(
     val year: Int,
-    val featured: List<Media.UriMedia>
+    val featured: List<Media.UriMedia>,
 )
 
 class MemoriesEngine(
     private val clock: Clock,
-    private val favoriteIds: Set<Long> = emptySet()
+    private val favoriteIds: Set<Long> = emptySet(),
 ) {
-
     fun onThisDay(media: List<Media.UriMedia>): List<OnThisDayGroup> {
         val today = LocalDate.now(clock)
         val zone = clock.zone
-        val byDate = media.associateWith {
-            Instant.ofEpochSecond(it.definedTimestamp).atZone(zone).toLocalDate()
-        }
+        val byDate =
+            media.associateWith {
+                Instant.ofEpochSecond(it.definedTimestamp).atZone(zone).toLocalDate()
+            }
 
-        val exact = media.filter { m ->
-            val d = byDate.getValue(m)
-            d.year < today.year && d.monthValue == today.monthValue && d.dayOfMonth == today.dayOfMonth
-        }
+        val exact =
+            media.filter { m ->
+                val d = byDate.getValue(m)
+                d.year < today.year && d.monthValue == today.monthValue && d.dayOfMonth == today.dayOfMonth
+            }
 
-        val matches = if (exact.size >= MIN_EXACT_MATCHES) exact else media.filter { m ->
-            val d = byDate.getValue(m)
-            if (d.year >= today.year) return@filter false
-            val shifted = d.withYear(today.year)
-            kotlin.math.abs(shifted.toEpochDay() - today.toEpochDay()) <= PROXIMITY_DAYS
-        }
+        val matches =
+            if (exact.size >= MIN_EXACT_MATCHES) {
+                exact
+            } else {
+                media.filter { m ->
+                    val d = byDate.getValue(m)
+                    if (d.year >= today.year) return@filter false
+                    val shifted = d.withYear(today.year)
+                    kotlin.math.abs(shifted.toEpochDay() - today.toEpochDay()) <= PROXIMITY_DAYS
+                }
+            }
 
         return matches
             .groupBy { byDate.getValue(it).year }
@@ -65,46 +71,53 @@ class MemoriesEngine(
             .entries
             .sortedByDescending { it.key }
             .map { (year, items) -> yearRecap(items.map { it.first }, year) }
+            .filter { it.featured.isNotEmpty() }
     }
 
     fun yearRecap(
         media: List<Media.UriMedia>,
         year: Int,
         maxPerMonth: Int = DEFAULT_MAX_PER_MONTH,
-        target: Int = DEFAULT_TARGET
+        target: Int = MAX_RECAP_SIZE,
+        minFeatured: Int = MIN_RECAP_SIZE,
     ): YearRecap {
         val zone = clock.zone
-        val inYear = media.filter {
-            Instant.ofEpochSecond(it.definedTimestamp).atZone(zone).year == year
-        }
+        val inYear =
+            media.filter {
+                Instant.ofEpochSecond(it.definedTimestamp).atZone(zone).year == year
+            }
         if (inYear.isEmpty()) return YearRecap(year, emptyList())
 
-        val byMonth = inYear.groupBy {
-            Instant.ofEpochSecond(it.definedTimestamp).atZone(zone).monthValue
-        }
+        val byMonth =
+            inYear.groupBy {
+                Instant.ofEpochSecond(it.definedTimestamp).atZone(zone).monthValue
+            }
 
-        val pools = (1..MONTHS_IN_YEAR).mapNotNull { month ->
-            val items = byMonth[month] ?: return@mapNotNull null
-            month to monthPool(year, items)
-        }.toMap()
+        val pools =
+            (1..MONTHS_IN_YEAR)
+                .mapNotNull { month ->
+                    val items = byMonth[month] ?: return@mapNotNull null
+                    month to monthPool(year, items)
+                }.toMap()
 
         val picked = mutableListOf<Media.UriMedia>()
         var round = 0
         while (picked.size < target && round < maxPerMonth) {
             for (month in 1..MONTHS_IN_YEAR) {
-                val pool = pools[month]
-                if (pool != null && round < pool.size) {
-                    picked += pool[round]
-                    if (picked.size >= target) break
-                }
+                pools[month]?.getOrNull(round)?.let { picked += it }
+                if (picked.size >= target) break
             }
             round++
         }
 
-        return YearRecap(year, picked)
+        val featured = if (picked.size < minFeatured) emptyList() else picked
+        return YearRecap(year, featured)
     }
 
-    private fun monthPool(year: Int, items: List<Media.UriMedia>): List<Media.UriMedia> {
+    private fun monthPool(
+        year: Int,
+        items: List<Media.UriMedia>,
+    ): List<Media.UriMedia> {
         val nonScreenshots = items.filterNot { isScreenshot(it) }
         val candidates = nonScreenshots.ifEmpty { items }
         return candidates
@@ -112,8 +125,7 @@ class MemoriesEngine(
                 val isPhoto = !m.mimeType.startsWith("video/")
                 val score = (if (isFavorite(m)) FAVORITE_BOOST else 0) + (if (isPhoto) PHOTO_BOOST else 0)
                 Triple(m, score, shuffleKey(year, m))
-            }
-            .sortedWith(compareByDescending<Triple<Media.UriMedia, Int, Long>> { it.second }.thenBy { it.third })
+            }.sortedWith(compareByDescending<Triple<Media.UriMedia, Int, Long>> { it.second }.thenBy { it.third })
             .map { it.first }
     }
 
@@ -125,8 +137,10 @@ class MemoriesEngine(
             haystack.contains("screencap", ignoreCase = true)
     }
 
-    private fun shuffleKey(year: Int, m: Media.UriMedia): Long =
-        Random(seed = year * 1_000_003L + m.id * 31L + m.label.hashCode()).nextLong()
+    private fun shuffleKey(
+        year: Int,
+        m: Media.UriMedia,
+    ): Long = Random(seed = year * 1_000_003L + m.id * 31L + m.label.hashCode()).nextLong()
 
     companion object {
         private const val PROXIMITY_DAYS = 3L
@@ -134,7 +148,8 @@ class MemoriesEngine(
         private const val MONTHS_IN_YEAR = 12
         private const val FAVORITE_BOOST = 2
         private const val PHOTO_BOOST = 1
-        const val DEFAULT_MAX_PER_MONTH = 3
-        const val DEFAULT_TARGET = 30
+        const val DEFAULT_MAX_PER_MONTH = 2
+        const val MIN_RECAP_SIZE = 5
+        const val MAX_RECAP_SIZE = 24
     }
 }

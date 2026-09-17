@@ -1261,6 +1261,18 @@ object Settings {
         fun rememberVaultEncryptBehavior() =
             rememberPreference(key = VAULT_ENCRYPT_BEHAVIOR, defaultValue = ENCRYPT_ASK)
     }
+
+    object Memories {
+        /** Default-off toggle for the optional on-this-day notification (R7). */
+        val NOTIFICATION_ENABLED = booleanPreferencesKey("memories_notification_enabled")
+
+        /** ISO-8601 date of the last posted notification; gates the once-per-day post. */
+        val NOTIFICATION_LAST_POSTED_DATE = stringPreferencesKey("memories_notification_last_posted_date")
+
+        @Composable
+        fun rememberNotificationsEnabled() =
+            rememberPreference(key = NOTIFICATION_ENABLED, defaultValue = false)
+    }
 }
 
 sealed class Position {
