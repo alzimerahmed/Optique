@@ -46,6 +46,8 @@ retrofitKotlinxSerialization = "2.1.0"
 room = "2.8.4"
 accompanist = "0.37.3"
 datastore = "1.2.1"
+detekt = "1.23.8"
+ktlintCli = "1.7.1"
 securityCrypto = "1.1.0"
 sqlcipherAndroid = "4.18.0"
 sqliteKtx = "2.7.0"
@@ -200,6 +202,7 @@ mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinCoroutinesVersion" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlintCli" }
 androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "lifecycleProcess" }
 
 [plugins]
@@ -212,5 +215,6 @@ hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 baselineProfilePlugin = { id = "androidx.baselineprofile", version.ref = "benchmarkMacroJunit4" }
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 [bundles]
 

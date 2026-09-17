@@ -1441,7 +1441,7 @@ fun <T : Media> MediaViewScreen(
                         kenBurnsScale.animateTo(
                             targetValue = 1.12f,
                             animationSpec = tween(
-                                durationMillis = (slideshowConfig?.intervalMillis ?: 5000L).toInt(),
+                                durationMillis = slideshowConfig.intervalMillis.toInt(),
                                 easing = LinearEasing
                             )
                         )

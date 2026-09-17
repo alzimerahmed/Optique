@@ -238,7 +238,7 @@ fun CloudProviderSettingsScreen(
         items.add(
             SettingsEntity.Preference(
                 title = if (isSyncing) syncNowSyncingTitle else syncNowTitle,
-                summary = if (isSyncing) (syncProgress.message ?: "") else syncNowSummary,
+                summary = if (isSyncing) syncProgress.message else syncNowSummary,
                 enabled = !isSyncing,
                 onClick = { viewModel.triggerSync(config.id) },
                 screenPosition = Position.Top

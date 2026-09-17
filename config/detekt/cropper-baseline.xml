@@ -1,0 +1,158 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ComplexCondition:CropStateImpl.kt$CropState$this.aspectRatio.value != aspectRatio.value || maxZoom != zoomMax || this.overlayRatio != overlayRatio || forceUpdate</ID>
+    <ID>ComplexCondition:DynamicCropState.kt$DynamicCropState$drawArea.width &lt;= 0f || drawArea.height &lt;= 0f || overlay.width &lt;= 0f || overlay.height &lt;= 0f</ID>
+    <ID>ComplexCondition:DynamicCropState.kt$DynamicCropState$pannable &amp;&amp; fling &amp;&amp; !gestureInvoked &amp;&amp; zoom &gt; 1</ID>
+    <ID>CyclomaticComplexMethod:DynamicCropState.kt$DynamicCropState$private fun getTouchRegionInternal( position: Offset, rect: Rect, threshold: Float ): TouchRegion</ID>
+    <ID>CyclomaticComplexMethod:DynamicCropState.kt$DynamicCropState$private fun updateOverlayRect( distanceToEdgeFromTouch: Offset, touchRegion: TouchRegion, minDimension: IntSize, rectTemp: Rect, overlayRect: Rect, change: PointerInputChange, aspectRatio: Float, fixedAspectRatio: Boolean, ): Rect</ID>
+    <ID>ExplicitItLambdaParameter:GridImageLayout.kt${ it -&gt; Image( painter = painterResource(id = it), contentDescription = "Icon", contentScale = ContentScale.Crop, ) }</ID>
+    <ID>FunctionNaming:AspectRatioSlectionCard.kt$@Composable fun AspectRatioSelectionCard( modifier: Modifier = Modifier, contentColor: Color = MaterialTheme.colorScheme.surface, color: Color, cropAspectRatio: CropAspectRatio, onClick: ((List&lt;Int&gt;) -&gt; Unit)? = null )</ID>
+    <ID>FunctionNaming:CropFrameDisplayCard.kt$@Composable fun CropFrameDisplayCard( modifier: Modifier = Modifier, editable: Boolean, scale: Float, outlineColor: Color, editButtonBackgroundColor: Color = MaterialTheme.colorScheme.tertiary, editButtonContentColor: Color = MaterialTheme.colorScheme.onTertiary, fontSize: TextUnit = 12.sp, title: String, cropOutline: CropOutline, onEditClick: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:CropFrameDisplayCard.kt$@Composable private fun CropFrameDisplay( modifier: Modifier, cropOutline: CropOutline, color: Color, content: @Composable () -&gt; Unit )</ID>
+    <ID>FunctionNaming:GridImageLayout.kt$@Composable fun GridImageLayout( modifier: Modifier = Modifier, thumbnails: List&lt;Int&gt;, divider: Dp = 2.dp, onClick: ((List&lt;Int&gt;) -&gt; Unit)? = null )</ID>
+    <ID>FunctionNaming:GridImageLayout.kt$@Composable private fun ImageDrawLayout( modifier: Modifier = Modifier, itemCount: Int, divider: Dp, content: @Composable () -&gt; Unit )</ID>
+    <ID>FunctionNaming:ImageCropper.kt$@Composable fun ImageCropper( modifier: Modifier = Modifier, imageBitmap: ImageBitmap, contentDescription: String? = null, cropStyle: CropStyle = CropDefaults.style(), cropProperties: CropProperties, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, crop: Boolean = false, cropEnabled: Boolean = true, onCropStart: () -&gt; Unit, onCropSuccess: (ImageBitmap) -&gt; Unit, onCropRect: ((android.graphics.RectF) -&gt; Unit)? = null, backgroundModifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:ImageCropper.kt$@Composable private fun Crop( crop: Boolean, scaledImageBitmap: ImageBitmap, cropRect: Rect, cropOutline: CropOutline, onCropStart: () -&gt; Unit, onCropSuccess: (ImageBitmap) -&gt; Unit, onCropRect: ((Rect) -&gt; Unit)? = null )</ID>
+    <ID>FunctionNaming:ImageCropper.kt$@Composable private fun ImageCropper( modifier: Modifier, visible: Boolean, cropEnabled: Boolean, imageBitmap: ImageBitmap, containerWidth: Dp, containerHeight: Dp, imageWidthPx: Int, imageHeightPx: Int, handleSize: Float, cropType: CropType, cropOutline: CropOutline, cropStyle: CropStyle, overlayRect: Rect, transparentColor: Color, backgroundModifier: Modifier )</ID>
+    <ID>FunctionNaming:ImageCropper.kt$@Composable private fun ImageCropperImpl( modifier: Modifier, imageBitmap: ImageBitmap, cropEnabled: Boolean, containerWidth: Dp, containerHeight: Dp, imageWidthPx: Int, imageHeightPx: Int, cropType: CropType, cropOutline: CropOutline, handleSize: Float, cropStyle: CropStyle, transparentColor: Color, rectOverlay: Rect )</ID>
+    <ID>FunctionNaming:ImageDrawCanvas.kt$@Composable internal fun ImageDrawCanvas( modifier: Modifier, imageBitmap: ImageBitmap, imageWidth: Int, imageHeight: Int )</ID>
+    <ID>FunctionNaming:ImageWithConstraints.kt$@Composable internal fun ImageWithConstraints( modifier: Modifier = Modifier, imageBitmap: ImageBitmap, alignment: Alignment = Alignment.Center, contentScale: ContentScale = ContentScale.Fit, contentDescription: String? = null, alpha: Float = DefaultAlpha, colorFilter: ColorFilter? = null, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, drawImage: Boolean = true, content: @Composable ImageScope.() -&gt; Unit = {} )</ID>
+    <ID>FunctionNaming:ImageWithConstraints.kt$@Composable private fun ImageImpl( modifier: Modifier, imageBitmap: ImageBitmap, width: Int, height: Int, alpha: Float = DefaultAlpha, colorFilter: ColorFilter? = null, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, )</ID>
+    <ID>FunctionNaming:ImageWithConstraints.kt$@Composable private fun ImageLayout( constraints: Constraints, imageBitmap: ImageBitmap, bitmapRect: IntRect, imageWidth: Float, imageHeight: Float, boxWidth: Int, boxHeight: Int, alpha: Float = DefaultAlpha, colorFilter: ColorFilter? = null, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, drawImage: Boolean = true, content: @Composable ImageScope.() -&gt; Unit )</ID>
+    <ID>FunctionNaming:Overlay.kt$@Composable internal fun DrawingOverlay( modifier: Modifier, drawOverlay: Boolean, rect: Rect, cropOutline: CropOutline, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Dp, drawHandles: Boolean, handleSize: Float )</ID>
+    <ID>FunctionNaming:Overlay.kt$@Composable private fun DrawingOverlayImpl( modifier: Modifier, drawOverlay: Boolean, rect: Rect, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Float, drawHandles: Boolean, handleSize: Float, pathHandles: Path, image: ImageBitmap, )</ID>
+    <ID>FunctionNaming:Overlay.kt$@Composable private fun DrawingOverlayImpl( modifier: Modifier, drawOverlay: Boolean, rect: Rect, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Float, drawHandles: Boolean, handleSize: Float, pathHandles: Path, outline: Outline, )</ID>
+    <ID>FunctionNaming:Overlay.kt$@Composable private fun DrawingOverlayImpl( modifier: Modifier, drawOverlay: Boolean, rect: Rect, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Float, drawHandles: Boolean, handleSize: Float, pathHandles: Path, path: Path, )</ID>
+    <ID>LongMethod:CropFrameDisplayCard.kt$@Composable fun CropFrameDisplayCard( modifier: Modifier = Modifier, editable: Boolean, scale: Float, outlineColor: Color, editButtonBackgroundColor: Color = MaterialTheme.colorScheme.tertiary, editButtonContentColor: Color = MaterialTheme.colorScheme.onTertiary, fontSize: TextUnit = 12.sp, title: String, cropOutline: CropOutline, onEditClick: () -&gt; Unit = {}, )</ID>
+    <ID>LongMethod:CropFrameDisplayCard.kt$@Composable private fun CropFrameDisplay( modifier: Modifier, cropOutline: CropOutline, color: Color, content: @Composable () -&gt; Unit )</ID>
+    <ID>LongMethod:CropFrameFactory.kt$CropFrameFactory$private fun createCropOutlineContainer( outlineType: OutlineType ): CropOutlineContainer&lt;out CropOutline&gt;</ID>
+    <ID>LongMethod:CropModifier.kt$fun Modifier.crop( vararg keys: Any?, cropState: CropState, zoomOnDoubleTap: (ZoomLevel) -&gt; Float = cropState.DefaultOnDoubleTap, onDown: ((CropData) -&gt; Unit)? = null, onMove: ((CropData) -&gt; Unit)? = null, onUp: ((CropData) -&gt; Unit)? = null, onGestureStart: ((CropData) -&gt; Unit)? = null, onGesture: ((CropData) -&gt; Unit)? = null, onGestureEnd: ((CropData) -&gt; Unit)? = null )</ID>
+    <ID>LongMethod:DynamicCropState.kt$DynamicCropState$private fun updateOverlayRect( distanceToEdgeFromTouch: Offset, touchRegion: TouchRegion, minDimension: IntSize, rectTemp: Rect, overlayRect: Rect, change: PointerInputChange, aspectRatio: Float, fixedAspectRatio: Boolean, ): Rect</ID>
+    <ID>LongMethod:GridImageLayout.kt$@Composable private fun ImageDrawLayout( modifier: Modifier = Modifier, itemCount: Int, divider: Dp, content: @Composable () -&gt; Unit )</ID>
+    <ID>LongMethod:ImageCropper.kt$@Composable fun ImageCropper( modifier: Modifier = Modifier, imageBitmap: ImageBitmap, contentDescription: String? = null, cropStyle: CropStyle = CropDefaults.style(), cropProperties: CropProperties, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, crop: Boolean = false, cropEnabled: Boolean = true, onCropStart: () -&gt; Unit, onCropSuccess: (ImageBitmap) -&gt; Unit, onCropRect: ((android.graphics.RectF) -&gt; Unit)? = null, backgroundModifier: Modifier = Modifier )</ID>
+    <ID>LongMethod:Overlay.kt$@Composable internal fun DrawingOverlay( modifier: Modifier, drawOverlay: Boolean, rect: Rect, cropOutline: CropOutline, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Dp, drawHandles: Boolean, handleSize: Float )</ID>
+    <ID>LongParameterList:CropDefaults.kt$CropDefaults$( cropType: CropType = CropType.Dynamic, handleSize: Float = 50f, maxZoom: Float = 10f, contentScale: ContentScale = ContentScale.Fit, cropOutlineProperty: CropOutlineProperty, aspectRatio: AspectRatio = aspectRatios[2].aspectRatio, overlayRatio: Float = .9f, pannable: Boolean = true, fling: Boolean = false, zoomable: Boolean = true, rotatable: Boolean = false, minDimension: IntSize? = null, fixedAspectRatio: Boolean = false, )</ID>
+    <ID>LongParameterList:CropDefaults.kt$CropDefaults$( drawOverlay: Boolean = true, drawGrid: Boolean = true, strokeWidth: Dp = 1.dp, overlayColor: Color = DefaultOverlayColor, handleColor: Color = DefaultHandleColor, backgroundColor: Color = DefaultBackgroundColor )</ID>
+    <ID>LongParameterList:CropFrameDisplayCard.kt$( modifier: Modifier = Modifier, editable: Boolean, scale: Float, outlineColor: Color, editButtonBackgroundColor: Color = MaterialTheme.colorScheme.tertiary, editButtonContentColor: Color = MaterialTheme.colorScheme.onTertiary, fontSize: TextUnit = 12.sp, title: String, cropOutline: CropOutline, onEditClick: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:CropModifier.kt$( vararg keys: Any?, cropState: CropState, zoomOnDoubleTap: (ZoomLevel) -&gt; Float = cropState.DefaultOnDoubleTap, onDown: ((CropData) -&gt; Unit)? = null, onMove: ((CropData) -&gt; Unit)? = null, onUp: ((CropData) -&gt; Unit)? = null, onGestureStart: ((CropData) -&gt; Unit)? = null, onGesture: ((CropData) -&gt; Unit)? = null, onGestureEnd: ((CropData) -&gt; Unit)? = null )</ID>
+    <ID>LongParameterList:CropStateImpl.kt$CropState$( centroid: Offset, panChange: Offset, zoomChange: Float, rotationChange: Float, mainPointer: PointerInputChange, changes: List&lt;PointerInputChange&gt; )</ID>
+    <ID>LongParameterList:CropStateImpl.kt$CropState$( imageSize: IntSize, containerSize: IntSize, drawAreaSize: IntSize, maxZoom: Float, internal var fling: Boolean = true, internal var aspectRatio: AspectRatio, internal var overlayRatio: Float, zoomable: Boolean = true, pannable: Boolean = true, rotatable: Boolean = false, limitPan: Boolean = false )</ID>
+    <ID>LongParameterList:DrawScopeUtils.kt$( aspectRatio: AspectRatio, shape: Shape, density: Density, dstBitmap: ImageBitmap, coefficient: Float = .9f, color: Color = Color.Red, )</ID>
+    <ID>LongParameterList:DynamicCropState.kt$DynamicCropState$( distanceToEdgeFromTouch: Offset, touchRegion: TouchRegion, minDimension: IntSize, rectTemp: Rect, overlayRect: Rect, change: PointerInputChange, aspectRatio: Float, fixedAspectRatio: Boolean, )</ID>
+    <ID>LongParameterList:DynamicCropState.kt$DynamicCropState$( private var handleSize: Float, imageSize: IntSize, containerSize: IntSize, drawAreaSize: IntSize, aspectRatio: AspectRatio, overlayRatio: Float, maxZoom: Float, fling: Boolean, zoomable: Boolean, pannable: Boolean, rotatable: Boolean, limitPan: Boolean, private val minDimension: IntSize?, private val fixedAspectRatio: Boolean, )</ID>
+    <ID>LongParameterList:ImageContentScaleUtil.kt$( boxWidth: Int, boxHeight: Int, imageWidth: Float, imageHeight: Float, bitmapWidth: Int, bitmapHeight: Int )</ID>
+    <ID>LongParameterList:ImageCropper.kt$( crop: Boolean, scaledImageBitmap: ImageBitmap, cropRect: Rect, cropOutline: CropOutline, onCropStart: () -&gt; Unit, onCropSuccess: (ImageBitmap) -&gt; Unit, onCropRect: ((Rect) -&gt; Unit)? = null )</ID>
+    <ID>LongParameterList:ImageCropper.kt$( cropEnabled: Boolean, scaledImageBitmap: ImageBitmap, imageWidthPx: Int, imageHeightPx: Int, containerWidthPx: Int, containerHeightPx: Int, contentScale: ContentScale, cropType: CropType, fixedAspectRatio: Boolean, )</ID>
+    <ID>LongParameterList:ImageCropper.kt$( modifier: Modifier = Modifier, imageBitmap: ImageBitmap, contentDescription: String? = null, cropStyle: CropStyle = CropDefaults.style(), cropProperties: CropProperties, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, crop: Boolean = false, cropEnabled: Boolean = true, onCropStart: () -&gt; Unit, onCropSuccess: (ImageBitmap) -&gt; Unit, onCropRect: ((android.graphics.RectF) -&gt; Unit)? = null, backgroundModifier: Modifier = Modifier )</ID>
+    <ID>LongParameterList:ImageCropper.kt$( modifier: Modifier, imageBitmap: ImageBitmap, cropEnabled: Boolean, containerWidth: Dp, containerHeight: Dp, imageWidthPx: Int, imageHeightPx: Int, cropType: CropType, cropOutline: CropOutline, handleSize: Float, cropStyle: CropStyle, transparentColor: Color, rectOverlay: Rect )</ID>
+    <ID>LongParameterList:ImageCropper.kt$( modifier: Modifier, visible: Boolean, cropEnabled: Boolean, imageBitmap: ImageBitmap, containerWidth: Dp, containerHeight: Dp, imageWidthPx: Int, imageHeightPx: Int, handleSize: Float, cropType: CropType, cropOutline: CropOutline, cropStyle: CropStyle, overlayRect: Rect, transparentColor: Color, backgroundModifier: Modifier )</ID>
+    <ID>LongParameterList:ImageWithConstraints.kt$( constraints: Constraints, imageBitmap: ImageBitmap, bitmapRect: IntRect, imageWidth: Float, imageHeight: Float, boxWidth: Int, boxHeight: Int, alpha: Float = DefaultAlpha, colorFilter: ColorFilter? = null, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, drawImage: Boolean = true, content: @Composable ImageScope.() -&gt; Unit )</ID>
+    <ID>LongParameterList:ImageWithConstraints.kt$( modifier: Modifier = Modifier, imageBitmap: ImageBitmap, alignment: Alignment = Alignment.Center, contentScale: ContentScale = ContentScale.Fit, contentDescription: String? = null, alpha: Float = DefaultAlpha, colorFilter: ColorFilter? = null, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, drawImage: Boolean = true, content: @Composable ImageScope.() -&gt; Unit = {} )</ID>
+    <ID>LongParameterList:ImageWithConstraints.kt$( modifier: Modifier, imageBitmap: ImageBitmap, width: Int, height: Int, alpha: Float = DefaultAlpha, colorFilter: ColorFilter? = null, filterQuality: FilterQuality = DrawScope.DefaultFilterQuality, )</ID>
+    <ID>LongParameterList:Overlay.kt$( drawOverlay: Boolean, rect: Rect, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Float, drawHandles: Boolean, handleSize: Float, pathHandles: Path, drawBlock: DrawScope.() -&gt; Unit )</ID>
+    <ID>LongParameterList:Overlay.kt$( modifier: Modifier, drawOverlay: Boolean, rect: Rect, cropOutline: CropOutline, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Dp, drawHandles: Boolean, handleSize: Float )</ID>
+    <ID>LongParameterList:Overlay.kt$( modifier: Modifier, drawOverlay: Boolean, rect: Rect, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Float, drawHandles: Boolean, handleSize: Float, pathHandles: Path, image: ImageBitmap, )</ID>
+    <ID>LongParameterList:Overlay.kt$( modifier: Modifier, drawOverlay: Boolean, rect: Rect, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Float, drawHandles: Boolean, handleSize: Float, pathHandles: Path, outline: Outline, )</ID>
+    <ID>LongParameterList:Overlay.kt$( modifier: Modifier, drawOverlay: Boolean, rect: Rect, drawGrid: Boolean, transparentColor: Color, overlayColor: Color, handleColor: Color, strokeWidth: Float, drawHandles: Boolean, handleSize: Float, pathHandles: Path, path: Path, )</ID>
+    <ID>LongParameterList:ShapeUtils.kt$( aspectRatio: AspectRatio, coefficient: Float, shape: Shape, size: Size, layoutDirection: LayoutDirection, density: Density )</ID>
+    <ID>LongParameterList:StaticCropState.kt$StaticCropState$( imageSize: IntSize, containerSize: IntSize, drawAreaSize: IntSize, aspectRatio: AspectRatio, overlayRatio: Float, maxZoom: Float = 5f, fling: Boolean = false, zoomable: Boolean = true, pannable: Boolean = true, rotatable: Boolean = false, limitPan: Boolean = false )</ID>
+    <ID>LongParameterList:TransformState.kt$TransformState$( internal val imageSize: IntSize, val containerSize: IntSize, val drawAreaSize: IntSize, initialZoom: Float = 1f, initialRotation: Float = 0f, minZoom: Float = 1f, maxZoom: Float = 10f, internal var zoomable: Boolean = true, internal var pannable: Boolean = true, internal var rotatable: Boolean = true, internal var limitPan: Boolean = false )</ID>
+    <ID>MagicNumber:AspectRatios.kt$1.91f</ID>
+    <ID>MagicNumber:AspectRatios.kt$16</ID>
+    <ID>MagicNumber:AspectRatios.kt$16f</ID>
+    <ID>MagicNumber:AspectRatios.kt$3</ID>
+    <ID>MagicNumber:AspectRatios.kt$3f</ID>
+    <ID>MagicNumber:AspectRatios.kt$4f</ID>
+    <ID>MagicNumber:AspectRatios.kt$5f</ID>
+    <ID>MagicNumber:AspectRatios.kt$9</ID>
+    <ID>MagicNumber:AspectRatios.kt$9f</ID>
+    <ID>MagicNumber:Color.kt$0x99000000</ID>
+    <ID>MagicNumber:CropFrameDisplayCard.kt$.9f</ID>
+    <ID>MagicNumber:CropFrameDisplayCard.kt$1.3f</ID>
+    <ID>MagicNumber:CropFrameFactory.kt$CropFrameFactory$5</ID>
+    <ID>MagicNumber:CropFrameFactory.kt$CropFrameFactory$7</ID>
+    <ID>MagicNumber:CropFrameFactory.kt$CropFrameFactory$8</ID>
+    <ID>MagicNumber:CropStateImpl.kt$CropState$400</ID>
+    <ID>MagicNumber:DrawScopeUtils.kt$3</ID>
+    <ID>MagicNumber:DynamicCropState.kt$DynamicCropState$3f</ID>
+    <ID>MagicNumber:GridImageLayout.kt$3</ID>
+    <ID>MagicNumber:GridImageLayout.kt$5</ID>
+    <ID>MagicNumber:ImageCropper.kt$.7f</ID>
+    <ID>MagicNumber:ImageCropper.kt$100</ID>
+    <ID>MagicNumber:ImageCropper.kt$300</ID>
+    <ID>MagicNumber:ImageCropper.kt$400</ID>
+    <ID>MagicNumber:ImageCropper.kt$500</ID>
+    <ID>MagicNumber:Paths.kt$Paths$0.61f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$0.81f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$1.32f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$1.45f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$1.64f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$1.74f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$100f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$11.54f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$12.0f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$12.28f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$122.3858f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$124f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$12f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$13.09f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$14.76f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$15.36f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$150f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$16.5f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$17.27f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$177.6142f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$18.18f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$188f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$19.58f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$2.09f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$200f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$21.0f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$21.35f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$22.0f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$22.3858f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$3.0f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$3.41f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$3.4f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$3.78f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$3.81f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$4.42f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$4.5f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$4.73f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$5.42f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$5.46f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$5.4f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$5.82f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$50f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$6.86f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$7.03f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$7.19f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$7.5f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$76f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$77.6142f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$8.55f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$8.5f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$8.63f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$9.19f</ID>
+    <ID>MagicNumber:Paths.kt$Paths$9.24f</ID>
+    <ID>MagicNumber:TransformState.kt$TransformState$360</ID>
+    <ID>MagicNumber:TransformState.kt$TransformState$400</ID>
+    <ID>MagicNumber:ZoomUtil.kt$3f</ID>
+    <ID>MaxLineLength:ImageCropper.kt$imageHeight.roundToPx()</ID>
+    <ID>NewLineAtEndOfFile:AspectRatios.kt$com.smarttoolfactory.cropper.model.AspectRatios.kt</ID>
+    <ID>NewLineAtEndOfFile:Color.kt$com.smarttoolfactory.cropper.ui.theme.Color.kt</ID>
+    <ID>NewLineAtEndOfFile:CropAspectRatio.kt$com.smarttoolfactory.cropper.model.CropAspectRatio.kt</ID>
+    <ID>NewLineAtEndOfFile:CropType.kt$com.smarttoolfactory.cropper.settings.CropType.kt</ID>
+    <ID>NewLineAtEndOfFile:ImageCropper.kt$com.smarttoolfactory.cropper.ImageCropper.kt</ID>
+    <ID>NewLineAtEndOfFile:ImageScope.kt$com.smarttoolfactory.cropper.image.ImageScope.kt</ID>
+    <ID>NewLineAtEndOfFile:OffsetUtil.kt$com.smarttoolfactory.cropper.util.OffsetUtil.kt</ID>
+    <ID>NewLineAtEndOfFile:ShapeUtils.kt$com.smarttoolfactory.cropper.util.ShapeUtils.kt</ID>
+    <ID>ReturnCount:DynamicCropState.kt$DynamicCropState$private fun getTouchRegionInternal( position: Offset, rect: Rect, threshold: Float ): TouchRegion</ID>
+    <ID>TooManyFunctions:CropStateImpl.kt$CropState : TransformState</ID>
+    <ID>TooManyFunctions:DynamicCropState.kt$DynamicCropState : CropState</ID>
+    <ID>TooManyFunctions:TransformState.kt$TransformState</ID>
+    <ID>UnusedPrivateMember:DynamicCropState.kt$DynamicCropState$private suspend fun animateResizeToFitOverlay()</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
+    <ID>EmptyFunctionBlock:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView${}</ID>
+    <ID>FunctionNaming:PanoramaViewer.kt$@Composable fun PanoramaViewer( imageUri: Uri, projectionType: ProjectionType, modifier: Modifier = Modifier, gyroscopeEnabled: Boolean = false, imageLoader: PanoramaImageLoader? = null, onTap: (() -&gt; Unit)? = null, onCameraChanged: ((CameraState) -&gt; Unit)? = null, onViewCreated: ((View) -&gt; Unit)? = null )</ID>
+    <ID>LongMethod:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
+    <ID>LongMethod:PanoramaRenderer.kt$PanoramaRenderer$override fun onDrawFrame(gl: GL10?)</ID>
+    <ID>LongParameterList:PanoramaViewer.kt$( imageUri: Uri, projectionType: ProjectionType, modifier: Modifier = Modifier, gyroscopeEnabled: Boolean = false, imageLoader: PanoramaImageLoader? = null, onTap: (() -&gt; Unit)? = null, onCameraChanged: ((CameraState) -&gt; Unit)? = null, onViewCreated: ((View) -&gt; Unit)? = null )</ID>
+    <ID>MagicNumber:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$0.01f</ID>
+    <ID>MagicNumber:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$0.6f</ID>
+    <ID>MagicNumber:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$16</ID>
+    <ID>MagicNumber:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$1_000_000f</ID>
+    <ID>MagicNumber:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$3</ID>
+    <ID>MagicNumber:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$360f</ID>
+    <ID>MagicNumber:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$90f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$0.1f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$0.5f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$1.3f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$120f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$16</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$180f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$270f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$3</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$300f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$360f</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$4</ID>
+    <ID>MagicNumber:PanoramaRenderer.kt$PanoramaRenderer$90f</ID>
+    <ID>MagicNumber:SphereGeometry.kt$SphereGeometry$3</ID>
+    <ID>MagicNumber:SphereGeometry.kt$SphereGeometry$3.0</ID>
+    <ID>MagicNumber:SphereGeometry.kt$SphereGeometry$4</ID>
+    <ID>MagicNumber:SphereGeometry.kt$SphereGeometry$6</ID>
+    <ID>MaxLineLength:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$private</ID>
+    <ID>MaxLineLength:PanoramaRenderer.kt$PanoramaRenderer$PanoramaLog.d("onDrawFrame() rebuilt cylinder mesh: height=$cylinderHeight arc=$arcDeg° (aspect=$imgAspect)")</ID>
+    <ID>MaxLineLength:PanoramaRenderer.kt$PanoramaRenderer$PanoramaLog.d("onDrawFrame() uploading detail texture ${detail.bitmap.width}x${detail.bitmap.height} bounds=(${detail.uMin},${detail.vMin})-(${detail.uMax},${detail.vMax})")</ID>
+    <ID>MaxLineLength:PanoramaRenderer.kt$PanoramaRenderer$ProjectionType.CYLINDER -&gt; SphereGeometry.createCylinder(radius = GEOMETRY_RADIUS, height = GEOMETRY_RADIUS, segments = 128)</ID>
+    <ID>MaxLineLength:PanoramaRenderer.kt$PanoramaRenderer$ProjectionType.SPHERE -&gt; SphereGeometry.createSphere(radius = GEOMETRY_RADIUS, latSegments = 64, lonSegments = 64)</ID>
+    <ID>MaxLineLength:PanoramaRenderer.kt$PanoramaRenderer$mesh = SphereGeometry.createCylinder(radius = r, height = cylinderHeight, arcDegrees = arcDeg, segments = 128)</ID>
+    <ID>MaxLineLength:RegionLoader.kt$RegionLoader$PanoramaLog.d("loadRegion() ($clampedLeft,$clampedTop)-($clampedRight,$clampedBottom) =&gt; ${bmp?.width}x${bmp?.height} (sampleSize=$sampleSize)")</ID>
+    <ID>NestedBlockDepth:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
+    <ID>ReturnCount:RegionLoader.kt$RegionLoader$override fun initialize(): Boolean</ID>
+    <ID>ReturnCount:RegionLoader.kt$RegionLoader$override fun loadRegion( left: Int, top: Int, right: Int, bottom: Int, maxDimension: Int ): Bitmap?</ID>
+    <ID>TooGenericExceptionCaught:RegionLoader.kt$RegionLoader$e: Exception</ID>
+    <ID>TooManyFunctions:PanoramaGLSurfaceView.kt$PanoramaGLSurfaceView : GLSurfaceViewSensorEventListener</ID>
+  </CurrentIssues>
+</SmellBaseline>

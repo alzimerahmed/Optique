@@ -13,7 +13,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.os.Environment
@@ -22,7 +21,6 @@ import android.os.Looper
 import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.provider.OpenableColumns
-import androidx.annotation.RequiresApi
 import androidx.exifinterface.media.ExifInterface
 import com.dot.gallery.core.Settings
 import com.dot.gallery.core.decoder.format.ImageReencoder
@@ -50,7 +48,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 
-@RequiresApi(Build.VERSION_CODES.R)
 /** DATE_MODIFIED of [uri] in seconds, or 0 when it cannot be read. */
 fun ContentResolver.mediaDateModified(uri: Uri): Long {
     runCatching {

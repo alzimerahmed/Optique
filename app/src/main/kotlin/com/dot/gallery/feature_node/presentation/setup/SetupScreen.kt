@@ -88,7 +88,6 @@ fun SetupScreen(onComplete: () -> Unit = {}) {
     val goNext: () -> Unit = { if (safeIndex < pages.lastIndex) index = safeIndex + 1 }
     val goBack: () -> Unit = {
         if (safeIndex > 0) index = safeIndex - 1 else activity?.finish()
-        Unit
     }
     val finish: () -> Unit = finish@{
         // Permission may have been revoked from system settings while later setup pages were open.

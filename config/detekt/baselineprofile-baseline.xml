@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>MaxLineLength:BaselineProfileGenerator.kt$BaselineProfileGenerator$*</ID>
+    <ID>MaxLineLength:StartupBenchmarks.kt$StartupBenchmarks$*</ID>
+    <ID>NewLineAtEndOfFile:BaselineProfileGenerator.kt$com.dot.baselineprofile.BaselineProfileGenerator.kt</ID>
+    <ID>NewLineAtEndOfFile:StartupBenchmarks.kt$com.dot.baselineprofile.StartupBenchmarks.kt</ID>
+  </CurrentIssues>
+</SmellBaseline>

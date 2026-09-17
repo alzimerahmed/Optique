@@ -363,7 +363,7 @@ private fun ServerCard(
             }
 
             // Sync progress message
-            AnimatedVisibility(visible = isSyncing && syncProgress?.message?.isNotEmpty() == true) {
+            AnimatedVisibility(visible = isSyncing && syncProgress.message.isNotEmpty()) {
                 Text(
                     text = syncProgress?.message ?: "",
                     style = MaterialTheme.typography.bodySmall,
