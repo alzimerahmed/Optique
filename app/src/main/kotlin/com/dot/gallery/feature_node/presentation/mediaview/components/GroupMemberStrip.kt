@@ -56,6 +56,8 @@ import com.dot.gallery.feature_node.domain.model.Media
 import com.dot.gallery.feature_node.domain.util.getUri
 import com.dot.gallery.feature_node.domain.util.isCloud
 import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.resize.Precision
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
@@ -177,7 +179,12 @@ fun <T : Media> GroupMemberStrip(
                     )
             ) {
                 AsyncImage(
-                    uri = member.getUri().toString(),
+                    request = ComposableImageRequest(member.getUri().toString()) {
+                        // Strip cells are ~56dp; without an explicit resize Sketch decodes the
+                        // full-resolution image and downsamples in memory per cell.
+                        resize(width = 256, height = 256, precision = Precision.LESS_PIXELS)
+                        crossfade(false)
+                    },
                     contentDescription = member.label,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
