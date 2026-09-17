@@ -157,6 +157,13 @@ android {
     // support for `cmake_minimum_required(VERSION < 3.5)`, which breaks libde265/libheif scripts.
     ndkVersion = pinnedNdkVersion
 
+    testOptions {
+        unitTests {
+            // Required for Robolectric: merge resources/manifests into the unit-test classpath.
+            isIncludeAndroidResources = true
+        }
+    }
+
     defaultConfig {
         applicationId = "com.dot.gallery"
         minSdk = 29
@@ -612,6 +619,10 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.mockwebserver)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.ext.junit)
+    testImplementation(libs.room.testing)
+    testImplementation(libs.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.room.testing)
