@@ -49,6 +49,14 @@ jobs:
         run: ./gradlew ktlintCheck
       - name: detekt
         run: ./gradlew detekt
+      - name: Unit + Robolectric integration tests
+        run: ./gradlew :app:testUniversalNoMLDebugUnitTest :app:testUniversalWithMLDebugUnitTest
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@v5
         if: always()
         with:
