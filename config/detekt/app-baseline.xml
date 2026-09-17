@@ -5030,6 +5030,8 @@
     <ID>NewLineAtEndOfFile:rememberHeaderOffset.kt$com.dot.gallery.feature_node.presentation.common.components.rememberHeaderOffset.kt</ID>
     <ID>NewLineAtEndOfFile:rememberStickyHeaderItem.kt$com.dot.gallery.feature_node.presentation.common.components.rememberStickyHeaderItem.kt</ID>
     <ID>NewLineAtEndOfFile:swipe.kt$com.dot.gallery.core.presentation.components.util.swipe.kt</ID>
+    <ID>PackageNaming:MemoriesEngine.kt$package com.dot.gallery.feature_node.domain.memories</ID>
+    <ID>PackageNaming:MemoriesEngineTest.kt$package com.dot.gallery.feature_node.domain.memories</ID>
     <ID>PackageNaming:AIModelsManagerScreen.kt$package com.dot.gallery.feature_node.presentation.settings.subsettings</ID>
     <ID>PackageNaming:ActionsScreen.kt$package com.dot.gallery.feature_node.presentation.actions</ID>
     <ID>PackageNaming:ActionsViewModel.kt$package com.dot.gallery.feature_node.presentation.actions</ID>
