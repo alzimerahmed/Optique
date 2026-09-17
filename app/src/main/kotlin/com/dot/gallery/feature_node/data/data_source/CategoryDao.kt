@@ -117,7 +117,7 @@ interface CategoryDao {
 
     /**
      * Removes automatic category memberships whose media no longer exists in the authoritative
-     * internal `media` mirror (kept in sync with MediaStore by [DatabaseUpdaterWorker]).
+     * internal `media` mirror (kept in sync with MediaStore by [com.dot.gallery.feature_node.data.repository.MediaRepositoryImpl.updateInternalDatabase]).
      *
      * Uses a correlated subquery instead of a bound `IN (...)` list so it is safe for
      * arbitrarily large libraries (no SQLite bind-variable limit). Callers MUST ensure the

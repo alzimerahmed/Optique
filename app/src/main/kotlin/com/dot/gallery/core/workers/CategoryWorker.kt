@@ -16,7 +16,6 @@ import androidx.work.CoroutineWorker
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
@@ -34,7 +33,6 @@ import com.dot.gallery.feature_node.presentation.util.printWarning
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.isActive
 
@@ -94,55 +92,13 @@ class CategoryWorker @AssistedInject constructor(
         }
 
         // Get all image embeddings
-        var imageEmbeddings = embeddingDao.getRecords().firstOrNull() ?: emptyList()
+        val imageEmbeddings = embeddingDao.getRecords().firstOrNull() ?: emptyList()
         if (imageEmbeddings.isEmpty()) {
-            printInfo("CategoryWorker: No image embeddings found, starting search indexer...")
-            setProgress(workDataOf(KEY_PROGRESS to 0f, KEY_STATUS to "Starting image indexer..."))
-            
-            // Start the search indexer
-            startSearchIndexer()
-            
-            // Wait for the search indexer to complete (with timeout)
-            val workManager = WorkManager.getInstance(appContext)
-            var attempts = 0
-            val maxAttempts = 600 // 10 minutes max wait (600 * 1 second)
-            
-            while (attempts < maxAttempts && currentCoroutineContext().isActive && !isStopped) {
-                delay(1000) // Wait 1 second between checks
-                attempts++
-                
-                val workInfos = workManager.getWorkInfosByTag("SearchIndexerUpdater").get()
-                val isRunning = workInfos.any { it.state == WorkInfo.State.RUNNING || it.state == WorkInfo.State.ENQUEUED }
-                
-                if (!isRunning) {
-                    // Check if we now have embeddings
-                    imageEmbeddings = embeddingDao.getRecords().firstOrNull() ?: emptyList()
-                    if (imageEmbeddings.isNotEmpty()) {
-                        printInfo("CategoryWorker: Search indexer completed, found ${imageEmbeddings.size} embeddings")
-                        break
-                    } else {
-                        printWarning("CategoryWorker: Search indexer finished but no embeddings found")
-                        setProgress(workDataOf(KEY_PROGRESS to 100f, KEY_STATUS to "No images to classify"))
-                        return Result.success()
-                    }
-                }
-                
-                // Update progress to show we're waiting
-                if (attempts % 5 == 0) {
-                    val progress = workInfos.firstOrNull { it.state == WorkInfo.State.RUNNING }
-                        ?.progress?.getFloat("progress", 0f) ?: 0f
-                    setProgress(workDataOf(
-                        KEY_PROGRESS to (progress * 0.5f).coerceIn(0f, 50f), // Use first 50% for indexing
-                        KEY_STATUS to "Indexing images... ${progress.toInt()}%"
-                    ))
-                }
-            }
-            
-            if (imageEmbeddings.isEmpty()) {
-                printWarning("CategoryWorker: Timed out waiting for search indexer")
-                setProgress(workDataOf(KEY_PROGRESS to 100f, KEY_STATUS to "Indexer timed out"))
-                return Result.success()
-            }
+            // Embeddings are produced by the SmartScan SEARCH_INDEX phase; without them
+            // there is nothing to classify. The legacy inline indexer was removed.
+            printInfo("CategoryWorker: No image embeddings found, skipping classification")
+            setProgress(workDataOf(KEY_PROGRESS to 100f, KEY_STATUS to "No images to classify"))
+            return Result.success()
         }
 
         printInfo("CategoryWorker: Processing ${categories.size} categories and ${imageEmbeddings.size} images")
@@ -240,32 +196,6 @@ class CategoryWorker @AssistedInject constructor(
         printWarning("CategoryWorker failed: ${exception.message}")
         exception.printStackTrace()
         return Result.failure()
-    }
-
-    /**
-     * Starts the search indexer to create image embeddings
-     */
-    private fun startSearchIndexer() {
-        val workManager = WorkManager.getInstance(appContext)
-        val constraints = Constraints.Builder()
-            .setRequiresStorageNotLow(true)
-            .build()
-
-        val searchIndexerWork = OneTimeWorkRequestBuilder<SearchIndexerUpdaterWorker>()
-            .setConstraints(constraints)
-            .apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-                }
-            }
-            .addTag("SearchIndexerUpdater")
-            .build()
-
-        workManager.enqueueUniqueWork(
-            "SearchIndexerUpdater",
-            ExistingWorkPolicy.KEEP,
-            searchIndexerWork
-        )
     }
 
     companion object {
