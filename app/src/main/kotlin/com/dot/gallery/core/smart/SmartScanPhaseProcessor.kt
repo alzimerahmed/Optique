@@ -428,7 +428,8 @@ class SearchIndexPhaseProcessor @Inject constructor(
     repository: MediaRepository,
     database: InternalDatabase,
     private val modelManager: ModelManager,
-    private val thumbnailLoader: SmartThumbnailLoader
+    private val thumbnailLoader: SmartThumbnailLoader,
+    @ApplicationContext private val appContext: Context
 ) : MediaPhaseProcessor(repository, database) {
     override val phase = SmartScanPhase.SEARCH_INDEX
     override val revision: String
@@ -436,6 +437,9 @@ class SearchIndexPhaseProcessor @Inject constructor(
 
     override suspend fun process(context: SmartScanPhaseContext): SmartScanPhaseResult {
         if (!BuildConfig.ENABLE_INDEXING) return SmartScanPhaseResult.Blocked("indexing_disabled")
+        if (!Settings.SmartFeatures.semanticIndexing(appContext).first()) {
+            return SmartScanPhaseResult.Blocked("semantic_indexing_disabled")
+        }
         if (!modelManager.isReady(ModelGroup.SEARCH)) return SmartScanPhaseResult.Blocked("search_model_unavailable")
         val scanDao = database.getSmartScanDao()
         val imageEmbeddingDao = database.getImageEmbeddingDao()

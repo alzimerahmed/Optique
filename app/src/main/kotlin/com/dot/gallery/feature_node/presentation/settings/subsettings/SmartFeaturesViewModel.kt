@@ -95,6 +95,12 @@ class SmartFeaturesViewModel @Inject constructor(
         initialValue = false
     )
 
+    val semanticIndexingEnabled: StateFlow<Boolean> = Settings.SmartFeatures.semanticIndexing(context).stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = true
+    )
+
     val activeSmartScan: StateFlow<SmartScanRunEntity?> = smartScanDao.observeActiveRun()
         .map { run -> run?.takeIf { SmartScanPlan.shouldShowRun(it.userVisible, it.totalMedia) } }
         .stateIn(
@@ -153,9 +159,18 @@ class SmartFeaturesViewModel @Inject constructor(
         }
     }
 
+    fun setSemanticIndexingEnabled(enabled: Boolean) {
+        viewModelScope.launch {
+            Settings.SmartFeatures.setSemanticIndexing(context, enabled)
+        }
+    }
+
     fun refreshMetadata() = request(SmartScanFeature.METADATA.bit)
 
-    fun refreshEmbeddings() = request(SmartScanFeature.EMBEDDINGS.bit)
+    fun refreshEmbeddings() {
+        if (!semanticIndexingEnabled.value) return
+        request(SmartScanFeature.EMBEDDINGS.bit)
+    }
 
     fun refreshCategories() = request(SmartScanFeature.CATEGORIES.bit)
 

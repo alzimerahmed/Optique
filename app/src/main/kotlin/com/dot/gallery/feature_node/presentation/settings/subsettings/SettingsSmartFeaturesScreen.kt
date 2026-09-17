@@ -44,6 +44,7 @@ fun SettingsSmartFeaturesScreen(
     val activeSmartScanPhases by viewModel.activeSmartScanPhases.collectAsStateWithLifecycle()
     val latestSmartScan by viewModel.latestSmartScan.collectAsStateWithLifecycle()
     val includeIgnoredAlbums by viewModel.includeIgnoredAlbums.collectAsStateWithLifecycle()
+    val semanticIndexingEnabled by viewModel.semanticIndexingEnabled.collectAsStateWithLifecycle()
 
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
@@ -63,6 +64,8 @@ fun SettingsSmartFeaturesScreen(
     ) { padding ->
         // Resolve strings outside the non-composable settings{} DSL
         val smartFeaturesHeader = stringResource(R.string.ai_category)
+        val semanticIndexingTitle = stringResource(R.string.smart_features_semantic_indexing)
+        val semanticIndexingSummary = stringResource(R.string.smart_features_semantic_indexing_summary)
         val includeIgnoredAlbumsTitle = stringResource(R.string.smart_features_include_ignored_albums)
         val includeIgnoredAlbumsSummary = stringResource(
             if (activeSmartScan == null) {
@@ -156,6 +159,13 @@ fun SettingsSmartFeaturesScreen(
                         enabled = activeSmartScan == null,
                         isChecked = includeIgnoredAlbums,
                         onCheck = viewModel::setIncludeIgnoredAlbums
+                    )
+
+                    SwitchPreference(
+                        title = semanticIndexingTitle,
+                        summary = semanticIndexingSummary,
+                        isChecked = semanticIndexingEnabled,
+                        onCheck = viewModel::setSemanticIndexingEnabled
                     )
 
                     Preference(

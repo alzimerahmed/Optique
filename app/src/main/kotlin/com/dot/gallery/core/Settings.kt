@@ -356,12 +356,27 @@ object Settings {
 
     object SmartFeatures {
         private val INCLUDE_IGNORED_ALBUMS = booleanPreferencesKey("smart_features_include_ignored_albums")
+        private val SEMANTIC_INDEXING = booleanPreferencesKey("smart_features_semantic_indexing")
 
         fun includeIgnoredAlbums(context: Context): Flow<Boolean> =
             context.activeDataStore.data.map { it[INCLUDE_IGNORED_ALBUMS] ?: false }
 
         suspend fun setIncludeIgnoredAlbums(context: Context, include: Boolean) {
             context.activeDataStore.edit { it[INCLUDE_IGNORED_ALBUMS] = include }
+        }
+
+        /**
+         * Master switch for semantic (embedding) indexing. Default ON so existing
+         * installs keep their current behavior; disabling blocks new embedding work
+         * (and, transitively, category classification) from the next scan onward.
+         */
+        fun resolveSemanticIndexing(stored: Boolean?): Boolean = stored ?: true
+
+        fun semanticIndexing(context: Context): Flow<Boolean> =
+            context.activeDataStore.data.map { resolveSemanticIndexing(it[SEMANTIC_INDEXING]) }
+
+        suspend fun setSemanticIndexing(context: Context, enabled: Boolean) {
+            context.activeDataStore.edit { it[SEMANTIC_INDEXING] = enabled }
         }
     }
 

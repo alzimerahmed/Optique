@@ -46,6 +46,7 @@ fun SmartScanPreferenceDetailScreen(
     val activeScan by viewModel.activeSmartScan.collectAsStateWithLifecycle()
     val activePhases by viewModel.activeSmartScanPhases.collectAsStateWithLifecycle()
     val latestScan by viewModel.latestSmartScan.collectAsStateWithLifecycle()
+    val semanticIndexingEnabled by viewModel.semanticIndexingEnabled.collectAsStateWithLifecycle()
     val searchReady = searchStatus == ModelStatus.READY
     val personsReady = faceDetectStatus == ModelStatus.READY && faceRecognitionStatus == ModelStatus.READY
 
@@ -59,6 +60,7 @@ fun SmartScanPreferenceDetailScreen(
                 latestScan = latestScan,
                 searchReady = searchReady,
                 personsReady = personsReady,
+                semanticIndexingEnabled = semanticIndexingEnabled,
                 onMetadata = viewModel::refreshMetadata,
                 onEmbeddings = viewModel::refreshEmbeddings,
                 onCategories = viewModel::refreshCategories,
@@ -79,6 +81,7 @@ private fun SmartScanDetailContent(
     latestScan: SmartScanRunEntity?,
     searchReady: Boolean,
     personsReady: Boolean,
+    semanticIndexingEnabled: Boolean,
     onMetadata: () -> Unit,
     onEmbeddings: () -> Unit,
     onCategories: () -> Unit,
@@ -114,10 +117,13 @@ private fun SmartScanDetailContent(
         )
         ScanAction(
             title = stringResource(R.string.refresh_embeddings),
-            summary = if (searchReady) stringResource(R.string.refresh_embeddings_summary)
-            else stringResource(R.string.ai_models_unavailable),
+            summary = when {
+                !semanticIndexingEnabled -> stringResource(R.string.smart_features_semantic_indexing_disabled_summary)
+                searchReady -> stringResource(R.string.refresh_embeddings_summary)
+                else -> stringResource(R.string.ai_models_unavailable)
+            },
             position = Position.Middle,
-            enabled = !running && searchReady,
+            enabled = !running && searchReady && semanticIndexingEnabled,
             onClick = onEmbeddings
         )
         ScanAction(
