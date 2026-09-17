@@ -12,8 +12,9 @@ import org.junit.Test
 /**
  * Tests for the pure mask refinement pipeline (Cutout Engine / Mask Refinement).
  *
- * Grid convention: 100x100 (size = 10000) gives hole-fill threshold = 50 px
- * and island-removal threshold = 20 px.
+ * Grid convention: 100x100 (size = 10000) gives hole-fill threshold
+ * = (10000*0.005).coerceIn(100, 2000) = 100 px and island-removal threshold
+ * = (10000*0.002).coerceIn(50, 500) = 50 px.
  */
 class MaskRefinementPipelineTest {
 
@@ -35,7 +36,7 @@ class MaskRefinementPipelineTest {
     @Test
     fun `small interior hole is filled`() {
         val mask = fullMask()
-        fillRect(mask, 40, 40, 4, 4, 0x00FFFFFF) // 16 px hole < 50 px threshold
+        fillRect(mask, 40, 40, 4, 4, 0x00FFFFFF) // 16 px hole < 100 px threshold
         MaskRefinementPipeline.refineMask(mask, w, h, emptyList())
         assertEquals(255, alphaAt(mask, 41, 41))
         assertEquals(255, alphaAt(mask, 43, 43))
@@ -44,7 +45,7 @@ class MaskRefinementPipelineTest {
     @Test
     fun `large interior hole is preserved`() {
         val mask = fullMask()
-        fillRect(mask, 30, 30, 30, 30, 0x00FFFFFF) // 900 px hole >= 50 px threshold
+        fillRect(mask, 30, 30, 30, 30, 0x00FFFFFF) // 900 px hole >= 100 px threshold
         MaskRefinementPipeline.refineMask(mask, w, h, emptyList())
         assertEquals(0, alphaAt(mask, 45, 45))
         assertEquals(255, alphaAt(mask, 10, 10))
@@ -55,7 +56,7 @@ class MaskRefinementPipelineTest {
         val mask = IntArray(w * h) { 0x00FFFFFF } // all background
         fillRect(mask, 10, 10, 10, 10, 0xFFFFFFFF.toInt()) // one foreground blob
         MaskRefinementPipeline.refineMask(mask, w, h, emptyList())
-        // 100 px island >= 20 px threshold: kept
+        // 100 px island >= 50 px threshold: kept
         assertEquals(255, alphaAt(mask, 12, 12))
         assertEquals(0, alphaAt(mask, 50, 50))
     }
@@ -63,7 +64,7 @@ class MaskRefinementPipelineTest {
     @Test
     fun `small isolated island is removed`() {
         val mask = fullMask()
-        fillRect(mask, 5, 5, 3, 3, 0xFFFFFFFF.toInt()) // 9 px island < 20 px threshold
+        fillRect(mask, 5, 5, 3, 3, 0xFFFFFFFF.toInt()) // 9 px island < 50 px threshold
         // Separate it from the main component with a background ring
         fillRect(mask, 0, 0, 10, 10, 0x00FFFFFF)
         fillRect(mask, 5, 5, 3, 3, 0xFFFFFFFF.toInt())
