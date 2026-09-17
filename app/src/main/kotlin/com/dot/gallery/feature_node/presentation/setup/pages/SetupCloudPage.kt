@@ -270,29 +270,4 @@ private fun capabilityLabel(capability: ProviderCapability): Int? = when (capabi
     ProviderCapability.TRASH -> null
 }
 
-private fun defaultCapabilitiesFor(type: ProviderType): Set<ProviderCapability> = when (type) {
-    ProviderType.IMMICH -> setOf(
-        ProviderCapability.REMOTE_ASSETS,
-        ProviderCapability.REMOTE_ALBUMS,
-        ProviderCapability.SYNC,
-        ProviderCapability.PEOPLE,
-        ProviderCapability.MAP,
-        ProviderCapability.SMART_SEARCH,
-        ProviderCapability.SHARE_CREATE,
-        ProviderCapability.SHARE_MANAGE,
-        ProviderCapability.ARCHIVE,
-        ProviderCapability.MEMORIES
-    )
-    ProviderType.OWNCLOUD, ProviderType.NEXTCLOUD, ProviderType.WEBDAV -> setOf(
-        ProviderCapability.REMOTE_ASSETS,
-        ProviderCapability.REMOTE_ALBUMS,
-        ProviderCapability.SYNC,
-        ProviderCapability.SHARE_CREATE
-    )
-    ProviderType.SMB, ProviderType.NFS -> setOf(
-        ProviderCapability.REMOTE_ASSETS,
-        ProviderCapability.REMOTE_ALBUMS,
-        ProviderCapability.SYNC
-    )
-    else -> setOf(ProviderCapability.REMOTE_ASSETS)
-}
+private fun defaultCapabilitiesFor(type: ProviderType): Set<ProviderCapability> = type.defaultCapabilities()
