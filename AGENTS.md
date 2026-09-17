@@ -13,7 +13,7 @@ Optique (fork of IacobIonut01/ReFra, itself renamed from `IacobIonut01/Gallery`;
 - **Media provider:** ContentProvider `com.dot.gallery.media_provider` (`.debug` suffix in debug builds), CONTENT_AUTHORITY per build type.
 - **i18n via Crowdin** (project: gallery-compose). Community on Telegram.
 
-**Build/verify:** `./gradlew assembleDebug` · `./gradlew testDebugUnitTest` · `./gradlew bundleRelease` (needs `SIGNING_STORE_PASSWORD`/`SIGNING_KEY_ALIAS`/`SIGNING_KEY_PASSWORD` env vars + `release_key.jks`). Native codec rebuilds need NDK r29 + bash scripts (`scripts/native/`); prebuilt outputs live in `app/src/main/cpp/<stack>/<abi>`. `:ml-models:checkModelSizes` fails the build if unmanaged assets exceed GitHub's 100 MB limit. Lint baseline: `lint-baseline.xml`. Requires JDK 17 + Android SDK 37.
+**Build/verify:** `powershell -File scripts/verify-env.ps1` (env check — JDK 17/21, SDK 37, NDK must match `refra.ndkVersion`, CMake 3.31.x; never CMake 4.x) · `./gradlew assembleDebug` · `./gradlew testDebugUnitTest` · `./gradlew bundleRelease` (needs `SIGNING_STORE_PASSWORD`/`SIGNING_KEY_ALIAS`/`SIGNING_KEY_PASSWORD` env vars + `release_key.jks`). Native codec rebuilds need NDK r29 + bash scripts (`scripts/native/`); prebuilt outputs live in `app/src/main/cpp/<stack>/<abi>`. `:ml-models:checkModelSizes` fails the build if unmanaged assets exceed GitHub's 100 MB limit. Lint baseline: `lint-baseline.xml`.
 
 ## Entry Point
 
@@ -53,7 +53,8 @@ For quick tasks, follow `.devin/prompt/quick.md` (commandments) and `.devin/prom
 - `docs/toolset.md` — intent map (task type → skills, sub-agents, rules) — create per phase.md §4 if absent
 - `docs/plan.md` — phased plan and current status — create per phase.md §8 if absent
 - `docs/project.md` — project state and structure — create per phase.md §3 if absent
-- `docs/agent.md` — past implementations and decisions — create if absent
+- `docs/tools-log.md` — which .devin resources (skills, sub-agents, rules) were invoked each session — create if absent
+- `docs/CONCEPTS.md` — project vocabulary (ubiquitous language for media/ML terms) — create if absent
 - `docs/research.md` — technical research, ADRs, gotchas — create per phase.md §7 if absent
 - `CONTEXT.md` — upstream ubiquitous language for media/AI features (Subject Cutout, Cutout Engine, etc.)
 - `docs/adr/` — upstream architecture decision records
