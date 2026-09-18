@@ -48,6 +48,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -61,6 +62,8 @@ import com.dot.gallery.feature_node.domain.model.Album
 import com.dot.gallery.feature_node.presentation.util.GlideInvalidation
 import com.dot.gallery.feature_node.presentation.util.formatSize
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -108,16 +111,16 @@ fun EditGroupScreen(
     ) { innerPaddingValues ->
         LazyVerticalGrid(
             modifier = Modifier
-                .padding(horizontal = 8.dp)
+                .padding(horizontal = Spacing.Small)
                 .fillMaxSize()
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             columns = GridCells.Fixed(2),
             contentPadding = PaddingValues(
                 top = innerPaddingValues.calculateTopPadding(),
-                bottom = innerPaddingValues.calculateBottomPadding() + 16.dp + 64.dp
+                bottom = innerPaddingValues.calculateBottomPadding() + Spacing.Medium + ComponentSize.NavigationBarHeight
             ),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(Spacing.Small),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             if (inGroup.isNotEmpty()) {
                 item(
@@ -128,7 +131,7 @@ fun EditGroupScreen(
                         text = stringResource(R.string.n_albums, inGroup.size),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)
+                        modifier = Modifier.padding(horizontal = Spacing.Small, vertical = Spacing.Small)
                     )
                 }
             }
@@ -155,7 +158,7 @@ fun EditGroupScreen(
                         text = stringResource(R.string.other_albums),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)
+                        modifier = Modifier.padding(horizontal = Spacing.Small, vertical = Spacing.Small)
                     )
                 }
             }
@@ -198,14 +201,14 @@ private fun EditGroupAlbumItem(
         label = "borderColor"
     )
     val borderWidth by animateDpAsState(
-        targetValue = if (isSelected) 3.dp else 1.dp,
+        targetValue = if (isSelected) 3.dp else Spacing.Hairline,
         label = "borderWidth"
     )
     val itemAlpha = if (isSelected) 1f else 0.5f
 
     Column(
         modifier = modifier
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = Spacing.Small)
             .alpha(itemAlpha),
     ) {
         Box(
@@ -231,6 +234,7 @@ private fun EditGroupAlbumItem(
                         .combinedClickable(
                             interactionSource = interactionSource,
                             indication = LocalIndication.current,
+                            role = Role.Button,
                             onClick = {
                                 feedbackManager.vibrate()
                                 onClick()
@@ -251,6 +255,7 @@ private fun EditGroupAlbumItem(
                         .combinedClickable(
                             interactionSource = interactionSource,
                             indication = LocalIndication.current,
+                            role = Role.Button,
                             onClick = {
                                 feedbackManager.vibrate()
                                 onClick()
@@ -270,8 +275,8 @@ private fun EditGroupAlbumItem(
         }
         Text(
             modifier = Modifier
-                .padding(top = 12.dp)
-                .padding(horizontal = 16.dp),
+                .padding(top = Spacing.MediumSmall)
+                .padding(horizontal = Spacing.ScreenHorizontal),
             text = album.label,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
@@ -281,8 +286,8 @@ private fun EditGroupAlbumItem(
         if (album.count > 0) {
             Text(
                 modifier = Modifier
-                    .padding(top = 2.dp, bottom = 16.dp)
-                    .padding(horizontal = 16.dp),
+                    .padding(top = Spacing.Tiny, bottom = Spacing.Medium)
+                    .padding(horizontal = Spacing.ScreenHorizontal),
                 text = pluralStringResource(
                     id = R.plurals.item_count,
                     count = album.count.toInt(),

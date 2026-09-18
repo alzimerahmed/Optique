@@ -42,6 +42,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -58,6 +60,7 @@ import com.dot.gallery.feature_node.presentation.edit.components.core.Supportive
 import com.dot.gallery.feature_node.presentation.edit.components.core.SupportiveLazyLayout
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.util.horizontalFadingEdge
+import com.dot.gallery.ui.theme.Spacing
 
 internal fun markupPresetColor(color: Color, currentColor: Color): Color =
     color.copy(alpha = currentColor.alpha)
@@ -160,10 +163,10 @@ private fun MarkupSelectorPhone(
                 .fillMaxWidth()
                 .horizontalFadingEdge(0.06f)
                 .horizontalScroll(rememberScrollState())
-                .padding(bottom = 12.dp),
+                .padding(bottom = Spacing.MediumSmall),
             horizontalArrangement = Arrangement.Center
         ) {
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(Spacing.Small))
             MarkupToolTab(
                 label = stringResource(R.string.editor_pen),
                 selected = isPen,
@@ -206,7 +209,7 @@ private fun MarkupSelectorPhone(
                     }
                 }
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(Spacing.Small))
         }
 
         val isText = drawMode == DrawMode.Text
@@ -250,12 +253,12 @@ private fun MarkupSelectorPhone(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = Spacing.ScreenHorizontal)
                 .background(
                     color = MaterialTheme.colorScheme.surfaceContainerHigh,
                     shape = RoundedCornerShape(24.dp)
                 )
-                .padding(horizontal = 12.dp, vertical = 10.dp),
+                .padding(horizontal = Spacing.MediumSmall, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Tool icon reflecting the current tool
@@ -263,17 +266,17 @@ private fun MarkupSelectorPhone(
                 imageVector = toolIcon,
                 contentDescription = null,
                 tint = Color.White.copy(alpha = if (textColorsEnabled) 1f else 0.4f),
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(Spacing.MediumLarge)
             )
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(Spacing.Small))
 
             if (isText && !textColorsEnabled) {
                 // Hint text when no text is selected
                 Box(
                     modifier = Modifier
                         .weight(1f)
-                        .defaultMinSize(minHeight = 32.dp),
+                        .defaultMinSize(minHeight = Spacing.ExtraLarge),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -290,18 +293,18 @@ private fun MarkupSelectorPhone(
                         .weight(1f)
                         .horizontalFadingEdge(0.06f)
                         .horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.Micro),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Spacing.ExtraSmall))
                     presetColors.forEach { color ->
                         val isSelected = effectiveColor == color ||
                                 (color == Color(0xFF1A1A1A) && effectiveColor == Color.Black)
                         Box(
                             modifier = Modifier
-                                .size(32.dp)
+                                .size(Spacing.ExtraLarge)
                                 .then(
-                                    if (isSelected) Modifier.border(2.dp, Color.White, CircleShape)
+                                    if (isSelected) Modifier.border(Spacing.Tiny, Color.White, CircleShape)
                                     else Modifier
                                 )
                                 .padding(3.dp)
@@ -323,7 +326,7 @@ private fun MarkupSelectorPhone(
                                 }
                         )
                     }
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Spacing.ExtraSmall))
                 }
             }
         }
@@ -347,7 +350,7 @@ private fun MarkupToolTab(
         modifier = Modifier
             .clip(RoundedCornerShape(8.dp))
             .clickable(onClick = onClick)
-            .padding(horizontal = 20.dp, vertical = 8.dp)
+            .padding(horizontal = Spacing.MediumLarge, vertical = Spacing.Small)
     )
 }
 
@@ -397,7 +400,7 @@ private fun MarkupSelectorTablet(
             )
         } else {
             HSVColorBars(
-                modifier = Modifier.padding(end = 8.dp),
+                modifier = Modifier.padding(end = Spacing.Small),
                 enabled = drawMode == DrawMode.Draw || selectedText != null,
                 currentColor = effectiveColor,
                 isSupportingPanel = true,
@@ -487,7 +490,7 @@ private fun MarkupSelectorTablet(
                     }
                 )
                 if (index < MarkupItems.entries.size - 1) {
-                    Spacer(modifier = Modifier.size(16.dp))
+                    Spacer(modifier = Modifier.size(Spacing.Medium))
                 }
             }
         }
@@ -508,26 +511,28 @@ private fun BrushEffectControls(
     faceDetectAvailable: Boolean = false,
     isDetectingFaces: Boolean = false,
 ) {
+    val brushSizeLabel = stringResource(R.string.editor_brush_size)
+    val brushStrengthLabel = stringResource(R.string.editor_brush_strength)
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.ScreenHorizontal)
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainerHigh,
                 shape = RoundedCornerShape(24.dp)
             )
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.Small)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 imageVector = toolIcon,
                 contentDescription = null,
                 tint = Color.White,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(Spacing.MediumLarge)
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(Spacing.Small))
             Text(
-                text = stringResource(R.string.editor_brush_size),
+                text = brushSizeLabel,
                 style = MaterialTheme.typography.bodySmall,
                 color = Color.White.copy(alpha = 0.7f)
             )
@@ -539,7 +544,8 @@ private fun BrushEffectControls(
                 valueRange = 15f..150f,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 12.dp)
+                    .padding(start = Spacing.MediumSmall)
+                    .semantics { contentDescription = brushSizeLabel }
             )
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -547,11 +553,11 @@ private fun BrushEffectControls(
                 imageVector = Icons.Outlined.Tune,
                 contentDescription = null,
                 tint = Color.White,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(Spacing.MediumLarge)
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(Spacing.Small))
             Text(
-                text = stringResource(R.string.editor_brush_strength),
+                text = brushStrengthLabel,
                 style = MaterialTheme.typography.bodySmall,
                 color = Color.White.copy(alpha = 0.7f)
             )
@@ -563,7 +569,8 @@ private fun BrushEffectControls(
                 valueRange = 0f..1f,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 12.dp)
+                    .padding(start = Spacing.MediumSmall)
+                    .semantics { contentDescription = brushStrengthLabel }
             )
         }
         if (faceDetectAvailable) {
@@ -571,15 +578,15 @@ private fun BrushEffectControls(
                 onClick = { if (!isDetectingFaces) onDetectFaces() },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(top = 4.dp)
+                    .padding(top = Spacing.ExtraSmall)
             ) {
                 if (isDetectingFaces) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(16.dp),
+                        modifier = Modifier.size(Spacing.Medium),
                         strokeWidth = 2.dp,
                         color = Color.White
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Spacing.Small))
                 } else {
                     Icon(
                         imageVector = Icons.Outlined.Face,
@@ -587,7 +594,7 @@ private fun BrushEffectControls(
                         tint = Color.White,
                         modifier = Modifier.size(18.dp)
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Spacing.Small))
                 }
                 Text(
                     text = stringResource(R.string.editor_blur_faces),

@@ -23,7 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.semantics.Role
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dot.gallery.R
@@ -33,6 +33,7 @@ import com.dot.gallery.core.Settings.Misc.rememberNoClassification
 import com.dot.gallery.core.ml.ModelStatus
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
 import com.dot.gallery.feature_node.presentation.settings.components.SwitchPreferenceDetailScreen
+import com.dot.gallery.ui.theme.Spacing
 
 @Composable
 fun CategoriesSettingsScreen() {
@@ -75,6 +76,8 @@ fun CategoriesSettingsScreen() {
                         .alpha(if (isModelReady) 1f else 0.5f)
                         .combinedClickable(
                             enabled = isModelReady,
+                            role = Role.Button,
+                            onLongClickLabel = stringResource(R.string.cancel),
                             onLongClick = {
                                 if (isCategoryWorkerRunning) viewModel.stopCategoryClassification()
                             },
@@ -89,7 +92,7 @@ fun CategoriesSettingsScreen() {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = Spacing.ScreenHorizontal)
                             .animateContentSize()
                     ) {
                         if (categoryWorkerProgress < 100f) {
@@ -109,7 +112,7 @@ fun CategoriesSettingsScreen() {
                                 text = categoryWorkerStatus,
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
+                                modifier = Modifier.padding(top = Spacing.Small, bottom = Spacing.Small)
                             )
                         }
                     }

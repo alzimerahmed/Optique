@@ -66,6 +66,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
@@ -92,7 +93,9 @@ import com.dot.gallery.feature_node.presentation.util.printError
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
 import com.dot.gallery.feature_node.presentation.vault.components.ConfirmationSheet
+import com.dot.gallery.ui.theme.ComponentSize
 import com.dot.gallery.ui.theme.Shapes
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -122,7 +125,7 @@ fun AlbumComponent(
     Column(
         modifier = modifier
             .alpha(if (isEnabled) 1f else 0.4f)
-            .padding(horizontal = 8.dp),
+            .padding(horizontal = Spacing.Small),
     ) {
         AlbumOptionSheet(
             album = album,
@@ -161,8 +164,8 @@ fun AlbumComponent(
             if (album.isOnSdcard) {
                 Icon(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .size(24.dp)
+                        .padding(Spacing.Medium)
+                        .size(Spacing.Large)
                         .align(Alignment.BottomEnd),
                     imageVector = Icons.Outlined.SdCard,
                     contentDescription = null,
@@ -174,14 +177,14 @@ fun AlbumComponent(
                     album = album,
                     modifier = Modifier
                         .align(Alignment.BottomStart)
-                        .padding(8.dp)
+                        .padding(Spacing.Small)
                 )
             }
         }
         Text(
             modifier = Modifier
-                .padding(top = 12.dp)
-                .padding(horizontal = 16.dp),
+                .padding(top = Spacing.MediumSmall)
+                .padding(horizontal = Spacing.ScreenHorizontal),
             text = album.label,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
@@ -191,8 +194,8 @@ fun AlbumComponent(
         if (album.count > 0) {
             Text(
                 modifier = Modifier
-                    .padding(top = 2.dp, bottom = 16.dp)
-                    .padding(horizontal = 16.dp),
+                    .padding(top = Spacing.Tiny, bottom = Spacing.Medium)
+                    .padding(horizontal = Spacing.ScreenHorizontal),
                 text = pluralStringResource(
                     id = R.plurals.item_count,
                     count = album.count.toInt(),
@@ -229,14 +232,14 @@ private fun CloudProviderBadge(album: Album, modifier: Modifier = Modifier) {
             ProviderBrandIcon(
                 providerType = providerType,
                 tint = Color.White,
-                modifier = Modifier.size(16.dp)
+                modifier = Modifier.size(Spacing.Medium)
             )
         } else {
             Icon(
                 imageVector = Icons.Outlined.Cloud,
                 contentDescription = null,
                 tint = Color.White,
-                modifier = Modifier.size(16.dp)
+                modifier = Modifier.size(Spacing.Medium)
             )
         }
     }
@@ -268,11 +271,13 @@ fun AlbumRowComponent(
         modifier = modifier
             .fillMaxWidth()
             .alpha(if (isEnabled) 1f else 0.4f)
-            .height(64.dp)
-            .padding(horizontal = 8.dp)
+            .height(ComponentSize.ButtonHeight)
+            .padding(horizontal = Spacing.Small)
             .clip(Shapes.large)
             .combinedClickable(
                 enabled = isEnabled,
+                role = Role.Button,
+                onLongClickLabel = stringResource(R.string.more_options_cd),
                 onClick = { onItemClick(album) },
                 onLongClick = if (onTogglePinClick != null) {
                     {
@@ -318,8 +323,8 @@ fun AlbumRowComponent(
             if (album.isOnSdcard) {
                 Icon(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .size(24.dp)
+                        .padding(Spacing.Medium)
+                        .size(Spacing.Large)
                         .align(Alignment.BottomEnd),
                     imageVector = Icons.Outlined.SdCard,
                     contentDescription = null,
@@ -331,7 +336,7 @@ fun AlbumRowComponent(
                     album = album,
                     modifier = Modifier
                         .align(Alignment.BottomStart)
-                        .padding(8.dp)
+                        .padding(Spacing.Small)
                 )
             }
         }
@@ -340,7 +345,7 @@ fun AlbumRowComponent(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight()
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = Spacing.MediumSmall),
             verticalArrangement = Arrangement.Center
         ) {
             Text(
@@ -711,7 +716,7 @@ fun AlbumOptionSheet(
                         }
                     },
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(Spacing.Medium)
                         .fillMaxWidth()
                 )
             }
@@ -763,6 +768,8 @@ fun AlbumImage(
                 enabled = isEnabled,
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
+                role = Role.Button,
+                onLongClickLabel = stringResource(R.string.more_options_cd),
                 onClick = { onItemClick(album) },
                 onLongClick = {
                     onItemLongClick?.let {
@@ -780,7 +787,7 @@ fun AlbumImage(
             modifier = modifier
                 .fillMaxSize()
                 .border(
-                    width = 1.dp,
+                    width = Spacing.Hairline,
                     color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                     shape = RoundedCornerShape(cornerRadius)
                 )
@@ -790,6 +797,8 @@ fun AlbumImage(
                     enabled = isEnabled,
                     interactionSource = interactionSource,
                     indication = LocalIndication.current,
+                    role = Role.Button,
+                    onLongClickLabel = stringResource(R.string.more_options_cd),
                     onClick = { onItemClick(album) },
                     onLongClick = {
                         onItemLongClick?.let {
@@ -806,7 +815,7 @@ fun AlbumImage(
             modifier = Modifier
                 .fillMaxSize()
                 .border(
-                    width = 1.dp,
+                    width = Spacing.Hairline,
                     color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                     shape = RoundedCornerShape(cornerRadius)
                 )
@@ -815,6 +824,8 @@ fun AlbumImage(
                     enabled = isEnabled,
                     interactionSource = interactionSource,
                     indication = LocalIndication.current,
+                    role = Role.Button,
+                    onLongClickLabel = stringResource(R.string.more_options_cd),
                     onClick = { onItemClick(album) },
                     onLongClick = {
                         onItemLongClick?.let {
@@ -845,7 +856,7 @@ internal fun LockedAlbumThumbnail(
             .then(
                 if (showBorder) {
                     Modifier.border(
-                        width = 1.dp,
+                        width = Spacing.Hairline,
                         color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                         shape = shape
                     )

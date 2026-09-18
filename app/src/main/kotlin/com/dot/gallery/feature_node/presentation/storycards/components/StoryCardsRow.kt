@@ -5,7 +5,6 @@
 
 package com.dot.gallery.feature_node.presentation.storycards.components
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -97,11 +96,9 @@ private fun StoryCardItem(
 ) {
     val isDarkTheme = isDarkTheme()
     val followTheme = remember(allowBlur) { !allowBlur }
-    val gradientColor by animateColorAsState(
-        if (followTheme) {
-            if (isDarkTheme) BlackScrim else WhiterBlackScrim
-        } else BlackScrim,
-    )
+    val gradientColor = if (followTheme) {
+        if (isDarkTheme) BlackScrim else WhiterBlackScrim
+    } else BlackScrim
 
     Box(
         modifier = modifier

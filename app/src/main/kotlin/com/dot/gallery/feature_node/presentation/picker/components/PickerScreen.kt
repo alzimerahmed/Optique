@@ -123,6 +123,7 @@ import com.dot.gallery.feature_node.presentation.vault.utils.VaultPasswordManage
 import com.dot.gallery.feature_node.presentation.vault.utils.VerifyResult
 import com.dot.gallery.feature_node.presentation.vault.utils.rememberBiometricState
 import com.dot.gallery.ui.theme.Dimens
+import com.dot.gallery.ui.theme.Spacing
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.outlined.FolderOff
 import androidx.compose.ui.platform.LocalContext
@@ -493,7 +494,7 @@ fun PickerScreen(
                                                 )
                                                 Text(
                                                     text = stringResource(R.string.preview),
-                                                    modifier = Modifier.padding(start = 4.dp)
+                                                    modifier = Modifier.padding(start = Spacing.ExtraSmall)
                                                 )
                                             }
                                         }
@@ -520,7 +521,7 @@ fun PickerScreen(
                                                     )
                                                     Text(
                                                         text = stringResource(R.string.preview),
-                                                        modifier = Modifier.padding(start = 4.dp)
+                                                        modifier = Modifier.padding(start = Spacing.ExtraSmall)
                                                     )
                                                 }
                                             }
@@ -529,13 +530,13 @@ fun PickerScreen(
                                     Surface(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .padding(horizontal = 24.dp, vertical = 8.dp),
+                                            .padding(horizontal = Spacing.Large, vertical = Spacing.Small),
                                         shape = CircleShape,
                                         color = MaterialTheme.colorScheme.surfaceContainerHigh
                                     ) {
                                         Row(
-                                            modifier = Modifier.padding(4.dp),
-                                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                            modifier = Modifier.padding(Spacing.ExtraSmall),
+                                            horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
                                         ) {
                                             PillTab(
                                                 selected = selectedTabIndex == 0,
@@ -663,7 +664,7 @@ fun PickerScreen(
                         AnimatedVisibility(
                             modifier = Modifier
                                 .align(Alignment.BottomEnd)
-                                .padding(32.dp),
+                                .padding(Spacing.ExtraLarge),
                             visible = allowSelection || selectedMedia.value.isNotEmpty(),
                             enter = slideInVertically { it * 2 },
                             exit = slideOutVertically { it * 2 }
@@ -919,9 +920,9 @@ fun PickerScreen(
                 color = MaterialTheme.colorScheme.surfaceContainerHigh
             ) {
                 Row(
-                    modifier = Modifier.padding(24.dp),
+                    modifier = Modifier.padding(Spacing.Large),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.MediumLarge)
                 ) {
                     CircularProgressIndicator()
                     Text(
@@ -984,7 +985,7 @@ private fun RowScope.PillTab(
     ) {
         Text(
             text = text,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            modifier = Modifier.padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
             style = MaterialTheme.typography.labelLarge,
             color = textColor,
             textAlign = TextAlign.Center
@@ -1010,12 +1011,12 @@ private fun PickerSecurityInfoSheet(
             contentWindowInsets = { WindowInsets(0, 0, 0, 0) }
         ) {
             Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Medium),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 32.dp, vertical = 16.dp)
+                    .padding(horizontal = Spacing.ExtraLarge, vertical = Spacing.Medium)
             ) {
                 Text(
                     text = stringResource(R.string.locked),
@@ -1023,7 +1024,7 @@ private fun PickerSecurityInfoSheet(
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
-                        .padding(bottom = 16.dp)
+                        .padding(bottom = Spacing.Medium)
                         .fillMaxWidth()
                 )
                 Text(
@@ -1033,7 +1034,7 @@ private fun PickerSecurityInfoSheet(
                             color = MaterialTheme.colorScheme.errorContainer,
                             shape = RoundedCornerShape(12.dp)
                         )
-                        .padding(16.dp),
+                        .padding(Spacing.Medium),
                     text = stringResource(R.string.locked_album_security_error),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.error,
@@ -1077,17 +1078,17 @@ private fun PickerAlbumsGrid(
             columns = GridCells.Adaptive(Dimens.Album()),
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 8.dp),
+                .padding(horizontal = Spacing.Small),
             contentPadding = PaddingValues(bottom = 96.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(Spacing.Small),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             items(
                 items = albums,
                 key = { it.toString() }
             ) { album ->
                 Column(
-                    modifier = Modifier.padding(horizontal = 8.dp)
+                    modifier = Modifier.padding(horizontal = Spacing.Small)
                 ) {
                     Box(
                         modifier = Modifier
@@ -1108,8 +1109,8 @@ private fun PickerAlbumsGrid(
                     }
                     Text(
                         modifier = Modifier
-                            .padding(top = 12.dp)
-                            .padding(horizontal = 16.dp),
+                            .padding(top = Spacing.MediumSmall)
+                            .padding(horizontal = Spacing.Medium),
                         text = album.label,
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurface,
@@ -1158,7 +1159,7 @@ private fun PickerSourceCard(
 ) {
     Column(
         modifier = Modifier
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = Spacing.Small)
             .clickable { onClick() }
     ) {
         Box(
@@ -1177,8 +1178,8 @@ private fun PickerSourceCard(
         }
         Text(
             modifier = Modifier
-                .padding(top = 12.dp)
-                .padding(horizontal = 16.dp),
+                .padding(top = Spacing.MediumSmall)
+                .padding(horizontal = Spacing.Medium),
             text = label,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
@@ -1197,10 +1198,10 @@ private fun PickerVaultChooserGrid(
         columns = GridCells.Adaptive(Dimens.Album()),
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 8.dp),
+            .padding(horizontal = Spacing.Small),
         contentPadding = PaddingValues(bottom = 96.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Small),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         items(
             items = vaults,

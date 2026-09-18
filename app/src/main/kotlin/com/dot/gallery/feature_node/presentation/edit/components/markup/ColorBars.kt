@@ -33,11 +33,19 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.progressBarRangeInfo
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.toRect
+import com.dot.gallery.R
 import com.dot.gallery.feature_node.presentation.edit.components.core.SupportiveLayout
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import android.graphics.Color as AndroidColor
@@ -59,6 +67,7 @@ fun AlphaBar(
     val initialAlpha = remember(currentColor, enabled) {
         currentColor.alpha * if (enabled) 1f else 0.2f
     }
+    val opacityLabel = stringResource(R.string.color_opacity)
 
     Canvas(
         modifier = modifier
@@ -72,6 +81,18 @@ fun AlphaBar(
             )
             .clip(RoundedCornerShape(20))
             .emitDragGesture(interactionSource)
+            .semantics {
+                contentDescription = opacityLabel
+                progressBarRangeInfo = ProgressBarRangeInfo(
+                    current = initialAlpha,
+                    range = 0f..1f
+                )
+                setProgress { value ->
+                    if (!enabled) return@setProgress false
+                    setColor(value.coerceIn(0f, 1f))
+                    true
+                }
+            }
     ) {
         val drawScopeSize = size
 
@@ -131,9 +152,9 @@ fun AlphaBar(
                 drawRoundRect(
                     color = Color.White,
                     topLeft = if (isSupportingPanel) {
-                        Offset(0f, pressOffset.value.y - 8.dp.toPx())
+                        Offset(0f, pressOffset.value.y - Spacing.Small.toPx())
                     } else {
-                        Offset(pressOffset.value.x - 8.dp.toPx(), 0f)
+                        Offset(pressOffset.value.x - Spacing.Small.toPx(), 0f)
                     },
                     size = if (isSupportingPanel) {
                         Size(size.width, size.width / 3)
@@ -173,6 +194,7 @@ fun VibrancyBar(
     val currentSaturation = remember(hsv) { hsv[1] }
     val currentAlpha =
         remember(currentColor, enabled) { currentColor.alpha * if (enabled) 1f else 0.2f }
+    val vibrancyLabel = stringResource(R.string.color_vibrancy)
 
     Canvas(
         modifier = modifier
@@ -186,6 +208,18 @@ fun VibrancyBar(
             )
             .clip(RoundedCornerShape(20))
             .emitDragGesture(interactionSource)
+            .semantics {
+                contentDescription = vibrancyLabel
+                progressBarRangeInfo = ProgressBarRangeInfo(
+                    current = initialVibrancy,
+                    range = 0f..1f
+                )
+                setProgress { value ->
+                    if (!enabled) return@setProgress false
+                    setColor(value.coerceIn(0f, 1f))
+                    true
+                }
+            }
     ) {
         val drawScopeSize = size
 
@@ -262,9 +296,9 @@ fun VibrancyBar(
                 drawRoundRect(
                     color = Color.White,
                     topLeft = if (isSupportingPanel) {
-                        Offset(0f, pressOffset.value.y - 8.dp.toPx())
+                        Offset(0f, pressOffset.value.y - Spacing.Small.toPx())
                     } else {
-                        Offset(pressOffset.value.x - 8.dp.toPx(), 0f)
+                        Offset(pressOffset.value.x - Spacing.Small.toPx(), 0f)
                     },
                     size = if (isSupportingPanel) {
                         Size(size.width, size.width / 3)
@@ -303,6 +337,7 @@ fun SaturationBar(
     val currentHue = remember(hsv) { hsv[0] }
     val currentAlpha =
         remember(currentColor, enabled) { currentColor.alpha * if (enabled) 1f else 0.2f }
+    val saturationLabel = stringResource(R.string.color_saturation)
 
     Canvas(
         modifier = modifier
@@ -316,6 +351,18 @@ fun SaturationBar(
             )
             .clip(RoundedCornerShape(20))
             .emitDragGesture(interactionSource)
+            .semantics {
+                contentDescription = saturationLabel
+                progressBarRangeInfo = ProgressBarRangeInfo(
+                    current = initialSaturation,
+                    range = 0f..1f
+                )
+                setProgress { value ->
+                    if (!enabled) return@setProgress false
+                    setColor(value.coerceIn(0f, 1f))
+                    true
+                }
+            }
     ) {
         val drawScopeSize = size
 
@@ -393,9 +440,9 @@ fun SaturationBar(
                 drawRoundRect(
                     color = Color.White,
                     topLeft = if (isSupportingPanel) {
-                        Offset(0f, pressOffset.value.y - 8.dp.toPx())
+                        Offset(0f, pressOffset.value.y - Spacing.Small.toPx())
                     } else {
-                        Offset(pressOffset.value.x - 8.dp.toPx(), 0f)
+                        Offset(pressOffset.value.x - Spacing.Small.toPx(), 0f)
                     },
                     size = if (isSupportingPanel) {
                         Size(size.width, size.width / 3)
@@ -470,6 +517,7 @@ fun HueBar(
     val vibrancy = remember(hsv) { hsv[2] }
     val currentAlpha =
         remember(currentColor, enabled) { currentColor.alpha * if (enabled) 1f else 0.2f }
+    val hueLabel = stringResource(R.string.color_hue)
 
     Canvas(
         modifier = Modifier
@@ -484,6 +532,18 @@ fun HueBar(
             .then(modifier)
             .clip(RoundedCornerShape(20))
             .emitDragGesture(interactionSource)
+            .semantics {
+                contentDescription = hueLabel
+                progressBarRangeInfo = ProgressBarRangeInfo(
+                    current = initialHue / 360f,
+                    range = 0f..1f
+                )
+                setProgress { value ->
+                    if (!enabled) return@setProgress false
+                    setColor(value.coerceIn(0f, 1f) * 360f)
+                    true
+                }
+            }
     ) {
         val drawScopeSize = size
 
@@ -546,9 +606,9 @@ fun HueBar(
                 drawRoundRect(
                     color = Color.White,
                     topLeft = if (isSupportingPanel) {
-                        Offset(0f, pressOffset.value.y - 8.dp.toPx())
+                        Offset(0f, pressOffset.value.y - Spacing.Small.toPx())
                     } else {
-                        Offset(pressOffset.value.x - 8.dp.toPx(), 0f)
+                        Offset(pressOffset.value.x - Spacing.Small.toPx(), 0f)
                     },
                     size = if (isSupportingPanel) {
                         Size(size.width, size.width / 3)

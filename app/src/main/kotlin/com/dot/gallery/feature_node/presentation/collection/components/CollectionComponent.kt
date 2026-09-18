@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -57,6 +58,8 @@ import com.dot.gallery.feature_node.presentation.common.components.OptionItem
 import com.dot.gallery.feature_node.presentation.common.components.OptionSheet
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalGlideComposeApi::class, ExperimentalFoundationApi::class)
@@ -152,13 +155,13 @@ fun CollectionComponent(
             Text(
                 text = collection.label,
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(Spacing.Medium)
             )
         }
     )
 
     Column(
-        modifier = modifier.padding(horizontal = 8.dp)
+        modifier = modifier.padding(horizontal = Spacing.Small)
     ) {
         Box(
             modifier = Modifier.aspectRatio(1f)
@@ -184,7 +187,7 @@ fun CollectionComponent(
                     modifier = Modifier
                         .fillMaxSize()
                         .border(
-                            width = 1.dp,
+                            width = Spacing.Hairline,
                             color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                             shape = RoundedCornerShape(cornerRadius)
                         )
@@ -192,6 +195,8 @@ fun CollectionComponent(
                         .combinedClickable(
                             interactionSource = interactionSource,
                             indication = LocalIndication.current,
+                            role = Role.Button,
+                            onLongClickLabel = stringResource(R.string.more_options_cd),
                             onClick = { onItemClick(collectionWithCount) },
                             onLongClick = {
                                 feedbackManager.vibrate()
@@ -219,7 +224,7 @@ fun CollectionComponent(
                             shape = RoundedCornerShape(cornerRadius)
                         )
                         .border(
-                            width = 1.dp,
+                            width = Spacing.Hairline,
                             color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                             shape = RoundedCornerShape(cornerRadius)
                         )
@@ -227,6 +232,8 @@ fun CollectionComponent(
                         .combinedClickable(
                             interactionSource = interactionSource,
                             indication = LocalIndication.current,
+                            role = Role.Button,
+                            onLongClickLabel = stringResource(R.string.more_options_cd),
                             onClick = { onItemClick(collectionWithCount) },
                             onLongClick = {
                                 feedbackManager.vibrate()
@@ -240,8 +247,8 @@ fun CollectionComponent(
             if (collection.isPinned) {
                 Icon(
                     modifier = Modifier
-                        .padding(8.dp)
-                        .size(20.dp)
+                        .padding(Spacing.Small)
+                        .size(Spacing.MediumLarge)
                         .align(Alignment.TopEnd),
                     imageVector = Icons.Outlined.PushPin,
                     contentDescription = null,
@@ -251,8 +258,8 @@ fun CollectionComponent(
         }
         Text(
             modifier = Modifier
-                .padding(top = 12.dp)
-                .padding(horizontal = 16.dp),
+                .padding(top = Spacing.MediumSmall)
+                .padding(horizontal = Spacing.ScreenHorizontal),
             text = collection.label,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
@@ -265,8 +272,8 @@ fun CollectionComponent(
             } else ""
             Text(
                 modifier = Modifier
-                    .padding(top = 2.dp, bottom = 16.dp)
-                    .padding(horizontal = 16.dp),
+                    .padding(top = Spacing.Tiny, bottom = Spacing.Medium)
+                    .padding(horizontal = Spacing.ScreenHorizontal),
                 text = stringResource(
                     R.string.n_items_in_collection,
                     collectionWithCount.mediaCount
@@ -372,7 +379,7 @@ fun CollectionRowComponent(
             Text(
                 text = collection.label,
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(Spacing.Medium)
             )
         }
     )
@@ -391,11 +398,13 @@ fun CollectionRowComponent(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(64.dp)
-            .padding(horizontal = 8.dp)
+            .height(ComponentSize.ButtonHeight)
+            .padding(horizontal = Spacing.Small)
             .combinedClickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
+                role = Role.Button,
+                onLongClickLabel = stringResource(R.string.more_options_cd),
                 onClick = { onItemClick(collectionWithCount) },
                 onLongClick = {
                     feedbackManager.vibrate()
@@ -432,7 +441,7 @@ fun CollectionRowComponent(
                             shape = RoundedCornerShape(12.dp)
                         )
                         .clip(RoundedCornerShape(12.dp))
-                        .padding(12.dp)
+                        .padding(Spacing.MediumSmall)
                 )
             }
         }
@@ -441,7 +450,7 @@ fun CollectionRowComponent(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight()
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = Spacing.MediumSmall),
             verticalArrangement = Arrangement.Center
         ) {
             Text(
@@ -469,7 +478,7 @@ fun CollectionRowComponent(
         if (collection.isPinned) {
             Icon(
                 modifier = Modifier
-                    .size(20.dp)
+                    .size(Spacing.MediumLarge)
                     .align(Alignment.CenterVertically),
                 imageVector = Icons.Outlined.PushPin,
                 contentDescription = null,

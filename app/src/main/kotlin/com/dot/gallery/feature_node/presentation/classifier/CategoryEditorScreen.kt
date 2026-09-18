@@ -123,6 +123,7 @@ import com.dot.gallery.feature_node.presentation.search.ImageSearchPickerSheet
 import com.dot.gallery.feature_node.presentation.util.GlideInvalidation
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.Screen
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.LocalHazeStyle
 import dev.chrisbanes.haze.hazeEffect
 import kotlinx.coroutines.launch
@@ -247,11 +248,11 @@ fun CategoryEditorScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .padding(bottom = 16.dp)
+                        .padding(horizontal = Spacing.ScreenHorizontal)
+                        .padding(bottom = Spacing.Medium)
                         .clip(RoundedCornerShape(50))
                         .background(MaterialTheme.colorScheme.secondaryContainer)
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .padding(horizontal = Spacing.Medium, vertical = Spacing.Small)
                 ) {
                     Text(
                         text = stringResource(R.string.best_match),
@@ -387,15 +388,15 @@ fun CategoryEditorScreen(
                     top = innerPadding.calculateTopPadding(),
                     bottom = paddingValues.calculateBottomPadding() + 128.dp
                 ),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
         ) {
             // ============ 1. Category Name ============
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
+                    .padding(top = Spacing.Small),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Small)
             ) {
                 Text(
                     text = stringResource(R.string.category_name),
@@ -445,11 +446,11 @@ fun CategoryEditorScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
                     .clip(RoundedCornerShape(24.dp))
                     .background(MaterialTheme.colorScheme.surfaceContainer)
-                    .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                    .padding(Spacing.MediumLarge),
+                verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
             ) {
                 Text(
                     text = stringResource(R.string.describe_content),
@@ -494,7 +495,7 @@ fun CategoryEditorScreen(
                 allMedia = allMedia,
                 onAddClick = { showRefImagePicker = true },
                 onRemove = { viewModel.removeReferenceImage(it) },
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = Spacing.ScreenHorizontal)
             )
 
             // ============ 5. Sensitivity Presets ============
@@ -503,7 +504,7 @@ fun CategoryEditorScreen(
                 onThresholdChange = { viewModel.updateThreshold(it) },
                 showFineTune = showFineTune,
                 onToggleFineTune = { showFineTune = !showFineTune },
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = Spacing.ScreenHorizontal)
             )
 
             // ============ 6. Inline Preview Grid ============
@@ -515,10 +516,10 @@ fun CategoryEditorScreen(
                 onCardClick = {
                     if (previewCount > 0) showPreviewSheet = true
                 },
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = Spacing.ScreenHorizontal)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Spacing.Medium))
         }
     }
 }
@@ -533,11 +534,11 @@ private fun TemplateChipsSection(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.ScreenHorizontal)
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(Spacing.MediumLarge),
+        verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         Text(
             text = stringResource(R.string.quick_start),
@@ -551,8 +552,8 @@ private fun TemplateChipsSection(
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
+            verticalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             Category.DEFAULT_CATEGORIES.forEach { template ->
                 FilterChip(
@@ -613,9 +614,9 @@ private fun SensitivitySection(
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(20.dp)
+            .padding(Spacing.MediumLarge)
             .animateContentSize(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -641,7 +642,7 @@ private fun SensitivitySection(
         // Preset chips
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             SensitivityPreset.entries.forEach { preset ->
                 val isSelected = selectedPreset == preset
@@ -654,15 +655,15 @@ private fun SensitivitySection(
                             else Modifier
                                 .background(MaterialTheme.colorScheme.surface)
                                 .border(
-                                    1.dp,
+                                    Spacing.Hairline,
                                     MaterialTheme.colorScheme.outlineVariant,
                                     RoundedCornerShape(16.dp)
                                 )
                         )
                         .clickable { onThresholdChange(preset.threshold) }
-                        .padding(horizontal = 8.dp, vertical = 12.dp),
+                        .padding(horizontal = Spacing.Small, vertical = Spacing.MediumSmall),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                    verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
                 ) {
                     Text(
                         text = stringResource(preset.labelRes),
@@ -691,7 +692,7 @@ private fun SensitivitySection(
         // Fine-tune slider (advanced, toggled)
         AnimatedVisibility(visible = showFineTune) {
             Column(
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -753,8 +754,8 @@ private fun InlinePreviewSection(
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
             .clickable(enabled = previewCount > 0, onClick = onCardClick)
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(Spacing.MediumLarge),
+        verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -763,7 +764,7 @@ private fun InlinePreviewSection(
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
             ) {
                 Text(
                     text = stringResource(R.string.matching_preview),
@@ -773,7 +774,7 @@ private fun InlinePreviewSection(
                 )
                 if (isLoading) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(16.dp),
+                        modifier = Modifier.size(Spacing.Medium),
                         strokeWidth = 2.dp
                     )
                 }
@@ -808,8 +809,8 @@ private fun InlinePreviewSection(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(((displayMedia.size / 3 + if (displayMedia.size % 3 > 0) 1 else 0) * 120).dp),
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Micro),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Micro),
                 userScrollEnabled = false
             ) {
                 items(
@@ -843,12 +844,12 @@ private fun InlinePreviewSection(
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(Spacing.ExtraSmall))
                     Icon(
                         imageVector = Icons.AutoMirrored.Outlined.ArrowForward,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(Spacing.Medium)
                     )
                 }
             }
@@ -872,8 +873,8 @@ private fun ReferenceImagesSection(
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(Spacing.MediumLarge),
+        verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -919,7 +920,7 @@ private fun ReferenceImagesSection(
                 modifier = Modifier
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
             ) {
                 referenceImageIds.forEach { id ->
                     val media = mediaMap[id]
@@ -942,8 +943,8 @@ private fun ReferenceImagesSection(
                             Box(
                                 modifier = Modifier
                                     .align(Alignment.TopEnd)
-                                    .padding(2.dp)
-                                    .size(20.dp)
+                                    .padding(Spacing.Tiny)
+                                    .size(Spacing.MediumLarge)
                                     .clip(CircleShape)
                                     .background(MaterialTheme.colorScheme.error)
                                     .clickable { onRemove(id) },

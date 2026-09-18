@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -52,6 +53,8 @@ import com.dot.gallery.feature_node.presentation.common.components.OptionSheet
 import com.dot.gallery.feature_node.presentation.util.formatSize
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalGlideComposeApi::class)
@@ -139,7 +142,7 @@ fun AlbumGroupComponent(
             val albums = groupWithAlbums.albums
             if (albums.isNotEmpty()) {
                 val thumbRadius = 12.dp
-                val gap = 2.dp
+                val gap = Spacing.Tiny
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(0.5f)
@@ -198,33 +201,33 @@ fun AlbumGroupComponent(
                 Icon(
                     imageVector = Icons.Outlined.Collections,
                     contentDescription = null,
-                    modifier = Modifier.height(64.dp).padding(16.dp),
+                    modifier = Modifier.height(64.dp).padding(Spacing.Medium),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Text(
                 text = groupWithAlbums.group.label,
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = Spacing.Small)
             )
             Text(
                 text = stringResource(R.string.n_albums, groupWithAlbums.albums.size),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(bottom = 8.dp)
+                modifier = Modifier.padding(bottom = Spacing.Small)
             )
         }
     )
 
     Column(
-        modifier = modifier.padding(horizontal = 8.dp),
+        modifier = modifier.padding(horizontal = Spacing.Small),
     ) {
         Box(
             modifier = Modifier
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(cornerRadius))
                 .border(
-                    width = 1.dp,
+                    width = Spacing.Hairline,
                     color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                     shape = RoundedCornerShape(cornerRadius)
                 )
@@ -235,6 +238,8 @@ fun AlbumGroupComponent(
                 .combinedClickable(
                     interactionSource = interactionSource,
                     indication = LocalIndication.current,
+                    role = Role.Button,
+                    onLongClickLabel = stringResource(R.string.more_options_cd),
                     onClick = { onGroupClick(groupWithAlbums) },
                     onLongClick = {
                         if (onRenameGroup != null || onDeleteGroup != null) {
@@ -257,7 +262,7 @@ fun AlbumGroupComponent(
             } else {
                 // 2x2 grid of album thumbnails
                 val innerCornerRadius = (cornerRadius.value * 0.5f).dp
-                val gap = 2.dp
+                val gap = Spacing.Tiny
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(gap)
@@ -322,8 +327,8 @@ fun AlbumGroupComponent(
 
         Text(
             modifier = Modifier
-                .padding(top = 12.dp)
-                .padding(horizontal = 16.dp),
+                .padding(top = Spacing.MediumSmall)
+                .padding(horizontal = Spacing.ScreenHorizontal),
             text = groupWithAlbums.group.label,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
@@ -332,8 +337,8 @@ fun AlbumGroupComponent(
         )
         Text(
             modifier = Modifier
-                .padding(top = 2.dp, bottom = 16.dp)
-                .padding(horizontal = 16.dp),
+                .padding(top = Spacing.Tiny, bottom = Spacing.Medium)
+                .padding(horizontal = Spacing.ScreenHorizontal),
             text = stringResource(
                 R.string.n_albums,
                 groupWithAlbums.albums.size
@@ -428,13 +433,13 @@ fun AlbumGroupRowComponent(
             Text(
                 text = groupWithAlbums.group.label,
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = Spacing.Small)
             )
             Text(
                 text = stringResource(R.string.n_albums, groupWithAlbums.albums.size),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(bottom = 8.dp)
+                modifier = Modifier.padding(bottom = Spacing.Small)
             )
         }
     )
@@ -442,11 +447,13 @@ fun AlbumGroupRowComponent(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(64.dp)
-            .padding(horizontal = 8.dp)
+            .height(ComponentSize.ButtonHeight)
+            .padding(horizontal = Spacing.Small)
             .combinedClickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
+                role = Role.Button,
+                onLongClickLabel = stringResource(R.string.more_options_cd),
                 onClick = { onGroupClick(groupWithAlbums) },
                 onLongClick = {
                     if (onRenameGroup != null || onDeleteGroup != null) {
@@ -474,7 +481,7 @@ fun AlbumGroupRowComponent(
                     tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                 )
             } else {
-                val gap = 1.dp
+                val gap = Spacing.Hairline
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(gap)
@@ -517,7 +524,7 @@ fun AlbumGroupRowComponent(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight()
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = Spacing.MediumSmall),
             verticalArrangement = Arrangement.Center
         ) {
             Text(

@@ -26,11 +26,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dot.gallery.feature_node.presentation.util.safeSystemGesturesPadding
 import com.dot.gallery.feature_node.presentation.util.sentenceCase
+import com.dot.gallery.ui.theme.Spacing
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -85,7 +88,8 @@ fun SelectableItem(
                     onLongClick = { onLongItemClick?.invoke() },
                     onClick = onItemClick
                 )
-                .padding(16.dp),
+                .semantics { this.selected = selected }
+                .padding(Spacing.Medium),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -94,10 +98,10 @@ fun SelectableItem(
                 colorFilter = ColorFilter.tint(tintColor),
                 contentDescription = title,
                 modifier = Modifier
-                    .padding(12.dp)
+                    .padding(Spacing.MediumSmall)
                     .size(28.dp)
             )
-            Spacer(modifier = Modifier.size(16.dp))
+            Spacer(modifier = Modifier.size(Spacing.Medium))
             Text(
                 text = title.sentenceCase().replace("_", " "),
                 modifier = Modifier,
@@ -106,7 +110,7 @@ fun SelectableItem(
                 color = tintColor,
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.size(24.dp))
+            Spacer(modifier = Modifier.size(Spacing.Large))
         }
     } else {
         Column(
@@ -115,7 +119,8 @@ fun SelectableItem(
                     enabled = enabled,
                     onLongClick = { onLongItemClick?.invoke() },
                     onClick = onItemClick
-                ),
+                )
+                .semantics { this.selected = selected },
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -127,7 +132,7 @@ fun SelectableItem(
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha),
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.size(8.dp))
+            Spacer(modifier = Modifier.size(Spacing.Small))
             Image(
                 imageVector = icon,
                 colorFilter = ColorFilter.tint(tintColor),
@@ -138,7 +143,7 @@ fun SelectableItem(
                         color = containerColor,
                         shape = CircleShape
                     )
-                    .padding(20.dp)
+                    .padding(Spacing.MediumLarge)
                     .size(28.dp)
             )
         }

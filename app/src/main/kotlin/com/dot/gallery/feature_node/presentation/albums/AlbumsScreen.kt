@@ -48,7 +48,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dot.gallery.cloud.core.ProviderType
 import com.dot.gallery.cloud.ui.descriptor.ProviderBrandIcon
@@ -103,6 +102,8 @@ import com.dot.gallery.feature_node.presentation.util.Screen
 import com.dot.gallery.feature_node.presentation.util.mediaSharedElement
 import com.dot.gallery.feature_node.presentation.util.rememberActivityResult
 import com.dot.gallery.feature_node.presentation.util.rememberBottomBarInset
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import kotlinx.coroutines.Dispatchers
@@ -265,7 +266,7 @@ fun AlbumsScreen(
                     GridPinchZoomLayout(
                         state = pinchState,
                         modifier = Modifier.hazeSource(LocalHazeState.current),
-                        indicatorTopPadding = innerPaddingValues.calculateTopPadding() + 16.dp,
+                        indicatorTopPadding = innerPaddingValues.calculateTopPadding() + Spacing.Medium,
                     ) {
                         LaunchedEffect(gridState.isScrollInProgress) {
                             isScrolling.value = gridState.isScrollInProgress
@@ -274,15 +275,15 @@ fun AlbumsScreen(
                         LazyVerticalGrid(
                             state = gridState,
                             modifier = Modifier
-                                .padding(horizontal = 8.dp)
+                                .padding(horizontal = Spacing.Small)
                                 .fillMaxSize(),
                             columns = gridCells,
                             contentPadding = PaddingValues(
                                 top = innerPaddingValues.calculateTopPadding(),
-                                bottom = bottomBarInset + 16.dp + 64.dp
+                                bottom = bottomBarInset + Spacing.Medium + ComponentSize.NavigationBarHeight
                             ),
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            verticalArrangement = Arrangement.spacedBy(Spacing.Small),
+                            horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
                         ) {
                             item(
                                 span = { GridItemSpan(maxLineSpan) },
@@ -297,8 +298,8 @@ fun AlbumsScreen(
                                         Text(
                                             modifier = Modifier
                                                 .pinchItem(key = "pinnedAlbums")
-                                                .padding(horizontal = 8.dp)
-                                                .padding(vertical = 24.dp),
+                                                .padding(horizontal = Spacing.Small)
+                                                .padding(vertical = Spacing.Large),
                                             text = stringResource(R.string.pinned_albums_title),
                                             style = MaterialTheme.typography.bodyLarge,
                                             fontWeight = FontWeight.Medium
@@ -308,8 +309,8 @@ fun AlbumsScreen(
                                             Text(
                                                 modifier = Modifier
                                                     .pinchItem(key = "pinnedAlbums")
-                                                    .padding(horizontal = 8.dp)
-                                                    .padding(vertical = 24.dp),
+                                                    .padding(horizontal = Spacing.Small)
+                                                    .padding(vertical = Spacing.Large),
                                                 text = stringResource(R.string.pinned_albums_title),
                                                 style = MaterialTheme.typography.bodyLarge,
                                                 fontWeight = FontWeight.Medium
@@ -556,8 +557,8 @@ fun AlbumsScreen(
                                     Text(
                                         modifier = Modifier
                                             .pinchItem(key = "mediaTypesHeader")
-                                            .padding(horizontal = 8.dp)
-                                            .padding(vertical = 24.dp),
+                                            .padding(horizontal = Spacing.Small)
+                                            .padding(vertical = Spacing.Large),
                                         text = stringResource(R.string.media_type_albums_section),
                                         style = MaterialTheme.typography.bodyLarge,
                                         fontWeight = FontWeight.Medium
@@ -591,8 +592,8 @@ fun AlbumsScreen(
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .pinchItem(key = "albumDetails")
-                                            .padding(horizontal = 8.dp)
-                                            .padding(vertical = 24.dp),
+                                            .padding(horizontal = Spacing.Small)
+                                            .padding(vertical = Spacing.Large),
                                         text = stringResource(
                                             R.string.images_videos,
                                             mediaState.value.media.size
@@ -644,13 +645,13 @@ fun AlbumsScreen(
                         state = listState,
                         modifier = Modifier
                             .hazeSource(LocalHazeState.current)
-                            .padding(horizontal = 8.dp)
+                            .padding(horizontal = Spacing.Small)
                             .fillMaxSize(),
                         contentPadding = PaddingValues(
                             top = innerPaddingValues.calculateTopPadding(),
-                            bottom = bottomBarInset + 16.dp + 64.dp
+                            bottom = bottomBarInset + Spacing.Medium + ComponentSize.NavigationBarHeight
                         ),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(Spacing.Small)
                     ) {
                         item("pinnedAlbums") {
                             AnimatedVisibility(
@@ -661,8 +662,8 @@ fun AlbumsScreen(
                                 if (pinnedAlbumsAsGrid) {
                                     Text(
                                         modifier = Modifier
-                                            .padding(horizontal = 8.dp)
-                                            .padding(vertical = 24.dp),
+                                            .padding(horizontal = Spacing.Small)
+                                            .padding(vertical = Spacing.Large),
                                         text = stringResource(R.string.pinned_albums_title),
                                         style = MaterialTheme.typography.bodyLarge,
                                         fontWeight = FontWeight.Medium
@@ -671,8 +672,8 @@ fun AlbumsScreen(
                                     Column {
                                         Text(
                                             modifier = Modifier
-                                                .padding(horizontal = 8.dp)
-                                                .padding(vertical = 24.dp),
+                                                .padding(horizontal = Spacing.Small)
+                                                .padding(vertical = Spacing.Large),
                                             text = stringResource(R.string.pinned_albums_title),
                                             style = MaterialTheme.typography.bodyLarge,
                                             fontWeight = FontWeight.Medium
@@ -897,8 +898,8 @@ fun AlbumsScreen(
                             ) {
                                 Text(
                                     modifier = Modifier
-                                        .padding(horizontal = 8.dp)
-                                        .padding(vertical = 24.dp),
+                                        .padding(horizontal = Spacing.Small)
+                                        .padding(vertical = Spacing.Large),
                                     text = stringResource(R.string.media_type_albums_section),
                                     style = MaterialTheme.typography.bodyLarge,
                                     fontWeight = FontWeight.Medium
@@ -926,8 +927,8 @@ fun AlbumsScreen(
                                 Text(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(horizontal = 8.dp)
-                                        .padding(vertical = 24.dp),
+                                        .padding(horizontal = Spacing.Small)
+                                        .padding(vertical = Spacing.Large),
                                     text = stringResource(
                                         R.string.images_videos,
                                         mediaState.value.media.size
@@ -983,23 +984,23 @@ private fun CloudAlbumSectionHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp)
-            .padding(top = 24.dp, bottom = 8.dp),
+            .padding(horizontal = Spacing.Small)
+            .padding(top = Spacing.Large, bottom = Spacing.Small),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         if (providerType != null) {
             ProviderBrandIcon(
                 providerType = providerType,
                 tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(Spacing.MediumLarge)
             )
         } else {
             Icon(
                 imageVector = Icons.Outlined.Cloud,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(Spacing.MediumLarge)
             )
         }
         Text(

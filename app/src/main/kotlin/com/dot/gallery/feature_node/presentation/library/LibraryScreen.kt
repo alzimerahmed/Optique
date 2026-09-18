@@ -4,7 +4,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -72,6 +71,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -111,6 +111,7 @@ import com.dot.gallery.feature_node.presentation.util.categorySharedElement
 import com.dot.gallery.feature_node.presentation.util.rememberBottomBarInset
 import com.dot.gallery.ui.core.icons.Encrypted
 import com.dot.gallery.ui.theme.BlackScrim
+import com.dot.gallery.ui.theme.Spacing
 import com.dot.gallery.ui.theme.WhiterBlackScrim
 import com.dot.gallery.ui.theme.isDarkTheme
 import dev.chrisbanes.haze.hazeEffect
@@ -238,7 +239,7 @@ fun LibraryScreen(
         GridPinchZoomLayout(
             state = pinchState,
             modifier = Modifier.hazeSource(LocalHazeState.current),
-            indicatorTopPadding = it.calculateTopPadding() + 16.dp,
+            indicatorTopPadding = it.calculateTopPadding() + Spacing.Medium,
         ) {
             LaunchedEffect(gridState.isScrollInProgress) {
                 isScrolling.value = gridState.isScrollInProgress
@@ -247,15 +248,15 @@ fun LibraryScreen(
             LazyVerticalGrid(
                 state = gridState,
                 modifier = Modifier
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = Spacing.Small)
                     .fillMaxSize(),
                 columns = gridCells,
                 contentPadding = PaddingValues(
                     top = it.calculateTopPadding(),
                     bottom = bottomBarInset + 128.dp
                 ),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(Spacing.Small),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
             ) {
                 item(
                     span = { GridItemSpan(maxLineSpan) },
@@ -280,8 +281,8 @@ fun LibraryScreen(
                         },
                         modifier = Modifier
                             .pinchItem(key = "libraryShortcuts")
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 32.dp)
+                            .padding(horizontal = Spacing.ScreenHorizontal)
+                            .padding(top = Spacing.ExtraLarge)
                     )
                 }
 
@@ -296,8 +297,8 @@ fun LibraryScreen(
                             MapPreviewCard(
                                 modifier = Modifier
                                     .pinchItem(key = "LocationsHeader")
-                                    .padding(horizontal = 16.dp)
-                                    .padding(top = 8.dp)
+                                    .padding(horizontal = Spacing.ScreenHorizontal)
+                                    .padding(top = Spacing.Small)
                                     .clip(RoundedCornerShape(24.dp))
                                     .editLock(shortcutsEditMode)
                                     .clickable {
@@ -312,10 +313,10 @@ fun LibraryScreen(
                             Column(
                                 modifier = Modifier
                                     .pinchItem(key = "LocationsHeader")
-                                    .padding(horizontal = 16.dp)
-                                    .padding(top = 8.dp)
+                                    .padding(horizontal = Spacing.ScreenHorizontal)
+                                    .padding(top = Spacing.Small)
                                     .editLock(shortcutsEditMode),
-                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                                verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
                             ) {
                                 LibrarySmallItem(
                                     title = stringResource(R.string.locations),
@@ -340,11 +341,11 @@ fun LibraryScreen(
                     ) {
                         LazyRow(
                             modifier = Modifier
-                                .padding(horizontal = 16.dp)
-                                .padding(top = 8.dp)
+                                .padding(horizontal = Spacing.ScreenHorizontal)
+                                .padding(top = Spacing.Small)
                                 .clip(RoundedCornerShape(16.dp))
                                 .editLock(shortcutsEditMode),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                            horizontalArrangement = Arrangement.spacedBy(Spacing.Medium)
                         ) {
                             items(
                                 items = locations,
@@ -356,11 +357,9 @@ fun LibraryScreen(
                                     val isDarkTheme = isDarkTheme()
                                     val allowBlur by rememberAllowBlur()
                                     val followTheme = remember(allowBlur) { !allowBlur }
-                                    val gradientColor by animateColorAsState(
-                                        if (followTheme) {
-                                            if (isDarkTheme) BlackScrim else WhiterBlackScrim
-                                        } else BlackScrim,
-                                    )
+                                    val gradientColor = if (followTheme) {
+                                        if (isDarkTheme) BlackScrim else WhiterBlackScrim
+                                    } else BlackScrim
                                     Box(
                                         modifier = Modifier
                                             .width(164.dp)
@@ -410,7 +409,7 @@ fun LibraryScreen(
                                                         )
                                                     )
                                                 )
-                                                .padding(24.dp),
+                                                .padding(Spacing.Large),
                                             text = location,
                                             style = MaterialTheme.typography.titleMedium,
                                             color = Color.White,
@@ -435,10 +434,10 @@ fun LibraryScreen(
                         Column(
                             modifier = Modifier
                                 .pinchItem(key = "PeopleHeader")
-                                .padding(horizontal = 16.dp)
-                                .padding(top = 8.dp)
+                                .padding(horizontal = Spacing.ScreenHorizontal)
+                                .padding(top = Spacing.Small)
                                 .editLock(shortcutsEditMode),
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                            verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
                         ) {
                             LibrarySmallItem(
                                 title = stringResource(R.string.cloud_people),
@@ -461,10 +460,10 @@ fun LibraryScreen(
                     ) {
                         LazyRow(
                             modifier = Modifier
-                                .padding(horizontal = 16.dp)
-                                .padding(top = 8.dp)
+                                .padding(horizontal = Spacing.ScreenHorizontal)
+                                .padding(top = Spacing.Small)
                                 .editLock(shortcutsEditMode),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
                         ) {
                             items(
                                 items = cloudState.people,
@@ -500,7 +499,7 @@ fun LibraryScreen(
                                             Icon(
                                                 imageVector = Icons.Outlined.People,
                                                 contentDescription = null,
-                                                modifier = Modifier.size(32.dp),
+                                                modifier = Modifier.size(Spacing.ExtraLarge),
                                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
                                         }
@@ -521,10 +520,10 @@ fun LibraryScreen(
                             Column(
                                 modifier = Modifier
                                     .pinchItem(key = "CategoriesHeader")
-                                    .padding(horizontal = 16.dp)
-                                    .padding(top = 8.dp)
+                                    .padding(horizontal = Spacing.ScreenHorizontal)
+                                    .padding(top = Spacing.Small)
                                     .editLock(shortcutsEditMode),
-                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                                verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
                             ) {
                                 LibrarySmallItem(
                                     title = stringResource(R.string.categories),
@@ -548,11 +547,11 @@ fun LibraryScreen(
                         ) {
                             LazyRow(
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
-                                    .padding(top = 8.dp)
+                                    .padding(horizontal = Spacing.ScreenHorizontal)
+                                    .padding(top = Spacing.Small)
                                     .clip(RoundedCornerShape(16.dp))
                                     .editLock(shortcutsEditMode),
-                                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                                horizontalArrangement = Arrangement.spacedBy(Spacing.Medium)
                             ) {
                                 items(
                                     items = topCategories,
@@ -562,11 +561,9 @@ fun LibraryScreen(
                                         val isDarkTheme = isDarkTheme()
                                         val allowBlur by rememberAllowBlur()
                                         val followTheme = remember(allowBlur) { !allowBlur }
-                                        val gradientColor by animateColorAsState(
-                                            if (followTheme) {
-                                                if (isDarkTheme) BlackScrim else WhiterBlackScrim
-                                            } else BlackScrim,
-                                        )
+                                        val gradientColor = if (followTheme) {
+                                            if (isDarkTheme) BlackScrim else WhiterBlackScrim
+                                        } else BlackScrim
                                         Box(
                                             modifier = Modifier
                                                 .width(164.dp)
@@ -577,6 +574,8 @@ fun LibraryScreen(
                                                 )
                                                 .clip(RoundedCornerShape(24.dp))
                                                 .combinedClickable(
+                                                    role = Role.Button,
+                                                    onLongClickLabel = stringResource(R.string.edit_category),
                                                     onClick = {
                                                         eventHandler.navigate(
                                                             Screen.CategoryViewScreen.categoryId(
@@ -636,7 +635,7 @@ fun LibraryScreen(
                                                             )
                                                         )
                                                     )
-                                                    .padding(16.dp),
+                                                    .padding(Spacing.Medium),
                                                 horizontalAlignment = Alignment.CenterHorizontally
                                             ) {
                                                 Text(
@@ -672,7 +671,7 @@ fun LibraryScreen(
                             NoCategories(
                                 modifier = Modifier
                                     .pinchItem(key = "NoCategories")
-                                    .padding(16.dp)
+                                    .padding(Spacing.Medium)
                                     .editLock(shortcutsEditMode)
                             ) {
                                 eventHandler.navigate(Screen.CategoriesScreen())
@@ -724,12 +723,12 @@ fun NoCategories(
             .dashedBorder(
                 brush = brush,
                 shape = RoundedCornerShape(16.dp),
-                gapLength = 8.dp
+                gapLength = Spacing.Small
             )
             .clip(RoundedCornerShape(16.dp))
             .clickable(onClick = onClick)
-            .padding(32.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+            .padding(Spacing.ExtraLarge),
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(

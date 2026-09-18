@@ -8,7 +8,6 @@ package com.dot.gallery.feature_node.presentation.classifier
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalIndication
@@ -63,6 +62,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -95,6 +95,7 @@ import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.Screen
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
 import com.dot.gallery.ui.theme.BlackScrim
+import com.dot.gallery.ui.theme.Spacing
 import com.dot.gallery.ui.theme.WhiterBlackScrim
 import com.dot.gallery.ui.theme.isDarkTheme
 import dev.chrisbanes.haze.LocalHazeStyle
@@ -186,12 +187,12 @@ fun CategoriesScreen(
             MediaContentState.CONTENT -> GridPinchZoomLayout(
             state = pinchState,
             modifier = Modifier.hazeSource(LocalHazeState.current),
-            indicatorTopPadding = paddingValues.calculateTopPadding() + 16.dp,
+            indicatorTopPadding = paddingValues.calculateTopPadding() + Spacing.Medium,
         ) {
             LazyVerticalGrid(
                 state = gridState,
                 modifier = Modifier
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
                     .fillMaxSize(),
                 columns = gridCells,
                 contentPadding = PaddingValues(
@@ -199,8 +200,8 @@ fun CategoriesScreen(
                     bottom = paddingValues.calculateBottomPadding() + 128.dp
                 ),
                 userScrollEnabled = canScroll,
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Medium),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
             ) {
                 // Settings button at the top
                 item(
@@ -291,18 +292,18 @@ fun CategoriesScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp)
+                                .padding(Spacing.Medium)
                                 .dashedBorder(
                                     brush = brush,
                                     shape = RoundedCornerShape(24.dp),
-                                    gapLength = 8.dp
+                                    gapLength = Spacing.Small
                                 )
                                 .clip(RoundedCornerShape(24.dp))
                                 .clickable {
                                     eventHandler.navigate(Screen.CategoryEditorScreen.create())
                                 }
-                                .padding(32.dp),
-                            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                                .padding(Spacing.ExtraLarge),
+                            verticalArrangement = Arrangement.spacedBy(Spacing.Medium, Alignment.CenterVertically),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Image(
@@ -355,11 +356,9 @@ private fun CategoryGridItem(
     val isDarkTheme = isDarkTheme()
     val allowBlur by rememberAllowBlur()
     val followTheme = remember(allowBlur) { !allowBlur }
-    val gradientColor by animateColorAsState(
-        if (followTheme) {
-            if (isDarkTheme) BlackScrim else WhiterBlackScrim
-        } else BlackScrim,
-    )
+    val gradientColor = if (followTheme) {
+        if (isDarkTheme) BlackScrim else WhiterBlackScrim
+    } else BlackScrim
 
     Box(
         modifier = modifier
@@ -368,6 +367,8 @@ private fun CategoryGridItem(
             .combinedClickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
+                role = Role.Button,
+                onLongClickLabel = stringResource(R.string.edit_category),
                 onClick = onClick,
                 onLongClick = {
                     feedbackManager.vibrate()
@@ -412,7 +413,7 @@ private fun CategoryGridItem(
                         )
                     )
                 )
-                .padding(16.dp),
+                .padding(Spacing.Medium),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(

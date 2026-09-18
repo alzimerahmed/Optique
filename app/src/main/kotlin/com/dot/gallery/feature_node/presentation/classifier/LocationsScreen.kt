@@ -5,7 +5,6 @@
 
 package com.dot.gallery.feature_node.presentation.classifier
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -240,12 +239,9 @@ private fun LocationCard(
     val isDarkTheme = isDarkTheme()
     val allowBlur by rememberAllowBlur()
     val followTheme = remember(allowBlur) { !allowBlur }
-    val gradientColor by animateColorAsState(
-        if (followTheme) {
-            if (isDarkTheme) BlackScrim else WhiterBlackScrim
-        } else BlackScrim,
-        label = "gradientColor"
-    )
+    val gradientColor = if (followTheme) {
+        if (isDarkTheme) BlackScrim else WhiterBlackScrim
+    } else BlackScrim
     
     // Extract just the city name for display
     val cityName = locationMedia.location.substringBefore(",").trim()

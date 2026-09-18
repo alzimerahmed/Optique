@@ -25,6 +25,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.dot.gallery.R
 import com.dot.gallery.core.decoder.RawDemosaic
@@ -34,6 +36,7 @@ import com.dot.gallery.core.decoder.RawNoiseReduction
 import com.dot.gallery.core.decoder.RawOutputColorSpace
 import com.dot.gallery.core.decoder.RawWhiteBalance
 import com.dot.gallery.feature_node.domain.model.editor.DevelopCategory
+import com.dot.gallery.ui.theme.Spacing
 
 /**
  * Renders the controls for a single RAW develop [category] (its own editor tab). Base-changing
@@ -64,7 +67,7 @@ fun DevelopCategorySection(
         }
     }
 
-    val base = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+    val base = Modifier.fillMaxWidth().padding(vertical = Spacing.Small)
     val columnModifier = if (category.fixedHeight) {
         base.height(CONTENT_HEIGHT).verticalScroll(rememberScrollState())
     } else {
@@ -72,7 +75,7 @@ fun DevelopCategorySection(
     }
     Column(
         modifier = modifier.then(columnModifier),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall),
     ) {
         content()
     }
@@ -259,8 +262,8 @@ private fun TileRow(content: @Composable () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .horizontalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+            .padding(horizontal = Spacing.ScreenHorizontal),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall),
         verticalAlignment = Alignment.Top,
     ) { content() }
 }
@@ -271,14 +274,14 @@ private fun SectionLabel(@StringRes resId: Int) {
         text = stringResource(resId),
         style = MaterialTheme.typography.labelMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
-        modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp),
+        modifier = Modifier.padding(horizontal = Spacing.MediumLarge, vertical = Spacing.ExtraSmall),
     )
 }
 
 @Composable
 private fun ToggleRow(label: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 4.dp),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.MediumLarge, vertical = Spacing.ExtraSmall),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
@@ -295,7 +298,7 @@ private fun DevelopSlider(
     valueFormatter: (Float) -> String = { (it * 100).toInt().toString() },
     onValueChange: (Float) -> Unit,
 ) {
-    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 4.dp)) {
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.MediumLarge, vertical = Spacing.ExtraSmall)) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -308,7 +311,12 @@ private fun DevelopSlider(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
-        Slider(value = value, onValueChange = onValueChange, valueRange = valueRange)
+        Slider(
+            value = value,
+            onValueChange = onValueChange,
+            valueRange = valueRange,
+            modifier = Modifier.semantics { contentDescription = label }
+        )
     }
 }
 
