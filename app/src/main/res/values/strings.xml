@@ -1466,10 +1466,11 @@
     <string name="story_cards_highlights_this_week">This week</string>
     <string name="story_cards_highlights_this_month">This month</string>
     <string name="story_cards_person_unnamed">Person</string>
-    <plurals name="story_cards_media_count">
-        <item quantity="one">%1$d item</item>
-        <item quantity="other">%1$d items</item>
+    <plurals name="story_cards_years_ago">
+        <item quantity="one">%1$d year ago</item>
+        <item quantity="other">%1$d years ago</item>
     </plurals>
+    <string name="story_cards_this_year">This year</string>
     <plurals name="story_cards_excluded_count">
         <item quantity="one">%1$d excluded</item>
         <item quantity="other">%1$d excluded</item>

@@ -9,7 +9,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,29 +19,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DragHandle
-import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.ChevronRight
-import androidx.compose.material.icons.outlined.Cloud
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.History
-import androidx.compose.material.icons.outlined.ImageSearch
-import androidx.compose.material.icons.outlined.LocationOn
-import androidx.compose.material.icons.outlined.People
-import androidx.compose.material.icons.outlined.PhotoAlbum
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeTopAppBar
@@ -66,7 +54,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
@@ -95,6 +82,7 @@ import com.dot.gallery.feature_node.domain.model.StoryCardType
 import com.dot.gallery.feature_node.domain.model.StoryCardsConfig
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
+import com.dot.gallery.feature_node.presentation.storycards.components.icon
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -107,7 +95,9 @@ fun StoryCardsSettingsScreen(
     onNavigateBack: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    var config by rememberStoryCardsConfig()
+    var configState by rememberStoryCardsConfig()
+    // One decode per composition — the preference getter JSON-decodes on every read.
+    val config = configState
     var autoAdvance by rememberStoryViewerAutoAdvance()
     var duration by rememberStoryViewerDuration()
     var memoriesNotifications by rememberNotificationsEnabled()
@@ -132,9 +122,12 @@ fun StoryCardsSettingsScreen(
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
 
-    // Drag-to-reorder state
+    // Drag-to-reorder state — swaps mutate a local order list during the
+    // gesture; the single DataStore write happens on drag end.
     var draggingIndex by remember { mutableIntStateOf(-1) }
     var dragOffsetY by remember { mutableFloatStateOf(0f) }
+    var dragOrder by remember { mutableStateOf<List<StoryCardType>?>(null) }
+    val displayedOrder = dragOrder ?: config.normalizedOrder
     val haptic = LocalHapticFeedback.current
     val density = LocalDensity.current
     val itemHeightPx = remember(density) { with(density) { 72.dp.toPx() } }
@@ -170,35 +163,31 @@ fun StoryCardsSettingsScreen(
                         title = stringResource(R.string.story_cards_enabled),
                         summary = stringResource(R.string.story_cards_enabled_summary),
                         isChecked = config.enabled,
-                        onCheck = { config = config.copy(enabled = it) },
+                        onCheck = { configState = config.copy(enabled = it) },
                         screenPosition = Position.Alone
                     ),
                     modifier = Modifier
-                        .widthIn(max = 600.dp)
-                        .fillMaxWidth()
+                        .widthInSheet()
                         .padding(bottom = 16.dp)
                 )
             }
 
             // ── Card Types Header ──
             item(key = "card_types_header") {
-                SectionHeader(
-                    title = stringResource(R.string.story_cards_order_title),
-                    modifier = Modifier
-                        .widthIn(max = 600.dp)
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 8.dp)
+                SettingsItem(
+                    item = SettingsEntity.Header(
+                        title = stringResource(R.string.story_cards_order_title)
+                    )
                 )
             }
 
             // ── Card Type Items (drag-to-reorder) ──
             itemsIndexed(
-                items = config.normalizedOrder,
+                items = displayedOrder,
                 key = { _, type -> "card_${type.name}" }
             ) { index, type ->
                 val isEnabled = type !in config.disabledTypes
-                val position = cardItemPosition(index, config.normalizedOrder.size)
+                val position = cardItemPosition(index, displayedOrder.size)
                 val isDragged = draggingIndex == index
 
                 CardTypeListItem(
@@ -215,30 +204,40 @@ fun StoryCardsSettingsScreen(
                     onDragStart = {
                         draggingIndex = index
                         dragOffsetY = 0f
+                        dragOrder = config.normalizedOrder.toMutableList()
                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     },
                     onDrag = { delta ->
                         dragOffsetY += delta
                         val swapThreshold = itemHeightPx * 0.5f
-                        if (dragOffsetY > swapThreshold && draggingIndex < config.normalizedOrder.lastIndex) {
-                            val list = config.normalizedOrder.toMutableList()
+                        val currentOrder = dragOrder ?: config.normalizedOrder
+                        if (dragOffsetY > swapThreshold && draggingIndex < currentOrder.lastIndex) {
+                            val list = currentOrder.toMutableList()
                             val item = list.removeAt(draggingIndex)
                             list.add(draggingIndex + 1, item)
-                            config = config.copy(cardOrder = list)
+                            dragOrder = list
                             draggingIndex++
                             dragOffsetY -= itemHeightPx
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         } else if (dragOffsetY < -swapThreshold && draggingIndex > 0) {
-                            val list = config.normalizedOrder.toMutableList()
+                            val list = currentOrder.toMutableList()
                             val item = list.removeAt(draggingIndex)
                             list.add(draggingIndex - 1, item)
-                            config = config.copy(cardOrder = list)
+                            dragOrder = list
                             draggingIndex--
                             dragOffsetY += itemHeightPx
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         }
                     },
                     onDragEnd = {
+                        // Single DataStore write for the whole gesture — mid-drag
+                        // swaps only touched the local order list.
+                        dragOrder?.let { order ->
+                            if (order != config.normalizedOrder) {
+                                configState = config.copy(cardOrder = order)
+                            }
+                        }
+                        dragOrder = null
                         draggingIndex = -1
                         dragOffsetY = 0f
                     },
@@ -248,23 +247,19 @@ fun StoryCardsSettingsScreen(
                         } else {
                             config.disabledTypes + type
                         }
-                        config = config.copy(disabledTypes = newDisabled)
+                        configState = config.copy(disabledTypes = newDisabled)
                     },
-                    modifier = Modifier
-                        .widthIn(max = 600.dp)
-                        .fillMaxWidth()
+                    modifier = Modifier.widthInSheet()
                 )
             }
 
             // ── Viewer Settings Header ──
             item(key = "viewer_header") {
-                SectionHeader(
-                    title = stringResource(R.string.story_viewer_settings_title),
-                    modifier = Modifier
-                        .widthIn(max = 600.dp)
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(top = 16.dp, bottom = 8.dp)
+                SettingsItem(
+                    item = SettingsEntity.Header(
+                        title = stringResource(R.string.story_viewer_settings_title)
+                    ),
+                    modifier = Modifier.padding(top = 16.dp)
                 )
             }
 
@@ -278,9 +273,7 @@ fun StoryCardsSettingsScreen(
                         onCheck = { autoAdvance = it },
                         screenPosition = Position.Top
                     ),
-                    modifier = Modifier
-                        .widthIn(max = 600.dp)
-                        .fillMaxWidth()
+                    modifier = Modifier.widthInSheet()
                 )
             }
 
@@ -298,21 +291,17 @@ fun StoryCardsSettingsScreen(
                         onSeek = { duration = it.toInt().toString() },
                         screenPosition = Position.Bottom
                     ),
-                    modifier = Modifier
-                        .widthIn(max = 600.dp)
-                        .fillMaxWidth()
+                    modifier = Modifier.widthInSheet()
                 )
             }
 
             // ── Memories ──
             item(key = "memories_header") {
-                SectionHeader(
-                    title = stringResource(R.string.memories_title),
-                    modifier = Modifier
-                        .widthIn(max = 600.dp)
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(top = 16.dp, bottom = 8.dp)
+                SettingsItem(
+                    item = SettingsEntity.Header(
+                        title = stringResource(R.string.memories_title)
+                    ),
+                    modifier = Modifier.padding(top = 16.dp)
                 )
             }
 
@@ -338,8 +327,7 @@ fun StoryCardsSettingsScreen(
                         screenPosition = Position.Alone
                     ),
                     modifier = Modifier
-                        .widthIn(max = 600.dp)
-                        .fillMaxWidth()
+                        .widthInSheet()
                         .padding(bottom = 16.dp)
                 )
             }
@@ -355,7 +343,7 @@ fun StoryCardsSettingsScreen(
         albumsState = albumsState,
         categories = categories,
         locationKeys = locationKeys,
-        onConfigChange = { config = it }
+        onConfigChange = { configState = it }
     )
 }
 
@@ -388,14 +376,9 @@ internal fun CardTypeListItem(
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surfaceContainer
 
-    val fullCornerRadius by animateDpAsState(
-        targetValue = 24.dp,
-        label = "fullCornerRadius"
-    )
-    val normalCornerRadius by animateDpAsState(
-        targetValue = 8.dp,
-        label = "normalCornerRadius"
-    )
+    // Fixed targets — plain dp values, no animation state needed.
+    val fullCornerRadius = 24.dp
+    val normalCornerRadius = 8.dp
 
     val shape by rememberedDerivedState(position, fullCornerRadius, normalCornerRadius) {
         when (position) {
@@ -458,15 +441,12 @@ internal fun CardTypeListItem(
                     .padding(horizontal = 16.dp)
                     .clip(shape)
                     .background(color = backgroundColor)
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
-                    .widthIn(max = 600.dp)
-                    .fillMaxWidth(),
+                    .padding(horizontal = 8.dp, vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(
                     modifier = Modifier
-                        .padding(8.dp)
-                        .padding(vertical = 6.dp),
+                        .padding(horizontal = 8.dp, vertical = 14.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Drag handle — excluded from the detail-sheet tap target.
@@ -495,7 +475,7 @@ internal fun CardTypeListItem(
                     ) {
                         // Type icon
                         Image(
-                            imageVector = type.settingsIcon,
+                            imageVector = type.icon,
                             contentDescription = null,
                             modifier = Modifier
                                 .padding(end = 12.dp)
@@ -571,20 +551,6 @@ internal fun CardTypeListItem(
     }
 }
 
-// ────────────────────────────────────────────────────────────────────────────────
-// Section Header
-// ────────────────────────────────────────────────────────────────────────────────
-
-@Composable
-private fun SectionHeader(title: String, modifier: Modifier = Modifier) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.titleMedium,
-        color = MaterialTheme.colorScheme.onSurface,
-        modifier = modifier
-    )
-}
-
 private fun cardItemPosition(index: Int, size: Int): Position {
     return when {
         size == 1 -> Position.Alone
@@ -593,18 +559,6 @@ private fun cardItemPosition(index: Int, size: Int): Position {
         else -> Position.Middle
     }
 }
-
-private val StoryCardType.settingsIcon: ImageVector
-    get() = when (this) {
-        StoryCardType.MEMORIES -> Icons.Outlined.History
-        StoryCardType.ALBUMS -> Icons.Outlined.PhotoAlbum
-        StoryCardType.CATEGORIES -> Icons.Outlined.ImageSearch
-        StoryCardType.LOCATIONS -> Icons.Outlined.LocationOn
-        StoryCardType.FAVORITES -> Icons.Outlined.Favorite
-        StoryCardType.CLOUD_MEMORIES -> Icons.Outlined.Cloud
-        StoryCardType.HIGHLIGHTS -> Icons.Outlined.AutoAwesome
-        StoryCardType.PEOPLE -> Icons.Outlined.People
-    }
 
 internal val StoryCardType.displayName: String
     @Composable get() = when (this) {

@@ -67,6 +67,9 @@ fun StoryCardsRow(
 ) {
     if (cards.isEmpty()) return
 
+    // One DataStore collector for the whole row — used to be one per card.
+    val allowBlur by rememberAllowBlur()
+
     LazyRow(
         modifier = modifier.fillMaxWidth(),
         contentPadding = contentPadding,
@@ -78,6 +81,7 @@ fun StoryCardsRow(
         ) { index, card ->
             StoryCardItem(
                 card = card,
+                allowBlur = allowBlur,
                 onClick = { onCardClick(index, card) }
             )
         }
@@ -87,11 +91,11 @@ fun StoryCardsRow(
 @Composable
 private fun StoryCardItem(
     card: StoryCard,
+    allowBlur: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val isDarkTheme = isDarkTheme()
-    val allowBlur by rememberAllowBlur()
     val followTheme = remember(allowBlur) { !allowBlur }
     val gradientColor by animateColorAsState(
         if (followTheme) {
@@ -107,25 +111,17 @@ private fun StoryCardItem(
             .clickable(onClick = onClick)
     ) {
         val thumbnailMedia = card.thumbnailMedia
-        val thumbnailUri = card.thumbnailUri
-        if (thumbnailMedia != null) {
+        // Face-crop / file:// covers (e.g. People cards) arrive as URIs with no backing Media.
+        val model = thumbnailMedia?.getUri() ?: card.thumbnailUri
+        if (model != null) {
             AsyncImage(
-                request = ComposableImageRequest(thumbnailMedia.getUri().toString()) {
+                request = ComposableImageRequest(model.toString()) {
                     resize(width = 300, height = 440, precision = Precision.LESS_PIXELS)
                     crossfade(false)
-                    // Bust the cache when the underlying file changes (#1004).
-                    setExtra(key = "mediaVersion", value = "${thumbnailMedia.timestamp}:${thumbnailMedia.size}")
-                },
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop,
-                contentDescription = card.title,
-            )
-        } else if (thumbnailUri != null) {
-            // Face-crop / file:// covers (e.g. People cards) arrive as URIs with no backing Media.
-            AsyncImage(
-                request = ComposableImageRequest(thumbnailUri.toString()) {
-                    resize(width = 300, height = 440, precision = Precision.LESS_PIXELS)
-                    crossfade(false)
+                    if (thumbnailMedia != null) {
+                        // Bust the cache when the underlying file changes (#1004).
+                        setExtra(key = "mediaVersion", value = "${thumbnailMedia.timestamp}:${thumbnailMedia.size}")
+                    }
                 },
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
@@ -204,7 +200,7 @@ private fun StoryCardItem(
     }
 }
 
-private val StoryCardType.icon: ImageVector
+internal val StoryCardType.icon: ImageVector
     get() = when (this) {
         StoryCardType.MEMORIES -> Icons.Outlined.History
         StoryCardType.ALBUMS -> Icons.Outlined.PhotoAlbum

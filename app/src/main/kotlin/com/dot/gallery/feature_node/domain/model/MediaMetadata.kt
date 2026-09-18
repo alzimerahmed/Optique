@@ -192,6 +192,22 @@ data class MediaMetadata(
 
 }
 
+/**
+ * Shared `"city, country"` story-cards key — the same string
+ * `StoryCardsConfig.excludedLocationKeys` stores and the location-card
+ * builder groups by. Null unless both fields are non-blank.
+ */
+val MediaMetadata.locationKey: String?
+    get() {
+        val city = gpsLocationNameCity
+        val country = gpsLocationNameCountry
+        return if (city.isNullOrBlank() || country.isNullOrBlank()) {
+            null
+        } else {
+            "$city, $country"
+        }
+    }
+
 fun MediaMetadata.getIcon(): ImageVector? {
     return if (isNightMode) {
         Icons.Outlined.NightsStay

@@ -17,6 +17,7 @@ import com.dot.gallery.cloud.core.ProviderCapability
 import com.dot.gallery.cloud.core.ProviderRegistry
 import com.dot.gallery.cloud.core.ProviderType
 import com.dot.gallery.cloud.core.capabilities.PeopleCapableProvider
+import com.dot.gallery.cloud.data.dao.DetectedFaceDao
 import com.dot.gallery.cloud.data.dao.PersonDao
 import com.dot.gallery.cloud.data.entity.PersonEntity
 import com.dot.gallery.core.Resource
@@ -202,6 +203,42 @@ class StoryCardsViewModelTest {
     }
 
     /**
+     * Same proxy trick: person→media membership now resolves through
+     * `DetectedFaceDao.getMediaIdsForPerson` instead of the provider's
+     * `getPersonMedia` full-library load.
+     */
+    private class FakeDetectedFaceDao(
+        var mediaIdsByPerson: Map<String, List<Long>> = emptyMap(),
+    ) : InvocationHandler {
+
+        override fun invoke(proxy: Any, method: Method, args: Array<out Any?>?): Any? {
+            val arguments = args ?: emptyArray()
+            return when {
+                method.name == "getMediaIdsForPerson" ->
+                    mediaIdsByPerson[arguments[0] as String] ?: emptyList<Long>()
+                method.name == "toString" -> "FakeDetectedFaceDao"
+                method.name == "hashCode" -> System.identityHashCode(proxy)
+                method.name == "equals" -> proxy === arguments[0]
+                else -> throw UnsupportedOperationException(
+                    "DetectedFaceDao.${method.name} is not stubbed in StoryCardsViewModelTest"
+                )
+            }
+        }
+
+        fun asDao(): DetectedFaceDao = Proxy.newProxyInstance(
+            DetectedFaceDao::class.java.classLoader,
+            arrayOf(DetectedFaceDao::class.java),
+            this
+        ) as DetectedFaceDao
+    }
+
+    /** Build a face DAO whose membership mirrors a `personId → media` fixture map. */
+    private fun faceDaoFor(personMedia: Map<String, List<Media>>): DetectedFaceDao =
+        FakeDetectedFaceDao(
+            mediaIdsByPerson = personMedia.mapValues { (_, media) -> media.map { it.id } }
+        ).asDao()
+
+    /**
      * A [PeopleCapableProvider] for U8: [providerType] decides whether the
      * ViewModel treats it as the local face-cluster source — only
      * [ProviderType.LOCAL_PEOPLE] providers may produce cards (KTD4's
@@ -210,7 +247,7 @@ class StoryCardsViewModelTest {
     private class FakePeopleProvider(
         override val providerType: ProviderType,
         private val people: List<PersonInfo> = emptyList(),
-        private val personMedia: Map<String, List<Media>> = emptyMap(),
+        val personMedia: Map<String, List<Media>> = emptyMap(),
         override val isAvailable: Boolean = true,
     ) : PeopleCapableProvider {
         override val displayName: String = providerType.displayName
@@ -332,11 +369,13 @@ class StoryCardsViewModelTest {
         clock: Clock = Clock.fixed(TEST_INSTANT, ZoneOffset.UTC),
         registry: ProviderRegistry = ProviderRegistry(),
         personDao: PersonDao = FakePersonDao().asDao(),
+        faceDao: DetectedFaceDao = FakeDetectedFaceDao().asDao(),
     ) = StoryCardsViewModel(
         repository.asRepository(),
         distributor,
         registry,
         personDao,
+        faceDao,
         context,
         clock,
     )
@@ -886,6 +925,7 @@ class StoryCardsViewModelTest {
         val vm = viewModel(
             FakeMediaRepository(), distributor,
             registry = peopleRegistry(provider),
+            faceDao = faceDaoFor(provider.personMedia),
         )
         val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
 
@@ -911,6 +951,7 @@ class StoryCardsViewModelTest {
         val vm = viewModel(
             FakeMediaRepository(), distributor,
             registry = peopleRegistry(provider),
+            faceDao = faceDaoFor(provider.personMedia),
         )
         val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
 
@@ -945,6 +986,7 @@ class StoryCardsViewModelTest {
         val vm = viewModel(
             FakeMediaRepository(), distributor,
             registry = peopleRegistry(provider),
+            faceDao = faceDaoFor(provider.personMedia),
         )
         val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
 
@@ -965,15 +1007,13 @@ class StoryCardsViewModelTest {
         val items = (1L..5L).map { media(it, albumID = 1) }
         distributor.timeline.value = MediaState(items)
         distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 5)))
+        val local = FakePeopleProvider(
+            providerType = ProviderType.LOCAL_PEOPLE,
+            people = listOf(person("local_a", name = "Alice", assetCount = 4)),
+            personMedia = mapOf("local_a" to items.take(4)),
+        )
         val registry = ProviderRegistry().apply {
-            register(
-                LOCAL_PEOPLE_CONFIG_ID,
-                FakePeopleProvider(
-                    providerType = ProviderType.LOCAL_PEOPLE,
-                    people = listOf(person("local_a", name = "Alice", assetCount = 4)),
-                    personMedia = mapOf("local_a" to items.take(4)),
-                )
-            )
+            register(LOCAL_PEOPLE_CONFIG_ID, local)
             register(
                 42L,
                 FakePeopleProvider(
@@ -985,7 +1025,10 @@ class StoryCardsViewModelTest {
         }
         val remote = registry.getByConfigId(42L) as FakePeopleProvider
 
-        val vm = viewModel(FakeMediaRepository(), distributor, registry = registry)
+        val vm = viewModel(
+            FakeMediaRepository(), distributor, registry = registry,
+            faceDao = faceDaoFor(local.personMedia),
+        )
         val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
 
         val people = cardsOfType(cards, StoryCardType.PEOPLE)
@@ -1031,6 +1074,7 @@ class StoryCardsViewModelTest {
             FakeMediaRepository(), distributor,
             registry = peopleRegistry(provider),
             personDao = personDao.asDao(),
+            faceDao = faceDaoFor(provider.personMedia),
         )
         val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
 
@@ -1074,6 +1118,7 @@ class StoryCardsViewModelTest {
             FakeMediaRepository(), distributor,
             registry = peopleRegistry(provider),
             personDao = personDao.asDao(),
+            faceDao = faceDaoFor(provider.personMedia),
         )
         val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
 
@@ -1102,6 +1147,7 @@ class StoryCardsViewModelTest {
         val vm = viewModel(
             FakeMediaRepository(), distributor,
             registry = peopleRegistry(provider),
+            faceDao = faceDaoFor(provider.personMedia),
         )
         val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.ALBUMS } }
 
@@ -1109,7 +1155,7 @@ class StoryCardsViewModelTest {
     }
 
     /**
-     * KTD4: card ids are `8_000_000L +` a 40-bit masked FNV-1a hash of the
+     * KTD4: card ids are `8_000_000L +` a 40-bit masked stable hash of the
      * personId — asserted unique across a synthetic `local_*` id set. The
      * run also documents the pool bound: far more emitted persons than
      * `peopleCards` carries, so `getPersonMedia` stays bounded.
@@ -1133,6 +1179,7 @@ class StoryCardsViewModelTest {
         val vm = viewModel(
             FakeMediaRepository(), distributor,
             registry = peopleRegistry(provider),
+            faceDao = faceDaoFor(provider.personMedia),
         )
         val people = withTimeout(30_000) { vm.peopleCards.first { it.isNotEmpty() } }
 

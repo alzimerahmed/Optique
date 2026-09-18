@@ -5,7 +5,9 @@
 
 package com.dot.gallery.feature_node.presentation.storycards
 
+import android.content.res.Resources
 import androidx.activity.compose.BackHandler
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -58,6 +60,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalResources
@@ -90,9 +93,31 @@ import kotlinx.coroutines.launch
 /**
  * Which source kind a card type's exclusion set draws from (R4/KTD2). Only
  * the three source-backed types expose an exclusion section; the effect of
- * every exclusion is global across all card types.
+ * every exclusion is global across all card types. [titleRes] is the
+ * picker top-bar title; [emptyIcon]/[emptyTextRes] drive the picker's
+ * empty state.
  */
-internal enum class ExclusionSourceKind { ALBUM, CATEGORY, LOCATION }
+internal enum class ExclusionSourceKind(
+    @param:StringRes val titleRes: Int,
+    val emptyIcon: ImageVector,
+    @param:StringRes val emptyTextRes: Int,
+) {
+    ALBUM(
+        R.string.story_cards_exclude_albums,
+        Icons.Outlined.PhotoAlbum,
+        R.string.story_cards_no_albums,
+    ),
+    CATEGORY(
+        R.string.story_cards_exclude_categories,
+        Icons.Outlined.ImageSearch,
+        R.string.story_cards_no_categories,
+    ),
+    LOCATION(
+        R.string.story_cards_exclude_locations,
+        Icons.Outlined.LocationOn,
+        R.string.story_cards_no_locations,
+    ),
+}
 
 internal fun StoryCardType.exclusionSourceKind(): ExclusionSourceKind? = when (this) {
     StoryCardType.ALBUMS -> ExclusionSourceKind.ALBUM
@@ -136,7 +161,7 @@ fun StoryCardTypeDetailSheet(
 
     if (sheetState.isVisible && type != null) {
         val density = LocalDensity.current
-        val dragHandleAlpha by remember {
+        val dragHandleAlpha by remember(density) {
             derivedStateOf {
                 val offset =
                     runCatching { sheetState.sheetState.requireOffset() }
@@ -196,7 +221,9 @@ fun StoryCardTypeDetailContent(
                 TopAppBar(
                     title = {
                         Text(
-                            text = pickerTitle(type.exclusionSourceKind()),
+                            text = type.exclusionSourceKind()
+                                ?.let { stringResource(it.titleRes) }
+                                .orEmpty(),
                             style = MaterialTheme.typography.titleMedium
                         )
                     },
@@ -271,15 +298,24 @@ private fun TypeDetailList(
 
     // Resolved outside the LazyListScope lambda — composable calls are only
     // allowed in composable context, and the scope builder is not one.
-    val entries = if (sourceKind != null) {
-        exclusionEntries(
-            kind = sourceKind,
-            config = config,
-            albumsState = albumsState,
-            categories = categories
-        )
-    } else {
-        emptyList()
+    val unknownAlbumLabel = stringResource(R.string.story_cards_excluded_album_unknown)
+    val unknownCategoryLabel = stringResource(R.string.story_cards_excluded_category_unknown)
+    val entries = remember(
+        sourceKind, config, albumsState, categories,
+        unknownAlbumLabel, unknownCategoryLabel
+    ) {
+        if (sourceKind != null) {
+            exclusionEntries(
+                kind = sourceKind,
+                config = config,
+                albumsState = albumsState,
+                categories = categories,
+                unknownAlbumLabel = unknownAlbumLabel,
+                unknownCategoryLabel = unknownCategoryLabel,
+            )
+        } else {
+            emptyList()
+        }
     }
 
     LazyColumn(
@@ -360,7 +396,7 @@ private fun TypeDetailList(
                     label = entry.label,
                     position = if (index == 0) Position.Top else Position.Middle,
                     onRemove = {
-                        onConfigChange(removeExclusion(sourceKind, config, entry.key))
+                        onConfigChange(removeExclusion(sourceKind, config, entry))
                     },
                     modifier = Modifier.widthInSheet()
                 )
@@ -382,20 +418,27 @@ private fun TypeDetailList(
 }
 
 /**
- * Resolved exclusion entries for display: label + the opaque key
- * [removeExclusion] consumes. One row per excluded source.
+ * Resolved exclusion entries for display: label + list key + the typed
+ * payload [removeExclusion] consumes (no string re-parsing). One row per
+ * excluded source.
  */
-private data class ExclusionEntry(val key: String, val label: String)
+private data class ExclusionEntry(
+    val key: String,
+    val label: String,
+    val albumIds: Set<Long> = emptySet(),
+    val categoryId: Long? = null,
+    val locationKey: String? = null,
+)
 
-@Composable
 private fun exclusionEntries(
     kind: ExclusionSourceKind,
     config: StoryCardsConfig,
     albumsState: AlbumState,
     categories: List<CategoryWithMediaCount>,
+    unknownAlbumLabel: String,
+    unknownCategoryLabel: String,
 ): List<ExclusionEntry> = when (kind) {
     ExclusionSourceKind.ALBUM -> {
-        val unknownLabel = stringResource(R.string.story_cards_excluded_album_unknown)
         val allAlbums = albumsState.albums + albumsState.albumsWithBlacklisted
         // Group source ids that resolve to the same (merged) album so it
         // appears once; unresolved ids fall back to a neutral label.
@@ -404,56 +447,50 @@ private fun exclusionEntries(
         for (id in config.excludedAlbumIds) {
             val album = allAlbums.firstOrNull { it.id == id || id in it.sourceAlbumIds }
             val groupKey = album?.let { "album_${it.id}" } ?: "raw_$id"
-            labels[groupKey] = album?.label ?: unknownLabel
+            labels[groupKey] = album?.label ?: unknownAlbumLabel
             grouped.getOrPut(groupKey) { mutableSetOf() } += id
         }
         grouped.map { (groupKey, ids) ->
             ExclusionEntry(
-                key = ids.joinToString(","),
-                label = labels.getValue(groupKey)
+                key = groupKey,
+                label = labels.getValue(groupKey),
+                albumIds = ids,
             )
         }
     }
 
-    ExclusionSourceKind.CATEGORY -> {
-        val unknownLabel = stringResource(R.string.story_cards_excluded_category_unknown)
+    ExclusionSourceKind.CATEGORY ->
         config.excludedCategoryIds.map { id ->
             ExclusionEntry(
-                key = id.toString(),
-                label = categories.firstOrNull { it.id == id }?.name ?: unknownLabel
+                key = "category_$id",
+                label = categories.firstOrNull { it.id == id }?.name ?: unknownCategoryLabel,
+                categoryId = id,
             )
         }
-    }
 
     ExclusionSourceKind.LOCATION ->
-        config.excludedLocationKeys.map { ExclusionEntry(key = it, label = it) }
+        config.excludedLocationKeys.map {
+            ExclusionEntry(key = "location_$it", label = it, locationKey = it)
+        }
 }
 
 private fun removeExclusion(
     kind: ExclusionSourceKind,
     config: StoryCardsConfig,
-    key: String,
+    entry: ExclusionEntry,
 ): StoryCardsConfig = when (kind) {
-    ExclusionSourceKind.ALBUM -> {
-        val ids = key.split(",").mapNotNull { it.toLongOrNull() }.toSet()
-        config.copy(excludedAlbumIds = config.excludedAlbumIds - ids)
-    }
+    ExclusionSourceKind.ALBUM ->
+        config.copy(excludedAlbumIds = config.excludedAlbumIds - entry.albumIds)
 
     ExclusionSourceKind.CATEGORY ->
-        key.toLongOrNull()?.let { id ->
+        entry.categoryId?.let { id ->
             config.copy(excludedCategoryIds = config.excludedCategoryIds - id)
         } ?: config
 
     ExclusionSourceKind.LOCATION ->
-        config.copy(excludedLocationKeys = config.excludedLocationKeys - key)
-}
-
-@Composable
-private fun pickerTitle(kind: ExclusionSourceKind?): String = when (kind) {
-    ExclusionSourceKind.ALBUM -> stringResource(R.string.story_cards_exclude_albums)
-    ExclusionSourceKind.CATEGORY -> stringResource(R.string.story_cards_exclude_categories)
-    ExclusionSourceKind.LOCATION -> stringResource(R.string.story_cards_exclude_locations)
-    null -> ""
+        entry.locationKey?.let { key ->
+            config.copy(excludedLocationKeys = config.excludedLocationKeys - key)
+        } ?: config
 }
 
 /**
@@ -474,16 +511,23 @@ private fun SourceExclusionPickerContent(
 ) {
     val kind = type.exclusionSourceKind() ?: return
     val hiddenAnnotation = stringResource(R.string.story_cards_source_already_hidden)
+    val resources = LocalResources.current
 
-    val items = pickerItems(
-        kind = kind,
-        config = config,
-        albumsState = albumsState,
-        categories = categories,
-        locationKeys = locationKeys,
-        hiddenAnnotation = hiddenAnnotation,
-        onConfigChange = onConfigChange
-    )
+    val items = remember(
+        kind, config, albumsState, categories, locationKeys,
+        hiddenAnnotation, resources, onConfigChange
+    ) {
+        pickerItems(
+            kind = kind,
+            config = config,
+            albumsState = albumsState,
+            categories = categories,
+            locationKeys = locationKeys,
+            hiddenAnnotation = hiddenAnnotation,
+            resources = resources,
+            onConfigChange = onConfigChange
+        )
+    }
 
     Scaffold(
         containerColor = Color.Transparent,
@@ -525,24 +569,13 @@ private fun SourceExclusionPickerContent(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Icon(
-                            imageVector = when (kind) {
-                                ExclusionSourceKind.ALBUM -> Icons.Outlined.PhotoAlbum
-                                ExclusionSourceKind.CATEGORY -> Icons.Outlined.ImageSearch
-                                ExclusionSourceKind.LOCATION -> Icons.Outlined.LocationOn
-                            },
+                            imageVector = kind.emptyIcon,
                             contentDescription = null,
                             modifier = Modifier.size(72.dp),
                             tint = MaterialTheme.colorScheme.primary
                         )
                         Text(
-                            text = when (kind) {
-                                ExclusionSourceKind.ALBUM ->
-                                    stringResource(R.string.story_cards_no_albums)
-                                ExclusionSourceKind.CATEGORY ->
-                                    stringResource(R.string.story_cards_no_categories)
-                                ExclusionSourceKind.LOCATION ->
-                                    stringResource(R.string.story_cards_no_locations)
-                            },
+                            text = stringResource(kind.emptyTextRes),
                             style = MaterialTheme.typography.titleMedium,
                             textAlign = TextAlign.Center
                         )
@@ -557,7 +590,6 @@ private fun SourceExclusionPickerContent(
     }
 }
 
-@Composable
 private fun pickerItems(
     kind: ExclusionSourceKind,
     config: StoryCardsConfig,
@@ -565,14 +597,12 @@ private fun pickerItems(
     categories: List<CategoryWithMediaCount>,
     locationKeys: List<String>,
     hiddenAnnotation: String,
+    resources: Resources,
     onConfigChange: (StoryCardsConfig) -> Unit,
 ): List<ExclusionSourceItem> {
-    // Hoisted so item construction below stays in plain (non-composable)
-    // collection lambdas.
-    val resources = LocalResources.current
     val itemCount = { count: Long ->
         resources.getQuantityString(
-            R.plurals.story_cards_media_count, count.toInt(), count.toInt()
+            R.plurals.item_count, count.toInt(), count.toInt()
         )
     }
     return when (kind) {
@@ -596,6 +626,8 @@ private fun pickerItems(
                     isHidden = isHidden,
                     isExcluded = exclusionIds.any { it in config.excludedAlbumIds },
                     onToggle = {
+                        // Multi-id toggle: removing only applies when at least
+                        // one of the album's ids is currently excluded.
                         val newSet = if (exclusionIds.any { it in config.excludedAlbumIds }) {
                             config.excludedAlbumIds - exclusionIds.toSet()
                         } else {
@@ -617,12 +649,12 @@ private fun pickerItems(
                     supportingText = itemCount(cat.mediaCount.toLong()),
                     isExcluded = cat.id in config.excludedCategoryIds,
                     onToggle = {
-                        val newSet = if (cat.id in config.excludedCategoryIds) {
-                            config.excludedCategoryIds - cat.id
-                        } else {
-                            config.excludedCategoryIds + cat.id
-                        }
-                        onConfigChange(config.copy(excludedCategoryIds = newSet))
+                        onConfigChange(
+                            config.copy(
+                                excludedCategoryIds =
+                                    config.excludedCategoryIds.toggled(cat.id)
+                            )
+                        )
                     }
                 )
             }
@@ -634,17 +666,21 @@ private fun pickerItems(
                     label = key,
                     isExcluded = key in config.excludedLocationKeys,
                     onToggle = {
-                        val newSet = if (key in config.excludedLocationKeys) {
-                            config.excludedLocationKeys - key
-                        } else {
-                            config.excludedLocationKeys + key
-                        }
-                        onConfigChange(config.copy(excludedLocationKeys = newSet))
+                        onConfigChange(
+                            config.copy(
+                                excludedLocationKeys =
+                                    config.excludedLocationKeys.toggled(key)
+                            )
+                        )
                     }
                 )
             }
     }
 }
+
+/** Add [item] when absent, remove when present — the exclusion toggle pattern. */
+private fun <T> Set<T>.toggled(item: T): Set<T> =
+    if (item in this) this - item else this + item
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -765,5 +801,5 @@ private fun ExclusionEntryRow(
     )
 }
 
-private fun Modifier.widthInSheet(): Modifier =
+internal fun Modifier.widthInSheet(): Modifier =
     this.widthIn(max = 600.dp).fillMaxWidth()

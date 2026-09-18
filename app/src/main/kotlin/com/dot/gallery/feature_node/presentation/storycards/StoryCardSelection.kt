@@ -75,12 +75,8 @@ object StoryCardSelection {
     fun <T> cover(items: List<T>, toCandidate: (T) -> Candidate): T? =
         items.getOrNull(coverIndex(items.map(toCandidate)))
 
-    private fun isBetter(a: Candidate, b: Candidate): Boolean {
-        val scoreDiff = score(a) - score(b)
-        if (scoreDiff != 0) return scoreDiff > 0
-        if (a.timestampSec != b.timestampSec) return a.timestampSec > b.timestampSec
-        return a.id > b.id
-    }
+    private fun isBetter(a: Candidate, b: Candidate): Boolean =
+        HIGHLIGHT_ORDER.compare(a, b) < 0
 
     /**
      * KTD3/R6 freshness rotation: deterministic, calendar-seeded within-type
@@ -95,22 +91,6 @@ object StoryCardSelection {
      */
     fun <T> rotatePick(items: List<T>, seed: Long, count: Int): List<T> =
         if (items.size <= count) items else items.shuffled(Random(seed)).take(count)
-
-    /**
-     * KTD4/U8: stable 64-bit hash of a string identifier for card-id
-     * spacing. Person ids are `local_<uuid>`-style strings — Java
-     * [String.hashCode] yields only 32 bits and collides too easily when
-     * masked small, so this FNV-1a fold spreads the full string across 64
-     * bits. Deterministic across runs and platforms.
-     */
-    fun stableIdHash(value: String): Long {
-        var hash = FNV_OFFSET_BASIS_64
-        for (byte in value.toByteArray(Charsets.UTF_8)) {
-            hash = hash xor (byte.toLong() and 0xFF)
-            hash *= FNV_PRIME_64
-        }
-        return hash
-    }
 
     /**
      * Screenshot heuristic identical to `MemoriesEngine.isScreenshot` —
@@ -187,11 +167,6 @@ object StoryCardSelection {
     internal const val MAX_HIGHLIGHT_ITEMS = 20
 
     private const val SECONDS_PER_DAY = 86_400L
-
-    // FNV-1a 64-bit constants for [stableIdHash] (0xCBF29CE484222325 as a
-    // signed Long).
-    private const val FNV_OFFSET_BASIS_64 = -3750763034362895579L
-    private const val FNV_PRIME_64 = 1099511628211L
 
     private const val FAVORITE_BONUS = 4
     private const val FLAGGED_BONUS = 2

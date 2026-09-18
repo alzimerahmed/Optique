@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.dot.gallery.core.MediaDistributor
 import com.dot.gallery.feature_node.data.data_source.CategoryWithMediaCount
 import com.dot.gallery.feature_node.domain.model.AlbumState
+import com.dot.gallery.feature_node.domain.model.locationKey
 import com.dot.gallery.feature_node.domain.repository.MediaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -53,12 +54,7 @@ class StoryCardsSettingsViewModel @Inject constructor(
      */
     val locationKeys: StateFlow<List<String>> = repository.getMetadata()
         .map { metadata ->
-            metadata.mapNotNull { meta ->
-                val city = meta.gpsLocationNameCity
-                val country = meta.gpsLocationNameCountry
-                if (city.isNullOrBlank() || country.isNullOrBlank()) null
-                else "$city, $country"
-            }.distinct().sorted()
+            metadata.mapNotNull { it.locationKey }.distinct().sorted()
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 }
