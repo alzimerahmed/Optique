@@ -13,6 +13,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,6 +35,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DragHandle
 import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.Cloud
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.History
@@ -56,6 +58,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -71,11 +74,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dot.gallery.R
 import com.dot.gallery.core.Position
 import com.dot.gallery.core.SettingsEntity
@@ -85,10 +92,13 @@ import com.dot.gallery.core.Settings.Misc.rememberStoryViewerAutoAdvance
 import com.dot.gallery.core.Settings.Misc.rememberStoryViewerDuration
 import com.dot.gallery.core.presentation.components.NavigationBackButton
 import com.dot.gallery.feature_node.domain.model.StoryCardType
+import com.dot.gallery.feature_node.domain.model.StoryCardsConfig
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
+import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.launch
 
 @SuppressLint("InlinedApi") // POST_NOTIFICATIONS launch is SDK-gated below
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
@@ -101,6 +111,15 @@ fun StoryCardsSettingsScreen(
     var autoAdvance by rememberStoryViewerAutoAdvance()
     var duration by rememberStoryViewerDuration()
     var memoriesNotifications by rememberNotificationsEnabled()
+
+    // U5 detail surface: picker data seam + the per-type sheet state.
+    val vm = hiltViewModel<StoryCardsSettingsViewModel>()
+    val albumsState by vm.albumsState.collectAsStateWithLifecycle()
+    val categories by vm.categories.collectAsStateWithLifecycle()
+    val locationKeys by vm.locationKeys.collectAsStateWithLifecycle()
+    val detailSheetState = rememberAppBottomSheetState()
+    var detailType by remember { mutableStateOf<StoryCardType?>(null) }
+    val scope = rememberCoroutineScope()
 
     // API 33+: enabling the on-this-day notification toggle must also fire the
     // runtime POST_NOTIFICATIONS request. The toggle stays on when denied —
@@ -188,6 +207,11 @@ fun StoryCardsSettingsScreen(
                     position = position,
                     isDragging = isDragged,
                     dragOffset = if (isDragged) dragOffsetY else 0f,
+                    exclusionCount = config.exclusionCount(type),
+                    onOpenDetail = {
+                        detailType = type
+                        scope.launch { detailSheetState.show() }
+                    },
                     onDragStart = {
                         draggingIndex = index
                         dragOffsetY = 0f
@@ -321,6 +345,26 @@ fun StoryCardsSettingsScreen(
             }
         }
     }
+
+    // Per-type detail surface (U5): caps + source exclusions. Disabled types
+    // can still open it — configuration precedes enabling.
+    StoryCardTypeDetailSheet(
+        sheetState = detailSheetState,
+        type = detailType,
+        config = config,
+        albumsState = albumsState,
+        categories = categories,
+        locationKeys = locationKeys,
+        onConfigChange = { config = it }
+    )
+}
+
+/** Excluded-source count surfaced on the type row for discoverability (U5). */
+private fun StoryCardsConfig.exclusionCount(type: StoryCardType): Int = when (type) {
+    StoryCardType.ALBUMS -> excludedAlbumIds.size
+    StoryCardType.CATEGORIES -> excludedCategoryIds.size
+    StoryCardType.LOCATIONS -> excludedLocationKeys.size
+    else -> 0
 }
 
 // ────────────────────────────────────────────────────────────────────────────────
@@ -328,12 +372,14 @@ fun StoryCardsSettingsScreen(
 // ────────────────────────────────────────────────────────────────────────────────
 
 @Composable
-private fun CardTypeListItem(
+internal fun CardTypeListItem(
     type: StoryCardType,
     isEnabled: Boolean,
     position: Position,
     isDragging: Boolean = false,
     dragOffset: Float = 0f,
+    exclusionCount: Int = 0,
+    onOpenDetail: () -> Unit = {},
     onDragStart: () -> Unit = {},
     onDrag: (Float) -> Unit = {},
     onDragEnd: () -> Unit = {},
@@ -423,7 +469,7 @@ private fun CardTypeListItem(
                         .padding(vertical = 6.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Drag handle
+                    // Drag handle — excluded from the detail-sheet tap target.
                     Icon(
                         Icons.Outlined.DragHandle, null,
                         modifier = Modifier
@@ -433,44 +479,88 @@ private fun CardTypeListItem(
                         else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
                     )
 
-                    // Type icon
-                    Image(
-                        imageVector = type.settingsIcon,
-                        contentDescription = null,
+                    // Tap target for the per-type detail sheet (U5): the row
+                    // content between the drag handle and the Switch. The
+                    // outer row keeps unmerged semantics so the Switch stays
+                    // independently focusable; this sub-row merges into one
+                    // announced action.
+                    Row(
                         modifier = Modifier
-                            .padding(end = 12.dp)
-                            .size(22.dp),
-                        colorFilter = ColorFilter.tint(
-                            if (isEnabled) MaterialTheme.colorScheme.primary
-                            else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
-                        )
-                    )
-
-                    // Label + description
-                    Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.Center
+                            .weight(1f)
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable(onClick = onOpenDetail)
+                            .semantics(mergeDescendants = true) { }
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = type.displayName,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = if (isEnabled) MaterialTheme.colorScheme.onSurface
-                            else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                        // Type icon
+                        Image(
+                            imageVector = type.settingsIcon,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(end = 12.dp)
+                                .size(22.dp),
+                            colorFilter = ColorFilter.tint(
+                                if (isEnabled) MaterialTheme.colorScheme.primary
+                                else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                            )
                         )
-                        Text(
-                            text = type.description,
-                            style = MaterialTheme.typography.bodySmall,
-                            fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
+
+                        // Label + description + exclusion count
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Text(
+                                text = type.displayName,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = if (isEnabled) MaterialTheme.colorScheme.onSurface
+                                else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                            )
+                            Text(
+                                text = type.description,
+                                style = MaterialTheme.typography.bodySmall,
+                                fontSize = 14.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                                    alpha = if (isEnabled) 1f else 0.38f
+                                ),
+                                modifier = Modifier.padding(top = 2.dp)
+                            )
+                            if (exclusionCount > 0) {
+                                Text(
+                                    text = pluralStringResource(
+                                        R.plurals.story_cards_excluded_count,
+                                        exclusionCount,
+                                        exclusionCount
+                                    ),
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = MaterialTheme.colorScheme.primary.copy(
+                                        alpha = if (isEnabled) 1f else 0.5f
+                                    ),
+                                    modifier = Modifier.padding(top = 2.dp)
+                                )
+                            }
+                        }
+
+                        // Trailing affordance announcing the row is clickable.
+                        Icon(
+                            imageVector = Icons.Outlined.ChevronRight,
+                            contentDescription = stringResource(
+                                R.string.story_cards_open_type_settings_cd,
+                                type.displayName
+                            ),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(
                                 alpha = if (isEnabled) 1f else 0.38f
                             ),
-                            modifier = Modifier.padding(top = 2.dp)
+                            modifier = Modifier
+                                .padding(horizontal = 4.dp)
+                                .size(20.dp)
                         )
                     }
 
-                    // Toggle
+                    // Toggle — outside the detail tap target.
                     Switch(
                         checked = isEnabled,
                         onCheckedChange = onToggle
@@ -516,7 +606,7 @@ private val StoryCardType.settingsIcon: ImageVector
         StoryCardType.PEOPLE -> Icons.Outlined.People
     }
 
-private val StoryCardType.displayName: String
+internal val StoryCardType.displayName: String
     @Composable get() = when (this) {
         StoryCardType.MEMORIES -> stringResource(R.string.story_cards_type_memories)
         StoryCardType.ALBUMS -> stringResource(R.string.story_cards_type_albums)
@@ -528,7 +618,7 @@ private val StoryCardType.displayName: String
         StoryCardType.PEOPLE -> stringResource(R.string.story_cards_type_people)
     }
 
-private val StoryCardType.description: String
+internal val StoryCardType.description: String
     @Composable get() = when (this) {
         StoryCardType.MEMORIES -> stringResource(R.string.story_cards_type_memories_desc)
         StoryCardType.ALBUMS -> stringResource(R.string.story_cards_type_albums_desc)

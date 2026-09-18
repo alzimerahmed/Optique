@@ -1467,6 +1467,29 @@
         <item quantity="one">%1$d item</item>
         <item quantity="other">%1$d items</item>
     </plurals>
+    <plurals name="story_cards_excluded_count">
+        <item quantity="one">%1$d excluded</item>
+        <item quantity="other">%1$d excluded</item>
+    </plurals>
+    <string name="story_cards_open_type_settings_cd">Open %1$s card settings</string>
+    <string name="story_cards_max_cards_title">Maximum cards</string>
+    <string name="story_cards_max_cards_summary">Show up to %1$s cards of this type</string>
+    <string name="story_cards_exclusions_title">Excluded sources</string>
+    <string name="story_cards_exclusions_global_summary">Excluded sources produce no cards and contribute no media to any card type</string>
+    <string name="story_cards_add_exclusion">Add excluded sources</string>
+    <string name="story_cards_exclude_albums">Exclude albums</string>
+    <string name="story_cards_exclude_categories">Exclude categories</string>
+    <string name="story_cards_exclude_locations">Exclude locations</string>
+    <string name="story_cards_no_albums">No albums available</string>
+    <string name="story_cards_no_categories">No categories available</string>
+    <string name="story_cards_no_locations">No locations available</string>
+    <string name="story_cards_source_already_hidden">Already hidden by ignored albums</string>
+    <string name="story_cards_remove_exclusion_cd">Remove %1$s from excluded sources</string>
+    <string name="story_cards_picker_done">Done</string>
+    <string name="story_cards_state_excluded">Excluded</string>
+    <string name="story_cards_state_included">Not excluded</string>
+    <string name="story_cards_excluded_album_unknown">Unknown album</string>
+    <string name="story_cards_excluded_category_unknown">Unknown category</string>
     <string name="story_viewer_settings_title">Story viewer</string>
     <string name="story_viewer_auto_advance">Auto-advance</string>
     <string name="story_viewer_auto_advance_summary">Automatically move to the next photo</string>
