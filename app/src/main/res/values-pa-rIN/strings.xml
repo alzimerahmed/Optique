@@ -1886,9 +1886,6 @@ de(s) \'ਤੇ ਕੀਤਾ ਗਿਆ</string>
     <string name="cloud_net_wifi_disable">ਸਵਿੱਚਿੰਗ ਅਪਚਾਰਿਤ ਕਰੋ</string>
     <string name="cloud_net_wifi_blank_summary">ਕੋਈ ਨੈੱਟਵਰਕ ਨਹੀਂ — ਸਵਿੱਚਿੰਗ ਅਪਚਾਰਿਤ ਹੈ</string>
     <string name="cloud_net_wifi_pick_none">ਸੈੱਟ ਨਹੀਂ ਕੀਤਾ</string>
-    <string name="change_app_logo">ਐਪ ਲੋਗੋ</string>
-    <string name="change_app_logo_summary">Optique ਅਤੇ ਕਲਾਸਿਕ ਗੈਲਰੀ ਲਾਂਚਰ ਆਇਕਨ ਦੇ ਵਿਚਕਾਰ ਸਵਿੱਚ ਕਰੋ</string>
-    <string name="app_logo_description">ਆਪਣੇ ਹੋਮ ਸਕ੍ਰੀਨ ਅਤੇ ਐਪ ਡ੍ਰੌਰ \'ਤੇ ਵਰਤੇ ਜਾਣ ਵਾਲੇ ਲਾਂਚਰ ਆਇਕਨ ਚੁਣੋ। ਬਦਲਾਅ ਲਾਗੂ ਕਰਨ ਲਈ ਐਪ ਮੁੜ ਸ਼ੁਰੂ ਹੋਏਗੀ।</string>
     <string name="setup_step_progress">ਕੀਰਮ %1$d ਵਿਚੋਂ %2$d</string>
     <string name="setup_continue">ਜਾਰੀ ਰੱਖੋ</string>
     <string name="setup_finish">ਸੰਪੂਰਨ ਕਰੋ</string>
@@ -1912,8 +1909,6 @@ de(s) \'ਤੇ ਕੀਤਾ ਗਿਆ</string>
     <string name="setup_looks_title">ਦਿੱਖ ਅਤੇ ਮਹਿਸੂਸ</string>
     <string name="setup_looks_subtitle">ਐਪ ਨੂੰ ਆਪਣੇ ਵਰਗਾ ਮਹਿਸੂਸ ਕਰੋ।</string>
     <string name="setup_section_app_name">ਐਪ ਦਾ ਨਾਮ</string>
-    <string name="setup_section_app_logo">ਐਪ ਦਾ ਲੋਗੋ</string>
-    <string name="setup_looks_restart_note">ਚੁਣਿਆ ਹੋਇਆ ਨਾਮ ਅਤੇ ਆਈਕਨ ਲਾਗੂ ਕਰਨ ਲਈ ਸੈਟਅਪ ਮੁਕੰਮਲ ਹੋਣ \'ਤੇ ਐਪ ਮੁੜ ਸ਼ੁਰੂ ਹੋਵੇਗੀ।</string>
     <string name="setup_section_appearance">ਦਿੱਖ</string>
     <string name="setup_appearance_summary">ਲਾਈਟ ਜਾਂ ਡਾਰਕ ਮੋਡ, ਐਕਸੈਂਟ ਰੰਗ ਅਤੇ ਹੋਰ।</string>
     <string name="setup_open_appearance">ਦਿੱਖ ਨਿੱਜੀਕਰਣ ਕਰੋ</string>

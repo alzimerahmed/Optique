@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">स्विचिंग अक्षम करें</string>
     <string name="cloud_net_wifi_blank_summary">कोई नेटवर्क नहीं — स्विचिंग अक्षम</string>
     <string name="cloud_net_wifi_pick_none">सेट नहीं किया गया</string>
-    <string name="change_app_logo">ऐप लोगो</string>
-    <string name="change_app_logo_summary">Optique और क्लासिक गैलरी लॉन्चर आइकन के बीच स्विच करें</string>
-    <string name="app_logo_description">अपने होम स्क्रीन और ऐप ड्रावर पर उपयोग किए जाने वाले लॉन्चर आइकन का चयन करें। परिवर्तन लागू करने के लिए ऐप फिर से शुरू होगा।</string>
     <string name="setup_step_progress">चरण %1$d का %2$d</string>
     <string name="setup_continue">जारी रखें</string>
     <string name="setup_finish">समाप्त करें</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">दिखावट और अनुभव</string>
     <string name="setup_looks_subtitle">ऐप को अपने अनुसार महसूस करने योग्य बनाएं।</string>
     <string name="setup_section_app_name">एप्लिकेशन का नाम</string>
-    <string name="setup_section_app_logo">ऐप लोगो</string>
-    <string name="setup_looks_restart_note">चुना हुआ नाम और आइकॉन लागू करने के लिए सेटअप पूरा करने पर ऐप फिर से शुरू होगा।</string>
     <string name="setup_section_appearance">दिखावट</string>
     <string name="setup_appearance_summary">लाइट या डार्क मोड, ऐक्सेंट रंग और अधिक।</string>
     <string name="setup_open_appearance">दिखावट को अनुकूलित करें</string>

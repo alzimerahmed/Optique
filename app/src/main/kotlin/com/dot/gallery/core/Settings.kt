@@ -976,12 +976,6 @@ object Settings {
         fun rememberAppNameAlias() =
             rememberPreference(key = APP_NAME_ALIAS, defaultValue = ALIAS_REFRA)
 
-        private val APP_LOGO_ALIAS = stringPreferencesKey("app_logo_alias")
-
-        @Composable
-        fun rememberAppLogoAlias() =
-            rememberPreference(key = APP_LOGO_ALIAS, defaultValue = ALIAS_REFRA)
-
         /**
          * Version of the first-launch setup wizard the user last completed. Bump
          * [CURRENT_SETUP_VERSION] whenever the wizard is reworked to force every existing

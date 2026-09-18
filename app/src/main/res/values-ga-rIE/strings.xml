@@ -1892,9 +1892,6 @@
     <string name="cloud_net_wifi_disable">Múchadh aistrithe</string>
     <string name="cloud_net_wifi_blank_summary">Gan líonra — aistriú múchta</string>
     <string name="cloud_net_wifi_pick_none">Ní socraithe</string>
-    <string name="change_app_logo">Lógó an aip</string>
-    <string name="change_app_logo_summary">Aistrigh idir an íocón seolaithe Optique agus an íocón Gallerí clasaiceach</string>
-    <string name="app_logo_description">Roghnaigh an íocón seolaithe a úsáidtear ar do scáileán baile agus i ndoras na n-aip. Beidh ar an aip atosú chun an t-athrú a chur i bhfeidhm.</string>
     <string name="setup_step_progress">Céim %1$d de %2$d</string>
     <string name="setup_continue">Lean ar aghaidh</string>
     <string name="setup_finish">Críochnaigh</string>
@@ -1918,8 +1915,6 @@
     <string name="setup_looks_title">Aghaidh &amp; Mothúchán</string>
     <string name="setup_looks_subtitle">Déan an aip a mhothú mar d\'aois.</string>
     <string name="setup_section_app_name">Ainm an aip</string>
-    <string name="setup_section_app_logo">Lógó an aip</string>
-    <string name="setup_looks_restart_note">Seasfaidh an aip arís nuair a chríochnóidh tú an socrú chun an t-ainm agus siombail a roghnaíodh a chur i bhfeidhm.</string>
     <string name="setup_section_appearance">Chuma</string>
     <string name="setup_appearance_summary">Modh éadrom nó dorcha, dathanna béim agus tuilleadh.</string>
     <string name="setup_open_appearance">Saincheap an chuma</string>

@@ -1887,9 +1887,6 @@
     <string name="cloud_net_wifi_disable">Dezactivează schimbarea</string>
     <string name="cloud_net_wifi_blank_summary">Fără rețea — schimbarea dezactivată</string>
     <string name="cloud_net_wifi_pick_none">Neconfigurat</string>
-    <string name="change_app_logo">Logo aplicație</string>
-    <string name="change_app_logo_summary">Comută între iconița lansatorului Optique și cea clasică Galerie</string>
-    <string name="app_logo_description">Alege iconița lansatorului folosită pe ecranul de start și în sertarul de aplicații. Aplicația se va reporni pentru a aplica schimbarea.</string>
     <string name="setup_step_progress">Pasul %1$d din %2$d</string>
     <string name="setup_continue">Continuă</string>
     <string name="setup_finish">Finalizează</string>
@@ -1913,8 +1910,6 @@
     <string name="setup_looks_title">Aspect și senzație</string>
     <string name="setup_looks_subtitle">Fă ca aplicația să se simtă ca a ta.</string>
     <string name="setup_section_app_name">Nume aplicație</string>
-    <string name="setup_section_app_logo">Logo aplicație</string>
-    <string name="setup_looks_restart_note">Aplicația se va reporni când termini configurarea pentru a aplica numele și pictograma alese.</string>
     <string name="setup_section_appearance">Aspect</string>
     <string name="setup_appearance_summary">Mod deschis sau întunecat, culori accent și altele.</string>
     <string name="setup_open_appearance">Personalizează aspectul</string>

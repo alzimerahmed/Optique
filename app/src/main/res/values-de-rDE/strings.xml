@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Wechseln deaktivieren</string>
     <string name="cloud_net_wifi_blank_summary">Kein Netzwerk — Wechseln deaktiviert</string>
     <string name="cloud_net_wifi_pick_none">Nicht gesetzt</string>
-    <string name="change_app_logo">App-Logo</string>
-    <string name="change_app_logo_summary">Zwischen dem Optique- und dem klassischen Galerie-Launcher-Symbol wechseln</string>
-    <string name="app_logo_description">Wählen Sie das Launcher-Symbol aus, das auf Ihrem Startbildschirm und im App-Drawer verwendet wird. Die App wird neu gestartet, um die Änderung anzuwenden.</string>
     <string name="setup_step_progress">Schritt %1$d von %2$d</string>
     <string name="setup_continue">Weiter</string>
     <string name="setup_finish">Fertig</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Aussehen &amp; Gefühl</string>
     <string name="setup_looks_subtitle">Lassen Sie die App wie Ihre eigene wirken.</string>
     <string name="setup_section_app_name">App-Name</string>
-    <string name="setup_section_app_logo">App-Logo</string>
-    <string name="setup_looks_restart_note">Die App wird neu starten, wenn Sie die Einrichtung abgeschlossen haben, um den gewählten Namen und das Symbol anzuwenden.</string>
     <string name="setup_section_appearance">Erscheinungsbild</string>
     <string name="setup_appearance_summary">Hell- oder Dunkelmodus, Akzentfarben und mehr.</string>
     <string name="setup_open_appearance">Erscheinungsbild anpassen</string>

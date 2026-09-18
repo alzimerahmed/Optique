@@ -1886,9 +1886,6 @@
     <string name="cloud_net_wifi_disable">Schakel het schakelen uit</string>
     <string name="cloud_net_wifi_blank_summary">Geen netwerk — schakelen uitgeschakeld</string>
     <string name="cloud_net_wifi_pick_none">Niet ingesteld</string>
-    <string name="change_app_logo">App-logo</string>
-    <string name="change_app_logo_summary">Schakel tussen het Optique- en klassieke Galerij-opstartpictogram</string>
-    <string name="app_logo_description">Kies het opstartpictogram dat op uw startscherm en app-lade wordt gebruikt. De app wordt opnieuw opgestart om de wijziging toe te passen.</string>
     <string name="setup_step_progress">Stap %1$d van %2$d</string>
     <string name="setup_continue">Ga door</string>
     <string name="setup_finish">Afwerking</string>
@@ -1912,8 +1909,6 @@
     <string name="setup_looks_title">Uiterlijk en gevoel</string>
     <string name="setup_looks_subtitle">Zorg ervoor dat de app aanvoelt als de jouwe.</string>
     <string name="setup_section_app_name">App-naam</string>
-    <string name="setup_section_app_logo">App-logo</string>
-    <string name="setup_looks_restart_note">De app wordt opnieuw opgestart wanneer u klaar bent met instellen om de gekozen naam en het gekozen pictogram toe te passen.</string>
     <string name="setup_section_appearance">Uiterlijk</string>
     <string name="setup_appearance_summary">Lichte of donkere modus, accentkleuren en meer.</string>
     <string name="setup_open_appearance">Pas het uiterlijk aan</string>

@@ -1886,9 +1886,6 @@
     <string name="cloud_net_wifi_disable">Deaktiver veksling</string>
     <string name="cloud_net_wifi_blank_summary">Ikkje noko nettverk — byte er deaktivert</string>
     <string name="cloud_net_wifi_pick_none">Ikkje sat</string>
-    <string name="change_app_logo">Applogo</string>
-    <string name="change_app_logo_summary">Byt mellom Optique og det klassiske galleristartikonet</string>
-    <string name="app_logo_description">Vel startikonet som blir brukt på startskjermen og appskuffa. Appen startar på nytt for å bruka endringa.</string>
     <string name="setup_step_progress">Trinn %1$d av %2$d</string>
     <string name="setup_continue">Hald fram</string>
     <string name="setup_finish">Fullfør</string>
@@ -1912,8 +1909,6 @@
     <string name="setup_looks_title">Utsjånad og kjensle</string>
     <string name="setup_looks_subtitle">Få appen til å kjennast som din.</string>
     <string name="setup_section_app_name">Appnamn</string>
-    <string name="setup_section_app_logo">Applogo</string>
-    <string name="setup_looks_restart_note">Appen startar på nytt når du er ferdig med oppsettet for å bruka det valde namnet og ikonet.</string>
     <string name="setup_section_appearance">Utsjånad</string>
     <string name="setup_appearance_summary">Lys eller mørk modus, aksentfargar og meir.</string>
     <string name="setup_open_appearance">Tilpass utsjånaden</string>

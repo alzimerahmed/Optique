@@ -1890,9 +1890,6 @@
     <string name="cloud_net_wifi_disable">השבת מיתוג</string>
     <string name="cloud_net_wifi_blank_summary">אין רשת - מיתוג מושבת</string>
     <string name="cloud_net_wifi_pick_none">לא מוגדר</string>
-    <string name="change_app_logo">לוגו האפליקציה</string>
-    <string name="change_app_logo_summary">עבור בין סמל Optique לסמל מפעיל הגלריה הקלאסי</string>
-    <string name="app_logo_description">בחר את סמל המפעיל המשמש במסך הבית ובמגירת האפליקציות שלך. האפליקציה תופעל מחדש כדי להחיל את השינוי.</string>
     <string name="setup_step_progress">שלב %1$d של %2$d</string>
     <string name="setup_continue">המשך</string>
     <string name="setup_finish">סיים</string>
@@ -1916,8 +1913,6 @@
     <string name="setup_looks_title">מראה ותחושה</string>
     <string name="setup_looks_subtitle">תן לאפליקציה להרגיש כמו שלך.</string>
     <string name="setup_section_app_name">שם האפליקציה</string>
-    <string name="setup_section_app_logo">לוגו האפליקציה</string>
-    <string name="setup_looks_restart_note">האפליקציה תופעל מחדש כשתסיים את ההגדרה כדי להחיל את השם והסמל שנבחרו.</string>
     <string name="setup_section_appearance">מראה</string>
     <string name="setup_appearance_summary">מצב בהיר או כהה, צבעי הדגשה ועוד.</string>
     <string name="setup_open_appearance">התאם אישית את המראה</string>

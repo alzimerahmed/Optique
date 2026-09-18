@@ -484,34 +484,21 @@ fun Context.restartApplication() {
 }
 
 /**
- * Resolve the launcher [activity-alias] short name for a given app-name + app-logo
- * combination. The two legacy aliases (Optique-logo) keep their original names so existing
- * installs are not disrupted; the Gallery-logo combinations use dedicated aliases.
+ * Resolve the launcher [activity-alias] short name for a given app-name.
  */
-fun launcherAliasFor(nameAlias: String, logoAlias: String): String {
-    val galleryLogo = logoAlias == "Gallery"
-    return when {
-        nameAlias == "Gallery" && galleryLogo -> "Launcher_Gallery_GalleryLogo"
-        nameAlias == "Gallery" -> "Launcher_Gallery"
-        galleryLogo -> "Launcher_Optique_GalleryLogo"
-        else -> "Launcher_Optique"
-    }
-}
+fun launcherAliasFor(nameAlias: String): String =
+    if (nameAlias == "Gallery") "Launcher_Gallery" else "Launcher_Optique"
 
 /**
- * Enable the launcher alias matching the given app-name + app-logo combination and disable
- * all others. [logoAlias] defaults to the Optique logo for backward compatibility with callers
- * that only toggle the app name.
+ * Enable the launcher alias matching the given app-name and disable all others.
  */
-fun Context.changeAppAlias(nameAlias: String, logoAlias: String = "Optique") {
+fun Context.changeAppAlias(nameAlias: String) {
     val namespace = "com.dot.gallery"
     val aliases = listOf(
         "Launcher_Optique",
-        "Launcher_Gallery",
-        "Launcher_Optique_GalleryLogo",
-        "Launcher_Gallery_GalleryLogo"
+        "Launcher_Gallery"
     )
-    val targetAlias = launcherAliasFor(nameAlias, logoAlias)
+    val targetAlias = launcherAliasFor(nameAlias)
     for (alias in aliases) {
         val component = ComponentName(packageName, "$namespace.$alias")
         val newState = if (alias == targetAlias) {
@@ -535,9 +522,7 @@ fun Context.currentLauncherAlias(): String {
     val namespace = "com.dot.gallery"
     val aliases = listOf(
         "Launcher_Optique",
-        "Launcher_Gallery",
-        "Launcher_Optique_GalleryLogo",
-        "Launcher_Gallery_GalleryLogo"
+        "Launcher_Gallery"
     )
     for (alias in aliases) {
         val component = ComponentName(packageName, "$namespace.$alias")

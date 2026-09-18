@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Деактивирайте превключването</string>
     <string name="cloud_net_wifi_blank_summary">Няма мрежа — превключването е деактивирано</string>
     <string name="cloud_net_wifi_pick_none">Не е зададено</string>
-    <string name="change_app_logo">Лого на приложението</string>
-    <string name="change_app_logo_summary">Превключвайте между иконата за стартиране на Optique и класическата галерия</string>
-    <string name="app_logo_description">Изберете иконата за стартиране, използвана на вашия начален екран и чекмеджето на приложението. Приложението ще се рестартира, за да приложи промяната.</string>
     <string name="setup_step_progress">Стъпка %1$d от %2$d</string>
     <string name="setup_continue">Продължи</string>
     <string name="setup_finish">Завършете</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Изглед и усещане</string>
     <string name="setup_looks_subtitle">Накарайте приложението да се чувства като ваше.</string>
     <string name="setup_section_app_name">Име на приложението</string>
-    <string name="setup_section_app_logo">Лого на приложението</string>
-    <string name="setup_looks_restart_note">Приложението ще се рестартира, когато завършите настройката, за да приложи избраното име и икона.</string>
     <string name="setup_section_appearance">Външен вид</string>
     <string name="setup_appearance_summary">Светъл или тъмен режим, акцентни цветове и др.</string>
     <string name="setup_open_appearance">Персонализирайте външния вид</string>

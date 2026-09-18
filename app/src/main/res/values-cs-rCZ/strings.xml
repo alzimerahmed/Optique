@@ -1889,9 +1889,6 @@
     <string name="cloud_net_wifi_disable">Zakázat přepínání</string>
     <string name="cloud_net_wifi_blank_summary">Žádná síť – přepínání zakázáno</string>
     <string name="cloud_net_wifi_pick_none">Nenastaveno</string>
-    <string name="change_app_logo">Logo aplikace</string>
-    <string name="change_app_logo_summary">Přepínejte mezi ikonou spouštěče Optique a klasickou galerií</string>
-    <string name="app_logo_description">Vyberte ikonu spouštěče použitou na domovské obrazovce a v zásuvce aplikace. Aplikace se restartuje, aby se změna uplatnila.</string>
     <string name="setup_step_progress">Krok %1$d z %2$d</string>
     <string name="setup_continue">Pokračovat</string>
     <string name="setup_finish">Dokončit</string>
@@ -1915,8 +1912,6 @@
     <string name="setup_looks_title">Vzhled a dojem</string>
     <string name="setup_looks_subtitle">Udělejte z aplikace pocit, jako je ta vaše.</string>
     <string name="setup_section_app_name">Název aplikace</string>
-    <string name="setup_section_app_logo">Logo aplikace</string>
-    <string name="setup_looks_restart_note">Po dokončení nastavení se aplikace restartuje, aby se použil vybraný název a ikona.</string>
     <string name="setup_section_appearance">Vzhled</string>
     <string name="setup_appearance_summary">Světlý nebo tmavý režim, zvýrazňující barvy a další.</string>
     <string name="setup_open_appearance">Přizpůsobte vzhled</string>

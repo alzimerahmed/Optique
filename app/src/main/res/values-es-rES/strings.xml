@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Desactivar cambio</string>
     <string name="cloud_net_wifi_blank_summary">Sin red — cambio desactivado</string>
     <string name="cloud_net_wifi_pick_none">No establecido</string>
-    <string name="change_app_logo">Logo de la aplicación</string>
-    <string name="change_app_logo_summary">Cambiar entre los íconos de la galería Optique y clásica</string>
-    <string name="app_logo_description">Elige el ícono del lanzador usado en tu pantalla de inicio y cajón de aplicaciones. La aplicación se reiniciará para aplicar el cambio.</string>
     <string name="setup_step_progress">Paso %1$d de %2$d</string>
     <string name="setup_continue">Continuar</string>
     <string name="setup_finish">Finalizar</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Aspecto y sensación</string>
     <string name="setup_looks_subtitle">Haz que la aplicación se sienta como tuya.</string>
     <string name="setup_section_app_name">Nombre de la aplicación</string>
-    <string name="setup_section_app_logo">Logo de la aplicación</string>
-    <string name="setup_looks_restart_note">La aplicación se reiniciará cuando finalices la configuración para aplicar el nombre y el ícono elegidos.</string>
     <string name="setup_section_appearance">Apariencia</string>
     <string name="setup_appearance_summary">Modo claro u oscuro, colores de acento y más.</string>
     <string name="setup_open_appearance">Personalizar apariencia</string>

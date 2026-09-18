@@ -236,7 +236,6 @@ internal object PortableBackupSettings {
         "weekly_date_format",
         "selection_sheet_config",
         "app_name_alias",
-        "app_logo_alias",
         "favorite_icon_position",
         "timeline_group_method",
         "albums_group_method",

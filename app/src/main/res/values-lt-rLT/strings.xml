@@ -1890,9 +1890,6 @@
     <string name="cloud_net_wifi_disable">Išjungti perjungimą</string>
     <string name="cloud_net_wifi_blank_summary">Nėra tinklo – perjungimas išjungtas</string>
     <string name="cloud_net_wifi_pick_none">Nenustatyta</string>
-    <string name="change_app_logo">Programėlės logotipas</string>
-    <string name="change_app_logo_summary">Perjunkite tarp Optique ir klasikinės galerijos paleidimo priemonės piktogramos</string>
-    <string name="app_logo_description">Pasirinkite paleidimo priemonės piktogramą, naudojamą pagrindiniame ekrane ir programų stalčiuje. Programa bus paleista iš naujo, kad būtų pritaikytas pakeitimas.</string>
     <string name="setup_step_progress">%1$d veiksmas iš %2$d</string>
     <string name="setup_continue">Tęsti</string>
     <string name="setup_finish">Baigti</string>
@@ -1916,8 +1913,6 @@
     <string name="setup_looks_title">Išvaizda ir jausmas</string>
     <string name="setup_looks_subtitle">Priverskite programą jaustis kaip jūsų.</string>
     <string name="setup_section_app_name">Programos pavadinimas</string>
-    <string name="setup_section_app_logo">Programėlės logotipas</string>
-    <string name="setup_looks_restart_note">Programa bus paleista iš naujo, kai baigsite sąranką, kad pritaikytumėte pasirinktą pavadinimą ir piktogramą.</string>
     <string name="setup_section_appearance">Išvaizda</string>
     <string name="setup_appearance_summary">Šviesus arba tamsus režimas, akcentinės spalvos ir kt.</string>
     <string name="setup_open_appearance">Tinkinti išvaizdą</string>

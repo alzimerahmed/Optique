@@ -1889,9 +1889,6 @@
     <string name="cloud_net_wifi_disable">Wyłącz zmianę</string>
     <string name="cloud_net_wifi_blank_summary">Brak sieci — zmiana wyłączona</string>
     <string name="cloud_net_wifi_pick_none">Nie ustawiono</string>
-    <string name="change_app_logo">Logo aplikacji</string>
-    <string name="change_app_logo_summary">Przełączanie między ikoną uruchamiania galerii Optique a klasyczną</string>
-    <string name="app_logo_description">Wybierz ikonę uruchamiania używaną na ekranie głównym i w szufladzie aplikacji. Aplikacja zostanie ponownie uruchomiona, aby zastosować zmianę.</string>
     <string name="setup_step_progress">Krok %1$d z %2$d</string>
     <string name="setup_continue">Kontynuuj</string>
     <string name="setup_finish">Zakończ</string>
@@ -1915,8 +1912,6 @@
     <string name="setup_looks_title">Wygląd i odczucie</string>
     <string name="setup_looks_subtitle">Spraw, aby aplikacja wyglądała jak Twoja.</string>
     <string name="setup_section_app_name">Nazwa aplikacji</string>
-    <string name="setup_section_app_logo">Logo aplikacji</string>
-    <string name="setup_looks_restart_note">Aplikacja uruchomi się ponownie po zakończeniu konfiguracji, aby zastosować wybraną nazwę i ikonę.</string>
     <string name="setup_section_appearance">Wygląd</string>
     <string name="setup_appearance_summary">Tryb jasny lub ciemny, kolory akcentu i inne.</string>
     <string name="setup_open_appearance">Dostosuj wygląd</string>

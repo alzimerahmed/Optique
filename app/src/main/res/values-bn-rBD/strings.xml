@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">সুইচিং অক্ষম করুন</string>
     <string name="cloud_net_wifi_blank_summary">কোনো নেটওয়ার্ক নেই — সুইচিং অক্ষম</string>
     <string name="cloud_net_wifi_pick_none">সেট করা হয়নি</string>
-    <string name="change_app_logo">অ্যাপ লোগো</string>
-    <string name="change_app_logo_summary">Optique এবং ক্লাসিক গ্যালারি লঞ্চার আইকনের মধ্যে স্যুইচ করুন</string>
-    <string name="app_logo_description">আপনার হোম স্ক্রীন এবং অ্যাপ ড্রয়ারে ব্যবহৃত লঞ্চার আইকনটি বেছে নিন। পরিবর্তনটি প্রয়োগ করতে অ্যাপটি পুনরায় চালু হবে।</string>
     <string name="setup_step_progress">%2$d এর %1$d ধাপ</string>
     <string name="setup_continue">চালিয়ে যান</string>
     <string name="setup_finish">শেষ করুন</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">চেহারা এবং অনুভব</string>
     <string name="setup_looks_subtitle">অ্যাপটিকে আপনার মত করে তুলুন।</string>
     <string name="setup_section_app_name">অ্যাপের নাম</string>
-    <string name="setup_section_app_logo">অ্যাপ লোগো</string>
-    <string name="setup_looks_restart_note">আপনি নির্বাচিত নাম এবং আইকন প্রয়োগ করতে সেটআপ শেষ করলে অ্যাপটি পুনরায় চালু হবে।</string>
     <string name="setup_section_appearance">চেহারা</string>
     <string name="setup_appearance_summary">হালকা বা গাঢ় মোড, অ্যাকসেন্ট রং এবং আরও অনেক কিছু।</string>
     <string name="setup_open_appearance">চেহারা কাস্টমাইজ করুন</string>

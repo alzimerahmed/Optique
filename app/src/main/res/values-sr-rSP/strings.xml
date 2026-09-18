@@ -1887,9 +1887,6 @@
     <string name="cloud_net_wifi_disable">Онемогући прелазак</string>
     <string name="cloud_net_wifi_blank_summary">Нема мреже — прелазак онемогућен</string>
     <string name="cloud_net_wifi_pick_none">Није постављено</string>
-    <string name="change_app_logo">Лого апликације</string>
-    <string name="change_app_logo_summary">Пребацивање између Optique и класичне иконе покретача Галерије</string>
-    <string name="app_logo_description">Изаберите икону покретача која се користи на вашем почетном екрану и фиоци апликација. Апликација ће поново покренути да би промена ступила на снагу.</string>
     <string name="setup_step_progress">Корак %1$d од %2$d</string>
     <string name="setup_continue">Настави</string>
     <string name="setup_finish">Заврши</string>
@@ -1913,8 +1910,6 @@
     <string name="setup_looks_title">Изглед и осећај</string>
     <string name="setup_looks_subtitle">Учините да апликација делује као ваша.</string>
     <string name="setup_section_app_name">Назив апликације</string>
-    <string name="setup_section_app_logo">Лого апликације</string>
-    <string name="setup_looks_restart_note">Апликација ће се поново покренути када завршите подешавање како би се применио изабрани назив и икона.</string>
     <string name="setup_section_appearance">Изглед</string>
     <string name="setup_appearance_summary">Светли или тамни режим, акцентне боје и још много тога.</string>
     <string name="setup_open_appearance">Прилагодите изглед</string>

@@ -134,44 +134,6 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- App name "Optique" with the legacy Gallery launcher logo -->
-        <activity-alias
-            android:name=".Launcher_Optique_GalleryLogo"
-            android:label="@string/app_name"
-            android:icon="@mipmap/ic_launcher_gallery"
-            android:roundIcon="@mipmap/ic_launcher_gallery_round"
-            android:targetActivity=".feature_node.presentation.main.MainActivity"
-            android:exported="true"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.APP_GALLERY"/>
-                <category android:name="android.intent.category.INFO"/>
-            </intent-filter>
-        </activity-alias>
-
-        <!-- App name "Gallery" with the legacy Gallery launcher logo -->
-        <activity-alias
-            android:name=".Launcher_Gallery_GalleryLogo"
-            android:label="@string/app_name_gallery"
-            android:icon="@mipmap/ic_launcher_gallery"
-            android:roundIcon="@mipmap/ic_launcher_gallery_round"
-            android:targetActivity=".feature_node.presentation.main.MainActivity"
-            android:exported="true"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.APP_GALLERY"/>
-                <category android:name="android.intent.category.INFO"/>
-            </intent-filter>
-        </activity-alias>
-
         <activity
             android:name=".feature_node.presentation.standalone.StandaloneActivity"
             android:exported="true"

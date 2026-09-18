@@ -1883,9 +1883,6 @@
     <string name="cloud_net_wifi_disable">停用切換</string>
     <string name="cloud_net_wifi_blank_summary">無網路 — 已停用切換</string>
     <string name="cloud_net_wifi_pick_none">未設定</string>
-    <string name="change_app_logo">應用程式圖示</string>
-    <string name="change_app_logo_summary">在 Optique 與經典相簿啟動器圖示之間切換</string>
-    <string name="app_logo_description">選擇在主畫面和應用程式抽屜中使用的啟動器圖示。應用程式將重新啟動以套用更改。</string>
     <string name="setup_step_progress">步驟 %1$d / %2$d</string>
     <string name="setup_continue">繼續</string>
     <string name="setup_finish">完成</string>
@@ -1909,8 +1906,6 @@
     <string name="setup_looks_title">外觀與感受</string>
     <string name="setup_looks_subtitle">讓應用程式感覺像是你的專屬。</string>
     <string name="setup_section_app_name">應用程式名稱</string>
-    <string name="setup_section_app_logo">應用程式圖示</string>
-    <string name="setup_looks_restart_note">當你完成設定後，應用程式將重新啟動以套用所選擇的名稱和圖示。</string>
     <string name="setup_section_appearance">外觀</string>
     <string name="setup_appearance_summary">淺色或深色模式、強調色彩等。</string>
     <string name="setup_open_appearance">自訂外觀</string>

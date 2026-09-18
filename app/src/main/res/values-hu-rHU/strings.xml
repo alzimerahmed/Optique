@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Váltás letiltása</string>
     <string name="cloud_net_wifi_blank_summary">Nincs hálózat — váltás letiltva</string>
     <string name="cloud_net_wifi_pick_none">Nincs beállítva</string>
-    <string name="change_app_logo">Alkalmazás logó</string>
-    <string name="change_app_logo_summary">Váltás a Optique és a klasszikus Galéria indítóikon között</string>
-    <string name="app_logo_description">Válaszd ki a kezdőképernyőn és az alkalmazásfiókban használt indítóikont. Az alkalmazás újraindul a változtatás alkalmazásához.</string>
     <string name="setup_step_progress">%2$d lépés %1$d</string>
     <string name="setup_continue">Folytatás</string>
     <string name="setup_finish">Befejezés</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Megjelenés és érzés</string>
     <string name="setup_looks_subtitle">Tedd az alkalmazást a sajátodnak érezhetővé.</string>
     <string name="setup_section_app_name">Alkalmazás neve</string>
-    <string name="setup_section_app_logo">Alkalmazás logó</string>
-    <string name="setup_looks_restart_note">Az alkalmazás újraindul a beállítás befejezése után a kiválasztott név és ikon alkalmazásához.</string>
     <string name="setup_section_appearance">Megjelenés</string>
     <string name="setup_appearance_summary">Világos vagy sötét mód, kiemelő színek és még sok más.</string>
     <string name="setup_open_appearance">Megjelenés testreszabása</string>

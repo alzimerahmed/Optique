@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Inaktivera byte</string>
     <string name="cloud_net_wifi_blank_summary">Inget nätverk — byte inaktiverat</string>
     <string name="cloud_net_wifi_pick_none">Inte inställt</string>
-    <string name="change_app_logo">Appikon</string>
-    <string name="change_app_logo_summary">Växla mellan Optique och klassisk Galleri-startikon</string>
-    <string name="app_logo_description">Välj den startikon som används på din startsida och i app-lådan. Appen startar om för att tillämpa ändringen.</string>
     <string name="setup_step_progress">Steg %1$d av %2$d</string>
     <string name="setup_continue">Fortsätt</string>
     <string name="setup_finish">Slutför</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Utseende &amp; Känsla</string>
     <string name="setup_looks_subtitle">Få appen att kännas som din.</string>
     <string name="setup_section_app_name">Appnamn</string>
-    <string name="setup_section_app_logo">Applogo</string>
-    <string name="setup_looks_restart_note">Appen startar om när du avslutar inställningen för att tillämpa det valda namnet och ikonen.</string>
     <string name="setup_section_appearance">Utseende</string>
     <string name="setup_appearance_summary">Ljust eller mörkt läge, accentfärger och mer.</string>
     <string name="setup_open_appearance">Anpassa utseende</string>

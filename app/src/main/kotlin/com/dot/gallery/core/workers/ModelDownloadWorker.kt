@@ -299,7 +299,7 @@ class ModelDownloadWorker @AssistedInject constructor(
         val notification = NotificationCompat.Builder(appContext, CHANNEL_ID)
             .setContentTitle(appContext.getString(R.string.ai_models_downloading))
             .setContentText("${progress}%")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_notification)
             .setProgress(100, progress, progress == 0)
             .setOngoing(true)
             .setSilent(true)

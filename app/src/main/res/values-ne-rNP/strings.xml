@@ -1886,9 +1886,6 @@
     <string name="cloud_net_wifi_disable">स्विचिङ असक्षम पार्नुहोस्</string>
     <string name="cloud_net_wifi_blank_summary">कुनै नेटवर्क छैन — स्विचिङ असक्षम गरिएको छ</string>
     <string name="cloud_net_wifi_pick_none">सेट गरिएको छैन</string>
-    <string name="change_app_logo">एप लोगो</string>
-    <string name="change_app_logo_summary">Optique र क्लासिक ग्यालेरी लन्चर आइकन बीच स्विच गर्नुहोस्</string>
-    <string name="app_logo_description">तपाईंको गृह स्क्रिन र एप ड्रअरमा प्रयोग गरिएको लन्चर आइकन छनोट गर्नुहोस्। परिवर्तन लागू गर्न एप रिस्टार्ट हुनेछ।</string>
     <string name="setup_step_progress">%2$d को %1$d चरण</string>
     <string name="setup_continue">जारी राख्नुहोस्</string>
     <string name="setup_finish">समाप्त गर्नुहोस्</string>
@@ -1912,8 +1909,6 @@
     <string name="setup_looks_title">लुक्स एण्ड फील</string>
     <string name="setup_looks_subtitle">एपलाई आफ्नो जस्तो महसुस गराउनुहोस्।</string>
     <string name="setup_section_app_name">एपको नाम</string>
-    <string name="setup_section_app_logo">एप लोगो</string>
-    <string name="setup_looks_restart_note">तपाईंले रोजेको नाम र आइकन लागू गर्न सेटअप पूरा गरेपछि एप रिस्टार्ट हुनेछ।</string>
     <string name="setup_section_appearance">उपस्थिति</string>
     <string name="setup_appearance_summary">हल्का वा गाढा मोड, उच्चारण रङ र थप।</string>
     <string name="setup_open_appearance">रूप अनुकूलित गर्नुहोस्</string>

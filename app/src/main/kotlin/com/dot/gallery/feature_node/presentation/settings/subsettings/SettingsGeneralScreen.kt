@@ -50,7 +50,6 @@ import com.dot.gallery.R
 import com.dot.gallery.core.LocalEventHandler
 import com.dot.gallery.core.Position
 import com.dot.gallery.core.Settings
-import com.dot.gallery.core.Settings.Misc.rememberAppLogoAlias
 import com.dot.gallery.core.Settings.Misc.rememberAppNameAlias
 import com.dot.gallery.core.Settings.Misc.rememberTrashConfirmationEnabled
 import com.dot.gallery.core.SettingsEntity
@@ -74,7 +73,6 @@ private const val DETAIL_TRASH_CONFIRM = "trash_confirm"
 private const val DETAIL_SECURE = "secure"
 private const val DETAIL_VIBRATIONS = "vibrations"
 private const val DETAIL_APP_NAME = "app_name"
-private const val DETAIL_APP_LOGO = "app_logo"
 private const val DETAIL_VAULT_ENCRYPT = "vault_encrypt"
 
 @Composable
@@ -89,7 +87,6 @@ fun SettingsGeneralScreen() {
     var secureMode by Settings.Misc.rememberSecureMode()
     var allowVibrations by Settings.Misc.rememberAllowVibrations()
     var appNameAlias by rememberAppNameAlias()
-    var appLogoAlias by rememberAppLogoAlias()
     var vaultEncryptBehavior by Settings.Vault.rememberVaultEncryptBehavior()
 
     when (detailKey) {
@@ -147,27 +144,7 @@ fun SettingsGeneralScreen() {
                 ),
                 onOptionSelected = {
                     appNameAlias = it
-                    context.changeAppAlias(it, appLogoAlias)
-                    scope.launch {
-                        delay(300)
-                        context.restartApplication()
-                    }
-                },
-            )
-        }
-        DETAIL_APP_LOGO -> {
-            BackHandler { detailKey = null }
-            ChooserPreferenceDetailScreen(
-                title = stringResource(R.string.change_app_logo),
-                description = stringResource(R.string.app_logo_description),
-                preview = { AppLogoPreview(appLogoAlias) },
-                options = listOf(
-                    PreferenceOption(Settings.Misc.ALIAS_REFRA, Settings.Misc.ALIAS_REFRA, appLogoAlias == Settings.Misc.ALIAS_REFRA),
-                    PreferenceOption(Settings.Misc.ALIAS_GALLERY, Settings.Misc.ALIAS_GALLERY, appLogoAlias == Settings.Misc.ALIAS_GALLERY),
-                ),
-                onOptionSelected = {
-                    appLogoAlias = it
-                    context.changeAppAlias(appNameAlias, it)
+                    context.changeAppAlias(it)
                     scope.launch {
                         delay(300)
                         context.restartApplication()
@@ -199,7 +176,6 @@ fun SettingsGeneralScreen() {
                 allowVibrations = allowVibrations,
                 onVibrationsChange = { allowVibrations = it },
                 appNameAlias = appNameAlias,
-                appLogoAlias = appLogoAlias,
                 vaultEncryptBehavior = vaultEncryptBehavior,
                 onDetailClick = { detailKey = it },
                 listState = listState,
@@ -219,7 +195,6 @@ private fun GeneralListScreen(
     allowVibrations: Boolean,
     onVibrationsChange: (Boolean) -> Unit,
     appNameAlias: String,
-    appLogoAlias: String,
     vaultEncryptBehavior: String,
     onDetailClick: (String) -> Unit,
     listState: LazyListState,
@@ -297,14 +272,6 @@ private fun GeneralListScreen(
             title = stringResource(R.string.change_app_name),
             summary = stringResource(R.string.change_app_name_summary),
             onClick = { onDetailClick(DETAIL_APP_NAME) },
-            screenPosition = Position.Middle
-        )
-
-        val appLogoPref = rememberPreference(
-            appLogoAlias,
-            title = stringResource(R.string.change_app_logo),
-            summary = stringResource(R.string.change_app_logo_summary),
-            onClick = { onDetailClick(DETAIL_APP_LOGO) },
             screenPosition = Position.Bottom
         )
 
@@ -327,7 +294,7 @@ private fun GeneralListScreen(
 
         return remember(
             openTrashPref, trashCanEnabledPref, trashConfirmationEnabledPref,
-            secureModePref, allowVibrationsPref, appNamePref, appLogoPref,
+            secureModePref, allowVibrationsPref, appNamePref,
             vaultEncryptPref
         ) {
             mutableStateListOf<SettingsEntity>().apply {
@@ -341,7 +308,6 @@ private fun GeneralListScreen(
                 add(secureModePref)
                 add(allowVibrationsPref)
                 add(appNamePref)
-                add(appLogoPref)
                 add(vaultSectionPref)
                 add(vaultEncryptPref)
             }
@@ -459,59 +425,3 @@ private fun AppNamePreview(currentAlias: String) {
     }
 }
 
-@Composable
-private fun AppLogoPreview(currentAlias: String) {
-    val context = LocalContext.current
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(24.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        listOf(Settings.Misc.ALIAS_REFRA, Settings.Misc.ALIAS_GALLERY).forEach { alias ->
-            val selected = currentAlias == alias
-            val borderColor = if (selected) MaterialTheme.colorScheme.primary
-            else MaterialTheme.colorScheme.outlineVariant
-            val containerColor = if (selected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-            else Color.Transparent
-            val iconRes = if (alias == Settings.Misc.ALIAS_GALLERY) {
-                R.mipmap.ic_launcher_gallery_round
-            } else {
-                R.mipmap.ic_launcher_round
-            }
-
-            Column(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(16.dp))
-                    .border(width = 2.dp, color = borderColor, shape = RoundedCornerShape(16.dp))
-                    .background(containerColor)
-                    .padding(horizontal = 24.dp, vertical = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Image(
-                    painter = rememberDrawablePainter(
-                        drawable = AppCompatResources.getDrawable(context, iconRes)
-                    ),
-                    contentDescription = alias,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .clip(CircleShape)
-                )
-                Text(
-                    text = alias,
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Medium,
-                    textAlign = TextAlign.Center
-                )
-                Icon(
-                    imageVector = Icons.Filled.CheckCircle,
-                    contentDescription = null,
-                    tint = if (selected) MaterialTheme.colorScheme.primary
-                    else MaterialTheme.colorScheme.outlineVariant,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-        }
-    }
-}

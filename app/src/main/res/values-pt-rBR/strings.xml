@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Desativar troca</string>
     <string name="cloud_net_wifi_blank_summary">Sem rede — troca desativada</string>
     <string name="cloud_net_wifi_pick_none">Não definido</string>
-    <string name="change_app_logo">Logo do app</string>
-    <string name="change_app_logo_summary">Alternar entre o ícone de inicializador da Galeria Optique e clássico</string>
-    <string name="app_logo_description">Escolha o ícone do inicializador usado na tela inicial e na gaveta de aplicativos. O aplicativo será reiniciado para aplicar a mudança.</string>
     <string name="setup_step_progress">Passo %1$d de %2$d</string>
     <string name="setup_continue">Continuar</string>
     <string name="setup_finish">Concluir</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Aparência e Sensação</string>
     <string name="setup_looks_subtitle">Faça o aplicativo parecer seu.</string>
     <string name="setup_section_app_name">Nome do aplicativo</string>
-    <string name="setup_section_app_logo">Logo do aplicativo</string>
-    <string name="setup_looks_restart_note">O aplicativo será reiniciado quando você terminar a configuração para aplicar o nome e o ícone escolhidos.</string>
     <string name="setup_section_appearance">Aparência</string>
     <string name="setup_appearance_summary">Modo claro ou escuro, cores de destaque e mais.</string>
     <string name="setup_open_appearance">Personalizar aparência</string>

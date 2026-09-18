@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Disable switching</string>
     <string name="cloud_net_wifi_blank_summary">No network — switching disabled</string>
     <string name="cloud_net_wifi_pick_none">Not set</string>
-    <string name="change_app_logo">App logo</string>
-    <string name="change_app_logo_summary">Switch between the Optique and classic Gallery launcher icon</string>
-    <string name="app_logo_description">Choose the launcher icon used on your home screen and app drawer. The app will restart to apply the change.</string>
     <string name="setup_step_progress">Step %1$d of %2$d</string>
     <string name="setup_continue">Continue</string>
     <string name="setup_finish">Finish</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Looks &amp; Feel</string>
     <string name="setup_looks_subtitle">Make the app feel like yours.</string>
     <string name="setup_section_app_name">App name</string>
-    <string name="setup_section_app_logo">App logo</string>
-    <string name="setup_looks_restart_note">The app will restart when you finish setup to apply the chosen name and icon.</string>
     <string name="setup_section_appearance">Appearance</string>
     <string name="setup_appearance_summary">Light or dark mode, accent colors and more.</string>
     <string name="setup_open_appearance">Customize appearance</string>

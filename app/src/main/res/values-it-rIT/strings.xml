@@ -1886,9 +1886,6 @@
     <string name="cloud_net_wifi_disable">Disabilita il passaggio</string>
     <string name="cloud_net_wifi_blank_summary">Nessuna rete: commutazione disabilitata</string>
     <string name="cloud_net_wifi_pick_none">Non impostato</string>
-    <string name="change_app_logo">Logo dell\'app</string>
-    <string name="change_app_logo_summary">Passa dall\'icona Optique all\'icona di avvio della Galleria classica</string>
-    <string name="app_logo_description">Scegli l\'icona di avvio utilizzata nella schermata iniziale e nel cassetto delle app. L\'app si riavvierà per applicare la modifica.</string>
     <string name="setup_step_progress">Passo %1$d di %2$d</string>
     <string name="setup_continue">Continua</string>
     <string name="setup_finish">Finisci</string>
@@ -1912,8 +1909,6 @@
     <string name="setup_looks_title">Guarda e senti</string>
     <string name="setup_looks_subtitle">Rendi l\'app come tua.</string>
     <string name="setup_section_app_name">Nome dell\'app</string>
-    <string name="setup_section_app_logo">Logo dell\'app</string>
-    <string name="setup_looks_restart_note">L\'app si riavvierà al termine della configurazione per applicare il nome e l\'icona scelti.</string>
     <string name="setup_section_appearance">Aspetto</string>
     <string name="setup_appearance_summary">Modalità chiara o scura, colori accesi e altro ancora.</string>
     <string name="setup_open_appearance">Personalizza l\'aspetto</string>

@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Απενεργοποίηση αλλαγής</string>
     <string name="cloud_net_wifi_blank_summary">Κανένα δίκτυο — αλλαγή απενεργοποιημένη</string>
     <string name="cloud_net_wifi_pick_none">Δεν έχει οριστεί</string>
-    <string name="change_app_logo">Λογότυπο εφαρμογής</string>
-    <string name="change_app_logo_summary">Εναλλαγή μεταξύ του Optique και του κλασικού εικονιδίου εκκίνησης της Συλλογής</string>
-    <string name="app_logo_description">Επιλέξτε το εικονίδιο εκκίνησης που θα χρησιμοποιείται στην αρχική οθόνη και στο συρτάρι εφαρμογών. Η εφαρμογή θα επανεκκινηθεί για να εφαρμοστεί η αλλαγή.</string>
     <string name="setup_step_progress">Βήμα %1$d από %2$d</string>
     <string name="setup_continue">Συνέχεια</string>
     <string name="setup_finish">Τέλος</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Εμφάνιση &amp; Αίσθηση</string>
     <string name="setup_looks_subtitle">Κάντε την εφαρμογή να φαίνεται δική σας.</string>
     <string name="setup_section_app_name">Όνομα εφαρμογής</string>
-    <string name="setup_section_app_logo">Λογότυπο εφαρμογής</string>
-    <string name="setup_looks_restart_note">Η εφαρμογή θα επανεκκινήσει όταν ολοκληρώσετε τη ρύθμιση για να εφαρμοστεί το επιλεγμένο όνομα και εικονίδιο.</string>
     <string name="setup_section_appearance">Εμφάνιση</string>
     <string name="setup_appearance_summary">Λειτουργία φωτεινή ή σκοτεινή, χρώματα τονισμού και άλλα.</string>
     <string name="setup_open_appearance">Προσαρμογή εμφάνισης</string>

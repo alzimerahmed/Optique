@@ -1884,9 +1884,6 @@
     <string name="cloud_net_wifi_disable">전환 비활성화</string>
     <string name="cloud_net_wifi_blank_summary">네트워크 없음 - 전환 비활성화됨</string>
     <string name="cloud_net_wifi_pick_none">설정되지 않음</string>
-    <string name="change_app_logo">앱 로고</string>
-    <string name="change_app_logo_summary">Optique와 클래식 갤러리 런처 아이콘 간 전환</string>
-    <string name="app_logo_description">홈 화면과 앱 서랍에 사용되는 실행기 아이콘을 선택하세요. 변경 사항을 적용하기 위해 앱이 다시 시작됩니다.</string>
     <string name="setup_step_progress">%2$d 단계 중 %1$d 단계</string>
     <string name="setup_continue">계속</string>
     <string name="setup_finish">마침</string>
@@ -1910,8 +1907,6 @@
     <string name="setup_looks_title">외모와 느낌</string>
     <string name="setup_looks_subtitle">앱이 자신의 것처럼 느껴지도록 만드세요.</string>
     <string name="setup_section_app_name">앱 이름</string>
-    <string name="setup_section_app_logo">앱 로고</string>
-    <string name="setup_looks_restart_note">선택한 이름과 아이콘을 적용하기 위한 설정을 마치면 앱이 다시 시작됩니다.</string>
     <string name="setup_section_appearance">외관</string>
     <string name="setup_appearance_summary">밝거나 어두운 모드, 강조 색상 등.</string>
     <string name="setup_open_appearance">모양을 사용자 정의</string>

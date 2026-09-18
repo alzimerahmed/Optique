@@ -31,7 +31,6 @@ import androidx.compose.ui.platform.LocalContext
 import com.dot.gallery.BuildConfig
 import com.dot.gallery.cloud.core.ProviderType
 import com.dot.gallery.core.Settings
-import com.dot.gallery.core.Settings.Misc.rememberAppLogoAlias
 import com.dot.gallery.core.Settings.Misc.rememberAppNameAlias
 import com.dot.gallery.core.Settings.Misc.rememberSetupCompletedVersion
 import com.dot.gallery.core.presentation.components.util.hasMediaAccess
@@ -69,7 +68,6 @@ fun SetupScreen(onComplete: () -> Unit = {}) {
     val scope = rememberCoroutineScope()
     var setupCompletedVersion by rememberSetupCompletedVersion()
     val appNameAlias by rememberAppNameAlias()
-    val appLogoAlias by rememberAppLogoAlias()
 
     val pages = remember {
         buildList {
@@ -98,11 +96,11 @@ fun SetupScreen(onComplete: () -> Unit = {}) {
             return@finish
         }
         setupCompletedVersion = Settings.Misc.CURRENT_SETUP_VERSION
-        // Apply the remembered app name + logo now that setup is complete. Restart the app
+        // Apply the remembered app name now that setup is complete. Restart the app
         // (so the launcher reflects the change immediately) only when it actually differs
         // from what is currently applied; otherwise continue normally.
-        if (context.currentLauncherAlias() != launcherAliasFor(appNameAlias, appLogoAlias)) {
-            context.changeAppAlias(appNameAlias, appLogoAlias)
+        if (context.currentLauncherAlias() != launcherAliasFor(appNameAlias)) {
+            context.changeAppAlias(appNameAlias)
             // Give DataStore a moment to persist the completed-setup flag before the
             // process is killed and relaunched, otherwise setup could show again.
             scope.launch {

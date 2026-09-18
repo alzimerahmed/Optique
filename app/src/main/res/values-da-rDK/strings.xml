@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Deaktiver skift</string>
     <string name="cloud_net_wifi_blank_summary">Intet netværk — skift deaktiveret</string>
     <string name="cloud_net_wifi_pick_none">Ikke indstillet</string>
-    <string name="change_app_logo">App-logo</string>
-    <string name="change_app_logo_summary">Skift mellem Optique og klassisk Gallery-launcherikon</string>
-    <string name="app_logo_description">Vælg launcherikonet, der skal bruges på din startskærm og i appskuffen. Appen genstarter for at anvende ændringen.</string>
     <string name="setup_step_progress">Trin %1$d af %2$d</string>
     <string name="setup_continue">Fortsæt</string>
     <string name="setup_finish">Færdig</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Udseende &amp; Fornemmelse</string>
     <string name="setup_looks_subtitle">Få appen til at føles som din.</string>
     <string name="setup_section_app_name">App-navn</string>
-    <string name="setup_section_app_logo">App-logo</string>
-    <string name="setup_looks_restart_note">Appen genstarter, når du er færdig med opsætningen, for at anvende det valgte navn og ikon.</string>
     <string name="setup_section_appearance">Udseende</string>
     <string name="setup_appearance_summary">Lys eller mørk tilstand, accentfarver og mere.</string>
     <string name="setup_open_appearance">Tilpas udseende</string>

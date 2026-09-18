@@ -145,7 +145,6 @@ object HelpSearchIndex {
             Toggle(R.string.secure_mode_title, Screen.SettingsGeneralScreen(), HelpCategory.SETTINGS_GENERAL),
             Toggle(R.string.allow_vibrations, Screen.SettingsGeneralScreen(), HelpCategory.SETTINGS_GENERAL),
             Toggle(R.string.change_app_name, Screen.SettingsGeneralScreen(), HelpCategory.SETTINGS_GENERAL),
-            Toggle(R.string.change_app_logo, Screen.SettingsGeneralScreen(), HelpCategory.SETTINGS_GENERAL),
             Toggle(R.string.vault_encrypt_behavior, Screen.SettingsGeneralScreen(), HelpCategory.SETTINGS_GENERAL),
             // Appearance and color
             Toggle(R.string.settings_follow_system_theme_title, Screen.ColorPaletteScreen(), HelpCategory.SETTINGS_APPEARANCE),

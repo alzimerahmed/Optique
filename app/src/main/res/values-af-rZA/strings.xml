@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Deaktiveer omskakeling</string>
     <string name="cloud_net_wifi_blank_summary">Geen netwerk – skakeling gedeaktiveer</string>
     <string name="cloud_net_wifi_pick_none">Nie gestel nie</string>
-    <string name="change_app_logo">App-logo</string>
-    <string name="change_app_logo_summary">Skakel tussen die Optique- en klassieke Gallery-lanseerderikoon</string>
-    <string name="app_logo_description">Kies die lanseerderikoon wat op jou tuisskerm en programlaai gebruik word. Die toepassing sal herbegin om die verandering toe te pas.</string>
     <string name="setup_step_progress">Stap %1$d van %2$d</string>
     <string name="setup_continue">Gaan voort</string>
     <string name="setup_finish">Voltooi</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Voorkoms &amp; Voel</string>
     <string name="setup_looks_subtitle">Laat die toepassing soos joune voel.</string>
     <string name="setup_section_app_name">Programnaam</string>
-    <string name="setup_section_app_logo">App-logo</string>
-    <string name="setup_looks_restart_note">Die toepassing sal herbegin wanneer jy klaar is met die opstelling om die gekose naam en ikoon toe te pas.</string>
     <string name="setup_section_appearance">Voorkoms</string>
     <string name="setup_appearance_summary">Lig of donker modus, aksentkleure en meer.</string>
     <string name="setup_open_appearance">Pas voorkoms aan</string>

@@ -1884,9 +1884,6 @@
     <string name="cloud_net_wifi_disable">スイッチングを無効にする</string>
     <string name="cloud_net_wifi_blank_summary">ネットワークなし - スイッチングが無効になっています</string>
     <string name="cloud_net_wifi_pick_none">未設定</string>
-    <string name="change_app_logo">アプリのロゴ</string>
-    <string name="change_app_logo_summary">Optique とクラシック ギャラリー ランチャー アイコンを切り替える</string>
-    <string name="app_logo_description">ホーム画面とアプリドロワーで使用されるランチャーアイコンを選択します。変更を適用するためにアプリが再起動されます。</string>
     <string name="setup_step_progress">ステップ %1$d/%2$d</string>
     <string name="setup_continue">続ける</string>
     <string name="setup_finish">終了</string>
@@ -1910,8 +1907,6 @@
     <string name="setup_looks_title">見た目と感触</string>
     <string name="setup_looks_subtitle">アプリを自分のもののように感じさせます。</string>
     <string name="setup_section_app_name">アプリ名</string>
-    <string name="setup_section_app_logo">アプリのロゴ</string>
-    <string name="setup_looks_restart_note">セットアップが完了するとアプリが再起動し、選択した名前とアイコンが適用されます。</string>
     <string name="setup_section_appearance">外観</string>
     <string name="setup_appearance_summary">ライトモードまたはダークモード、アクセントカラーなど。</string>
     <string name="setup_open_appearance">外観をカスタマイズする</string>

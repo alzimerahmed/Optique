@@ -75,6 +75,9 @@ class ConfigBackupManager @Inject constructor(
     private val syncScheduler: CloudSyncScheduler
 ) {
 
+    // Settings removed from the app; silently dropped when restoring older backups.
+    private val deprecatedSettingKeys = setOf("app_logo_alias")
+
     private val json = Json {
         prettyPrint = true
         ignoreUnknownKeys = true
@@ -779,6 +782,7 @@ class ConfigBackupManager @Inject constructor(
         if (manifest.settings.isEmpty()) return RestoreCount()
         context.activeDataStore.edit { prefs ->
             manifest.settings.forEach { (name, value) ->
+                if (name in deprecatedSettingKeys) return@forEach
                 if (applySetting(prefs, name, value)) {
                     restored++
                 } else {

@@ -1889,9 +1889,6 @@
     <string name="cloud_net_wifi_disable">Адключыць пераключэнне</string>
     <string name="cloud_net_wifi_blank_summary">Няма сеткі — пераключэнне адключана</string>
     <string name="cloud_net_wifi_pick_none">Не ўстаноўлена</string>
-    <string name="change_app_logo">Лагатып праграмы</string>
-    <string name="change_app_logo_summary">Пераключэнне паміж Optique і класічным значком праграмы запуску галерэі</string>
-    <string name="app_logo_description">Выберыце значок праграмы запуску, які выкарыстоўваецца на галоўным экране і ў скрыні праграм. Праграма перазапусціцца, каб прымяніць змены.</string>
     <string name="setup_step_progress">Крок %1$d з %2$d</string>
     <string name="setup_continue">Працягнуць</string>
     <string name="setup_finish">Скончыць</string>
@@ -1915,8 +1912,6 @@
     <string name="setup_looks_title">Выглядае і адчуваецца</string>
     <string name="setup_looks_subtitle">Зрабіце так, каб праграма адчувала сябе вашай.</string>
     <string name="setup_section_app_name">Назва праграмы</string>
-    <string name="setup_section_app_logo">Лагатып праграмы</string>
-    <string name="setup_looks_restart_note">Праграма перазапусціцца, калі вы скончыце наладжванне, каб прымяніць выбраную назву і значок.</string>
     <string name="setup_section_appearance">Знешні выгляд</string>
     <string name="setup_appearance_summary">Светлы або цёмны рэжым, акцэнтныя колеры і многае іншае.</string>
     <string name="setup_open_appearance">Наладзьце знешні выгляд</string>

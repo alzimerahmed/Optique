@@ -1883,9 +1883,6 @@
     <string name="cloud_net_wifi_disable">Nonaktifkan pengalihan</string>
     <string name="cloud_net_wifi_blank_summary">Tidak ada jaringan — pengalihan dinonaktifkan</string>
     <string name="cloud_net_wifi_pick_none">Belum ditetapkan</string>
-    <string name="change_app_logo">Logo aplikasi</string>
-    <string name="change_app_logo_summary">Beralih antara ikon peluncur Galeri Optique dan klasik</string>
-    <string name="app_logo_description">Pilih ikon peluncur yang digunakan di layar utama dan laci aplikasi Anda. Aplikasi akan dimulai ulang untuk menerapkan perubahan.</string>
     <string name="setup_step_progress">Langkah %1$d dari %2$d</string>
     <string name="setup_continue">Lanjutkan</string>
     <string name="setup_finish">Selesai</string>
@@ -1909,8 +1906,6 @@
     <string name="setup_looks_title">Tampilan &amp; Nuansa</string>
     <string name="setup_looks_subtitle">Buat aplikasi terasa seperti milik Anda.</string>
     <string name="setup_section_app_name">Nama aplikasi</string>
-    <string name="setup_section_app_logo">Logo aplikasi</string>
-    <string name="setup_looks_restart_note">Aplikasi akan dimulai ulang ketika Anda menyelesaikan pengaturan untuk menerapkan nama dan ikon yang dipilih.</string>
     <string name="setup_section_appearance">Penampilan</string>
     <string name="setup_appearance_summary">Mode terang atau gelap, warna aksen, dan lainnya.</string>
     <string name="setup_open_appearance">Sesuaikan penampilan</string>

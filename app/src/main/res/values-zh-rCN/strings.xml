@@ -1883,9 +1883,6 @@
     <string name="cloud_net_wifi_disable">禁用切换</string>
     <string name="cloud_net_wifi_blank_summary">无网络 — 已禁用切换</string>
     <string name="cloud_net_wifi_pick_none">未设置</string>
-    <string name="change_app_logo">应用图标</string>
-    <string name="change_app_logo_summary">在 Optique 和经典图库启动器图标之间切换</string>
-    <string name="app_logo_description">选择用于主屏幕和应用抽屉的启动器图标。应用将重新启动以应用更改。</string>
     <string name="setup_step_progress">步骤 %1$d 共 %2$d</string>
     <string name="setup_continue">继续</string>
     <string name="setup_finish">完成</string>
@@ -1909,8 +1906,6 @@
     <string name="setup_looks_title">外观与感觉</string>
     <string name="setup_looks_subtitle">让应用感觉像属于你自己。</string>
     <string name="setup_section_app_name">应用名称</string>
-    <string name="setup_section_app_logo">应用图标</string>
-    <string name="setup_looks_restart_note">完成设置后，应用将重新启动以应用所选择的名称和图标。</string>
     <string name="setup_section_appearance">外观</string>
     <string name="setup_appearance_summary">浅色或深色模式、强调色等。</string>
     <string name="setup_open_appearance">自定义外观</string>

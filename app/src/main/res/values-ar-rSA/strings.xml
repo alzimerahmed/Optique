@@ -1893,9 +1893,6 @@
     <string name="cloud_net_wifi_disable">تعطيل التبديل</string>
     <string name="cloud_net_wifi_blank_summary">لا توجد شبكة - تم تعطيل التبديل</string>
     <string name="cloud_net_wifi_pick_none">لم يتم ضبطه</string>
-    <string name="change_app_logo">شعار التطبيق</string>
-    <string name="change_app_logo_summary">قم بالتبديل بين أيقونة Optique وأيقونة مشغل المعرض الكلاسيكي</string>
-    <string name="app_logo_description">اختر رمز المشغل المستخدم على شاشتك الرئيسية ودرج التطبيق. سيتم إعادة تشغيل التطبيق لتطبيق التغيير.</string>
     <string name="setup_step_progress">الخطوة %1$d من %2$d</string>
     <string name="setup_continue">متابعة</string>
     <string name="setup_finish">إنهاء</string>
@@ -1919,8 +1916,6 @@
     <string name="setup_looks_title">يبدو ويشعر</string>
     <string name="setup_looks_subtitle">اجعل التطبيق يبدو وكأنه تطبيقك.</string>
     <string name="setup_section_app_name">اسم التطبيق</string>
-    <string name="setup_section_app_logo">شعار التطبيق</string>
-    <string name="setup_looks_restart_note">سيتم إعادة تشغيل التطبيق عند الانتهاء من الإعداد لتطبيق الاسم والرمز المختارين.</string>
     <string name="setup_section_appearance">المظهر</string>
     <string name="setup_appearance_summary">الوضع الفاتح أو الداكن، وألوان مميزة والمزيد.</string>
     <string name="setup_open_appearance">تخصيص المظهر</string>

@@ -122,7 +122,7 @@ class MemoriesNotifier
             val notification =
                 NotificationCompat
                     .Builder(context, channelId)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground_monochrome)
+                    .setSmallIcon(R.drawable.ic_notification)
                     .setContentTitle(context.getString(R.string.memories_notification_title))
                     .setContentText(context.getString(R.string.memories_notification_body))
                     .setContentIntent(contentIntent)

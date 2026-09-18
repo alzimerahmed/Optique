@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Değiştirmeyi devre dışı bırak</string>
     <string name="cloud_net_wifi_blank_summary">Ağ yok — değişiklik devre dışı</string>
     <string name="cloud_net_wifi_pick_none">Ayarlanmadı</string>
-    <string name="change_app_logo">Uygulama logosu</string>
-    <string name="change_app_logo_summary">Optique ve klasik Galeri başlatıcı simgesi arasında geçiş yapın</string>
-    <string name="app_logo_description">Ana ekranınızda ve uygulama çekmecenizde kullanılacak başlatıcı simgesini seçin. Değişikliği uygulamak için uygulama yeniden başlayacaktır.</string>
     <string name="setup_step_progress">Adım %1$d / %2$d</string>
     <string name="setup_continue">Devam</string>
     <string name="setup_finish">Bitir</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Görünüm ve His</string>
     <string name="setup_looks_subtitle">Uygulamayı kendinize aitmiş gibi hissettirin.</string>
     <string name="setup_section_app_name">Uygulama adı</string>
-    <string name="setup_section_app_logo">Uygulama logosu</string>
-    <string name="setup_looks_restart_note">Seçilen ad ve simgeyi uygulamak için kurulum tamamlandığında uygulama yeniden başlatılacaktır.</string>
     <string name="setup_section_appearance">Görünüm</string>
     <string name="setup_appearance_summary">Açık veya koyu mod, vurgu renkleri ve daha fazlası.</string>
     <string name="setup_open_appearance">Görünümü özelleştir</string>

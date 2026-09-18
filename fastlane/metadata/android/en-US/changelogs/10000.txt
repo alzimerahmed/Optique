@@ -1,0 +1,9 @@
+What's new in 1.0.0:
+
+• First stable Optique release with a brand-new launcher icon
+• Simplified launcher: single Optique icon, legacy Gallery icon variants removed
+• Fresh README, release signing, and shipping pipeline
+
+Note:
+
+• Version code resets to 10000 — if you installed an older Optique build, uninstall it before updating

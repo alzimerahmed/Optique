@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Poista vaihto käytöstä</string>
     <string name="cloud_net_wifi_blank_summary">Ei verkkoa — vaihto pois päältä</string>
     <string name="cloud_net_wifi_pick_none">Ei asetettu</string>
-    <string name="change_app_logo">Sovelluksen logo</string>
-    <string name="change_app_logo_summary">Vaihda Optique ja perinteisen Gallerian käynnistyssymbolin välillä</string>
-    <string name="app_logo_description">Valitse käynnistyssymboli, jota käytetään kotinäytöllä ja sovellusvalikossa. Sovellus käynnistyy uudelleen muutoksen käyttöönottoa varten.</string>
     <string name="setup_step_progress">Vaihe %1$d / %2$d</string>
     <string name="setup_continue">Jatka</string>
     <string name="setup_finish">Valmis</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Ulkoasu &amp; Tuntuma</string>
     <string name="setup_looks_subtitle">Tee sovelluksesta sinun näköisesi.</string>
     <string name="setup_section_app_name">Sovelluksen nimi</string>
-    <string name="setup_section_app_logo">Sovelluksen logo</string>
-    <string name="setup_looks_restart_note">Sovellus käynnistyy uudelleen, kun olet suorittanut asennuksen, ottaaksesi käyttöön valitun nimen ja kuvakkeen.</string>
     <string name="setup_section_appearance">Ulkoasu</string>
     <string name="setup_appearance_summary">Vaalea tai tumma tila, korostusvärit ja muuta.</string>
     <string name="setup_open_appearance">Mukauta ulkoasua</string>

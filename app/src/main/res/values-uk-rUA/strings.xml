@@ -1889,9 +1889,6 @@
     <string name="cloud_net_wifi_disable">Вимкнути перемикання</string>
     <string name="cloud_net_wifi_blank_summary">Мережа відсутня — перемикання вимкнено</string>
     <string name="cloud_net_wifi_pick_none">Не встановлено</string>
-    <string name="change_app_logo">Логотип додатку</string>
-    <string name="change_app_logo_summary">Перемикання між значком запуску галереї Optique та класичним</string>
-    <string name="app_logo_description">Виберіть значок запуску, який використовується на головному екрані та у шухляді додатків. Додаток перезапуститься для застосування зміни.</string>
     <string name="setup_step_progress">Крок %1$d з %2$d</string>
     <string name="setup_continue">Продовжити</string>
     <string name="setup_finish">Завершити</string>
@@ -1915,8 +1912,6 @@
     <string name="setup_looks_title">Зовнішній вигляд та відчуття</string>
     <string name="setup_looks_subtitle">Зробіть додаток своїм.</string>
     <string name="setup_section_app_name">Назва додатка</string>
-    <string name="setup_section_app_logo">Логотип додатка</string>
-    <string name="setup_looks_restart_note">Додаток перезапуститься, коли ви завершите налаштування, щоб застосувати обрану назву та значок.</string>
     <string name="setup_section_appearance">Зовнішній вигляд</string>
     <string name="setup_appearance_summary">Світлий або темний режим, акцентні кольори та інше.</string>
     <string name="setup_open_appearance">Налаштувати зовнішній вигляд</string>

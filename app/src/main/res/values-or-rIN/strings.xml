@@ -1886,9 +1886,6 @@
     <string name="cloud_net_wifi_disable">ସ୍ୱିଚିଂ ନିଷ୍କ୍ରିୟ କରନ୍ତୁ</string>
     <string name="cloud_net_wifi_blank_summary">କୌଣସି ନେଟୱର୍କ ନାହିଁ — ସ୍ୱିଚିଂ ନିଷ୍କ୍ରିୟ</string>
     <string name="cloud_net_wifi_pick_none">ସେଟ୍ ହୋଇନି</string>
-    <string name="change_app_logo">ଆପ୍ ଲୋଗୋ</string>
-    <string name="change_app_logo_summary">Optique ଓ କ୍ଲାସିକ୍ ଗ୍ୟାଲେରୀ ଲଞ୍ଚର ଆଇକନ୍ ମଧ୍ୟରେ ସ୍ୱିଚ୍ କରନ୍ତୁ</string>
-    <string name="app_logo_description">ଆପଣଙ୍କ ହୋମ୍ ସ୍କ୍ରୀନ୍ ଓ ଆପ୍ ଡ୍ରାଅର୍‌ରେ ବ୍ୟବହୃତ ଲଞ୍ଚର ଆଇକନ୍ ଚୟନ କରନ୍ତୁ। ପରିବର୍ତ୍ତନ ପ୍ରୟୋଗ କରିବା ପାଇଁ ଆପ୍ ପୁନଃ ଆରମ୍ଭ ହେବ।</string>
     <string name="setup_step_progress">ପଦକ୍ଷେପ %1$d ର %2$d</string>
     <string name="setup_continue">ଚାଲାଣ କରନ୍ତୁ</string>
     <string name="setup_finish">ସମାପ୍ତ କରନ୍ତୁ</string>
@@ -1912,8 +1909,6 @@
     <string name="setup_looks_title">ଦେଖା ଓ ଅନୁଭୂତି</string>
     <string name="setup_looks_subtitle">ଆପ୍ପକୁ ନିଜର ଅନୁଭବ ଭାବରେ ଅନୁଭବ କରନ୍ତୁ।</string>
     <string name="setup_section_app_name">ଆପ୍ପର ନାମ</string>
-    <string name="setup_section_app_logo">ଆପ୍ପ ଲୋଗୋ</string>
-    <string name="setup_looks_restart_note">ଚୟିତ ନାମ ଏବଂ ଆଇକନ୍ ପ୍ରୟୋଗ କରିବା ପାଇଁ ସେଟ୍‌ଅପ୍ ଶେଷ ହେଲେ ଆପ୍ପ ପୁନଃଚାଲୁ ହେବ।</string>
     <string name="setup_section_appearance">ଦେଖାବା</string>
     <string name="setup_appearance_summary">ଆଲୋକମୟ କିମ୍ବା ଅନ୍ଧାରା ମୋଡ୍, ଆକର୍ଷଣୀୟ ରଙ୍ଗ ଏବଂ ଅଧିକ।</string>
     <string name="setup_open_appearance">ଦେଖାଯିବାକୁ ବ୍ୟକ୍ତିଗତ କରନ୍ତୁ</string>

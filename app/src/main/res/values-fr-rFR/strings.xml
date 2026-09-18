@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Désactiver le changement</string>
     <string name="cloud_net_wifi_blank_summary">Aucun réseau — changement désactivé</string>
     <string name="cloud_net_wifi_pick_none">Non défini</string>
-    <string name="change_app_logo">Logo de l\'application</string>
-    <string name="change_app_logo_summary">Basculer entre l\'icône de lanceur Optique et classique de la Galerie</string>
-    <string name="app_logo_description">Choisissez l\'icône de lanceur utilisée sur votre écran d\'accueil et dans le tiroir d\'applications. L\'application redémarrera pour appliquer le changement.</string>
     <string name="setup_step_progress">Étape %1$d sur %2$d</string>
     <string name="setup_continue">Continuer</string>
     <string name="setup_finish">Terminer</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Apparence &amp; sensations</string>
     <string name="setup_looks_subtitle">Faites en sorte que l’application vous ressemble.</string>
     <string name="setup_section_app_name">Nom de l’application</string>
-    <string name="setup_section_app_logo">Logo de l\'application</string>
-    <string name="setup_looks_restart_note">L’application redémarrera lorsque vous aurez terminé la configuration pour appliquer le nom et l’icône choisis.</string>
     <string name="setup_section_appearance">Apparence</string>
     <string name="setup_appearance_summary">Mode clair ou sombre, couleurs d’accentuation et plus.</string>
     <string name="setup_open_appearance">Personnaliser l’apparence</string>

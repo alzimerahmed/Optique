@@ -1885,9 +1885,6 @@
     <string name="cloud_net_wifi_disable">Desactiva la commutació</string>
     <string name="cloud_net_wifi_blank_summary">Sense xarxa: la commutació està desactivada</string>
     <string name="cloud_net_wifi_pick_none">No configurat</string>
-    <string name="change_app_logo">Logotip de l\'aplicació</string>
-    <string name="change_app_logo_summary">Canvia entre la icona de llançador de la galeria Optique i la clàssica</string>
-    <string name="app_logo_description">Trieu la icona del llançador que s\'utilitza a la pantalla d\'inici i al calaix d\'aplicacions. L\'aplicació es reiniciarà per aplicar el canvi.</string>
     <string name="setup_step_progress">Pas %1$d de %2$d</string>
     <string name="setup_continue">Continua</string>
     <string name="setup_finish">Acabar</string>
@@ -1911,8 +1908,6 @@
     <string name="setup_looks_title">Aspecte i sensació</string>
     <string name="setup_looks_subtitle">Fes que l\'aplicació se senti com teva.</string>
     <string name="setup_section_app_name">Nom de l\'aplicació</string>
-    <string name="setup_section_app_logo">Logotip de l\'aplicació</string>
-    <string name="setup_looks_restart_note">L\'aplicació es reiniciarà quan acabis de configurar per aplicar el nom i la icona escollits.</string>
     <string name="setup_section_appearance">Aparença</string>
     <string name="setup_appearance_summary">Mode clar o fosc, colors d\'accent i molt més.</string>
     <string name="setup_open_appearance">Personalitza l\'aparença</string>

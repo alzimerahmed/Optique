@@ -1887,9 +1887,6 @@
     <string name="cloud_net_wifi_disable">Onemogući prebacivanje</string>
     <string name="cloud_net_wifi_blank_summary">Nema mreže — prebacivanje onemogućeno</string>
     <string name="cloud_net_wifi_pick_none">Nije postavljeno</string>
-    <string name="change_app_logo">Logo aplikacije</string>
-    <string name="change_app_logo_summary">Prebaci između Optique i klasične ikone pokretača galerije</string>
-    <string name="app_logo_description">Odaberite ikonu pokretača koja će se koristiti na početnom zaslonu i u ladici aplikacija. Aplikacija će se ponovno pokrenuti kako bi primijenila promjenu.</string>
     <string name="setup_step_progress">Korak %1$d od %2$d</string>
     <string name="setup_continue">Nastavi</string>
     <string name="setup_finish">Završi</string>
@@ -1913,8 +1910,6 @@
     <string name="setup_looks_title">Izgled i dojam</string>
     <string name="setup_looks_subtitle">Napravite da aplikacija osjeća kao vaša.</string>
     <string name="setup_section_app_name">Naziv aplikacije</string>
-    <string name="setup_section_app_logo">Logo aplikacije</string>
-    <string name="setup_looks_restart_note">Aplikacija će se ponovno pokrenuti kada završite postavljanje kako bi primijenila odabrano ime i ikonu.</string>
     <string name="setup_section_appearance">Izgled</string>
     <string name="setup_appearance_summary">Svijetli ili tamni način rada, boje naglaska i još mnogo toga.</string>
     <string name="setup_open_appearance">Prilagodite izgled</string>

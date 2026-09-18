@@ -1883,9 +1883,6 @@
     <string name="cloud_net_wifi_disable">Vô hiệu hóa chuyển đổi</string>
     <string name="cloud_net_wifi_blank_summary">Không có mạng — chuyển đổi bị vô hiệu hóa</string>
     <string name="cloud_net_wifi_pick_none">Chưa được đặt</string>
-    <string name="change_app_logo">Biểu tượng ứng dụng</string>
-    <string name="change_app_logo_summary">Chuyển đổi giữa biểu tượng khởi chạy Optique và một biểu tượng Thư viện cổ điển</string>
-    <string name="app_logo_description">Chọn biểu tượng khởi chạy được sử dụng trên màn hình chính và ngăn ứng dụng của bạn. Ứng dụng sẽ khởi động lại để áp dụng thay đổi.</string>
     <string name="setup_step_progress">Bước %1$d của %2$d</string>
     <string name="setup_continue">Tiếp tục</string>
     <string name="setup_finish">Hoàn tất</string>
@@ -1909,8 +1906,6 @@
     <string name="setup_looks_title">Giao diện &amp; Cảm giác</string>
     <string name="setup_looks_subtitle">Làm cho ứng dụng cảm thấy như của riêng bạn.</string>
     <string name="setup_section_app_name">Tên ứng dụng</string>
-    <string name="setup_section_app_logo">Biểu tượng ứng dụng</string>
-    <string name="setup_looks_restart_note">Ứng dụng sẽ khởi động lại khi bạn hoàn tất thiết lập để áp dụng tên và biểu tượng đã chọn.</string>
     <string name="setup_section_appearance">Giao diện</string>
     <string name="setup_appearance_summary">Chế độ sáng hoặc tối, màu nhấn và nhiều hơn nữa.</string>
     <string name="setup_open_appearance">Tùy chỉnh giao diện</string>

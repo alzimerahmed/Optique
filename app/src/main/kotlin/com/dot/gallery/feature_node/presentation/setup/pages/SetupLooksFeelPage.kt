@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import com.dot.gallery.R
 import com.dot.gallery.core.LocalEventHandler
 import com.dot.gallery.core.Settings
-import com.dot.gallery.core.Settings.Misc.rememberAppLogoAlias
 import com.dot.gallery.core.Settings.Misc.rememberAppNameAlias
 import com.dot.gallery.core.navigate
 import com.dot.gallery.core.presentation.components.SetupButton
@@ -56,7 +55,6 @@ fun SetupLooksFeelPage(
 ) {
     val handler = LocalEventHandler.current
     var appNameAlias by rememberAppNameAlias()
-    var appLogoAlias by rememberAppLogoAlias()
 
     SetupWizardScaffold(
         showBack = true,
@@ -92,36 +90,12 @@ fun SetupLooksFeelPage(
                         LogoChoice(
                             modifier = Modifier.weight(1f),
                             label = alias,
-                            iconRes = launcherIconFor(appLogoAlias),
+                            iconRes = R.mipmap.ic_launcher_round,
                             selected = appNameAlias == alias,
                             onClick = { appNameAlias = alias }
                         )
                     }
                 }
-            }
-
-            // App logo
-            SetupSectionCard(title = stringResource(R.string.setup_section_app_logo)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    listOf(Settings.Misc.ALIAS_REFRA, Settings.Misc.ALIAS_GALLERY).forEach { alias ->
-                        LogoChoice(
-                            modifier = Modifier.weight(1f),
-                            label = alias,
-                            iconRes = launcherIconFor(alias),
-                            selected = appLogoAlias == alias,
-                            onClick = { appLogoAlias = alias }
-                        )
-                    }
-                }
-                Text(
-                    modifier = Modifier.padding(top = 12.dp),
-                    text = stringResource(R.string.setup_looks_restart_note),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
 
             // Appearance
@@ -143,10 +117,6 @@ fun SetupLooksFeelPage(
         }
     }
 }
-
-private fun launcherIconFor(logoAlias: String): Int =
-    if (logoAlias == Settings.Misc.ALIAS_GALLERY) R.mipmap.ic_launcher_gallery_round
-    else R.mipmap.ic_launcher_round
 
 @Composable
 private fun LogoChoice(
