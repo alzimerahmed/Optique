@@ -72,3 +72,14 @@ val seed = Color(0xFF247EE0)
 
 val BlackScrim = Color(0xBF000000)
 val WhiterBlackScrim = Color(0x666F6F6F)
+
+/**
+ * Semantic accent colors — fixed hues that must stay consistent across seed/dynamic
+ * palettes. Use these instead of re-declaring the same literals per screen.
+ */
+/** Connected/success status and Cutout additive-point marker. */
+val SuccessGreen = Color(0xFF34C759)
+/** Cutout subtractive-point marker. */
+val CutoutExcludeRed = Color(0xFFFF3B30)
+/** Favorite-heart accent over media. */
+val FavoriteRed = Color(0xFFE53935)

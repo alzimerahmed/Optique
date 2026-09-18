@@ -48,6 +48,7 @@ import com.dot.gallery.feature_node.presentation.util.changeAppAlias
 import com.dot.gallery.feature_node.presentation.util.currentLauncherAlias
 import com.dot.gallery.feature_node.presentation.util.launcherAliasFor
 import com.dot.gallery.feature_node.presentation.util.restartApplication
+import com.dot.gallery.ui.theme.MotionSpec
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -127,9 +128,9 @@ fun SetupScreen(onComplete: () -> Unit = {}) {
             transitionSpec = {
                 val forward = targetState >= initialState
                 val dir = if (forward) 1 else -1
-                (slideInHorizontally(tween(350)) { full -> dir * full } + fadeIn(tween(350)))
+                (slideInHorizontally(tween(MotionSpec.EmphasizedMs)) { full -> dir * full } + fadeIn(tween(MotionSpec.EmphasizedMs)))
                     .togetherWith(
-                        slideOutHorizontally(tween(350)) { full -> -dir * full } + fadeOut(tween(350))
+                        slideOutHorizontally(tween(MotionSpec.EmphasizedMs)) { full -> -dir * full } + fadeOut(tween(MotionSpec.EmphasizedMs))
                     )
                     .using(SizeTransform(clip = false))
             },

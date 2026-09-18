@@ -120,6 +120,15 @@
     <string name="trash_deletion_warning">Photos and videos you delete will be removed after 30 days.</string>
     <string name="open_with">Open with</string>
     <string name="select">Select</string>
+    <string name="selected_state">Selected</string>
+    <string name="not_selected_state">Not selected</string>
+    <string name="toggle_selection">Toggle selection</string>
+    <string name="clear_search">Clear search</string>
+    <string name="color_opacity">Color opacity</string>
+    <string name="color_hue">Color hue</string>
+    <string name="color_vibrancy">Color vibrancy</string>
+    <string name="color_saturation">Color saturation</string>
+    <string name="restore_backup">Restore backup</string>
     <string name="photos_and_videos">Photos and Videos</string>
     <string name="photos">Photos</string>
     <string name="videos">Videos</string>
