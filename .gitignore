@@ -37,3 +37,4 @@ ml-models/src/main/assets/arcface.onnx
 
 /scripts/native/sources/
 release_key.jks
+/docs/plans/
