@@ -25,6 +25,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.PersonSearch
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -55,11 +56,14 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.dot.gallery.R
 import com.dot.gallery.cloud.core.PersonInfo
+import com.dot.gallery.core.LocalEventHandler
 import com.dot.gallery.core.SettingsEntity
+import com.dot.gallery.core.navigate
 import com.dot.gallery.core.presentation.components.LoadingMedia
 import com.dot.gallery.core.presentation.components.NavigationBackButton
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
+import com.dot.gallery.feature_node.presentation.util.Screen
 import dev.chrisbanes.haze.LocalHazeStyle
 import dev.chrisbanes.haze.hazeEffect
 
@@ -72,6 +76,8 @@ fun PeopleListScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val isScanning by viewModel.isScanning.collectAsStateWithLifecycle()
     val scanProgress by viewModel.scanProgress.collectAsStateWithLifecycle()
+    val hiddenPeopleCount by viewModel.hiddenPeopleCount.collectAsStateWithLifecycle()
+    val eventHandler = LocalEventHandler.current
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
         state = rememberTopAppBarState()
     )
@@ -87,6 +93,20 @@ fun PeopleListScreen(
                 title = { Text(stringResource(R.string.cloud_people)) },
                 navigationIcon = { NavigationBackButton() },
                 actions = {
+                    if (hiddenPeopleCount > 0) {
+                        IconButton(
+                            onClick = {
+                                eventHandler.navigate(Screen.HiddenPeopleScreen())
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.VisibilityOff,
+                                contentDescription = stringResource(
+                                    R.string.hidden_people_action_description
+                                )
+                            )
+                        }
+                    }
                     if (viewModel.localScanAvailable) {
                         if (isScanning) {
                             Box(

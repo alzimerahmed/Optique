@@ -10,4 +10,6 @@
    <include domain="sharedpref" path="."/>
    <exclude domain="sharedpref" path="device.xml"/>
 -->
+    <!-- Purged face thumbnails must not be resurrected by a restore (KTD4). -->
+    <exclude domain="file" path="face_thumbs/"/>
 </full-backup-content>

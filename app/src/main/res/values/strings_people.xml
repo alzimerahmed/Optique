@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Hidden people management -->
+    <string name="hidden_people_title">Hidden people</string>
+    <string name="hidden_people_empty">No hidden people</string>
+    <string name="hidden_people_explainer">People you hide disappear from the People list and stop matching new face scans. Their faces, names, and thumbnails are kept — tap a person to unhide them.</string>
+    <string name="hidden_people_summary">Manage people you\'ve hidden</string>
+    <string name="hidden_people_action_description">View hidden people</string>
+    <string name="hidden_people_unhide">Unhide %1$s</string>
+
+    <!-- Delete all face data -->
+    <string name="hidden_people_delete_all_title">Delete all face data</string>
+    <string name="hidden_people_delete_all_summary">Remove all on-device people, detected faces, and saved face thumbnails</string>
+    <string name="hidden_people_delete_all_dialog_title">Delete all face data?</string>
+    <string name="hidden_people_delete_all_dialog_text">This permanently removes every on-device person, all detected faces, and all saved face thumbnails. This cannot be undone. Face detection can rebuild this data on the next scan.</string>
+    <string name="hidden_people_delete_all_confirm">Delete all</string>
+    <string name="hidden_people_delete_all_success">All face data deleted</string>
+    <string name="hidden_people_delete_all_failure">Couldn\'t delete all face data</string>
+
+    <!-- Person detail: shown when the person no longer resolves (stale back-stack entry) -->
+    <string name="cloud_person_unavailable">This person is no longer available</string>
+</resources>

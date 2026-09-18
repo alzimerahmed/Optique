@@ -113,6 +113,7 @@ import com.dot.gallery.feature_node.presentation.memories.MemoriesViewModel
 import com.dot.gallery.feature_node.presentation.memories.OnDeviceMemoriesScreen
 import com.dot.gallery.feature_node.presentation.memories.RecapPlaybackScreen
 import com.dot.gallery.feature_node.presentation.memories.resolvePlaybackMedia
+import com.dot.gallery.feature_node.presentation.people.HiddenPeopleScreen
 import com.dot.gallery.feature_node.presentation.search.SearchScreen
 import com.dot.gallery.feature_node.presentation.search.SearchViewModel
 import com.dot.gallery.feature_node.presentation.settings.SettingsScreen
@@ -871,6 +872,12 @@ fun NavigationComp(
                 IgnoredScreen(
                     albumsState = albumsState
                 )
+            }
+
+            composable(
+                route = Screen.HiddenPeopleScreen()
+            ) {
+                HiddenPeopleScreen()
             }
 
             composable(

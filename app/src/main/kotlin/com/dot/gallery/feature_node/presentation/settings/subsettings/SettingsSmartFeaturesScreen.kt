@@ -5,15 +5,20 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -45,6 +50,11 @@ fun SettingsSmartFeaturesScreen(
     val latestSmartScan by viewModel.latestSmartScan.collectAsStateWithLifecycle()
     val includeIgnoredAlbums by viewModel.includeIgnoredAlbums.collectAsStateWithLifecycle()
     val semanticIndexingEnabled by viewModel.semanticIndexingEnabled.collectAsStateWithLifecycle()
+    // Unfiltered active-run feed (KTD4): queued automatic runs must also block the
+    // face-data purge — the shouldShowRun-filtered activeSmartScan hides them.
+    val unfilteredActiveSmartScan by viewModel.unfilteredActiveSmartScan.collectAsStateWithLifecycle()
+    val isPurgingFaceData by viewModel.isPurgingFaceData.collectAsStateWithLifecycle()
+    var showDeleteFaceDataDialog by remember { mutableStateOf(false) }
 
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
@@ -139,6 +149,13 @@ fun SettingsSmartFeaturesScreen(
         val storageHeader = stringResource(R.string.edit_backups_storage)
         val editBackupsTitle = stringResource(R.string.edit_backups)
         val editBackupsSummary = stringResource(R.string.edit_backups_summary)
+        // Resolved before the non-composable settings{} DSL; stays available even
+        // without face models so manage-hidden works in model-deleted states (R11).
+        val peopleHeader = stringResource(R.string.cloud_people)
+        val hiddenPeopleTitle = stringResource(R.string.hidden_people_title)
+        val hiddenPeopleSummary = stringResource(R.string.hidden_people_summary)
+        val deleteAllFaceDataTitle = stringResource(R.string.hidden_people_delete_all_title)
+        val deleteAllFaceDataSummary = stringResource(R.string.hidden_people_delete_all_summary)
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -182,6 +199,22 @@ fun SettingsSmartFeaturesScreen(
                     )
                 }
 
+                Header(peopleHeader)
+
+                Preference(
+                    title = hiddenPeopleTitle,
+                    summary = hiddenPeopleSummary,
+                    onClick = { handler.navigate(Screen.HiddenPeopleScreen()) }
+                )
+
+                Preference(
+                    title = deleteAllFaceDataTitle,
+                    summary = deleteAllFaceDataSummary,
+                    enabled = isFaceDataPurgeEnabled(unfilteredActiveSmartScan != null) &&
+                        !isPurgingFaceData,
+                    onClick = { showDeleteFaceDataDialog = true }
+                )
+
                 Header(databaseHeader)
 
                 Preference(
@@ -198,6 +231,33 @@ fun SettingsSmartFeaturesScreen(
                     onClick = { handler.navigate(Screen.EditBackupsViewerScreen()) }
                 )
             }
+        }
+
+        // Destructive-action confirmation per AIModelsManagerScreen convention (KTD4).
+        if (showDeleteFaceDataDialog) {
+            AlertDialog(
+                onDismissRequest = { showDeleteFaceDataDialog = false },
+                title = { Text(stringResource(R.string.hidden_people_delete_all_dialog_title)) },
+                text = { Text(stringResource(R.string.hidden_people_delete_all_dialog_text)) },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            showDeleteFaceDataDialog = false
+                            viewModel.deleteAllFaceData()
+                        }
+                    ) {
+                        Text(
+                            stringResource(R.string.hidden_people_delete_all_confirm),
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showDeleteFaceDataDialog = false }) {
+                        Text(stringResource(R.string.action_cancel))
+                    }
+                }
+            )
         }
     }
 }

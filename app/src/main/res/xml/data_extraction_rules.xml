@@ -5,15 +5,11 @@
 -->
 <data-extraction-rules>
     <cloud-backup>
-        <!-- TODO: Use <include> and <exclude> to control what is backed up.
-        <include .../>
-        <exclude .../>
-        -->
+        <!-- Purged face thumbnails must not be resurrected by a restore (KTD4). -->
+        <exclude domain="file" path="face_thumbs/"/>
     </cloud-backup>
-    <!--
     <device-transfer>
-        <include .../>
-        <exclude .../>
+        <!-- Purged face thumbnails must not be resurrected by a transfer (KTD4). -->
+        <exclude domain="file" path="face_thumbs/"/>
     </device-transfer>
-    -->
 </data-extraction-rules>

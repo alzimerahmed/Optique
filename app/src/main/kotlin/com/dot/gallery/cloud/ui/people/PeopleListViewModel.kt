@@ -13,6 +13,8 @@ import com.dot.gallery.core.smart.SmartScanScheduler
 import com.dot.gallery.cloud.core.PersonInfo
 import com.dot.gallery.cloud.core.ProviderRegistry
 import com.dot.gallery.cloud.core.ProviderType
+import com.dot.gallery.cloud.data.dao.PersonDao
+import com.dot.gallery.cloud.data.entity.PersonEntity
 import com.dot.gallery.cloud.data.repository.CloudRepository
 import com.dot.gallery.core.Resource
 import com.dot.gallery.feature_node.data.data_source.SmartScanDao
@@ -39,7 +41,8 @@ class PeopleListViewModel @Inject constructor(
     private val registry: ProviderRegistry,
     private val modelManager: ModelManager,
     private val smartScanScheduler: SmartScanScheduler,
-    smartScanDao: SmartScanDao
+    smartScanDao: SmartScanDao,
+    personDao: PersonDao
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PeopleListUiState())
@@ -55,6 +58,15 @@ class PeopleListViewModel @Inject constructor(
 
     private val activeSmartScan = smartScanDao.observeActiveRun()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+
+    /**
+     * Number of hidden local persons — read from [PersonDao] directly (KTD1) so the
+     * manage-hidden entry point stays reachable even when face models are absent
+     * and the local provider reports itself unavailable (R11).
+     */
+    val hiddenPeopleCount: StateFlow<Int> = personDao.getByProvider(ProviderType.LOCAL_PEOPLE)
+        .map { people -> people.count(PersonEntity::hidden) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 
     val isScanning: StateFlow<Boolean> = activeSmartScan.map { run ->
         run?.requestedFeatures?.and(SmartScanFeature.PERSONS.bit) != 0

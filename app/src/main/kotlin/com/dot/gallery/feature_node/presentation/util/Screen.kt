@@ -105,6 +105,8 @@ sealed class Screen(val route: String) {
 
     data object IgnoredScreen : Screen("ignored_screen")
 
+    data object HiddenPeopleScreen : Screen("hidden_people_screen")
+
     data object SetupScreen: Screen("setup_screen")
 
     data object VaultScreen : Screen("vault_screen")

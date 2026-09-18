@@ -6,9 +6,15 @@
 package com.dot.gallery.feature_node.presentation.settings.subsettings
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.withTransaction
 import androidx.work.WorkManager
+import com.dot.gallery.R
+import com.dot.gallery.cloud.core.ProviderType
+import com.dot.gallery.cloud.data.dao.DetectedFaceDao
+import com.dot.gallery.cloud.data.dao.PersonDao
 import com.dot.gallery.core.Settings
 import com.dot.gallery.core.ml.DownloadInfo
 import com.dot.gallery.core.ml.ModelFileInfo
@@ -19,15 +25,21 @@ import com.dot.gallery.core.workers.cancelModelDownload
 import com.dot.gallery.core.workers.downloadModels
 import com.dot.gallery.core.smart.SmartScanPlan
 import com.dot.gallery.core.smart.SmartScanScheduler
+import com.dot.gallery.feature_node.data.data_source.InternalDatabase
+import com.dot.gallery.feature_node.data.data_source.MediaFeature
 import com.dot.gallery.feature_node.data.data_source.SmartScanDao
 import com.dot.gallery.feature_node.data.data_source.SmartScanFeature
 import com.dot.gallery.feature_node.data.data_source.SmartScanPhaseEntity
 import com.dot.gallery.feature_node.data.data_source.SmartScanRunEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.io.File
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -67,12 +79,24 @@ internal fun resolveModelManagementAction(
     }
 }
 
+/**
+ * Whether the "Delete all face data" control is enabled. Only when no SmartScan run
+ * exists at all — queued or running (KTD4). The caller must feed this from the
+ * *unfiltered* `SmartScanDao.observeActiveRun()`/`getActiveRun()` feed: the
+ * `shouldShowRun`-filtered [SmartFeaturesViewModel.activeSmartScan] reports null
+ * for queued automatic runs, which would let a purge race indexing.
+ */
+internal fun isFaceDataPurgeEnabled(hasActiveRun: Boolean): Boolean = !hasActiveRun
+
 @HiltViewModel
 class SmartFeaturesViewModel @Inject constructor(
     private val modelManager: ModelManager,
     private val workManager: WorkManager,
     private val smartScanScheduler: SmartScanScheduler,
-    smartScanDao: SmartScanDao,
+    private val smartScanDao: SmartScanDao,
+    private val personDao: PersonDao,
+    private val detectedFaceDao: DetectedFaceDao,
+    private val database: InternalDatabase,
     @param:ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -115,6 +139,22 @@ class SmartFeaturesViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = null
     )
+
+    /**
+     * Unfiltered active-run feed for the face-data purge gate (KTD4). Unlike
+     * [activeSmartScan] this does NOT apply [SmartScanPlan.shouldShowRun], so queued
+     * automatic runs still block the delete-all control.
+     */
+    val unfilteredActiveSmartScan: StateFlow<SmartScanRunEntity?> = smartScanDao.observeActiveRun()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = null
+        )
+
+    private val _isPurgingFaceData = MutableStateFlow(false)
+    /** True while [deleteAllFaceData] is in flight — the settings row disables itself. */
+    val isPurgingFaceData: StateFlow<Boolean> = _isPurgingFaceData.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val activeSmartScanPhases: StateFlow<List<SmartScanPhaseEntity>> = activeSmartScan
@@ -197,6 +237,55 @@ class SmartFeaturesViewModel @Inject constructor(
 
     fun retryLatestScan() {
         viewModelScope.launch { smartScanScheduler.retryFailed(latestSmartScan.value?.runId) }
+    }
+
+    /**
+     * Purges all local face data (KTD4): people rows, detected faces, face clusters
+     * (removed via the `people` → `face_clusters` FK cascade), stored face
+     * thumbnails, and the `FACE_DETECTION` media-feature state so indexing rebuilds
+     * cleanly on the next scan (R8). Pure DAO/file work — no provider or model
+     * calls, so it works with face models absent (R11). Device-local only.
+     */
+    fun deleteAllFaceData() {
+        if (_isPurgingFaceData.value) return
+        viewModelScope.launch {
+            // Re-check at action time (KTD4): a queued/running scan may have started
+            // after the preference was rendered enabled.
+            if (smartScanDao.getActiveRun() != null) return@launch
+            _isPurgingFaceData.value = true
+            // runCatching keeps the purge steps in one failure domain: any DAO or
+            // filesystem failure surfaces the same failure Toast (U4 test contract).
+            val purged = runCatching {
+                database.withTransaction {
+                    detectedFaceDao.deleteAll()
+                    personDao.deleteByProvider(ProviderType.LOCAL_PEOPLE)
+                    // The state reset stays inside the transaction: isCurrentFaceDetection
+                    // treats SUCCEEDED rows with empty face headers as current, so a crash
+                    // between commits would permanently block re-indexing (KTD4).
+                    smartScanDao.deleteFeatureStates(MediaFeature.FACE_DETECTION)
+                }
+                // After the commit: wipe stored face thumbnails and verify the dir is
+                // gone — a restore-visible residue must not survive the purge.
+                val thumbsDir = File(context.filesDir, "face_thumbs")
+                thumbsDir.deleteRecursively() && !thumbsDir.exists()
+            }.getOrElse { e ->
+                // Keep structured concurrency: cancellation is not a purge failure.
+                if (e is CancellationException) throw e
+                false
+            }
+            _isPurgingFaceData.value = false
+            Toast.makeText(
+                context,
+                context.getString(
+                    if (purged) {
+                        R.string.hidden_people_delete_all_success
+                    } else {
+                        R.string.hidden_people_delete_all_failure
+                    }
+                ),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun request(features: Int) {
