@@ -31,10 +31,6 @@
 - **Widgets, casting, wallpapers** — home-screen media widgets, Chromecast, set wallpaper from any photo
 - **`offline` variant** — network and location permissions stripped at build time; fully self-contained
 
-## Screenshots
-
-![](./screenshots/preview.png)
-
 ## Tech Stack
 
 | Layer | Technology |
