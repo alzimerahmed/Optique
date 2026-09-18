@@ -244,7 +244,8 @@
     <ID>CyclomaticComplexMethod:SourceQualityProbe.kt$SourceQualityProbe$private fun firstLuminanceQuantTable(bytes: ByteArray): IntArray?</ID>
     <ID>CyclomaticComplexMethod:SpecialFormatProbe.kt$SpecialFormatProbe$private fun isJxl(b: ByteArray): Boolean</ID>
     <ID>CyclomaticComplexMethod:StateExt.kt$suspend fun &lt;T : Media&gt; mapMediaToItem( data: List&lt;T&gt;, error: String, albumId: Long, groupByMonth: Boolean = false, groupByYear: Boolean = false, withMonthHeader: Boolean = true, groupSimilarMedia: Boolean = false, enabledGroupTypes: Set&lt;MediaGroupType&gt; = MediaGroupType.entries.toSet(), cloudGroupKeyOverrides: Map&lt;Long, String&gt; = emptyMap(), cloudBackups: Map&lt;Long, List&lt;Media.UriMedia&gt;&gt; = emptyMap(), defaultDateFormat: String, extendedDateFormat: String, weeklyDateFormat: String )</ID>
-    <ID>CyclomaticComplexMethod:StoryCardsSettingsScreen.kt$@Composable private fun CardTypeListItem( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>CyclomaticComplexMethod:StoryCardsSettingsScreen.kt$@Composable internal fun CardTypeListItem( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, exclusionCount: Int = 0, onOpenDetail: () -&gt; Unit = {}, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>CyclomaticComplexMethod:StoryCardsSettingsScreen.kt$@SuppressLint("InlinedApi") // POST_NOTIFICATIONS launch is SDK-gated below @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
     <ID>CyclomaticComplexMethod:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable private fun StoryCardViewer( card: StoryCard, isCurrentPage: Boolean, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit, onCardFinished: () -&gt; Unit )</ID>
     <ID>CyclomaticComplexMethod:StreamingEncryptedVideoFrameDecoder.kt$StreamingEncryptedVideoFrameDecoder$override fun decode( source: EncryptedMediaSource, width: Int, height: Int, options: Options ): Resource&lt;Bitmap&gt;?</ID>
     <ID>CyclomaticComplexMethod:StripedTiffDecoder.kt$StripedTiffDecoder$private fun decodeInternal(buffer: ByteBuffer, reqW: Int, reqH: Int): Bitmap?</ID>
@@ -1007,11 +1008,16 @@
     <ID>FunctionNaming:StepHeader.kt$@Preview(showBackground = true, name = "Long Text") @Composable private fun StepHeaderLongTextPreview()</ID>
     <ID>FunctionNaming:StepHeader.kt$@Preview(showBackground = true, name = "With Trailing Content") @Composable private fun StepHeaderWithTrailingPreview()</ID>
     <ID>FunctionNaming:StickyHeaderGrid.kt$@Stable @NonRestartableComposable @Composable fun StickyHeaderGrid( modifier: Modifier = Modifier, showSearchBar: Boolean, headerOffset: Int, stickyHeader: @Composable () -&gt; Unit, content: @Composable () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:StoryCardTypeDetailSheet.kt$@Composable private fun ExclusionEntryRow( label: String, position: Position, onRemove: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:StoryCardTypeDetailSheet.kt$@Composable private fun TypeDetailList( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, onOpenPicker: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:StoryCardTypeDetailSheet.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable private fun ExclusionPickerRow( item: ExclusionSourceItem, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:StoryCardTypeDetailSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun StoryCardTypeDetailContent( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:StoryCardTypeDetailSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun StoryCardTypeDetailSheet( sheetState: AppBottomSheetState, type: StoryCardType?, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:StoryCardTypeDetailSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable private fun SourceExclusionPickerContent( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, onDone: () -&gt; Unit, )</ID>
     <ID>FunctionNaming:StoryCardsRow.kt$@Composable fun StoryCardsRow( cards: List&lt;StoryCard&gt;, onCardClick: (index: Int, card: StoryCard) -&gt; Unit, modifier: Modifier = Modifier, contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp) )</ID>
-    <ID>FunctionNaming:StoryCardsRow.kt$@Composable private fun StoryCardItem( card: StoryCard, onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
-    <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@Composable private fun CardTypeListItem( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
-    <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@Composable private fun SectionHeader(title: String, modifier: Modifier = Modifier)</ID>
-    <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
+    <ID>FunctionNaming:StoryCardsRow.kt$@Composable private fun StoryCardItem( card: StoryCard, allowBlur: Boolean, onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@Composable internal fun CardTypeListItem( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, exclusionCount: Int = 0, onOpenDetail: () -&gt; Unit = {}, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:StoryCardsSettingsScreen.kt$@SuppressLint("InlinedApi") // POST_NOTIFICATIONS launch is SDK-gated below @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
     <ID>FunctionNaming:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable fun StoryViewerScreen( cards: List&lt;StoryCard&gt;?, initialCardId: Long = -1L, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit )</ID>
     <ID>FunctionNaming:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable private fun StoryCardViewer( card: StoryCard, isCurrentPage: Boolean, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit, onCardFinished: () -&gt; Unit )</ID>
     <ID>FunctionNaming:SubtitleBottomSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun SubtitleBottomSheet( state: AppBottomSheetState, subtitleTracks: List&lt;SubtitleTrack&gt;, onSelectSubtitle: (SubtitleTrack) -&gt; Unit, onDisableSubtitles: () -&gt; Unit, onAddSubtitle: () -&gt; Unit, onRemoveSubtitle: (SubtitleTrack) -&gt; Unit, )</ID>
@@ -1118,6 +1124,7 @@
     <ID>LargeClass:MediaDistributorImpl.kt$MediaDistributorImpl : MediaDistributor</ID>
     <ID>LargeClass:MediaRepositoryImpl.kt$MediaRepositoryImpl : MediaRepository</ID>
     <ID>LargeClass:SearchViewModel.kt$SearchViewModel : ViewModel</ID>
+    <ID>LargeClass:StoryCardsViewModelTest.kt$StoryCardsViewModelTest</ID>
     <ID>LongMethod:AIModelsManagerScreen.kt$@Composable private fun FacesPreview()</ID>
     <ID>LongMethod:AIModelsManagerScreen.kt$@Composable private fun ModelGroupSection( viewModel: SmartFeaturesViewModel, group: ModelGroup, title: String, description: String, downloadSummary: String, readySummary: String, sourceLabel: String, sourceUrl: String )</ID>
     <ID>LongMethod:AIModelsManagerScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun AIModelsManagerScreen( viewModel: SmartFeaturesViewModel = hiltViewModel() )</ID>
@@ -1451,9 +1458,14 @@
     <ID>LongMethod:SmartScanWorker.kt$SmartScanWorker$private fun foregroundInfo( progress: Int, phase: SmartScanPhase?, processed: Int, total: Int, estimatedRemainingMillis: Long? ): ForegroundInfo</ID>
     <ID>LongMethod:StandaloneActivity.kt$StandaloneActivity$@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalHazeMaterialsApi::class) private fun showIntent(intent: Intent)</ID>
     <ID>LongMethod:StateExt.kt$suspend fun &lt;T : Media&gt; mapMediaToItem( data: List&lt;T&gt;, error: String, albumId: Long, groupByMonth: Boolean = false, groupByYear: Boolean = false, withMonthHeader: Boolean = true, groupSimilarMedia: Boolean = false, enabledGroupTypes: Set&lt;MediaGroupType&gt; = MediaGroupType.entries.toSet(), cloudGroupKeyOverrides: Map&lt;Long, String&gt; = emptyMap(), cloudBackups: Map&lt;Long, List&lt;Media.UriMedia&gt;&gt; = emptyMap(), defaultDateFormat: String, extendedDateFormat: String, weeklyDateFormat: String )</ID>
-    <ID>LongMethod:StoryCardsRow.kt$@Composable private fun StoryCardItem( card: StoryCard, onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
-    <ID>LongMethod:StoryCardsSettingsScreen.kt$@Composable private fun CardTypeListItem( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
-    <ID>LongMethod:StoryCardsSettingsScreen.kt$@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
+    <ID>LongMethod:StoryCardTypeDetailSheet.kt$@Composable private fun TypeDetailList( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, onOpenPicker: () -&gt; Unit, )</ID>
+    <ID>LongMethod:StoryCardTypeDetailSheet.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable private fun ExclusionPickerRow( item: ExclusionSourceItem, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:StoryCardTypeDetailSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun StoryCardTypeDetailContent( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:StoryCardTypeDetailSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable private fun SourceExclusionPickerContent( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, onDone: () -&gt; Unit, )</ID>
+    <ID>LongMethod:StoryCardTypeDetailSheet.kt$private fun pickerItems( kind: ExclusionSourceKind, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, hiddenAnnotation: String, resources: Resources, onConfigChange: (StoryCardsConfig) -&gt; Unit, ): List&lt;ExclusionSourceItem&gt;</ID>
+    <ID>LongMethod:StoryCardsRow.kt$@Composable private fun StoryCardItem( card: StoryCard, allowBlur: Boolean, onClick: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>LongMethod:StoryCardsSettingsScreen.kt$@Composable internal fun CardTypeListItem( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, exclusionCount: Int = 0, onOpenDetail: () -&gt; Unit = {}, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:StoryCardsSettingsScreen.kt$@SuppressLint("InlinedApi") // POST_NOTIFICATIONS launch is SDK-gated below @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class) @Composable fun StoryCardsSettingsScreen( onNavigateBack: () -&gt; Unit = {} )</ID>
     <ID>LongMethod:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable fun StoryViewerScreen( cards: List&lt;StoryCard&gt;?, initialCardId: Long = -1L, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit )</ID>
     <ID>LongMethod:StoryViewerScreen.kt$@OptIn(ExperimentalHazeMaterialsApi::class) @Composable private fun StoryCardViewer( card: StoryCard, isCurrentPage: Boolean, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit, onCardFinished: () -&gt; Unit )</ID>
     <ID>LongMethod:StripedTiffDecoder.kt$StripedTiffDecoder$private fun decodeInternal(buffer: ByteBuffer, reqW: Int, reqH: Int): Bitmap?</ID>
@@ -1706,7 +1718,17 @@
     <ID>LongParameterList:StaticMapPreview.kt$( latitude: Double, longitude: Double, appearance: MapAppearance, effectiveAppIsDark: Boolean, zoom: Int, apiKey: String, modifier: Modifier = Modifier, contentDescription: String? = null, )</ID>
     <ID>LongParameterList:StaticMapURL.kt$StaticMapURL$( latitude: Double, longitude: Double, appearance: MapAppearance = MapAppearance.SYSTEM, effectiveAppIsDark: Boolean = false, zoom: Int = 12, apiKey: String = BuildConfig.CARTO_BASEMAP_KEY, )</ID>
     <ID>LongParameterList:StaticMapURL.kt$StaticMapURL$( tileX: Int, tileY: Int, appearance: MapAppearance, effectiveAppIsDark: Boolean, zoom: Int, apiKey: String, )</ID>
-    <ID>LongParameterList:StoryCardsSettingsScreen.kt$( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongParameterList:StoryCardSelectionTest.kt$StoryCardSelectionTest$( id: Long, timestampSec: Long = id, isFavorite: Boolean = false, isCategorized: Boolean = false, isFlagged: Boolean = false, isScreenshot: Boolean = false, isPhoto: Boolean = true, )</ID>
+    <ID>LongParameterList:StoryCardTypeDetailSheet.kt$( kind: ExclusionSourceKind, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, hiddenAnnotation: String, resources: Resources, onConfigChange: (StoryCardsConfig) -&gt; Unit, )</ID>
+    <ID>LongParameterList:StoryCardTypeDetailSheet.kt$( kind: ExclusionSourceKind, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, unknownAlbumLabel: String, unknownCategoryLabel: String, )</ID>
+    <ID>LongParameterList:StoryCardTypeDetailSheet.kt$( sheetState: AppBottomSheetState, type: StoryCardType?, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, )</ID>
+    <ID>LongParameterList:StoryCardTypeDetailSheet.kt$( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongParameterList:StoryCardTypeDetailSheet.kt$( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, locationKeys: List&lt;String&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, onDone: () -&gt; Unit, )</ID>
+    <ID>LongParameterList:StoryCardTypeDetailSheet.kt$( type: StoryCardType, config: StoryCardsConfig, albumsState: AlbumState, categories: List&lt;CategoryWithMediaCount&gt;, onConfigChange: (StoryCardsConfig) -&gt; Unit, onOpenPicker: () -&gt; Unit, )</ID>
+    <ID>LongParameterList:StoryCardsSettingsScreen.kt$( type: StoryCardType, isEnabled: Boolean, position: Position, isDragging: Boolean = false, dragOffset: Float = 0f, exclusionCount: Int = 0, onOpenDetail: () -&gt; Unit = {}, onDragStart: () -&gt; Unit = {}, onDrag: (Float) -&gt; Unit = {}, onDragEnd: () -&gt; Unit = {}, onToggle: (Boolean) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongParameterList:StoryCardsViewModel.kt$StoryCardsViewModel$( private val repository: MediaRepository, private val distributor: MediaDistributor, private val providerRegistry: ProviderRegistry, private val personDao: PersonDao, private val faceDao: DetectedFaceDao, @param:ApplicationContext private val context: Context, private val clock: Clock )</ID>
+    <ID>LongParameterList:StoryCardsViewModelTest.kt$StoryCardsViewModelTest$( id: Long, albumID: Long = 1L, albumLabel: String = "Camera", year: Int = 2020, month: Int = 1, day: Int = 15, )</ID>
+    <ID>LongParameterList:StoryCardsViewModelTest.kt$StoryCardsViewModelTest$( repository: FakeMediaRepository, distributor: TestDistributor, clock: Clock = Clock.fixed(TEST_INSTANT, ZoneOffset.UTC), registry: ProviderRegistry = ProviderRegistry(), personDao: PersonDao = FakePersonDao().asDao(), faceDao: DetectedFaceDao = FakeDetectedFaceDao().asDao(), )</ID>
     <ID>LongParameterList:StoryViewerScreen.kt$( card: StoryCard, isCurrentPage: Boolean, metadataMap: Map&lt;Long, MediaMetadata&gt; = emptyMap(), onEnsureMetadata: (Media?) -&gt; Unit = {}, onDismiss: () -&gt; Unit, onCardFinished: () -&gt; Unit )</ID>
     <ID>LongParameterList:StripedTiffDecoder.kt$StripedTiffDecoder$( buf: ByteArray, p: Int, samples: Int, bytesPerSample: Int, hiByte: Int, whiteIsZero: Boolean, )</ID>
     <ID>LongParameterList:StripedTiffDecoder.kt$StripedTiffDecoder$( buffer: ByteBuffer, offset: Long, byteCount: Long, out: ByteArray, expectedLen: Int, inflater: Inflater?, )</ID>
@@ -3884,15 +3906,19 @@
     <ID>MagicNumber:StaticMapURL.kt$StaticMapURL$90.0</ID>
     <ID>MagicNumber:StickyHeaderGrid.kt$10</ID>
     <ID>MagicNumber:StickyHeaderGrid.kt$100</ID>
+    <ID>MagicNumber:StoryCardTypeDetailSheet.kt$0.4f</ID>
     <ID>MagicNumber:StoryCardsSettingsScreen.kt$1.02f</ID>
+    <ID>MagicNumber:StoryCardsSettingsViewModel.kt$StoryCardsSettingsViewModel$5_000</ID>
     <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$1000</ID>
     <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$1000L</ID>
     <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$20</ID>
     <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$24</ID>
     <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$3</ID>
-    <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$5</ID>
     <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$5_000</ID>
     <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$60</ID>
+    <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel$86_400L</ID>
+    <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel.HighlightWindow.MONTH$30</ID>
+    <ID>MagicNumber:StoryCardsViewModel.kt$StoryCardsViewModel.HighlightWindow.WEEK$7</ID>
     <ID>MagicNumber:StoryViewerScreen.kt$100</ID>
     <ID>MagicNumber:StoryViewerScreen.kt$1000L</ID>
     <ID>MagicNumber:StoryViewerScreen.kt$5</ID>
@@ -4642,6 +4668,7 @@
     <ID>MaxLineLength:NavigationActions.kt$actions: @Composable ((expandedDropDown: MutableState&lt;Boolean&gt;, result: ActivityResultLauncher&lt;IntentSenderRequest&gt;) -&gt; Unit)</ID>
     <ID>MaxLineLength:NavigationComp.kt$if</ID>
     <ID>MaxLineLength:NextcloudLoginFlowClientTest.kt$NextcloudLoginFlowClientTest$"""{"server":"${server.url("/").toString().trimEnd('/')}","loginName":"alice","appPassword":"app-secret"}"""</ID>
+    <ID>MaxLineLength:OnDeviceMemoriesScreen.kt$text = pluralStringResource(R.plurals.memories_photo_count, recap.featured.size, recap.featured.size)</ID>
     <ID>MaxLineLength:PersonDetailScreen.kt$val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden, enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded))</ID>
     <ID>MaxLineLength:PickerScreen.kt$targetValue = if (enabled) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant</ID>
     <ID>MaxLineLength:PickerScreen.kt$targetValue = if (enabled) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant</ID>
@@ -5521,9 +5548,16 @@
     <ID>PackageNaming:StaticMapURL.kt$package com.dot.gallery.feature_node.presentation.util</ID>
     <ID>PackageNaming:StepHeader.kt$package com.dot.gallery.feature_node.presentation.ignored.setup.components</ID>
     <ID>PackageNaming:StoryCard.kt$package com.dot.gallery.feature_node.domain.model</ID>
+    <ID>PackageNaming:StoryCardSelection.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
+    <ID>PackageNaming:StoryCardSelectionTest.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
+    <ID>PackageNaming:StoryCardTypeDetailSheet.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
+    <ID>PackageNaming:StoryCardsConfigTest.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
     <ID>PackageNaming:StoryCardsRow.kt$package com.dot.gallery.feature_node.presentation.storycards.components</ID>
+    <ID>PackageNaming:StoryCardsSettingsDetailTest.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
     <ID>PackageNaming:StoryCardsSettingsScreen.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
+    <ID>PackageNaming:StoryCardsSettingsViewModel.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
     <ID>PackageNaming:StoryCardsViewModel.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
+    <ID>PackageNaming:StoryCardsViewModelTest.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
     <ID>PackageNaming:StoryViewerScreen.kt$package com.dot.gallery.feature_node.presentation.storycards</ID>
     <ID>PackageNaming:SubjectSuggestionState.kt$package com.dot.gallery.feature_node.presentation.mediaview.components.media</ID>
     <ID>PackageNaming:SubtitleBottomSheet.kt$package com.dot.gallery.feature_node.presentation.mediaview.components.video</ID>
@@ -6081,6 +6115,8 @@
     <ID>TooManyFunctions:SmartScanScheduler.kt$SmartScanScheduler</ID>
     <ID>TooManyFunctions:SmartScanWorker.kt$SmartScanWorker : CoroutineWorker</ID>
     <ID>TooManyFunctions:StateExt.kt$com.dot.gallery.feature_node.presentation.util.StateExt.kt</ID>
+    <ID>TooManyFunctions:StoryCardTypeDetailSheet.kt$com.dot.gallery.feature_node.presentation.storycards.StoryCardTypeDetailSheet.kt</ID>
+    <ID>TooManyFunctions:StoryCardsViewModel.kt$StoryCardsViewModel : ViewModel</ID>
     <ID>TooManyFunctions:StripedTiffDecoder.kt$StripedTiffDecoder</ID>
     <ID>TooManyFunctions:TiffImageDecoder.kt$TiffImageDecoder</ID>
     <ID>TooManyFunctions:VaultDao.kt$VaultDao</ID>
