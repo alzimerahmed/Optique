@@ -67,7 +67,7 @@ jobs:
         if: matrix.arch == 'Arm64-v8a' || matrix.arch == 'X86_64' || matrix.arch == 'Universal'
         run: |
           for apk in app/build/outputs/apk-renamed/*/*/*.apk; do
-            scripts/verify-16kb-alignment.sh "$apk"
+            bash scripts/verify-16kb-alignment.sh "$apk"
           done
       - uses: actions/upload-artifact@v5
         with:
@@ -115,7 +115,7 @@ jobs:
         if: matrix.arch == 'Arm64-v8a' || matrix.arch == 'X86_64' || matrix.arch == 'Universal'
         run: |
           for apk in app/build/outputs/apk-renamed/*/*/*.apk; do
-            scripts/verify-16kb-alignment.sh "$apk"
+            bash scripts/verify-16kb-alignment.sh "$apk"
           done
       - uses: actions/upload-artifact@v5
         with:
@@ -167,7 +167,7 @@ jobs:
         if: matrix.arch == 'Arm64-v8a' || matrix.arch == 'X86_64' || matrix.arch == 'Universal'
         run: |
           for apk in app/build/outputs/apk-renamed/*/*/*.apk; do
-            scripts/verify-16kb-alignment.sh "$apk"
+            bash scripts/verify-16kb-alignment.sh "$apk"
           done
       - uses: actions/upload-artifact@v5
         with:

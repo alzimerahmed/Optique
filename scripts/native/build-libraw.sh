@@ -132,7 +132,7 @@ build_abi() {
     # 4) LibRaw (static). The libraw.org tarball has NO CMakeLists.txt, so use Makefile.dist's
     #    reentrant-object mapping while compiling and archiving directly with the pinned NDK tools.
     local NDK_BIN CCB
-    NDK_BIN="$(ls -d "$NDK_DIR"/toolchains/llvm/prebuilt/*/bin 2>/dev/null | head -n1)"
+    NDK_BIN="$(ls -d "$NDK_DIR"/toolchains/llvm/prebuilt/*/bin 2>/dev/null | head -n1 || true)"
     case "$ABI" in
         arm64-v8a)   CCB="aarch64-linux-android$ANDROID_API" ;;
         armeabi-v7a) CCB="armv7a-linux-androideabi$ANDROID_API" ;;
