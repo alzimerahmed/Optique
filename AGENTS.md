@@ -15,6 +15,8 @@ Optique (fork of IacobIonut01/ReFra, itself renamed from `IacobIonut01/Gallery`;
 
 **Build/verify:** `powershell -File scripts/verify-env.ps1` (env check — JDK 17/21, SDK 37, NDK must match `refra.ndkVersion`, CMake 3.31.x; never CMake 4.x) · `./gradlew assembleDebug` · `./gradlew testDebugUnitTest` · `./gradlew bundleRelease` (needs `SIGNING_STORE_PASSWORD`/`SIGNING_KEY_ALIAS`/`SIGNING_KEY_PASSWORD` env vars + `release_key.jks`). Native codec rebuilds need NDK r29 + bash scripts (`scripts/native/`); prebuilt outputs live in `app/src/main/cpp/<stack>/<abi>`. `:ml-models:checkModelSizes` fails the build if unmanaged assets exceed GitHub's 100 MB limit. Lint baseline: `lint-baseline.xml`.
 
+**Remote-first verification (policy):** full gates run on CI, not locally — `.github/workflows/checks.yml` runs ktlint + detekt + unit tests on every push/PR (all branches except `nightly`, which runs the full pipeline). Local verification is tiered: targeted compile + scoped tests while iterating, scoped lint before commit, CI for the full gate before merge. Local Gradle build cache is ON (`org.gradle.caching=true`). Only run full local builds when the change touches build files/deps/native code or an on-device APK is needed.
+
 ## Entry Point
 
 This file is auto-loaded by Devin at every session start. It is the entry point to the full prompt system in `.devin/prompt/`. Read `.devin/prompt/map.md` before starting any task — it is the system map.
@@ -56,6 +58,6 @@ For quick tasks, follow `.devin/prompt/quick.md` (commandments) and `.devin/prom
 - `docs/tools-log.md` — which .devin resources (skills, sub-agents, rules) were invoked each session — create if absent
 - `docs/CONCEPTS.md` — project vocabulary (ubiquitous language for media/ML terms) — create if absent
 - `docs/research.md` — technical research, ADRs, gotchas — create per phase.md §7 if absent
-- `CONTEXT.md` — upstream ubiquitous language for media/AI features (Subject Cutout, Cutout Engine, etc.)
+- `docs/CONCEPTS.md` — project ubiquitous language for media/AI features (Subject Cutout, Cutout Engine, etc.) — supersedes upstream `CONTEXT.md` (removed)
 - `docs/adr/` — upstream architecture decision records
 - Upstream repo — README (features, variants, FAQ, signing fingerprints) and `.github/` for CI workflows (nightly builds)

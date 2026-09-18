@@ -1,0 +1,55 @@
+name: Checks
+
+# Remote-first verification: ktlint + detekt + unit tests run on GitHub's
+# runners so local machines stay cool. Push to any branch (except `nightly`,
+# which already runs the full pipeline) or open a PR to trigger.
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - nightly
+  workflow_dispatch:
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  static_analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Fix permissions
+        run: chmod +x ./gradlew
+      - name: Tune Gradle for CI
+        run: |
+          echo "org.gradle.jvmargs=-Xmx4g -Dfile.encoding=UTF-8" >> gradle.properties
+          echo "org.gradle.workers.max=2" >> gradle.properties
+      - name: ktlint
+        run: ./gradlew ktlintCheck
+      - name: detekt
+        run: ./gradlew detekt
+      - name: Unit + Robolectric integration tests
+        run: ./gradlew :app:testUniversalNoMLDebugUnitTest :app:testUniversalWithMLDebugUnitTest
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: detekt-reports
+          path: '**/build/reports/detekt/'
+          if-no-files-found: ignore
