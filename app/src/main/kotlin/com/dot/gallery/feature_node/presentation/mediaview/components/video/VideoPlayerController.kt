@@ -81,6 +81,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpSize
@@ -95,6 +96,10 @@ import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.hazeEffectScaled
 import com.dot.gallery.feature_node.presentation.util.formatMinSec
 import com.dot.gallery.feature_node.presentation.util.rememberGestureNavigationEnabled
+import com.dot.gallery.ui.theme.Alpha
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
 import com.dot.gallery.ui.theme.isDarkTheme
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import dev.chrisbanes.haze.materials.HazeMaterials
@@ -125,14 +130,14 @@ fun VideoPlayerController(
 
     val isGestureEnabled = rememberGestureNavigationEnabled()
     val extraNavPadding = remember(isGestureEnabled) {
-        if (!isGestureEnabled) 32.dp else 0.dp
+        if (!isGestureEnabled) Spacing.ExtraLarge else 0.dp
     }
 
     Box(
         modifier = Modifier
             .zIndex(10f)
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.4f))
+            .background(Color.Black.copy(alpha = Alpha.ScrimMedium))
     ) {
         Column(
             modifier = Modifier
@@ -142,10 +147,10 @@ fun VideoPlayerController(
                         .union(WindowInsets.displayCutout)
                         .only(WindowInsetsSides.Horizontal)
                 )
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = Spacing.ScreenHorizontal)
                 .padding(bottom = paddingValues.calculateBottomPadding() + 80.dp + extraNavPadding)
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(Spacing.Small),
             horizontalAlignment = Alignment.End
         ) {
             var isMuted by rememberSaveable { mutableStateOf(player.volume == 0f) }
@@ -227,13 +232,13 @@ fun VideoPlayerController(
                 AnimatedContent(
                     targetState = showMoreOptions,
                     transitionSpec = {
-                        (fadeIn(tween(200)) + scaleIn(
-                            tween(250),
+                        (fadeIn(tween(MotionSpec.StandardOutMs)) + scaleIn(
+                            tween(MotionSpec.StandardInMs),
                             initialScale = 0.8f,
                             transformOrigin = TransformOrigin(1f, 1f)
                         )).togetherWith(
-                            fadeOut(tween(150)) + scaleOut(
-                                tween(200),
+                            fadeOut(tween(MotionSpec.MicroMs)) + scaleOut(
+                                tween(MotionSpec.StandardOutMs),
                                 targetScale = 0.8f,
                                 transformOrigin = TransformOrigin(1f, 1f)
                             )
@@ -254,7 +259,7 @@ fun VideoPlayerController(
                                     containerColor = surfaceContainer
                                 )
                             )
-                            .padding(8.dp)
+                            .padding(Spacing.Small)
                         val optionButtons: @Composable () -> Unit = {
                             // Collapse button
                             IconButton(onClick = {
@@ -289,7 +294,7 @@ fun VideoPlayerController(
                                 ) {
                                     playbackSpeeds.forEach { speed ->
                                         DropdownMenuItem(
-                                            modifier = Modifier.padding(end = 16.dp),
+                                            modifier = Modifier.padding(end = Spacing.Medium),
                                             onClick = {
                                                 playbackSpeed = speed.speed
                                                 auto = speed.isAuto
@@ -377,7 +382,7 @@ fun VideoPlayerController(
                     } else {
                         Box(
                             modifier = Modifier
-                                .size(48.dp)
+                                .size(ComponentSize.MinimumTouchTarget)
                                 .clip(CircleShape)
                                 .background(surfaceContainer)
                                 .hazeEffectScaled(
@@ -408,7 +413,7 @@ fun VideoPlayerController(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 4.dp),
+                        .padding(bottom = Spacing.ExtraSmall),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -421,7 +426,7 @@ fun VideoPlayerController(
                                 Color.Black.copy(alpha = 0.6f),
                                 RoundedCornerShape(4.dp)
                             )
-                            .padding(horizontal = 12.dp, vertical = 4.dp)
+                            .padding(horizontal = Spacing.MediumSmall, vertical = Spacing.ExtraSmall)
                     )
                 }
             }
@@ -429,7 +434,7 @@ fun VideoPlayerController(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 4.dp),
+                    .padding(bottom = Spacing.ExtraSmall),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
@@ -457,7 +462,11 @@ fun VideoPlayerController(
                         disabledActiveTickColor = Color.Transparent
                     )
                     Slider(
-                        modifier = Modifier.fillMaxWidth(),
+                        // Purely visual buffered track — keep it out of the semantics
+                        // tree so TalkBack doesn't announce a phantom disabled seekbar.
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clearAndSetSemantics { },
                         value = buffer.toFloat(),
                         enabled = false,
                         onValueChange = {},
@@ -494,7 +503,13 @@ fun VideoPlayerController(
                     Slider(
                         modifier = Modifier.fillMaxWidth(),
                         value = sliderValue.coerceIn(0f, (totalTime).coerceAtLeast(0L).toFloat()),
-                        onValueChange = {},
+                        // Wired for accessibility: TalkBack swipe-adjust dispatches
+                        // onValueChange directly (the pointer overlay only sees touches).
+                        onValueChange = { value ->
+                            sliderValue = value
+                            player.seekTo(value.toLong())
+                            currentTime.longValue = value.toLong()
+                        },
                         valueRange = 0f..(if (totalTime > 0) totalTime.toFloat() else 0f),
                         colors = activeColors,
                         thumb = {

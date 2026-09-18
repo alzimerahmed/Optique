@@ -28,12 +28,13 @@ import com.dot.gallery.core.presentation.components.util.advancedShadow
 import com.dot.gallery.feature_node.domain.model.Media
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.util.formatMinSec
+import com.dot.gallery.ui.theme.Spacing
 
 @Composable
 fun VideoDurationHeader(modifier: Modifier = Modifier, media: Media) {
     Row(
         modifier = modifier
-            .padding(all = 8.dp)
+            .padding(all = Spacing.Small)
             .advancedShadow(
                 cornersRadius = 8.dp,
                 shadowBlurRadius = 6.dp,
@@ -51,10 +52,10 @@ fun VideoDurationHeader(modifier: Modifier = Modifier, media: Media) {
             style = MaterialTheme.typography.labelSmall,
             color = Color.White
         )
-        Spacer(modifier = Modifier.size(2.dp))
+        Spacer(modifier = Modifier.size(Spacing.Tiny))
         Image(
             modifier = Modifier
-                .size(16.dp)
+                .size(Spacing.Medium)
                 .advancedShadow(
                     cornersRadius = 2.dp,
                     shadowBlurRadius = 6.dp,

@@ -48,6 +48,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dot.gallery.R
@@ -55,15 +58,18 @@ import com.dot.gallery.core.presentation.components.CheckBox
 import com.dot.gallery.feature_node.domain.model.Media
 import com.dot.gallery.feature_node.domain.util.getUri
 import com.dot.gallery.feature_node.domain.util.isCloud
+import com.dot.gallery.ui.theme.Alpha
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 import com.github.panpf.sketch.AsyncImage
 import com.github.panpf.sketch.request.ComposableImageRequest
 import com.github.panpf.sketch.resize.Precision
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
-private val THUMBNAIL_SIZE = 56.dp
-private val ITEM_SPACING = 6.dp
-private val SELECTED_BORDER_WIDTH = 2.dp
+private val THUMBNAIL_SIZE = ComponentSize.ThumbnailMedium
+private val ITEM_SPACING = Spacing.Micro
+private val SELECTED_BORDER_WIDTH = Spacing.Tiny
 private val THUMBNAIL_SHAPE = RoundedCornerShape(8.dp)
 
 @Composable
@@ -137,11 +143,9 @@ fun <T : Media> GroupMemberStrip(
             val isCurrent = member.id == selectedId
             val isMultiSelected = multiSelectMode && member.id in multiSelectedIds
             val showBorder = isCurrent || isMultiSelected
-            val borderColor = if (isMultiSelected) {
-                Color(0xFF90CAF9) // light blue for multi-select
-            } else {
-                Color.White // white for current viewing item
-            }
+            // Primary border for both multi-selected and currently-viewing cells so the
+            // indicator tracks the theme instead of hardcoded light-on-dark colors.
+            val borderColor = MaterialTheme.colorScheme.primary
             val borderWidth by animateDpAsState(
                 targetValue = if (showBorder) SELECTED_BORDER_WIDTH else 0.dp,
                 label = "thumbnailBorder"
@@ -161,6 +165,8 @@ fun <T : Media> GroupMemberStrip(
                         } else Modifier
                     )
                     .combinedClickable(
+                        role = Role.Button,
+                        onLongClickLabel = stringResource(R.string.select),
                         onClick = {
                             if (multiSelectMode) {
                                 onToggleMultiSelect(member.id)
@@ -177,6 +183,11 @@ fun <T : Media> GroupMemberStrip(
                             { onEnterMultiSelect(member.id) }
                         }
                     )
+                    .semantics {
+                        if (multiSelectMode) {
+                            selected = isMultiSelected
+                        }
+                    }
             ) {
                 AsyncImage(
                     request = ComposableImageRequest(member.getUri().toString()) {
@@ -195,7 +206,7 @@ fun <T : Media> GroupMemberStrip(
                     Box(
                         modifier = Modifier
                             .align(Alignment.TopStart)
-                            .padding(2.dp)
+                            .padding(Spacing.Tiny)
                     ) {
                         CheckBox(isChecked = isMultiSelected)
                     }
@@ -210,7 +221,7 @@ fun <T : Media> GroupMemberStrip(
                                 color = Color.Black.copy(alpha = 0.55f),
                                 shape = labelShape
                             )
-                            .padding(vertical = 2.dp),
+                            .padding(vertical = Spacing.Tiny),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -243,27 +254,28 @@ fun GroupMemberSelectionBar(
                 color = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.85f),
                 shape = shape
             )
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = Spacing.Small, vertical = Spacing.ExtraSmall),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
     ) {
+        val contentColor = MaterialTheme.colorScheme.onSurface
         IconButton(onClick = onClose) {
             Icon(
                 imageVector = Icons.Outlined.Close,
                 contentDescription = stringResource(R.string.selection_dialog_close_cd),
-                tint = Color.White
+                tint = contentColor
             )
         }
         Text(
             text = selectedCount.toString(),
-            color = Color.White,
+            color = contentColor,
             style = MaterialTheme.typography.titleSmall
         )
         IconButton(onClick = onSelectAll) {
             Icon(
                 imageVector = Icons.Outlined.SelectAll,
                 contentDescription = stringResource(R.string.select_all),
-                tint = Color.White
+                tint = contentColor
             )
         }
         IconButton(
@@ -273,7 +285,11 @@ fun GroupMemberSelectionBar(
             Icon(
                 imageVector = Icons.Outlined.Share,
                 contentDescription = stringResource(R.string.share),
-                tint = if (selectedCount > 0) Color.White else Color.White.copy(alpha = 0.38f)
+                tint = if (selectedCount > 0) {
+                    contentColor
+                } else {
+                    contentColor.copy(alpha = Alpha.Disabled)
+                }
             )
         }
     }

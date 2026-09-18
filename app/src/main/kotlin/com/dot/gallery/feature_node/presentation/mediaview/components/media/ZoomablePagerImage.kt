@@ -55,7 +55,6 @@ import com.dot.gallery.cloud.image.CloudImageSource
 import com.dot.gallery.cloud.image.CloudSubsamplingMode
 import com.dot.gallery.cloud.image.resolveCloudSubsamplingMode
 import com.dot.gallery.cloud.image.shouldLoadCloudOriginal
-import com.dot.gallery.core.Constants.DEFAULT_TOP_BAR_ANIMATION_DURATION
 import com.dot.gallery.core.Settings
 import com.dot.gallery.core.decoder.EncryptedRegionDecoder
 import com.dot.gallery.core.decoder.FullImageRegionDecoder
@@ -91,6 +90,9 @@ import com.dot.gallery.feature_node.domain.util.isTiff
 import com.dot.gallery.feature_node.presentation.mediaview.LocalMediaViewerVisualPolicy
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
+import com.dot.gallery.ui.theme.rememberReduceMotion
 import com.github.panpf.sketch.AsyncImage
 import com.github.panpf.sketch.PainterState
 import com.github.panpf.sketch.rememberAsyncImagePainter
@@ -236,7 +238,7 @@ fun <T : Media> BlurredMediaBackground(
                 backgroundVisible = true
             }
             val blurAlpha by animateFloatAsState(
-                animationSpec = tween(DEFAULT_TOP_BAR_ANIMATION_DURATION),
+                animationSpec = tween(MotionSpec.EmphasizedMs),
                 targetValue = if (uiEnabled && backgroundVisible) 0.7f else 0f,
                 label = "blurAlpha"
             )
@@ -703,7 +705,9 @@ fun <T : Media> ZoomablePagerImage(
     // actually needed (a cutout is active). An unconditional rememberInfiniteTransition would run a
     // continuous per-frame animation and recomposition on every composed pager page — including
     // neighbours that briefly compose during a fling — adding avoidable swipe jank.
-    val needsGlow = cutoutState.isActive
+    // Reduced-motion: skip the pulse and keep the contour glow at a static radius.
+    val reduceMotion = rememberReduceMotion()
+    val needsGlow = cutoutState.isActive && !reduceMotion
     val glowRadius = if (needsGlow) {
         val infiniteTransition = rememberInfiniteTransition(label = "glowTransition")
         val animatedGlow by infiniteTransition.animateFloat(
@@ -952,7 +956,7 @@ fun <T : Media> ZoomablePagerImage(
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
                 ) {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                     Text(
@@ -1004,16 +1008,16 @@ private fun MediaViewActionPill(
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(0.85f),
                 shape = CircleShape
             )
-            .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 10.dp),
+            .clickable(onClick = onClick, role = Role.Button)
+            .padding(horizontal = Spacing.Medium, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         Icon(
             imageVector = icon,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.size(20.dp)
+            modifier = Modifier.size(Spacing.MediumLarge)
         )
         Text(
             text = label,

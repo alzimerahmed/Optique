@@ -48,9 +48,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.dot.gallery.R
 import com.dot.gallery.cloud.core.SyncState
 import com.dot.gallery.core.LocalMediaDistributor
 import com.dot.gallery.core.LocalMediaSelector
@@ -69,6 +74,9 @@ import com.dot.gallery.feature_node.domain.util.isFavorite
 import com.dot.gallery.feature_node.domain.util.isVideo
 import com.dot.gallery.feature_node.presentation.mediaview.components.video.VideoDurationHeader
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
+import com.dot.gallery.ui.theme.Alpha
+import com.dot.gallery.ui.theme.FavoriteRed
+import com.dot.gallery.ui.theme.Spacing
 import com.github.panpf.sketch.request.ImageRequest
 import com.github.panpf.sketch.resize.Precision
 import com.github.panpf.sketch.sketch
@@ -131,7 +139,7 @@ fun <T : Media> MediaImage(
     val strokeColor: Color
     if (selectionState) {
         selectedSize = animateDpAsState(
-            targetValue = if (isSelected) 12.dp else 0.dp,
+            targetValue = if (isSelected) Spacing.MediumSmall else 0.dp,
             label = "selectedSize"
         ).value
         scale = animateFloatAsState(
@@ -139,11 +147,11 @@ fun <T : Media> MediaImage(
             label = "scale"
         ).value
         selectedShapeSize = animateDpAsState(
-            targetValue = if (isSelected) 16.dp else 0.dp,
+            targetValue = if (isSelected) Spacing.Medium else 0.dp,
             label = "selectedShapeSize"
         ).value
         strokeSize = animateDpAsState(
-            targetValue = if (isSelected) 2.dp else 0.dp,
+            targetValue = if (isSelected) Spacing.Tiny else 0.dp,
             label = "strokeSize"
         ).value
         val primaryContainerColor = MaterialTheme.colorScheme.primaryContainer
@@ -168,6 +176,13 @@ fun <T : Media> MediaImage(
             .clip(roundedShape)
             .combinedClickable(
                 enabled = canClick(),
+                role = Role.Button,
+                onClickLabel = if (selectionState) {
+                    stringResource(R.string.toggle_selection)
+                } else {
+                    null
+                },
+                onLongClickLabel = stringResource(R.string.select),
                 onClick = {
                     if (selectionState) {
                         onItemSelect(media)
@@ -193,6 +208,11 @@ fun <T : Media> MediaImage(
                     { onItemSelect(media) }
                 }
             )
+            .semantics {
+                if (selectionState) {
+                    selected = isSelected
+                }
+            }
             .aspectRatio(aspectRatio)
             .then(modifier)
     ) {
@@ -265,7 +285,7 @@ fun <T : Media> MediaImage(
                     .align(Alignment.TopStart)
                     .padding(selectedSize / 1.5f)
                     .scale(scale)
-                    .padding(6.dp)
+                    .padding(Spacing.Micro)
                     .clip(badgeShape)
                     .background(Color.Black.copy(alpha = 0.45f))
                     .padding(horizontal = 5.dp, vertical = 3.dp),
@@ -276,9 +296,9 @@ fun <T : Media> MediaImage(
                     color = Color.White,
                     style = MaterialTheme.typography.labelSmall
                 )
-                Spacer(modifier = Modifier.width(2.dp))
+                Spacer(modifier = Modifier.width(Spacing.Tiny))
                 Icon(
-                    modifier = Modifier.size(12.dp),
+                    modifier = Modifier.size(Spacing.MediumSmall),
                     imageVector = if (isCloudGroup) Icons.Outlined.CloudSync else Icons.Outlined.BurstMode,
                     tint = Color.White,
                     contentDescription = null
@@ -299,10 +319,10 @@ fun <T : Media> MediaImage(
                     .align(favAlignment)
                     .padding(selectedSize / 1.5f)
                     .scale(scale)
-                    .padding(8.dp)
-                    .size(16.dp),
+                    .padding(Spacing.Small)
+                    .size(Spacing.Medium),
                 imageVector = Icons.Filled.Favorite,
-                tint = Color.Red,
+                tint = FavoriteRed,
                 contentDescription = null
             )
         }
@@ -313,8 +333,8 @@ fun <T : Media> MediaImage(
                     .align(Alignment.BottomStart)
                     .padding(selectedSize / 1.5f)
                     .scale(scale)
-                    .padding(8.dp)
-                    .size(16.dp)
+                    .padding(Spacing.Small)
+                    .size(Spacing.Medium)
                     .advancedShadow(
                         cornersRadius = 8.dp,
                         shadowBlurRadius = 6.dp,
@@ -343,7 +363,7 @@ fun <T : Media> MediaImage(
                         .align(Alignment.BottomStart)
                         .padding(selectedSize / 1.5f)
                         .scale(scale)
-                        .padding(6.dp)
+                        .padding(Spacing.Micro)
                         .size(10.dp),
                     strokeWidth = 1.5.dp,
                     color = Color.White
@@ -354,7 +374,7 @@ fun <T : Media> MediaImage(
                         .align(Alignment.BottomStart)
                         .padding(selectedSize / 1.5f)
                         .scale(scale)
-                        .padding(6.dp)
+                        .padding(Spacing.Micro)
                         .size(10.dp)
                         .advancedShadow(
                             cornersRadius = 5.dp,
@@ -362,7 +382,7 @@ fun <T : Media> MediaImage(
                             alpha = 0.3f
                         ),
                     imageVector = syncIcon,
-                    tint = Color.White.copy(alpha = 0.7f),
+                    tint = Color.White.copy(alpha = Alpha.SecondaryOnMedia),
                     contentDescription = null
                 )
             }
@@ -373,7 +393,7 @@ fun <T : Media> MediaImage(
                     .align(Alignment.BottomStart)
                     .padding(selectedSize / 1.5f)
                     .scale(scale)
-                    .padding(6.dp)
+                    .padding(Spacing.Micro)
                     .size(10.dp)
                     .advancedShadow(
                         cornersRadius = 5.dp,
@@ -381,7 +401,7 @@ fun <T : Media> MediaImage(
                         alpha = 0.3f
                     ),
                 imageVector = Icons.Outlined.CloudDone,
-                tint = Color.White.copy(alpha = 0.7f),
+                tint = Color.White.copy(alpha = Alpha.SecondaryOnMedia),
                 contentDescription = null
             )
         }
@@ -390,7 +410,7 @@ fun <T : Media> MediaImage(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(4.dp)
+                    .padding(Spacing.ExtraSmall)
             ) {
                 val number by rememberedDerivedState(isSelected, selectedMedia) {
                     if (isSelected) {

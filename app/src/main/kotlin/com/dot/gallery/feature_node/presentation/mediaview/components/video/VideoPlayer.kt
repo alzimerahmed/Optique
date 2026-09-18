@@ -80,6 +80,7 @@ import com.dot.gallery.feature_node.domain.model.Media
 import com.dot.gallery.feature_node.domain.model.SubtitleTrack
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.rememberSurfaceCapture
+import com.dot.gallery.ui.theme.MotionSpec
 import dev.chrisbanes.haze.hazeSource
 import kotlinx.coroutines.launch
 
@@ -283,9 +284,9 @@ fun <T : Media> VideoPlayer(
                         if (scaleAnim.value > 1.01f) {
                             // Reset zoom
                             isZoomed = false
-                            scope.launch { scaleAnim.animateTo(1f, tween(300)) }
-                            scope.launch { offsetXAnim.animateTo(0f, tween(300)) }
-                            scope.launch { offsetYAnim.animateTo(0f, tween(300)) }
+                            scope.launch { scaleAnim.animateTo(1f, tween(MotionSpec.StandardInMs)) }
+                            scope.launch { offsetXAnim.animateTo(0f, tween(MotionSpec.StandardInMs)) }
+                            scope.launch { offsetYAnim.animateTo(0f, tween(MotionSpec.StandardInMs)) }
                         } else {
                             // Zoom to 2.5x anchored on the tap position
                             val targetScale = 2.5f
@@ -293,12 +294,12 @@ fun <T : Media> VideoPlayer(
                             val focal = (center - tapOffset) * (targetScale - 1f)
                             val max = maxOffsetFor(targetScale)
                             isZoomed = true
-                            scope.launch { scaleAnim.animateTo(targetScale, tween(300)) }
+                            scope.launch { scaleAnim.animateTo(targetScale, tween(MotionSpec.StandardInMs)) }
                             scope.launch {
-                                offsetXAnim.animateTo(focal.x.coerceIn(-max.x, max.x), tween(300))
+                                offsetXAnim.animateTo(focal.x.coerceIn(-max.x, max.x), tween(MotionSpec.StandardInMs))
                             }
                             scope.launch {
-                                offsetYAnim.animateTo(focal.y.coerceIn(-max.y, max.y), tween(300))
+                                offsetYAnim.animateTo(focal.y.coerceIn(-max.y, max.y), tween(MotionSpec.StandardInMs))
                             }
                         }
                     }

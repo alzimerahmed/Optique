@@ -104,6 +104,7 @@ import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.text.buildAnnotatedString
@@ -127,7 +128,6 @@ import com.dot.gallery.R
 import com.dot.gallery.cloud.core.CloudRuntimeSettings
 import com.dot.gallery.core.Constants.Animation.enterAnimation
 import com.dot.gallery.core.Constants.Animation.exitAnimation
-import com.dot.gallery.core.Constants.DEFAULT_TOP_BAR_ANIMATION_DURATION
 import com.dot.gallery.core.Constants.Target.TARGET_TRASH
 import com.dot.gallery.core.LocalEventHandler
 import com.dot.gallery.core.Settings
@@ -201,7 +201,10 @@ import com.dot.gallery.feature_node.presentation.util.rememberWindowInsetsContro
 import com.dot.gallery.feature_node.presentation.util.setHdrMode
 import com.dot.gallery.feature_node.presentation.util.shareMedia
 import com.dot.gallery.feature_node.presentation.util.toggleSystemBars
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
 import com.dot.gallery.ui.theme.isDarkTheme
+import com.dot.gallery.ui.theme.rememberReduceMotion
 import com.github.panpf.sketch.BitmapImage
 import com.github.panpf.sketch.cache.CachePolicy
 import com.github.panpf.sketch.request.ImageRequest
@@ -319,10 +322,10 @@ private fun TapNavigationPromptContent(
             .fillMaxWidth()
             .widthIn(max = 600.dp)
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp)
-            .padding(top = 8.dp, bottom = 24.dp),
+            .padding(horizontal = Spacing.ContentHorizontal)
+            .padding(top = Spacing.Small, bottom = Spacing.Large),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium),
     ) {
         Text(
             text = stringResource(R.string.tap_sides_to_navigate_prompt_title),
@@ -341,7 +344,7 @@ private fun TapNavigationPromptContent(
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall),
         ) {
             SetupButton(
                 onClick = onNotNow,
@@ -435,7 +438,7 @@ private fun TapNavigationZonePreview(
     modifier: Modifier,
 ) {
     Column(
-        modifier = modifier.padding(8.dp),
+        modifier = modifier.padding(Spacing.Small),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -979,7 +982,7 @@ fun <T : Media> MediaViewScreen(
     val extraPaddingWithNavButtons by remember(onSides, isGestureEnabled) {
         mutableStateOf(
             if (!isGestureEnabled) {
-                32.dp
+                Spacing.ExtraLarge
             } else 0.dp
         )
     }
@@ -992,7 +995,7 @@ fun <T : Media> MediaViewScreen(
     // on rotation. Reading it directly subscribes to the inset state (#929).
     val bottomPadding = paddingValues.calculateBottomPadding()
 
-    val imageOnlyHeight = bottomBarHeightDefault + extraPaddingWithNavButtons + bottomPadding + 16.dp
+    val imageOnlyHeight = bottomBarHeightDefault + extraPaddingWithNavButtons + bottomPadding + Spacing.Medium
     val imageOnlyDetent = remember(imageOnlyHeight) { ImageOnly { imageOnlyHeight } }
 
     val expandedDetent = remember { FullyExpanded }
@@ -1397,7 +1400,7 @@ fun <T : Media> MediaViewScreen(
                 key = { index ->
                     pagerItems.getOrNull(index)?.id ?: "empty_$index"
                 },
-                pageSpacing = 16.dp,
+                pageSpacing = Spacing.Medium,
                 beyondViewportPageCount = 0
             ) { index ->
                 val pagerMedia by rememberedDerivedState(pagerItems, index) {
@@ -1431,7 +1434,9 @@ fun <T : Media> MediaViewScreen(
                 val transition = slideshowConfig?.transition
                 val fadeEnabled = slideshowActive &&
                         (transition == SlideshowTransition.FADE || transition == SlideshowTransition.KEN_BURNS)
-                val kenBurnsEnabled = slideshowActive && media?.isVideo != true &&
+                // Reduced-motion: keep the Ken Burns zoom static (scale stays 1f).
+                val reduceMotion = rememberReduceMotion()
+                val kenBurnsEnabled = !reduceMotion && slideshowActive && media?.isVideo != true &&
                         slideshowConfig != null &&
                         (transition == SlideshowTransition.KEN_BURNS || slideshowConfig.kenBurns)
                 val kenBurnsScale = remember(media?.id) { Animatable(1f) }
@@ -1674,6 +1679,10 @@ fun <T : Media> MediaViewScreen(
                                                         eventHandler.navigateUp()
                                                     }
                                                 }
+                                                // Invisible full-size gesture zone — duplicates
+                                                // controls that are already accessible, so keep
+                                                // it out of the semantics tree entirely.
+                                                .clearAndSetSemantics { }
                                         )
 
                                         Spacer(
@@ -1714,6 +1723,10 @@ fun <T : Media> MediaViewScreen(
                                                         eventHandler.navigateUp()
                                                     }
                                                 }
+                                                // Invisible full-size gesture zone — duplicates
+                                                // controls that are already accessible, so keep
+                                                // it out of the semantics tree entirely.
+                                                .clearAndSetSemantics { }
                                         )
                                     }
 
@@ -1747,8 +1760,8 @@ fun <T : Media> MediaViewScreen(
 
                                     AnimatedVisibility(
                                         visible = showViewerChrome,
-                                        enter = enterAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
-                                        exit = exitAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
+                                        enter = enterAnimation(MotionSpec.EmphasizedMs),
+                                        exit = exitAnimation(MotionSpec.EmphasizedMs),
                                         modifier = Modifier.fillMaxSize()
                                     ) {
                                         VideoPlayerController(
@@ -1971,14 +1984,14 @@ fun <T : Media> MediaViewScreen(
             // Floating filmstrip overlay (positioned like video seekbar)
             AnimatedVisibility(
                 visible = showViewerChrome && motionPhotoState.isDetected && motionPhotoState.compositeFilmstrip != null,
-                enter = enterAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
-                exit = exitAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
+                enter = enterAnimation(MotionSpec.EmphasizedMs),
+                exit = exitAnimation(MotionSpec.EmphasizedMs),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
                     .padding(
                         bottom = bottomPadding + extraPaddingWithNavButtons +
-                                bottomBarHeightDefault + 32.dp
+                                bottomBarHeightDefault + Spacing.ExtraLarge
                     )
             ) {
                 MotionPhotoFilmstrip(
@@ -1991,18 +2004,18 @@ fun <T : Media> MediaViewScreen(
                 motionPhotoState.isDetected && motionPhotoState.compositeFilmstrip != null
             AnimatedVisibility(
                 visible = showViewerChrome && !showMotionFilmstrip && currentGroupMembers.size > 1,
-                enter = enterAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
-                exit = exitAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
+                enter = enterAnimation(MotionSpec.EmphasizedMs),
+                exit = exitAnimation(MotionSpec.EmphasizedMs),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .graphicsLayer {
                         translationY =
                             bottomBarHeightDefault.toPx() * sheetState.progress(imageOnlyDetent, expandedDetent)
                     }
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
                     .padding(
                         bottom = bottomPadding + extraPaddingWithNavButtons +
-                                bottomBarHeightDefault + 32.dp +
+                                bottomBarHeightDefault + Spacing.ExtraLarge +
                                 // Lift the member carousel above the video transport controls
                                 // (slider + time) so they don't overlap for grouped videos.
                                 (if (isCurrentVideo) 96.dp else 0.dp)
@@ -2011,7 +2024,7 @@ fun <T : Media> MediaViewScreen(
                 val currentPagerItemId = pagerItems.getOrNull(currentPage)?.id ?: -1L
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(Spacing.Small)
                 ) {
                     // Floating action bar for group multi-select
                     AnimatedVisibility(visible = groupMultiSelectMode) {
@@ -2092,7 +2105,7 @@ fun <T : Media> MediaViewScreen(
             }
             val bottomSheetAlpha by animateFloatAsState(
                 targetValue = if (showViewerChrome) 1f else 0f,
-                animationSpec = tween(DEFAULT_TOP_BAR_ANIMATION_DURATION),
+                animationSpec = tween(MotionSpec.EmphasizedMs),
                 label = "MediaViewActionsAlpha"
             )
             if (!isCutoutActive) {
@@ -2145,7 +2158,7 @@ fun <T : Media> MediaViewScreen(
                                         bottomBarHeightDefault.toPx() * progress
                                 }
                                 .padding(
-                                    bottom = bottomPadding + extraPaddingWithNavButtons + 16.dp
+                                    bottom = bottomPadding + extraPaddingWithNavButtons + Spacing.Medium
                                 )
                                 .fillMaxWidth(),
                             contentAlignment = Alignment.Center
@@ -2160,9 +2173,9 @@ fun <T : Media> MediaViewScreen(
                                             containerColor = surfaceContainer
                                         )
                                     )
-                                    .padding(horizontal = 8.dp, vertical = 8.dp),
+                                    .padding(horizontal = Spacing.Small, vertical = Spacing.Small),
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall),
                             ) {
                                 MediaViewQuickBottomBar(
                                     currentMedia = currentMedia,
@@ -2223,12 +2236,12 @@ fun <T : Media> MediaViewScreen(
             // subject-cutout session is active on the current page.
             AnimatedVisibility(
                 visible = navigationChromeVisible && isCutoutActive && cutoutController != null,
-                enter = enterAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
-                exit = exitAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
+                enter = enterAnimation(MotionSpec.EmphasizedMs),
+                exit = exitAnimation(MotionSpec.EmphasizedMs),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = bottomPadding + extraPaddingWithNavButtons + 16.dp)
-                    .padding(horizontal = 16.dp)
+                    .padding(bottom = bottomPadding + extraPaddingWithNavButtons + Spacing.Medium)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
             ) {
                 cutoutController?.let { controller ->
                     CutoutControlsBar(controller = controller)
@@ -2240,12 +2253,12 @@ fun <T : Media> MediaViewScreen(
             // keeping the normal viewer chrome hidden.
             AnimatedVisibility(
                 visible = navigationChromeVisible && slideshowActive && slideshowControlsVisible,
-                enter = enterAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
-                exit = exitAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
+                enter = enterAnimation(MotionSpec.EmphasizedMs),
+                exit = exitAnimation(MotionSpec.EmphasizedMs),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = bottomPadding + extraPaddingWithNavButtons + 16.dp)
-                    .padding(horizontal = 16.dp)
+                    .padding(bottom = bottomPadding + extraPaddingWithNavButtons + Spacing.Medium)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
             ) {
                 SlideshowControls(
                     isPaused = slideshowPaused,

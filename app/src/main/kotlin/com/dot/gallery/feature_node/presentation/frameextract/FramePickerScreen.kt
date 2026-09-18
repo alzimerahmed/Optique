@@ -90,6 +90,7 @@ import com.dot.gallery.feature_node.presentation.frameextract.components.FrameFi
 import com.dot.gallery.feature_node.presentation.frameextract.components.SelectedFramesTray
 import com.dot.gallery.feature_node.presentation.util.rememberWindowInsetsController
 import com.dot.gallery.feature_node.presentation.util.toggleSystemBars
+import com.dot.gallery.ui.theme.MotionSpec
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -137,7 +138,10 @@ fun FramePickerScreen(
     SharedTransitionLayout {
         AnimatedContent(
             targetState = fullScreenPreview && ready != null,
-            transitionSpec = { fadeIn(tween(220)) togetherWith fadeOut(tween(180)) },
+            transitionSpec = {
+                fadeIn(tween(MotionSpec.StandardInMs)) togetherWith
+                        fadeOut(tween(MotionSpec.StandardOutMs))
+            },
             label = "framePreviewTransition",
         ) { showPreview ->
             val visibilityScope = this@AnimatedContent

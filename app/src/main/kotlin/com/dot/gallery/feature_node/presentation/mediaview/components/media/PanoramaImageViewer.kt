@@ -7,8 +7,6 @@ package com.dot.gallery.feature_node.presentation.mediaview.components.media
 
 import android.net.Uri
 import android.view.View
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -40,6 +38,7 @@ import com.dot.gallery.feature_node.domain.model.Vault
 import com.dot.gallery.feature_node.domain.util.getUri
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.rememberSurfaceCapture
+import com.dot.gallery.ui.theme.Spacing
 import com.dot.gallery.libs.panoramaviewer.CameraState
 import com.dot.gallery.libs.panoramaviewer.PanoramaImageLoader
 import com.dot.gallery.libs.panoramaviewer.PanoramaViewer
@@ -114,7 +113,7 @@ fun <T : Media> PanoramaImageViewer(
             cameraState = cameraState,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(16.dp)
+                .padding(Spacing.Medium)
         )
     }
 }
@@ -136,18 +135,12 @@ private fun PanoramaCompass(
     } else {
         cameraState.yaw + totalH / 2f
     }
-    val yawFraction by animateFloatAsState(
-        targetValue = (yawNorm / totalH).coerceIn(0f, 1f),
-        animationSpec = tween(50),
-        label = "compassYaw"
-    )
+    // Direct tracking: the camera state already updates every frame while panning,
+    // so a tween here only added per-frame re-targeting overhead and lag.
+    val yawFraction = (yawNorm / totalH).coerceIn(0f, 1f)
 
     // Pitch for sphere: show vertical indicator
-    val pitchFraction by animateFloatAsState(
-        targetValue = ((90f - cameraState.pitch) / 180f).coerceIn(0f, 1f),
-        animationSpec = tween(50),
-        label = "compassPitch"
-    )
+    val pitchFraction = ((90f - cameraState.pitch) / 180f).coerceIn(0f, 1f)
 
     val ringColor = Color.White.copy(alpha = 0.5f)
     val fovColor = Color.White.copy(alpha = 0.85f)

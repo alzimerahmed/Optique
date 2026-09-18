@@ -14,7 +14,6 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.fadeIn
@@ -119,16 +118,21 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dot.gallery.R
 import com.dot.gallery.core.Constants.Animation.enterAnimation
 import com.dot.gallery.core.Constants.Animation.exitAnimation
-import com.dot.gallery.core.Constants.DEFAULT_TOP_BAR_ANIMATION_DURATION
 import com.dot.gallery.core.LocalEventHandler
 import com.dot.gallery.core.setFollowTheme
 import com.dot.gallery.feature_node.domain.model.Media
+import com.dot.gallery.feature_node.presentation.mediaview.LocalMediaViewerVisualPolicy
 import com.dot.gallery.feature_node.presentation.mediaview.components.media.MediaPreviewComponent
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.common.components.OptionItem
 import com.dot.gallery.feature_node.presentation.common.components.OptionSheet
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
+import com.dot.gallery.ui.theme.Alpha
 import com.dot.gallery.ui.theme.BlackScrim
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
+import com.dot.gallery.ui.theme.isDarkTheme
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalHazeMaterialsApi::class)
@@ -205,7 +209,7 @@ fun EditBackupsViewerScreen(
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val systemBarsPadding = WindowInsets.systemBars.asPaddingValues()
 
-    val isDark = com.dot.gallery.ui.theme.isDarkTheme()
+    val isDark = isDarkTheme()
 
     if (state.isLoading || mediaList.isEmpty()) {
         // Status bar follows theme in empty state
@@ -229,12 +233,12 @@ fun EditBackupsViewerScreen(
             } else {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(Spacing.Small)
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Image,
                         contentDescription = null,
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(ComponentSize.MinimumTouchTarget),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
                     )
                     Text(
@@ -253,7 +257,7 @@ fun EditBackupsViewerScreen(
             IconButton(
                 modifier = Modifier
                     .align(Alignment.TopStart)
-                    .padding(top = statusBarPadding + 8.dp, start = 12.dp)
+                    .padding(top = statusBarPadding + Spacing.Small, start = Spacing.MediumSmall)
                     .background(
                         color = MaterialTheme.colorScheme.surfaceContainer,
                         shape = CircleShape
@@ -274,12 +278,22 @@ fun EditBackupsViewerScreen(
         return
     }
 
-    // Force light status bar icons (white) on dark background for media viewer
-    DisposableEffect(Unit) {
+    // Viewer surface follows the same policy as MediaViewScreen: dark unless the
+    // media-viewer visual policy permits a light background in light theme.
+    val visualPolicy = LocalMediaViewerVisualPolicy.current
+    val darkViewer = visualPolicy.usesDarkBackground(isDark)
+    val backgroundColor = if (darkViewer) Color.Black else Color.White
+    // Chrome colors derive from the surface so controls stay legible on either theme.
+    val viewerContentColor = if (darkViewer) Color.White else Color.Black
+    val viewerScrimColor = if (darkViewer) BlackScrim else Color.White.copy(alpha = 0.6f)
+    val accentColor = MaterialTheme.colorScheme.primary
+
+    // Status bar icons contrast with the viewer surface, not the system theme.
+    DisposableEffect(darkViewer) {
         val window = (activity as? ComponentActivity)?.window ?: return@DisposableEffect onDispose {}
         val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         val wasLight = insetsController.isAppearanceLightStatusBars
-        insetsController.isAppearanceLightStatusBars = false
+        insetsController.isAppearanceLightStatusBars = !darkViewer
         eventHandler.setFollowTheme(false)
         onDispose {
             insetsController.isAppearanceLightStatusBars = wasLight
@@ -287,29 +301,19 @@ fun EditBackupsViewerScreen(
         }
     }
 
-    // Main content — always dark regardless of system theme
-    val backgroundColor = Color.Black
-    val accentColor = MaterialTheme.colorScheme.primary
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(backgroundColor)
     ) {
         // ── Media Pager ──
-        // Top padding animates with card expansion so media slides under the card
-        val pagerTopPadding by animateDpAsState(
-            targetValue = statusBarPadding + 64.dp + (160.dp * animatedExpansion),
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioNoBouncy,
-                stiffness = Spring.StiffnessMedium
-            ),
-            label = "pagerTopPadding"
-        )
+        // The pager keeps a fixed top inset — the expanding header card slides over
+        // it via graphicsLayer.translationY instead. Animating a layout padding here
+        // re-laid-out the whole GlideImage/haze/blur pager subtree on every frame.
         HorizontalPager(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = pagerTopPadding)
+                .padding(top = statusBarPadding + ComponentSize.ButtonHeight)
                 .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
             state = pagerState,
             flingBehavior = PagerDefaults.flingBehavior(
@@ -318,7 +322,7 @@ fun EditBackupsViewerScreen(
                 snapPositionalThreshold = 0.3f
             ),
             key = { index -> mediaList.getOrNull(index)?.id ?: "empty_$index" },
-            pageSpacing = 16.dp,
+            pageSpacing = Spacing.Medium,
             beyondViewportPageCount = 0
         ) { index ->
             val media by rememberedDerivedState(mediaList, index) {
@@ -351,7 +355,7 @@ fun EditBackupsViewerScreen(
                                     val isPowerSavingMode = LocalBatteryStatus.current.isPowerSavingMode
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && allowBlur && !isPowerSavingMode) {
                                         val blurAlpha by animateFloatAsState(
-                                            animationSpec = tween(DEFAULT_TOP_BAR_ANIMATION_DURATION),
+                                            animationSpec = tween(MotionSpec.EmphasizedMs),
                                             targetValue = if (showUI) 0.7f else 0f,
                                             label = "blurAlpha"
                                         )
@@ -440,10 +444,10 @@ fun EditBackupsViewerScreen(
         // ── Top Bar ──
         AnimatedVisibility(
             visible = showUI,
-            enter = enterAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION),
-            exit = exitAnimation(DEFAULT_TOP_BAR_ANIMATION_DURATION)
+            enter = enterAnimation(MotionSpec.EmphasizedMs),
+            exit = exitAnimation(MotionSpec.EmphasizedMs)
         ) {
-            val gradientColor by animateColorAsState(BlackScrim)
+            val gradientColor by animateColorAsState(viewerScrimColor)
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -458,15 +462,15 @@ fun EditBackupsViewerScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 8.dp, vertical = 8.dp),
+                        .padding(horizontal = Spacing.Small, vertical = Spacing.Small),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    val buttonBackground = Color.White.copy(alpha = 0.12f)
+                    val buttonBackground = viewerContentColor.copy(alpha = Alpha.StateLayer)
 
                     // Back button
                     IconButton(
                         modifier = Modifier
-                            .padding(horizontal = 8.dp)
+                            .padding(horizontal = Spacing.Small)
                             .clip(CircleShape)
                             .background(color = buttonBackground, shape = CircleShape),
                         onClick = {
@@ -478,7 +482,7 @@ fun EditBackupsViewerScreen(
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(R.string.back_cd),
-                            tint = Color.White
+                            tint = viewerContentColor
                         )
                     }
 
@@ -494,7 +498,7 @@ fun EditBackupsViewerScreen(
                         ),
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.Medium,
-                        color = Color.White,
+                        color = viewerContentColor,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
                             .weight(1f)
@@ -504,7 +508,7 @@ fun EditBackupsViewerScreen(
                     // Action menu button
                     IconButton(
                         modifier = Modifier
-                            .padding(horizontal = 8.dp)
+                            .padding(horizontal = Spacing.Small)
                             .clip(CircleShape)
                             .background(color = buttonBackground, shape = CircleShape),
                         onClick = { showActionMenu = true }
@@ -512,7 +516,7 @@ fun EditBackupsViewerScreen(
                         Icon(
                             imageVector = Icons.Outlined.MoreVert,
                             contentDescription = stringResource(R.string.edit_backups_section_actions),
-                            tint = Color.White
+                            tint = viewerContentColor
                         )
                     }
                 }
@@ -522,16 +526,27 @@ fun EditBackupsViewerScreen(
                     targetValue = animatedExpansion,
                     label = "cardAlpha"
                 )
-                val cardColor = Color.White.copy(alpha = 0.1f)
+                val cardColor = viewerContentColor.copy(alpha = 0.1f)
+                // Matches the old pager top-padding travel so the card slides down over
+                // the (now static) media with the same visual distance.
+                val cardSlideDistance = 160.dp
                 if (animatedExpansion > 0.05f) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .graphicsLayer { alpha = cardAlpha }
-                            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
+                            .graphicsLayer {
+                                alpha = cardAlpha
+                                translationY = -(1f - animatedExpansion) * cardSlideDistance.toPx()
+                            }
+                            .padding(
+                                start = Spacing.Medium,
+                                end = Spacing.Medium,
+                                top = Spacing.Medium,
+                                bottom = Spacing.Medium
+                            )
                             .clip(RoundedCornerShape(20.dp))
                             .background(color = cardColor)
-                            .padding(16.dp)
+                            .padding(Spacing.Medium)
                             .animateContentSize(),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
@@ -539,7 +554,7 @@ fun EditBackupsViewerScreen(
                             text = stringResource(R.string.edit_backups_storage),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold,
-                            color = Color.White
+                            color = viewerContentColor
                         )
 
                         LinearProgressIndicator(
@@ -549,7 +564,7 @@ fun EditBackupsViewerScreen(
                                 .height(6.dp)
                                 .clip(RoundedCornerShape(3.dp)),
                             color = accentColor,
-                            trackColor = Color.White.copy(alpha = 0.12f),
+                            trackColor = viewerContentColor.copy(alpha = Alpha.StateLayer),
                         )
 
                         Row(
@@ -570,7 +585,7 @@ fun EditBackupsViewerScreen(
                                         backups.size
                                     ),
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = Color.White.copy(alpha = 0.6f)
+                                    color = viewerContentColor.copy(alpha = 0.6f)
                                 )
                             }
                             Column(horizontalAlignment = Alignment.End) {
@@ -578,12 +593,12 @@ fun EditBackupsViewerScreen(
                                     text = Formatter.formatShortFileSize(context, state.freeSpace),
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color.White
+                                    color = viewerContentColor
                                 )
                                 Text(
                                     text = stringResource(R.string.edit_backups_free_space),
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = Color.White.copy(alpha = 0.6f)
+                                    color = viewerContentColor.copy(alpha = 0.6f)
                                 )
                             }
                         }
@@ -615,8 +630,8 @@ fun EditBackupsViewerScreen(
                     .fillMaxWidth()
                     .height(IntrinsicSize.Min)
                     .navigationBarsPadding()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    .padding(start = Spacing.Medium, end = Spacing.Medium, bottom = Spacing.MediumSmall),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // ── Selection pill (left) ──
@@ -626,7 +641,7 @@ fun EditBackupsViewerScreen(
                         .clip(pillShape)
                         .hazeEffect(state = hazeState, style = hazeStyle)
                         .background(BlackScrim)
-                        .padding(horizontal = 4.dp, vertical = 4.dp),
+                        .padding(horizontal = Spacing.ExtraSmall, vertical = Spacing.ExtraSmall),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Select button — icon + text as single clickable
@@ -651,16 +666,16 @@ fun EditBackupsViewerScreen(
                                     }
                                 }
                             }
-                            .padding(start = 10.dp, end = 14.dp, top = 8.dp, bottom = 8.dp),
+                            .padding(start = 10.dp, end = 14.dp, top = Spacing.Small, bottom = Spacing.Small),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
                     ) {
                         Icon(
                             imageVector = if (isCurrentSelected) Icons.Outlined.CheckCircle
                             else Icons.Outlined.RadioButtonUnchecked,
                             contentDescription = stringResource(R.string.edit_backups_select),
                             tint = Color.White,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(Spacing.MediumLarge)
                         )
                         Text(
                             text = if (selectionMode && selectedIds.isNotEmpty()) {
@@ -686,14 +701,14 @@ fun EditBackupsViewerScreen(
                                 selectionMode = false
                             }
                         },
-                        modifier = Modifier.size(40.dp)
+                        modifier = Modifier.size(ComponentSize.IconLarge)
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.DeleteOutline,
                             contentDescription = stringResource(R.string.edit_backups_delete_selected),
                             tint = if (selectionMode && selectedIds.isNotEmpty())
-                                Color(0xFFFF6B6B)
-                            else Color.White.copy(alpha = 0.38f)
+                                MaterialTheme.colorScheme.error
+                            else Color.White.copy(alpha = Alpha.Disabled)
                         )
                     }
                 }
@@ -709,7 +724,7 @@ fun EditBackupsViewerScreen(
                             .clip(pillShape)
                             .hazeEffect(state = hazeState, style = hazeStyle)
                             .background(BlackScrim)
-                            .padding(4.dp),
+                            .padding(Spacing.ExtraSmall),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         // "Original" segment

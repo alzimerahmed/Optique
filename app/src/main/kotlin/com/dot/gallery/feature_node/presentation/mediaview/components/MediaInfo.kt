@@ -37,6 +37,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.Clipboard
 import androidx.compose.ui.platform.LocalClipboard
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -49,6 +51,7 @@ import com.dot.gallery.feature_node.presentation.util.formatMinSec
 import com.dot.gallery.feature_node.presentation.util.formatSize
 import com.dot.gallery.feature_node.presentation.util.toBitrateString
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -71,6 +74,8 @@ fun MediaInfoRow(
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
             .combinedClickable(
+                role = Role.Button,
+                onLongClickLabel = stringResource(R.string.more_options_cd),
                 onClick = { onClick?.let { it() } },
                 onLongClick = {
                     if (onLongClick != null) onLongClick()
@@ -88,9 +93,9 @@ fun MediaInfoRow(
                     }
                 }
             )
-            .padding(vertical = 12.dp),
+            .padding(vertical = Spacing.MediumSmall),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         if (icon != null) {
             Box(
@@ -110,7 +115,7 @@ fun MediaInfoRow(
         }
         Column(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+            verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
         ) {
             Text(
                 text = label,

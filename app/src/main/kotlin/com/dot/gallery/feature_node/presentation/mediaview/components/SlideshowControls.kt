@@ -22,8 +22,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.dot.gallery.R
+import com.dot.gallery.ui.theme.BlackScrim
+import com.dot.gallery.ui.theme.Spacing
 
 @Composable
 fun SlideshowControls(
@@ -36,11 +37,11 @@ fun SlideshowControls(
     Row(
         modifier = Modifier
             .background(
-                color = Color.Black.copy(alpha = 0.5f),
+                color = BlackScrim,
                 shape = RoundedCornerShape(100)
             )
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+            .padding(horizontal = Spacing.Small, vertical = Spacing.ExtraSmall),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
     ) {
         IconButton(onClick = onPrevious) {
             Icon(

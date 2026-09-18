@@ -12,8 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import com.dot.gallery.R
 import com.dot.gallery.ui.theme.Shapes
+import com.dot.gallery.ui.theme.Spacing
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -40,10 +44,12 @@ fun MediaInfoChip(
             )
             .clip(Shapes.extraLarge)
             .combinedClickable(
+                role = Role.Button,
+                onLongClickLabel = stringResource(R.string.more_options_cd),
                 onClick = onClick,
                 onLongClick = onLongClick
             )
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
         text = text,
         style = MaterialTheme.typography.bodyMedium,
         color = contentColor

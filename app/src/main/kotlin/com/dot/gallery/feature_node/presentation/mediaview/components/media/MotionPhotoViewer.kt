@@ -67,6 +67,8 @@ import com.dot.gallery.R
 import com.dot.gallery.feature_node.domain.model.Media
 import com.dot.gallery.feature_node.domain.util.MotionPhotoInfo
 import com.dot.gallery.feature_node.presentation.mediaview.MediaViewViewModel
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
 import com.github.panpf.zoomimage.compose.zoom.Transform
 import kotlin.math.roundToInt
 
@@ -218,7 +220,7 @@ fun BoxScope.MotionPhotoSurface(state: MotionPhotoState) {
         targetValue = if (
             state.isPlaying && state.videoReady && !presentationState.coverSurface
         ) 1f else 0f,
-        animationSpec = tween(250),
+        animationSpec = tween(MotionSpec.StandardOutMs),
         label = "motionVideoAlpha"
     )
     var textureViewRef by remember(player) { mutableStateOf<TextureView?>(null) }
@@ -341,7 +343,7 @@ fun MotionPhotoFilmstrip(
                 Box(
                     modifier = Modifier
                         .align(Alignment.TopStart)
-                        .padding(bottom = 4.dp)
+                        .padding(bottom = Spacing.ExtraSmall)
                         .offset(x = dotOffsetDp - FAVOURITE_DOT_SIZE / 2)
                         .size(FAVOURITE_DOT_SIZE)
                         .background(Color.White, CircleShape)
@@ -351,7 +353,7 @@ fun MotionPhotoFilmstrip(
             // Filmstrip + scrub indicator
             Box(
                 modifier = Modifier
-                    .padding(top = FAVOURITE_DOT_SIZE + 4.dp)
+                    .padding(top = FAVOURITE_DOT_SIZE + Spacing.ExtraSmall)
                     .width(stripWidth)
                     .height(stripHeight)
                     .clip(filmstripShape)
@@ -464,7 +466,7 @@ fun MotionPhotoShotsSection(
 
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         Text(
             text = stringResource(R.string.frame_picker_shots_heading),
@@ -510,7 +512,7 @@ fun MotionPhotoShotsSection(
                     contentDescription = null,
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
-                        .padding(top = FAVOURITE_DOT_SIZE + 4.dp)
+                        .padding(top = FAVOURITE_DOT_SIZE + Spacing.ExtraSmall)
                         .width(stripWidth)
                         .height(stripHeight)
                         .clip(filmstripShape)
