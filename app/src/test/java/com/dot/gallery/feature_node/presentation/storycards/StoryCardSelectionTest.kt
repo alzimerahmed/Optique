@@ -219,4 +219,137 @@ class StoryCardSelectionTest {
     fun `rotatePick with zero count picks nothing`() {
         assertTrue(StoryCardSelection.rotatePick(listOf(1, 2, 3), seed = 1L, count = 0).isEmpty())
     }
+
+    // ---------- U7: highlights window selection (R8, KTD6, AE4) ----------
+
+    @Test
+    fun `empty input yields no highlights`() {
+        assertTrue(
+            StoryCardSelection.selectHighlights(
+                emptyList(), nowEpochSec = NOW, windowDays = 7
+            ).isEmpty()
+        )
+    }
+
+    @Test
+    fun `items older than the window are excluded`() {
+        val items = listOf(
+            candidate(id = 1, timestampSec = NOW - 6 * DAY),   // inside week
+            candidate(id = 2, timestampSec = NOW - 8 * DAY),   // month only
+            candidate(id = 3, timestampSec = NOW - 20 * DAY),  // month only
+            candidate(id = 4, timestampSec = NOW - 31 * DAY),  // outside both
+        )
+
+        val week = StoryCardSelection.selectHighlights(
+            items, nowEpochSec = NOW, windowDays = 7, minItems = 1
+        )
+        assertEquals(listOf(1L), week.map { it.id })
+
+        val month = StoryCardSelection.selectHighlights(
+            items, nowEpochSec = NOW, windowDays = 30, minItems = 1
+        )
+        assertEquals(listOf(1L, 2L, 3L), month.map { it.id })
+    }
+
+    @Test
+    fun `an item exactly at the window edge is excluded`() {
+        val items = listOf(
+            candidate(id = 1, timestampSec = NOW - 7 * DAY),      // exactly at boundary
+            candidate(id = 2, timestampSec = NOW - 7 * DAY + 1),  // one second inside
+            candidate(id = 3, timestampSec = NOW - DAY),
+        )
+
+        val week = StoryCardSelection.selectHighlights(
+            items, nowEpochSec = NOW, windowDays = 7, minItems = 1
+        )
+
+        assertEquals(listOf(3L, 2L), week.map { it.id })
+    }
+
+    @Test
+    fun `window with fewer than min items emits nothing`() {
+        val items = listOf(
+            candidate(id = 1, timestampSec = NOW - DAY),
+            candidate(id = 2, timestampSec = NOW - 2 * DAY),
+        )
+
+        assertTrue(
+            StoryCardSelection.selectHighlights(items, nowEpochSec = NOW, windowDays = 7).isEmpty()
+        )
+        assertTrue(
+            StoryCardSelection.selectHighlights(items, nowEpochSec = NOW, windowDays = 30).isEmpty()
+        )
+    }
+
+    @Test
+    fun `favorites and flagged items rank above unflagged in the same window`() {
+        val items = listOf(
+            candidate(id = 1, timestampSec = NOW - DAY),
+            candidate(id = 2, timestampSec = NOW - 2 * DAY, isFavorite = true),
+            candidate(id = 3, timestampSec = NOW - 3 * DAY),
+            candidate(id = 4, timestampSec = NOW - 4 * DAY, isFlagged = true),
+        )
+
+        val picked = StoryCardSelection.selectHighlights(items, nowEpochSec = NOW, windowDays = 7)
+
+        assertEquals(listOf(2L, 4L, 1L, 3L), picked.map { it.id })
+    }
+
+    @Test
+    fun `screenshots rank below plain photos in the same window`() {
+        val items = listOf(
+            candidate(id = 1, timestampSec = NOW - DAY, isScreenshot = true),
+            candidate(id = 2, timestampSec = NOW - 2 * DAY),
+            candidate(id = 3, timestampSec = NOW - 3 * DAY),
+        )
+
+        val picked = StoryCardSelection.selectHighlights(items, nowEpochSec = NOW, windowDays = 7)
+
+        assertEquals(1L, picked.last().id)
+    }
+
+    @Test
+    fun `selection spreads across days before one day takes extra slots`() {
+        // Three strong items on one day vs weaker items on other days: each
+        // day contributes its best before any day takes a second slot (KTD6).
+        val items = listOf(
+            candidate(id = 1, timestampSec = NOW - DAY, isFavorite = true),
+            candidate(id = 2, timestampSec = NOW - DAY, isFlagged = true),
+            candidate(id = 3, timestampSec = NOW - DAY),
+            candidate(id = 4, timestampSec = NOW - 5 * DAY),
+            candidate(id = 5, timestampSec = NOW - 6 * DAY),
+        )
+
+        val picked = StoryCardSelection.selectHighlights(
+            items, nowEpochSec = NOW, windowDays = 7, maxItems = 4
+        )
+
+        // id 3 (third same-day item) loses its slot to the other days' best.
+        assertEquals(listOf(1L, 2L, 4L, 5L), picked.map { it.id })
+    }
+
+    @Test
+    fun `highlights selection is deterministic and independent of input order`() {
+        val items = listOf(
+            candidate(id = 1, timestampSec = NOW - DAY),
+            candidate(id = 2, timestampSec = NOW - 2 * DAY, isFavorite = true),
+            candidate(id = 3, timestampSec = NOW - 3 * DAY, isScreenshot = true),
+            candidate(id = 4, timestampSec = NOW - 4 * DAY, isFlagged = true),
+            candidate(id = 5, timestampSec = NOW - 5 * DAY),
+        )
+
+        val first = StoryCardSelection.selectHighlights(items, nowEpochSec = NOW, windowDays = 7)
+        val again = StoryCardSelection.selectHighlights(items, nowEpochSec = NOW, windowDays = 7)
+        val reversed = StoryCardSelection.selectHighlights(
+            items.asReversed(), nowEpochSec = NOW, windowDays = 7
+        )
+
+        assertEquals(first, again)
+        assertEquals(first, reversed)
+    }
+
+    private companion object {
+        const val NOW = 1_000_000_000L
+        const val DAY = 86_400L
+    }
 }

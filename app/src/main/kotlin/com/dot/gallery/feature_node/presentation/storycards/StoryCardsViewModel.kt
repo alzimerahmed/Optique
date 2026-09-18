@@ -117,7 +117,7 @@ class StoryCardsViewModel @Inject constructor(
                     // Cloud memories are handled in the separate _cloudMemoryCards flow
                 }
                 StoryCardType.HIGHLIGHTS -> {
-                    // Highlights cards are not built yet
+                    cards.addAll(buildHighlightCards(scopedMedia, covers))
                 }
                 StoryCardType.PEOPLE -> {
                     // People cards are handled in a separate provider flow
@@ -451,6 +451,49 @@ class StoryCardsViewModel @Inject constructor(
             }
     }
 
+    /**
+     * R8/KTD6: "This week" (7 days) and "This month" (30 days) windows of
+     * standout recent media, selected from the exclusion-filtered [media]
+     * (KTD2). Scoring and cover picking reuse the shared
+     * [StoryCardSelection] signals; a window emits no card when fewer than
+     * the minimum qualify (AE4).
+     */
+    private fun buildHighlightCards(
+        media: List<Media.UriMedia>,
+        covers: CoverContext,
+    ): List<StoryCard> {
+        val nowSec = clock.instant().epochSecond
+        val candidates = media.map { covers.candidate(it) }
+        val mediaById = media.associateBy { it.id }
+        return HighlightWindow.entries.mapIndexedNotNull { index, window ->
+            val picked = StoryCardSelection.selectHighlights(
+                candidates = candidates,
+                nowEpochSec = nowSec,
+                windowDays = window.days,
+            )
+            if (picked.isEmpty()) return@mapIndexedNotNull null
+            val pickedMedia = picked.mapNotNull { mediaById[it.id] }
+            StoryCard(
+                id = HIGHLIGHT_ID_BASE + index,
+                type = StoryCardType.HIGHLIGHTS,
+                title = context.getString(window.titleRes),
+                subtitle = mediaCountString(pickedMedia.size),
+                thumbnailMedia = covers.cover(pickedMedia),
+                mediaList = pickedMedia
+            )
+        }
+    }
+
+    /**
+     * Trailing recency windows for [StoryCardType.HIGHLIGHTS] — emitted in
+     * declaration order, which also determines the card-id window index
+     * (KTD4 `7_000_000L` namespace).
+     */
+    private enum class HighlightWindow(val days: Int, val titleRes: Int) {
+        WEEK(7, R.string.story_cards_highlights_this_week),
+        MONTH(30, R.string.story_cards_highlights_this_month),
+    }
+
     private fun mediaCountString(count: Int): String =
         context.resources.getQuantityString(R.plurals.story_cards_media_count, count, count)
 
@@ -464,20 +507,21 @@ class StoryCardsViewModel @Inject constructor(
         val categorizedIds: Set<Long>,
         val metadataById: Map<Long, MediaMetadata>,
     ) {
+        /** Maps a media item to its KTD6 signal bundle (shared by cover and highlights). */
+        fun candidate(m: Media.UriMedia) = StoryCardSelection.Candidate(
+            id = m.id,
+            timestampSec = m.definedTimestamp,
+            isFavorite = m.favorite == 1 || m.id in favoriteIds,
+            isCategorized = m.id in categorizedIds,
+            isFlagged = metadataById[m.id]?.isRelevant == true,
+            isScreenshot = StoryCardSelection.isScreenshotLike(
+                m.label, m.path, m.relativePath
+            ),
+            isPhoto = !m.mimeType.startsWith("video/"),
+        )
+
         fun cover(list: List<Media.UriMedia>): Media.UriMedia? =
-            StoryCardSelection.cover(list) { m ->
-                StoryCardSelection.Candidate(
-                    id = m.id,
-                    timestampSec = m.definedTimestamp,
-                    isFavorite = m.favorite == 1 || m.id in favoriteIds,
-                    isCategorized = m.id in categorizedIds,
-                    isFlagged = metadataById[m.id]?.isRelevant == true,
-                    isScreenshot = StoryCardSelection.isScreenshotLike(
-                        m.label, m.path, m.relativePath
-                    ),
-                    isPhoto = !m.mimeType.startsWith("video/"),
-                )
-            }
+            StoryCardSelection.cover(list) { m -> candidate(m) }
     }
 
     private companion object {
@@ -497,5 +541,8 @@ class StoryCardsViewModel @Inject constructor(
 
         /** Stride mixing the day-of-epoch seed with the card-type ordinal (KTD3). */
         const val SEED_TYPE_STRIDE = 31L
+
+        /** Card-id namespace for HIGHLIGHTS windows (KTD4): base + window index. */
+        const val HIGHLIGHT_ID_BASE = 7_000_000L
     }
 }

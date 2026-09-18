@@ -645,6 +645,109 @@ class StoryCardsViewModelTest {
         assertTrue(cards.any { it.type == StoryCardType.FAVORITES })
     }
 
+    // ---------- U7: HIGHLIGHTS cards (R8, AE4, KTD4/KTD6) ----------
+
+    /**
+     * Pinned day is 2026-09-18T12:00Z: the 7-day window starts
+     * 2026-09-11T12:00Z, the 30-day window 2026-08-19T12:00Z.
+     */
+    @Test
+    fun `recent media produces this week and this month highlight cards`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        val m1 = media(1, year = 2026, month = 9, day = 12) // 6 days — week + month
+        val m2 = media(2, year = 2026, month = 9, day = 16) // 2 days — week + month
+        val m3 = media(3, year = 2026, month = 9, day = 17) // 1 day — week + month
+        val m4 = media(4, year = 2026, month = 9, day = 10) // 8 days — month only
+        val m5 = media(5, year = 2026, month = 8, day = 25) // 24 days — month only
+        val mOld = media(6, year = 2020, month = 9, day = 15) // years old — neither
+        distributor.timeline.value = MediaState(listOf(m1, m2, m3, m4, m5, mOld))
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 6)))
+        // m3 favorited: the scoring must surface it as the week card's cover.
+        distributor.favorites.value = MediaState(listOf(m3))
+
+        val vm = viewModel(FakeMediaRepository(), distributor)
+        val cards = awaitCards(vm) { c ->
+            c.count { it.type == StoryCardType.HIGHLIGHTS } == 2
+        }
+
+        val highlights = cardsOfType(cards, StoryCardType.HIGHLIGHTS)
+        assertEquals(setOf("This week", "This month"), highlights.mapTo(HashSet()) { it.title })
+        val week = highlights.single { it.title == "This week" }
+        assertEquals(setOf(1L, 2L, 3L), week.mediaList.mapTo(HashSet()) { it.id })
+        assertEquals(3L, week.thumbnailMedia?.id)
+        val month = highlights.single { it.title == "This month" }
+        assertEquals(setOf(1L, 2L, 3L, 4L, 5L), month.mediaList.mapTo(HashSet()) { it.id })
+    }
+
+    /** AE4: library media all older than the month window → no card. */
+    @Test
+    fun `no recent media produces no highlights card`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        distributor.timeline.value = MediaState(
+            listOf(
+                media(1, year = 2020, month = 6, day = 1),
+                media(2, year = 2020, month = 6, day = 2),
+                media(3, year = 2020, month = 6, day = 3),
+            )
+        )
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 3)))
+
+        val vm = viewModel(FakeMediaRepository(), distributor)
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.ALBUMS } }
+
+        assertTrue(cardsOfType(cards, StoryCardType.HIGHLIGHTS).isEmpty())
+    }
+
+    /** A window with <3 scored items is noise and emits no card. */
+    @Test
+    fun `fewer than three recent items emits no highlights card`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        distributor.timeline.value = MediaState(
+            listOf(
+                media(1, year = 2026, month = 9, day = 17),
+                media(2, year = 2026, month = 9, day = 16),
+                media(3, year = 2020, month = 6, day = 1),
+            )
+        )
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 3)))
+
+        val vm = viewModel(FakeMediaRepository(), distributor)
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.ALBUMS } }
+
+        assertTrue(cardsOfType(cards, StoryCardType.HIGHLIGHTS).isEmpty())
+    }
+
+    /** KTD2: excluded-album media can't leak into a highlights card either. */
+    @Test
+    fun `excluded album media does not appear in highlights`() = runBlocking {
+        writeConfig(StoryCardsConfig(excludedAlbumIds = setOf(2L)))
+        val distributor = TestDistributor()
+        distributor.timeline.value = MediaState(
+            listOf(
+                media(1, albumID = 1, year = 2026, month = 9, day = 16),
+                media(2, albumID = 1, year = 2026, month = 9, day = 17),
+                media(3, albumID = 1, year = 2026, month = 9, day = 15),
+                media(4, albumID = 2, albumLabel = "Excluded", year = 2026, month = 9, day = 17),
+                media(5, albumID = 2, albumLabel = "Excluded", year = 2026, month = 9, day = 16),
+            )
+        )
+        distributor.albums.value = AlbumState(
+            albums = listOf(album(1, "Camera", count = 3), album(2, "Excluded", count = 2))
+        )
+
+        val vm = viewModel(FakeMediaRepository(), distributor)
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.HIGHLIGHTS } }
+
+        val highlights = cardsOfType(cards, StoryCardType.HIGHLIGHTS)
+        assertTrue(highlights.isNotEmpty())
+        assertTrue(highlights.all { card -> card.mediaList.none { it.albumID == 2L } })
+        assertFalse(4L in allMediaIds(cards))
+        assertFalse(5L in allMediaIds(cards))
+    }
+
     /** Seeds [albumCount] albums with one timeline media item each. */
     private fun seedAlbumPool(distributor: TestDistributor, albumCount: Int) {
         val items = (1L..albumCount.toLong()).map { media(it, albumID = it) }

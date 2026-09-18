@@ -111,6 +111,67 @@ object StoryCardSelection {
             haystack.contains("screencap", ignoreCase = true)
     }
 
+    /**
+     * U7/R8 highlights selection: the top-scored candidates inside a
+     * trailing window of [windowDays] days ending at [nowEpochSec]
+     * (epoch seconds — `Media.definedTimestamp` semantics).
+     *
+     * Returns an empty list when fewer than [minItems] candidates qualify —
+     * a "2 photos from Tuesday" card is noise (AE4). Otherwise up to
+     * [maxItems] candidates ordered by the same total order as the cover
+     * pick (score desc, timestampSec desc, id desc), so the result is
+     * deterministic and independent of input order.
+     *
+     * Membership spreads across days (KTD6): each epoch-day contributes its
+     * best-scored candidate before any day takes a second slot, then the
+     * remaining slots fill in global score order.
+     */
+    fun selectHighlights(
+        candidates: List<Candidate>,
+        nowEpochSec: Long,
+        windowDays: Int,
+        minItems: Int = MIN_HIGHLIGHT_ITEMS,
+        maxItems: Int = MAX_HIGHLIGHT_ITEMS,
+    ): List<Candidate> {
+        val windowStartSec = nowEpochSec - windowDays * SECONDS_PER_DAY
+        val sorted = candidates
+            .filter { it.timestampSec > windowStartSec }
+            .sortedWith(HIGHLIGHT_ORDER)
+        if (sorted.size < minItems) return emptyList()
+
+        val picked = ArrayList<Candidate>(minOf(maxItems, sorted.size))
+        val pickedIds = HashSet<Long>()
+        val seenDays = HashSet<Long>()
+        // First pass: one candidate per epoch-day for day diversity.
+        for (candidate in sorted) {
+            if (picked.size >= maxItems) break
+            if (seenDays.add(Math.floorDiv(candidate.timestampSec, SECONDS_PER_DAY))) {
+                picked += candidate
+                pickedIds += candidate.id
+            }
+        }
+        // Second pass: fill remaining slots in global score order.
+        for (candidate in sorted) {
+            if (picked.size >= maxItems) break
+            if (pickedIds.add(candidate.id)) picked += candidate
+        }
+        return picked.sortedWith(HIGHLIGHT_ORDER)
+    }
+
+    /** Total candidate order shared by the cover pick and highlights. */
+    private val HIGHLIGHT_ORDER: Comparator<Candidate> =
+        compareByDescending<Candidate> { score(it) }
+            .thenByDescending { it.timestampSec }
+            .thenByDescending { it.id }
+
+    /** Minimum scored candidates a highlights window needs to emit a card (AE4). */
+    internal const val MIN_HIGHLIGHT_ITEMS = 3
+
+    /** Per-window mediaList bound — matches the other builders' `take(20)`. */
+    internal const val MAX_HIGHLIGHT_ITEMS = 20
+
+    private const val SECONDS_PER_DAY = 86_400L
+
     private const val FAVORITE_BONUS = 4
     private const val FLAGGED_BONUS = 2
     private const val CATEGORIZED_BONUS = 1

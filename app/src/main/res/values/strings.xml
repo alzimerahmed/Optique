@@ -1463,6 +1463,8 @@
     <string name="story_cards_type_cloud_memories_desc">\"On this day\" memories from your cloud server</string>
     <string name="story_cards_type_highlights_desc">Standout photos from this week and month</string>
     <string name="story_cards_type_people_desc">Photos grouped by person</string>
+    <string name="story_cards_highlights_this_week">This week</string>
+    <string name="story_cards_highlights_this_month">This month</string>
     <plurals name="story_cards_media_count">
         <item quantity="one">%1$d item</item>
         <item quantity="other">%1$d items</item>
