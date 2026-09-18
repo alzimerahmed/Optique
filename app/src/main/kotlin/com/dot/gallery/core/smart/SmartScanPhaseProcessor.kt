@@ -400,6 +400,7 @@ private const val MEDIA_DELETE_BATCH_SIZE = 500
 private const val PREPARATION_BATCH_SIZE = 500
 private const val SEARCH_EMBEDDING_DIMENSION = 512
 private const val FACE_EMBEDDING_DIMENSION = 512
+private const val CARRIED_FACE_MIN_IOU = 0.5f
 
 internal fun smartSourceFingerprint(revisions: Iterable<String>): String {
     var hash = -3750763034362895579L
@@ -822,6 +823,73 @@ internal fun isCurrentFaceDetection(
     state.sourceRevision == sourceRevision && state.resultRevision == resultRevision &&
     (headers.isEmpty() || headers.all { it.timestamp == timestamp && it.resultRevision == resultRevision })
 
+internal fun hiddenPersonIds(people: List<PersonEntity>): Set<String> =
+    people.filter { it.hidden }.mapTo(hashSetOf()) { it.id }
+
+internal fun splitCarriedFaces(
+    faces: List<DetectedFaceEntity>,
+    hiddenPersonIds: Set<String>
+): Pair<List<DetectedFaceEntity>, List<DetectedFaceEntity>> =
+    faces.partition { it.personId != null && it.personId in hiddenPersonIds }
+
+internal fun carriedFaceRow(
+    face: DetectedFaceEntity,
+    timestamp: Long,
+    revision: String
+): DetectedFaceEntity = face.copy(id = 0, timestamp = timestamp, resultRevision = revision)
+
+internal fun faceBoxIoU(
+    aLeft: Float,
+    aTop: Float,
+    aRight: Float,
+    aBottom: Float,
+    bLeft: Float,
+    bTop: Float,
+    bRight: Float,
+    bBottom: Float
+): Float {
+    val width = (minOf(aRight, bRight) - maxOf(aLeft, bLeft)).coerceAtLeast(0f)
+    val height = (minOf(aBottom, bBottom) - maxOf(aTop, bTop)).coerceAtLeast(0f)
+    val intersection = width * height
+    val union = (aRight - aLeft) * (aBottom - aTop) +
+        (bRight - bLeft) * (bBottom - bTop) - intersection
+    return if (union > 0f) intersection / union else 0f
+}
+
+internal fun isCarriedHiddenFace(
+    face: DetectedFaceBox,
+    carriedFaces: List<DetectedFaceEntity>
+): Boolean = carriedFaces.any { prior ->
+    faceBoxIoU(
+        face.left, face.top, face.right, face.bottom,
+        prior.left, prior.top, prior.right, prior.bottom
+    ) >= CARRIED_FACE_MIN_IOU
+}
+
+internal fun bestFaceClusterMatch(
+    embedding: FloatArray,
+    clusters: List<FaceIndexPhaseProcessor.Cluster>,
+    hiddenPersonIds: Set<String>,
+    threshold: Float
+): FaceIndexPhaseProcessor.Cluster? {
+    var best: FaceIndexPhaseProcessor.Cluster? = null
+    var bestScore = Float.NEGATIVE_INFINITY
+    clusters.forEach { cluster ->
+        if (cluster.personId in hiddenPersonIds) return@forEach
+        val score = FaceHelper.cosine(embedding, cluster.normalizedCentroid)
+        if (score > bestScore) {
+            best = cluster
+            bestScore = score
+        }
+    }
+    return best?.takeIf { bestScore >= threshold }
+}
+
+internal fun emptyClusterIdsFor(
+    clusters: List<FaceIndexPhaseProcessor.Cluster>,
+    touchedPeople: Set<String>
+): Set<String> = touchedPeople - clusters.filter { it.count > 0 }.mapTo(hashSetOf()) { it.personId }
+
 class FaceIndexPhaseProcessor @Inject constructor(
     repository: MediaRepository,
     database: InternalDatabase,
@@ -836,7 +904,7 @@ class FaceIndexPhaseProcessor @Inject constructor(
         get() = "face-v2:${modelManager.processorRevision(ModelGroup.FACE_DETECT)}:" +
             modelManager.processorRevision(ModelGroup.FACE_RECOGNITION)
 
-    private data class Cluster(
+    internal data class Cluster(
         val personId: String,
         var centroid: FloatArray,
         var normalizedCentroid: FloatArray,
@@ -849,6 +917,7 @@ class FaceIndexPhaseProcessor @Inject constructor(
             !modelManager.isReady(ModelGroup.FACE_RECOGNITION)
         ) return SmartScanPhaseResult.Blocked("face_model_unavailable")
         val scanDao = database.getSmartScanDao()
+        val hiddenIds = hiddenPersonIds(personDao.getByProviderOnce(ProviderType.LOCAL_PEOPLE))
         val orphanPeople = faceDao.getOrphanPersonIds()
         val removedOrphans = faceDao.deleteOrphans()
         val touchedPeople = orphanPeople.toHashSet()
@@ -962,11 +1031,22 @@ class FaceIndexPhaseProcessor @Inject constructor(
                         }
                         val existingFaces = faceDao.getByMedia(item.id)
                         existingFaces.mapNotNullTo(touchedPeople) { it.personId }
-                        removeFromClusters(existingFaces, clusters)
+                        val (carriedFaces, drainableFaces) = splitCarriedFaces(existingFaces, hiddenIds)
+                        removeFromClusters(drainableFaces, clusters)
+                        val carriedRows = carriedFaces.map { carriedFaceRow(it, item.timestamp, revision) }
                         val detected = if (embeddedFaces.isEmpty()) {
-                            listOf(DetectedFaceEntity(mediaId = item.id, timestamp = item.timestamp, resultRevision = revision))
+                            carriedRows.ifEmpty {
+                                listOf(
+                                    DetectedFaceEntity(
+                                        mediaId = item.id,
+                                        timestamp = item.timestamp,
+                                        resultRevision = revision
+                                    )
+                                )
+                            }
                         } else {
-                            embeddedFaces.map { (face, embedding) ->
+                            carriedRows + embeddedFaces.mapNotNull { (face, embedding) ->
+                                if (isCarriedHiddenFace(face, carriedFaces)) return@mapNotNull null
                                 DetectedFaceEntity(
                                     mediaId = item.id,
                                     personId = assignCluster(
@@ -975,7 +1055,8 @@ class FaceIndexPhaseProcessor @Inject constructor(
                                         item,
                                         face,
                                         bitmap,
-                                        touchedPeople
+                                        touchedPeople,
+                                        hiddenIds
                                     ),
                                     embedding = FloatVectorCodec.encode(embedding),
                                     left = face.left,
@@ -1077,7 +1158,7 @@ class FaceIndexPhaseProcessor @Inject constructor(
             FaceClusterEntity(it.personId, it.centroid, it.count, updatedAt)
         }
         if (activeClusters.isNotEmpty()) faceDao.upsertClusters(activeClusters)
-        val emptyClusterIds = touchedPeople - activeClusters.mapTo(hashSetOf()) { it.personId }
+        val emptyClusterIds = emptyClusterIdsFor(clusters, touchedPeople)
         if (emptyClusterIds.isNotEmpty()) faceDao.deleteClusters(emptyClusterIds.toList())
     }
 
@@ -1141,18 +1222,10 @@ class FaceIndexPhaseProcessor @Inject constructor(
         media: Media.UriMedia,
         face: DetectedFaceBox,
         bitmap: Bitmap,
-        touchedPeople: MutableSet<String>
+        touchedPeople: MutableSet<String>,
+        hiddenPersonIds: Set<String>
     ): String {
-        var best: Cluster? = null
-        var bestScore = Float.NEGATIVE_INFINITY
-        clusters.forEach { cluster ->
-            val score = FaceHelper.cosine(embedding, cluster.normalizedCentroid)
-            if (score > bestScore) {
-                best = cluster
-                bestScore = score
-            }
-        }
-        best?.takeIf { bestScore >= CLUSTER_THRESHOLD }?.let { cluster ->
+        bestFaceClusterMatch(embedding, clusters, hiddenPersonIds, CLUSTER_THRESHOLD)?.let { cluster ->
             val newCount = cluster.count + 1
             cluster.centroid = FloatArray(cluster.centroid.size) { index ->
                 (cluster.centroid[index] * cluster.count + embedding[index]) / newCount
