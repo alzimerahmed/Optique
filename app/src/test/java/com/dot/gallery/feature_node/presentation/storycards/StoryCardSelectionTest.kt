@@ -168,4 +168,55 @@ class StoryCardSelectionTest {
         assertTrue(StoryCardSelection.isScreenshotLike(null, null, "Pictures/Screencaps"))
         assertFalse(StoryCardSelection.isScreenshotLike("IMG_1.jpg", "/DCIM/Camera", "DCIM"))
     }
+
+    // ---------- U6: day-seeded rotation (KTD3) ----------
+
+    @Test
+    fun `rotatePick returns items unchanged when at or under count`() {
+        val items = listOf(1, 2, 3)
+
+        assertEquals(items, StoryCardSelection.rotatePick(items, seed = 1L, count = 3))
+        assertEquals(items, StoryCardSelection.rotatePick(items, seed = 99L, count = 5))
+        assertSame(items, StoryCardSelection.rotatePick(items, seed = 7L, count = 10))
+    }
+
+    @Test
+    fun `rotatePick picks exactly count items from an over-cap pool`() {
+        val items = (1L..10L).toList()
+
+        val picked = StoryCardSelection.rotatePick(items, seed = 42L, count = 4)
+
+        assertEquals(4, picked.size)
+        assertEquals(4, picked.distinct().size)
+        assertTrue(items.containsAll(picked))
+    }
+
+    @Test
+    fun `rotatePick is deterministic for the same seed`() {
+        val items = (1L..10L).toList()
+
+        val first = StoryCardSelection.rotatePick(items, seed = 42L, count = 4)
+        val second = StoryCardSelection.rotatePick(items, seed = 42L, count = 4)
+
+        assertEquals(first, second)
+    }
+
+    @Test
+    fun `rotatePick varies the pick across seeds for an over-cap pool`() {
+        val items = (1L..10L).toList()
+
+        val picks = (1L..20L).mapTo(HashSet()) { seed ->
+            StoryCardSelection.rotatePick(items, seed = seed, count = 4).toSet()
+        }
+
+        assertTrue("expected seed variation in picks, got $picks", picks.size > 1)
+        // Every pick stays a subset of the eligible pool — rotation re-picks
+        // which cards fill the slots, never invents new ones.
+        assertTrue(picks.all { items.containsAll(it) })
+    }
+
+    @Test
+    fun `rotatePick with zero count picks nothing`() {
+        assertTrue(StoryCardSelection.rotatePick(listOf(1, 2, 3), seed = 1L, count = 0).isEmpty())
+    }
 }

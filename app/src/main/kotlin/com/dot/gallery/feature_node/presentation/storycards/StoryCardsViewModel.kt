@@ -31,6 +31,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.time.Clock
+import java.time.LocalDate
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -39,7 +41,8 @@ class StoryCardsViewModel @Inject constructor(
     private val repository: MediaRepository,
     private val distributor: MediaDistributor,
     private val providerRegistry: ProviderRegistry,
-    @param:ApplicationContext private val context: Context
+    @param:ApplicationContext private val context: Context,
+    private val clock: Clock
 ) : ViewModel() {
 
     private val configFlow = Settings.Misc.getStoryCardsConfig(context)
@@ -57,7 +60,9 @@ class StoryCardsViewModel @Inject constructor(
     val metadataFlow = repository.getMetadata()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
-    private val topCategories = repository.getTopCategories(5)
+    // Fetch above the maximum configurable cap so the eligible pool has
+    // material for rotation (and user caps above the old fetch limit of 5).
+    private val topCategories = repository.getTopCategories(CATEGORY_POOL_LIMIT)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
     val storyCards: StateFlow<List<StoryCard>> = combine(
@@ -251,12 +256,29 @@ class StoryCardsViewModel @Inject constructor(
         if (!config.enabled) return@combine emptyList()
         val merged = mutableListOf<StoryCard>()
         val orderedTypes = config.activeTypes
+        // R6/KTD3: one day-seed per emission, mixed with the type identity so
+        // each type gets an independent deterministic pick.
+        val dayEpoch = LocalDate.now(clock).toEpochDay()
         for (type in orderedTypes) {
-            when (type) {
-                StoryCardType.CATEGORIES -> merged.addAll(catCards)
-                StoryCardType.CLOUD_MEMORIES -> merged.addAll(cloudCards)
-                else -> merged.addAll(cards.filter { it.type == type })
+            val eligible = when (type) {
+                StoryCardType.CATEGORIES -> catCards
+                StoryCardType.CLOUD_MEMORIES -> cloudCards
+                else -> cards.filter { it.type == type }
             }
+            // R5: per-type cap — defaults preserve the limits the builders
+            // used to hardcode; types with no entry (FAVORITES) are uncapped.
+            val cap = config.maxCardsPerType[type]
+                ?: StoryCardsConfig.DEFAULT_MAX_CARDS_PER_TYPE[type]
+                ?: Int.MAX_VALUE
+            // Rotation runs after activeTypes ordering: type order and count
+            // never change, only which eligible cards fill each slot.
+            merged.addAll(
+                StoryCardSelection.rotatePick(
+                    eligible,
+                    seed = dayEpoch * SEED_TYPE_STRIDE + type.ordinal,
+                    count = cap
+                )
+            )
         }
         merged
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
@@ -352,7 +374,9 @@ class StoryCardsViewModel @Inject constructor(
         excludedAlbumIds: Set<Long>,
         covers: CoverContext
     ): List<StoryCard> {
-        // Pick recent/pinned albums with content, limit to 5.
+        // Pick recent/pinned albums with content. The full eligible pool is
+        // emitted here — the per-type cap and seeded rotation are applied at
+        // the allCards slot fill (R5/R6).
         // Excluded albums are dropped from card eligibility alongside locked
         // ones; their media is already absent from [media] (KTD2).
         val highlighted = albums
@@ -361,7 +385,6 @@ class StoryCardsViewModel @Inject constructor(
                 compareByDescending<com.dot.gallery.feature_node.domain.model.Album> { it.isPinned }
                     .thenByDescending { it.timestamp }
             )
-            .take(5)
 
         val mediaByAlbum = media.groupBy { it.albumID }
 
@@ -407,10 +430,10 @@ class StoryCardsViewModel @Inject constructor(
             val key = "${meta.gpsLocationNameCity}, ${meta.gpsLocationNameCountry}"
             locationGroups.getOrPut(key) { mutableListOf() }.add(m)
         }
-        // Sort groups by count descending, take top 5
+        // Sort groups by count descending — the full pool is emitted; the
+        // per-type cap and rotation are applied at the allCards slot fill.
         return locationGroups.entries
             .sortedByDescending { it.value.size }
-            .take(5)
             .mapNotNull { (location, locationMedia) ->
                 val sorted = locationMedia.sortedByDescending { it.definedTimestamp }
                 val city = location.substringBefore(",").trim()
@@ -464,5 +487,15 @@ class StoryCardsViewModel @Inject constructor(
          * `favorite` flag and screenshot/photo heuristics still do.
          */
         val REMOTE_COVERS = CoverContext(emptySet(), emptySet(), emptyMap())
+
+        /**
+         * Category pool fetch size — must exceed the maximum configurable
+         * cap (slider range 1–10) so rotation has eligible cards to pick
+         * from and caps above the old fetch limit of 5 are honored.
+         */
+        const val CATEGORY_POOL_LIMIT = 20
+
+        /** Stride mixing the day-of-epoch seed with the card-type ordinal (KTD3). */
+        const val SEED_TYPE_STRIDE = 31L
     }
 }

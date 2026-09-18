@@ -51,6 +51,8 @@ import java.io.File
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
+import java.time.Clock
+import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
 
@@ -253,11 +255,13 @@ class StoryCardsViewModelTest {
     private fun viewModel(
         repository: FakeMediaRepository,
         distributor: TestDistributor,
+        clock: Clock = Clock.fixed(TEST_INSTANT, ZoneOffset.UTC),
     ) = StoryCardsViewModel(
         repository.asRepository(),
         distributor,
         ProviderRegistry(),
         context,
+        clock,
     )
 
     /**
@@ -451,8 +455,210 @@ class StoryCardsViewModelTest {
         assertEquals(listOf(1L), categoryCard.mediaList.map { it.id })
     }
 
+    // ---------- U6: cap application + day-seeded rotation (R5, R6, KTD3) ----------
+
+    /**
+     * Determinism: two ViewModels pinned to the same day emit the identical
+     * pick from an over-cap pool.
+     */
+    @Test
+    fun `same day produces identical capped selection`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val clock = Clock.fixed(TEST_INSTANT, ZoneOffset.UTC)
+        val distributor = TestDistributor()
+        seedAlbumPool(distributor, albumCount = 7)
+
+        val first = awaitCards(viewModel(FakeMediaRepository(), distributor, clock)) { cards ->
+            cards.count { it.type == StoryCardType.ALBUMS } == 5
+        }
+        val second = awaitCards(viewModel(FakeMediaRepository(), distributor, clock)) { cards ->
+            cards.count { it.type == StoryCardType.ALBUMS } == 5
+        }
+
+        assertEquals(first.map { it.id }, second.map { it.id })
+    }
+
+    /**
+     * Rotation: with 7 eligible albums and cap 5, different days re-pick
+     * which cards fill the slots — the union of picked sets exceeds the cap.
+     */
+    @Test
+    fun `different days re-pick which eligible albums fill the cap`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        seedAlbumPool(distributor, albumCount = 7)
+
+        val picksByDay = mutableSetOf<Set<Long>>()
+        for (dayOffset in 0L..6L) {
+            val clock = Clock.fixed(
+                TEST_INSTANT.plus(dayOffset, java.time.temporal.ChronoUnit.DAYS),
+                ZoneOffset.UTC
+            )
+            val cards = awaitCards(viewModel(FakeMediaRepository(), distributor, clock)) { c ->
+                c.count { it.type == StoryCardType.ALBUMS } == 5
+            }
+            val albumIds = cardsOfType(cards, StoryCardType.ALBUMS)
+                .mapTo(HashSet()) { it.id }
+            assertEquals(5, albumIds.size)
+            picksByDay += albumIds
+        }
+
+        assertTrue(
+            "expected day-seeded picks to vary across the week, got $picksByDay",
+            picksByDay.size > 1
+        )
+    }
+
+    /** Eligible pool at/under the cap renders identically regardless of day. */
+    @Test
+    fun `pool at or under cap is identical across days`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        seedAlbumPool(distributor, albumCount = 3)
+
+        val picksByDay = mutableSetOf<List<Long>>()
+        for (dayOffset in 0L..3L) {
+            val clock = Clock.fixed(
+                TEST_INSTANT.plus(dayOffset, java.time.temporal.ChronoUnit.DAYS),
+                ZoneOffset.UTC
+            )
+            val cards = awaitCards(viewModel(FakeMediaRepository(), distributor, clock)) { c ->
+                c.count { it.type == StoryCardType.ALBUMS } == 3
+            }
+            picksByDay += cardsOfType(cards, StoryCardType.ALBUMS).map { it.id }
+        }
+
+        assertEquals(1, picksByDay.size)
+    }
+
+    /** The merged strip's type ordering follows config.activeTypes on any seed. */
+    @Test
+    fun `merged type order follows activeTypes on different days`() = runBlocking {
+        // Favorites first, then categories, then albums — non-default order.
+        val config = StoryCardsConfig(
+            cardOrder = listOf(
+                StoryCardType.FAVORITES,
+                StoryCardType.CATEGORIES,
+                StoryCardType.ALBUMS,
+                StoryCardType.MEMORIES,
+                StoryCardType.LOCATIONS,
+                StoryCardType.CLOUD_MEMORIES,
+                StoryCardType.HIGHLIGHTS,
+                StoryCardType.PEOPLE,
+            )
+        )
+        writeConfig(config)
+        val distributor = TestDistributor()
+        seedAlbumPool(distributor, albumCount = 3)
+        // Both the favorite and the category member resolve through the
+        // filtered timeline set, so they must share a timeline media id.
+        distributor.favorites.value = MediaState(listOf(media(1, albumID = 1)))
+        val repository = FakeMediaRepository(
+            topCategories = listOf(category(5, "Cats")),
+            mediaIdsByCategory = mapOf(5L to listOf(1L)),
+        )
+
+        for (dayOffset in 0L..2L) {
+            val clock = Clock.fixed(
+                TEST_INSTANT.plus(dayOffset, java.time.temporal.ChronoUnit.DAYS),
+                ZoneOffset.UTC
+            )
+            val cards = awaitCards(viewModel(repository, distributor, clock)) { c ->
+                c.any { it.type == StoryCardType.FAVORITES } &&
+                    c.any { it.type == StoryCardType.CATEGORIES } &&
+                    c.any { it.type == StoryCardType.ALBUMS }
+            }
+            val presentOrder = cards.map { it.type }.distinct()
+            val expectedOrder = config.activeTypes.filter { t -> cards.any { it.type == t } }
+            assertEquals(expectedOrder, presentOrder)
+        }
+    }
+
+    /** R5: a configured cap of 3 yields exactly 3 cards from a 7-album pool. */
+    @Test
+    fun `configured cap is honored over an over-cap pool`() = runBlocking {
+        writeConfig(
+            StoryCardsConfig(maxCardsPerType = mapOf(StoryCardType.ALBUMS to 3))
+        )
+        val distributor = TestDistributor()
+        seedAlbumPool(distributor, albumCount = 7)
+
+        val cards = awaitCards(viewModel(FakeMediaRepository(), distributor)) { c ->
+            c.count { it.type == StoryCardType.ALBUMS } == 3
+        }
+
+        assertEquals(3, cardsOfType(cards, StoryCardType.ALBUMS).size)
+    }
+
+    /** R5: raising the cap above the old hardcoded default surfaces more cards. */
+    @Test
+    fun `raised cap surfaces more than the old default of five`() = runBlocking {
+        writeConfig(
+            StoryCardsConfig(maxCardsPerType = mapOf(StoryCardType.ALBUMS to 8))
+        )
+        val distributor = TestDistributor()
+        seedAlbumPool(distributor, albumCount = 7)
+
+        val cards = awaitCards(viewModel(FakeMediaRepository(), distributor)) { c ->
+            c.count { it.type == StoryCardType.ALBUMS } == 7
+        }
+
+        assertEquals(7, cardsOfType(cards, StoryCardType.ALBUMS).size)
+    }
+
+    /**
+     * R5/R6: a CATEGORIES cap above the old fetch limit of 5 works — the
+     * fetch was raised to 20 so the eligible pool exceeds the cap.
+     */
+    @Test
+    fun `category cap above five is honored after fetch raise`() = runBlocking {
+        writeConfig(
+            StoryCardsConfig(maxCardsPerType = mapOf(StoryCardType.CATEGORIES to 8))
+        )
+        val distributor = TestDistributor()
+        val items = (1L..9L).map { media(it, albumID = 1) }
+        distributor.timeline.value = MediaState(items)
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 9)))
+        val repository = FakeMediaRepository(
+            topCategories = (1L..9L).map { category(it, "Cat$it") },
+            mediaIdsByCategory = (1L..9L).associateWith { listOf(it) },
+        )
+
+        val cards = awaitCards(viewModel(repository, distributor)) { c ->
+            c.count { it.type == StoryCardType.CATEGORIES } == 8
+        }
+
+        assertEquals(8, cardsOfType(cards, StoryCardType.CATEGORIES).size)
+    }
+
+    /** First-ever launch: default config, pinned day — normal seeded strip. */
+    @Test
+    fun `first launch with default config produces a seeded strip`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        seedAlbumPool(distributor, albumCount = 3)
+        distributor.favorites.value = MediaState(listOf(media(1, albumID = 1)))
+
+        val cards = awaitCards(viewModel(FakeMediaRepository(), distributor)) { it.isNotEmpty() }
+
+        assertTrue(cards.any { it.type == StoryCardType.ALBUMS })
+        assertTrue(cards.any { it.type == StoryCardType.FAVORITES })
+    }
+
+    /** Seeds [albumCount] albums with one timeline media item each. */
+    private fun seedAlbumPool(distributor: TestDistributor, albumCount: Int) {
+        val items = (1L..albumCount.toLong()).map { media(it, albumID = it) }
+        distributor.timeline.value = MediaState(items)
+        distributor.albums.value = AlbumState(
+            albums = (1L..albumCount.toLong()).map { album(it, "Album$it", count = 1) }
+        )
+    }
+
     private companion object {
         /** Raw preferences key — mirrors Settings.Misc.STORY_CARDS_CONFIG (private there). */
         const val STORY_CARDS_CONFIG_KEY = "story_cards_config"
+
+        /** Pinned day for the injected rotation Clock (2026-09-18T12:00Z). */
+        val TEST_INSTANT: Instant = Instant.parse("2026-09-18T12:00:00Z")
     }
 }

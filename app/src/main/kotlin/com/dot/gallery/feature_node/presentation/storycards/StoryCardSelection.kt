@@ -5,6 +5,8 @@
 
 package com.dot.gallery.feature_node.presentation.storycards
 
+import kotlin.random.Random
+
 /**
  * Pure-Kotlin selection helpers shared by the StoryCards builders.
  *
@@ -79,6 +81,20 @@ object StoryCardSelection {
         if (a.timestampSec != b.timestampSec) return a.timestampSec > b.timestampSec
         return a.id > b.id
     }
+
+    /**
+     * KTD3/R6 freshness rotation: deterministic, calendar-seeded within-type
+     * selection. [seed] mixes day-of-epoch with the card-type identity
+     * (computed ViewModel-side), so each day re-picks which eligible cards
+     * fill a type's slots while type order and count stay fixed.
+     *
+     * Returns [items] unchanged when it fits within [count] — pools at or
+     * under the cap render in builder order regardless of seed. Otherwise a
+     * seeded shuffle re-picks which [count] items surface; identical
+     * (items, seed, count) always yields the identical pick.
+     */
+    fun <T> rotatePick(items: List<T>, seed: Long, count: Int): List<T> =
+        if (items.size <= count) items else items.shuffled(Random(seed)).take(count)
 
     /**
      * Screenshot heuristic identical to `MemoriesEngine.isScreenshot` —
