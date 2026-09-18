@@ -92,6 +92,12 @@ class StoryCardsViewModel @Inject constructor(
                 StoryCardType.CLOUD_MEMORIES -> {
                     // Cloud memories are handled in the separate _cloudMemoryCards flow
                 }
+                StoryCardType.HIGHLIGHTS -> {
+                    // Highlights cards are not built yet
+                }
+                StoryCardType.PEOPLE -> {
+                    // People cards are handled in a separate provider flow
+                }
             }
         }
         cards

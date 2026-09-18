@@ -64,7 +64,10 @@ inline fun <reified T> rememberPreferenceSerializable(
     return remember(state) {
         object : MutableState<T> {
             override var value: T
-                get() = Json.decodeFromString(state)
+                // Stored JSON that fails to decode (e.g. written by a newer app
+                // version) falls back to the default instead of crashing —
+                // mirrors Settings.Misc.getStoryCardsConfig.
+                get() = runCatching { Json.decodeFromString<T>(state) }.getOrDefault(defaultValue)
                 set(value) {
                     coroutineScope.launch {
                         context.activeDataStore.edit {

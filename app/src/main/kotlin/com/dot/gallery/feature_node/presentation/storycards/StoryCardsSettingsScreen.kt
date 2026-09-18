@@ -33,11 +33,13 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DragHandle
+import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Cloud
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.ImageSearch
 import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material.icons.outlined.People
 import androidx.compose.material.icons.outlined.PhotoAlbum
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -510,24 +512,30 @@ private val StoryCardType.settingsIcon: ImageVector
         StoryCardType.LOCATIONS -> Icons.Outlined.LocationOn
         StoryCardType.FAVORITES -> Icons.Outlined.Favorite
         StoryCardType.CLOUD_MEMORIES -> Icons.Outlined.Cloud
+        StoryCardType.HIGHLIGHTS -> Icons.Outlined.AutoAwesome
+        StoryCardType.PEOPLE -> Icons.Outlined.People
     }
 
 private val StoryCardType.displayName: String
-    get() = when (this) {
-        StoryCardType.MEMORIES -> "Memories"
-        StoryCardType.ALBUMS -> "Albums"
-        StoryCardType.CATEGORIES -> "Categories"
-        StoryCardType.LOCATIONS -> "Locations"
-        StoryCardType.FAVORITES -> "Favorites"
-        StoryCardType.CLOUD_MEMORIES -> "Cloud Memories"
+    @Composable get() = when (this) {
+        StoryCardType.MEMORIES -> stringResource(R.string.story_cards_type_memories)
+        StoryCardType.ALBUMS -> stringResource(R.string.story_cards_type_albums)
+        StoryCardType.CATEGORIES -> stringResource(R.string.story_cards_type_categories)
+        StoryCardType.LOCATIONS -> stringResource(R.string.story_cards_type_locations)
+        StoryCardType.FAVORITES -> stringResource(R.string.story_cards_type_favorites)
+        StoryCardType.CLOUD_MEMORIES -> stringResource(R.string.story_cards_type_cloud_memories)
+        StoryCardType.HIGHLIGHTS -> stringResource(R.string.story_cards_type_highlights)
+        StoryCardType.PEOPLE -> stringResource(R.string.story_cards_type_people)
     }
 
 private val StoryCardType.description: String
-    get() = when (this) {
-        StoryCardType.MEMORIES -> "Photos from this day in previous years"
-        StoryCardType.ALBUMS -> "Highlighted and pinned albums"
-        StoryCardType.CATEGORIES -> "AI-classified photo categories"
-        StoryCardType.LOCATIONS -> "Photos organized by location"
-        StoryCardType.FAVORITES -> "Your favorite photos"
-        StoryCardType.CLOUD_MEMORIES -> "\"On this day\" memories from your cloud server"
+    @Composable get() = when (this) {
+        StoryCardType.MEMORIES -> stringResource(R.string.story_cards_type_memories_desc)
+        StoryCardType.ALBUMS -> stringResource(R.string.story_cards_type_albums_desc)
+        StoryCardType.CATEGORIES -> stringResource(R.string.story_cards_type_categories_desc)
+        StoryCardType.LOCATIONS -> stringResource(R.string.story_cards_type_locations_desc)
+        StoryCardType.FAVORITES -> stringResource(R.string.story_cards_type_favorites_desc)
+        StoryCardType.CLOUD_MEMORIES -> stringResource(R.string.story_cards_type_cloud_memories_desc)
+        StoryCardType.HIGHLIGHTS -> stringResource(R.string.story_cards_type_highlights_desc)
+        StoryCardType.PEOPLE -> stringResource(R.string.story_cards_type_people_desc)
     }

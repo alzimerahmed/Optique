@@ -19,7 +19,9 @@ enum class StoryCardType {
     CATEGORIES,
     LOCATIONS,
     FAVORITES,
-    CLOUD_MEMORIES
+    CLOUD_MEMORIES,
+    HIGHLIGHTS,
+    PEOPLE
 }
 
 /**
@@ -29,7 +31,15 @@ enum class StoryCardType {
 data class StoryCardsConfig(
     val enabled: Boolean = true,
     val cardOrder: List<StoryCardType> = StoryCardType.entries.toList(),
-    val disabledTypes: Set<StoryCardType> = emptySet()
+    val disabledTypes: Set<StoryCardType> = emptySet(),
+    /** Per-type card-count caps. An empty map (or missing entry) falls back to [DEFAULT_MAX_CARDS_PER_TYPE]. */
+    val maxCardsPerType: Map<StoryCardType, Int> = emptyMap(),
+    /** Albums excluded from card generation entirely — no card, no media in other cards' lists. */
+    val excludedAlbumIds: Set<Long> = emptySet(),
+    /** Categories excluded from card generation and media contribution. */
+    val excludedCategoryIds: Set<Long> = emptySet(),
+    /** "city, country" location keys excluded from card generation and media contribution. */
+    val excludedLocationKeys: Set<String> = emptySet()
 ) {
     /** cardOrder with any newly-added types appended (handles config persisted before the type existed). */
     val normalizedOrder: List<StoryCardType>
@@ -40,6 +50,23 @@ data class StoryCardsConfig(
 
     val activeTypes: List<StoryCardType>
         get() = if (enabled) normalizedOrder.filter { it !in disabledTypes } else emptyList()
+
+    companion object {
+        /**
+         * Default per-type card caps replicating the limits that were previously
+         * hardcoded in the card builders. Single-card types (FAVORITES) have no
+         * cap and are intentionally absent.
+         */
+        val DEFAULT_MAX_CARDS_PER_TYPE: Map<StoryCardType, Int> = mapOf(
+            StoryCardType.MEMORIES to 10,
+            StoryCardType.ALBUMS to 5,
+            StoryCardType.CATEGORIES to 5,
+            StoryCardType.LOCATIONS to 5,
+            StoryCardType.CLOUD_MEMORIES to 10,
+            StoryCardType.HIGHLIGHTS to 4,
+            StoryCardType.PEOPLE to 5
+        )
+    }
 }
 
 /**
@@ -60,5 +87,7 @@ data class StoryCard(
     val categoryId: Long? = null,
     val locationCity: String? = null,
     val locationCountry: String? = null,
-    val year: Int? = null
+    val year: Int? = null,
+    /** Face-cluster/person identifier for PEOPLE cards; used viewer-side. */
+    val personId: String? = null
 )

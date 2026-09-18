@@ -22,11 +22,13 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Cloud
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.ImageSearch
 import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material.icons.outlined.People
 import androidx.compose.material.icons.outlined.PhotoAlbum
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -104,9 +106,24 @@ private fun StoryCardItem(
             .clip(RoundedCornerShape(20.dp))
             .clickable(onClick = onClick)
     ) {
-        if (card.thumbnailMedia != null) {
+        val thumbnailMedia = card.thumbnailMedia
+        val thumbnailUri = card.thumbnailUri
+        if (thumbnailMedia != null) {
             AsyncImage(
-                request = ComposableImageRequest(card.thumbnailMedia.getUri().toString()) {
+                request = ComposableImageRequest(thumbnailMedia.getUri().toString()) {
+                    resize(width = 300, height = 440, precision = Precision.LESS_PIXELS)
+                    crossfade(false)
+                    // Bust the cache when the underlying file changes (#1004).
+                    setExtra(key = "mediaVersion", value = "${thumbnailMedia.timestamp}:${thumbnailMedia.size}")
+                },
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                contentDescription = card.title,
+            )
+        } else if (thumbnailUri != null) {
+            // Face-crop / file:// covers (e.g. People cards) arrive as URIs with no backing Media.
+            AsyncImage(
+                request = ComposableImageRequest(thumbnailUri.toString()) {
                     resize(width = 300, height = 440, precision = Precision.LESS_PIXELS)
                     crossfade(false)
                 },
@@ -195,4 +212,6 @@ private val StoryCardType.icon: ImageVector
         StoryCardType.LOCATIONS -> Icons.Outlined.LocationOn
         StoryCardType.FAVORITES -> Icons.Outlined.Favorite
         StoryCardType.CLOUD_MEMORIES -> Icons.Outlined.Cloud
+        StoryCardType.HIGHLIGHTS -> Icons.Outlined.AutoAwesome
+        StoryCardType.PEOPLE -> Icons.Outlined.People
     }
