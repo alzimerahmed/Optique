@@ -3,7 +3,7 @@
     <!-- Hidden people management -->
     <string name="hidden_people_title">Hidden people</string>
     <string name="hidden_people_empty">No hidden people</string>
-    <string name="hidden_people_explainer">People you hide disappear from the People list and stop matching new face scans. Their faces, names, and thumbnails are kept — tap a person to unhide them.</string>
+    <string name="hidden_people_explainer">People you hide disappear from the People list and stop collecting new faces. Their faces, names, and thumbnails are kept — tap a person to unhide them.</string>
     <string name="hidden_people_summary">Manage people you\'ve hidden</string>
     <string name="hidden_people_action_description">View hidden people</string>
     <string name="hidden_people_unhide">Unhide %1$s</string>
@@ -16,6 +16,7 @@
     <string name="hidden_people_delete_all_confirm">Delete all</string>
     <string name="hidden_people_delete_all_success">All face data deleted</string>
     <string name="hidden_people_delete_all_failure">Couldn\'t delete all face data</string>
+    <string name="hidden_people_delete_all_scan_active">Face data can\'t be deleted while a scan is running</string>
 
     <!-- Person detail: shown when the person no longer resolves (stale back-stack entry) -->
     <string name="cloud_person_unavailable">This person is no longer available</string>

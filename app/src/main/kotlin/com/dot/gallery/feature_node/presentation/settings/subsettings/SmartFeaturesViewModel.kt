@@ -251,12 +251,19 @@ class SmartFeaturesViewModel @Inject constructor(
         viewModelScope.launch {
             // Re-check at action time (KTD4): a queued/running scan may have started
             // after the preference was rendered enabled.
-            if (smartScanDao.getActiveRun() != null) return@launch
+            if (smartScanDao.getActiveRun() != null) {
+                toast(R.string.hidden_people_delete_all_scan_active)
+                return@launch
+            }
             _isPurgingFaceData.value = true
             // runCatching keeps the purge steps in one failure domain: any DAO or
             // filesystem failure surfaces the same failure Toast (U4 test contract).
             val purged = runCatching {
                 database.withTransaction {
+                    // In-transaction re-check narrows the check-then-act window to
+                    // the commit boundary: a scan going active here aborts before
+                    // any write.
+                    if (smartScanDao.getActiveRun() != null) throw ScanActiveException()
                     detectedFaceDao.deleteAll()
                     personDao.deleteByProvider(ProviderType.LOCAL_PEOPLE)
                     // The state reset stays inside the transaction: isCurrentFaceDetection
@@ -271,22 +278,29 @@ class SmartFeaturesViewModel @Inject constructor(
             }.getOrElse { e ->
                 // Keep structured concurrency: cancellation is not a purge failure.
                 if (e is CancellationException) throw e
+                if (e is ScanActiveException) {
+                    toast(R.string.hidden_people_delete_all_scan_active)
+                    _isPurgingFaceData.value = false
+                    return@launch
+                }
                 false
             }
             _isPurgingFaceData.value = false
-            Toast.makeText(
-                context,
-                context.getString(
-                    if (purged) {
-                        R.string.hidden_people_delete_all_success
-                    } else {
-                        R.string.hidden_people_delete_all_failure
-                    }
-                ),
-                Toast.LENGTH_SHORT
-            ).show()
+            toast(
+                if (purged) {
+                    R.string.hidden_people_delete_all_success
+                } else {
+                    R.string.hidden_people_delete_all_failure
+                }
+            )
         }
     }
+
+    private fun toast(stringRes: Int) {
+        Toast.makeText(context, context.getString(stringRes), Toast.LENGTH_SHORT).show()
+    }
+
+    private class ScanActiveException : Exception()
 
     private fun request(features: Int) {
         viewModelScope.launch { smartScanScheduler.manual(features) }

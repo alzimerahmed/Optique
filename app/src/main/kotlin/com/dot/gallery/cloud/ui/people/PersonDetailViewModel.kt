@@ -165,7 +165,7 @@ class PersonDetailViewModel @Inject constructor(
                             // Single person-gone exit path (R13): hiding or merging produces
                             // the same gone-signal, so no explicit navigateUp anywhere else.
                             exitSignalled = true
-                            _uiEvents.emit(PersonDetailEvent.Exit)
+                            _uiEvents.tryEmit(PersonDetailEvent.Exit)
                         }
                         PersonPresence.Missing ->
                             _uiState.value = _uiState.value.copy(

@@ -828,9 +828,9 @@ internal fun hiddenPersonIds(people: List<PersonEntity>): Set<String> =
 
 internal fun splitCarriedFaces(
     faces: List<DetectedFaceEntity>,
-    hiddenPersonIds: Set<String>
+    hiddenIds: Set<String>
 ): Pair<List<DetectedFaceEntity>, List<DetectedFaceEntity>> =
-    faces.partition { it.personId != null && it.personId in hiddenPersonIds }
+    faces.partition { it.personId != null && it.personId in hiddenIds }
 
 internal fun carriedFaceRow(
     face: DetectedFaceEntity,
@@ -869,13 +869,13 @@ internal fun isCarriedHiddenFace(
 internal fun bestFaceClusterMatch(
     embedding: FloatArray,
     clusters: List<FaceIndexPhaseProcessor.Cluster>,
-    hiddenPersonIds: Set<String>,
+    hiddenIds: Set<String>,
     threshold: Float
 ): FaceIndexPhaseProcessor.Cluster? {
     var best: FaceIndexPhaseProcessor.Cluster? = null
     var bestScore = Float.NEGATIVE_INFINITY
     clusters.forEach { cluster ->
-        if (cluster.personId in hiddenPersonIds) return@forEach
+        if (cluster.personId in hiddenIds) return@forEach
         val score = FaceHelper.cosine(embedding, cluster.normalizedCentroid)
         if (score > bestScore) {
             best = cluster
@@ -1223,9 +1223,9 @@ class FaceIndexPhaseProcessor @Inject constructor(
         face: DetectedFaceBox,
         bitmap: Bitmap,
         touchedPeople: MutableSet<String>,
-        hiddenPersonIds: Set<String>
+        hiddenIds: Set<String>
     ): String {
-        bestFaceClusterMatch(embedding, clusters, hiddenPersonIds, CLUSTER_THRESHOLD)?.let { cluster ->
+        bestFaceClusterMatch(embedding, clusters, hiddenIds, CLUSTER_THRESHOLD)?.let { cluster ->
             val newCount = cluster.count + 1
             cluster.centroid = FloatArray(cluster.centroid.size) { index ->
                 (cluster.centroid[index] * cluster.count + embedding[index]) / newCount

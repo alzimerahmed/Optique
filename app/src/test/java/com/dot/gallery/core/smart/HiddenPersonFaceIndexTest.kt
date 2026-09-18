@@ -50,7 +50,7 @@ class HiddenPersonFaceIndexTest {
         val match = bestFaceClusterMatch(
             embedding,
             listOf(hidden, visible),
-            hiddenPersonIds = setOf("local_hidden"),
+            hiddenIds = setOf("local_hidden"),
             threshold = 0.45f
         )
 
@@ -67,7 +67,7 @@ class HiddenPersonFaceIndexTest {
         val match = bestFaceClusterMatch(
             embedding,
             listOf(hidden, visible),
-            hiddenPersonIds = setOf("local_hidden"),
+            hiddenIds = setOf("local_hidden"),
             threshold = 0.45f
         )
 
@@ -83,7 +83,7 @@ class HiddenPersonFaceIndexTest {
         val match = bestFaceClusterMatch(
             embedding,
             listOf(weaker, best),
-            hiddenPersonIds = emptySet(),
+            hiddenIds = emptySet(),
             threshold = 0.45f
         )
 
@@ -99,7 +99,7 @@ class HiddenPersonFaceIndexTest {
             bestFaceClusterMatch(
                 embedding,
                 listOf(person),
-                hiddenPersonIds = setOf("local_person"),
+                hiddenIds = setOf("local_person"),
                 threshold = 0.45f
             )
         )
@@ -108,7 +108,7 @@ class HiddenPersonFaceIndexTest {
             bestFaceClusterMatch(
                 embedding,
                 listOf(person),
-                hiddenPersonIds = emptySet(),
+                hiddenIds = emptySet(),
                 threshold = 0.45f
             )?.personId
         )
