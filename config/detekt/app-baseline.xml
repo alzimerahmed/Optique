@@ -118,7 +118,6 @@
     <ID>CyclomaticComplexMethod:EncryptedMediaSource.kt$internal fun createEncryptedMediaSource(context: Context, file: File): EncryptedMediaSource</ID>
     <ID>CyclomaticComplexMethod:FCastSession.kt$FCastSession$private fun handleReceiverPacket(packet: ReceivedPacket)</ID>
     <ID>CyclomaticComplexMethod:FaceHelper.kt$FaceHelper$fun detect(bitmap: Bitmap, scoreThreshold: Float = 0.7f): List&lt;DetectedFaceBox&gt;</ID>
-    <ID>CyclomaticComplexMethod:FaceIndexerWorker.kt$FaceIndexerWorker$override suspend fun doWork(): Result</ID>
     <ID>CyclomaticComplexMethod:FileUtils.kt$FileUtils$@SuppressLint("NewApi") fun getPath(uri: Uri): String?</ID>
     <ID>CyclomaticComplexMethod:FiltersSelector.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable fun FiltersSelector( modifier: Modifier = Modifier, bitmap: Bitmap, isSupportingPanel: Boolean, appliedAdjustments: List&lt;Adjustment&gt; = emptyList(), activeFilterName: String? = null, onClick: (ImageFilter) -&gt; Unit = {}, filterIntensity: Float = 1f, onFilterIntensityChange: (Float) -&gt; Unit = {}, )</ID>
     <ID>CyclomaticComplexMethod:FrameDecoderSession.kt$FrameDecoderSession$suspend fun prepare(): FrameVideoMetadata</ID>
@@ -1255,7 +1254,6 @@
     <ID>LongMethod:ExternalEditor.kt$@Composable private fun EditApp( bitmap: ImageBitmap, title: String, enabled: Boolean = true, horizontal: Boolean = false, onItemLongClick: (() -&gt; Unit)? = null, onItemClick: () -&gt; Unit )</ID>
     <ID>LongMethod:FCastDevicePickerDialog.kt$@Composable fun FCastDevicePickerDialog( state: CastSessionState, onDeviceSelected: (FCastDevice) -&gt; Unit, onCastMedia: () -&gt; Unit = {}, onStopCasting: () -&gt; Unit = {}, onDisconnect: () -&gt; Unit, onDismiss: () -&gt; Unit )</ID>
     <ID>LongMethod:FCastSession.kt$FCastSession$private fun handleReceiverPacket(packet: ReceivedPacket)</ID>
-    <ID>LongMethod:FaceIndexerWorker.kt$FaceIndexerWorker$override suspend fun doWork(): Result</ID>
     <ID>LongMethod:FileUtils.kt$FileUtils$@SuppressLint("NewApi") fun getPath(uri: Uri): String?</ID>
     <ID>LongMethod:FilterComponent.kt$@Composable fun FilterButton( modifier: Modifier = Modifier, filterOptions: Array&lt;FilterOption&gt; = emptyArray(), viewType: Settings.Album.ViewType, onViewTypeChange: (Settings.Album.ViewType) -&gt; Unit )</ID>
     <ID>LongMethod:FiltersSelector.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable fun FiltersSelector( modifier: Modifier = Modifier, bitmap: Bitmap, isSupportingPanel: Boolean, appliedAdjustments: List&lt;Adjustment&gt; = emptyList(), activeFilterName: String? = null, onClick: (ImageFilter) -&gt; Unit = {}, filterIntensity: Float = 1f, onFilterIntensityChange: (Float) -&gt; Unit = {}, )</ID>
@@ -1575,7 +1573,6 @@
     <ID>LongParameterList:ErrorComponent.kt$( modifier: Modifier = Modifier, title: String = stringResource(R.string.error_title), errorMessage: String? = null, onRetry: (() -&gt; Unit)? = null, actionLabel: String? = null, onAction: (() -&gt; Unit)? = null, )</ID>
     <ID>LongParameterList:ExternalEditor.kt$( bitmap: ImageBitmap, title: String, enabled: Boolean = true, horizontal: Boolean = false, onItemLongClick: (() -&gt; Unit)? = null, onItemClick: () -&gt; Unit )</ID>
     <ID>LongParameterList:FCastDevicePickerDialog.kt$( state: CastSessionState, onDeviceSelected: (FCastDevice) -&gt; Unit, onCastMedia: () -&gt; Unit = {}, onStopCasting: () -&gt; Unit = {}, onDisconnect: () -&gt; Unit, onDismiss: () -&gt; Unit )</ID>
-    <ID>LongParameterList:FaceIndexerWorker.kt$FaceIndexerWorker$( embedding: FloatArray, clusters: MutableList&lt;Cluster&gt;, item: com.dot.gallery.feature_node.domain.model.Media.UriMedia, face: DetectedFaceBox, bitmap: Bitmap, touched: HashSet&lt;String&gt; )</ID>
     <ID>LongParameterList:FavoriteScreen.kt$( paddingValues: PaddingValues, albumName: String = stringResource(id = R.string.favorites), mediaState: State&lt;MediaState&lt;UriMedia&gt;&gt;, metadataState: State&lt;MediaMetadataState&gt;, clearSelection: () -&gt; Unit, sharedTransitionScope: SharedTransitionScope, animatedContentScope: AnimatedContentScope, )</ID>
     <ID>LongParameterList:FiltersSelector.kt$( modifier: Modifier = Modifier, bitmap: Bitmap, isSupportingPanel: Boolean, appliedAdjustments: List&lt;Adjustment&gt; = emptyList(), activeFilterName: String? = null, onClick: (ImageFilter) -&gt; Unit = {}, filterIntensity: Float = 1f, onFilterIntensityChange: (Float) -&gt; Unit = {}, )</ID>
     <ID>LongParameterList:FrameFilmstrip.kt$( frames: List&lt;FramePreview&gt;, current: FrameIdentity?, selected: Set&lt;FrameIdentity&gt;, preferredTimeUs: Long, onFrameClick: (FrameIdentity) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
@@ -2583,10 +2580,6 @@
     <ID>MagicNumber:FaceHelper.kt$FaceHelper$4</ID>
     <ID>MagicNumber:FaceHelper.kt$FaceHelper$8</ID>
     <ID>MagicNumber:FaceHelper.kt$FaceHelper.Companion$1e-10f</ID>
-    <ID>MagicNumber:FaceIndexerWorker.kt$FaceIndexerWorker$100f</ID>
-    <ID>MagicNumber:FaceIndexerWorker.kt$FaceIndexerWorker$640</ID>
-    <ID>MagicNumber:FaceIndexerWorker.kt$FaceIndexerWorker$90</ID>
-    <ID>MagicNumber:FaceIndexerWorker.kt$FaceIndexerWorker.Companion$4</ID>
     <ID>MagicNumber:FileUtils.kt$1024.0</ID>
     <ID>MagicNumber:FileUtils.kt$FileUtils$1024</ID>
     <ID>MagicNumber:FilterComponent.kt$100</ID>
@@ -5958,7 +5951,6 @@
     <ID>TooGenericExceptionCaught:FCastSession.kt$FCastSession$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FCastViewModel.kt$FCastViewModel$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FaceHelper.kt$FaceHelper$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:FaceIndexerWorker.kt$FaceIndexerWorker$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FileUtils.kt$FileUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FrameExportWorker.kt$FrameExportWorker$error: Throwable</ID>
     <ID>TooGenericExceptionCaught:FramePickerViewModel.kt$FramePickerViewModel$error: Throwable</ID>

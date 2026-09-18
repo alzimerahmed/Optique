@@ -27,7 +27,8 @@ import javax.inject.Singleton
 
 /**
  * Local, on-device people provider backed by the [PersonDao]/[DetectedFaceDao] tables that the
- * [com.dot.gallery.core.workers.FaceIndexerWorker] populates. Available whenever the face
+ * SmartScan [com.dot.gallery.feature_node.data.data_source.SmartScanPhase.FACE_INDEX] phase
+ * ([com.dot.gallery.core.smart.FaceIndexPhaseProcessor]) populates. Available whenever the face
  * detector model is installed.
  */
 @Singleton
