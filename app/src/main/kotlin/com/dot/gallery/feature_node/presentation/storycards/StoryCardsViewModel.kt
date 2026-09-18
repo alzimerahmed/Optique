@@ -6,12 +6,17 @@
 package com.dot.gallery.feature_node.presentation.storycards
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dot.gallery.R
 import com.dot.gallery.cloud.core.MemoryInfo
+import com.dot.gallery.cloud.core.PersonInfo
 import com.dot.gallery.cloud.core.ProviderRegistry
+import com.dot.gallery.cloud.core.ProviderType
 import com.dot.gallery.cloud.core.capabilities.MemoriesCapableProvider
+import com.dot.gallery.cloud.core.capabilities.PeopleCapableProvider
+import com.dot.gallery.cloud.data.dao.PersonDao
 import com.dot.gallery.core.MediaDistributor
 import com.dot.gallery.core.Resource
 import com.dot.gallery.core.Settings
@@ -28,6 +33,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -41,6 +47,7 @@ class StoryCardsViewModel @Inject constructor(
     private val repository: MediaRepository,
     private val distributor: MediaDistributor,
     private val providerRegistry: ProviderRegistry,
+    private val personDao: PersonDao,
     @param:ApplicationContext private val context: Context,
     private val clock: Clock
 ) : ViewModel() {
@@ -167,8 +174,21 @@ class StoryCardsViewModel @Inject constructor(
 
     private val _cloudMemoryCards = MutableStateFlow<List<StoryCard>>(emptyList())
 
+    /**
+     * Local face clusters emitted by the local people provider, kept with
+     * the provider that produced them so [peopleCards] can resolve
+     * per-person media through the same provider instance.
+     */
+    private val _personEntries = MutableStateFlow<List<PersonEntry>>(emptyList())
+
+    private data class PersonEntry(
+        val provider: PeopleCapableProvider,
+        val info: PersonInfo,
+    )
+
     init {
         loadCloudMemories()
+        loadPeople()
     }
 
     private fun loadCloudMemories() {
@@ -205,6 +225,105 @@ class StoryCardsViewModel @Inject constructor(
             )
         }
     }
+
+    /**
+     * R9/KTD4: PEOPLE cards come from local on-device face clusters only.
+     * [ProviderRegistry.getPeopleProviders] also returns remote providers
+     * implementing [PeopleCapableProvider] (Immich) — deferred scope — so
+     * the local-only boundary is enforced on [ProviderType], not on
+     * availability. A missing or unavailable provider (no face models,
+     * noML/offline flavor, `ENABLE_INDEXING=false` debug builds) leaves the
+     * entry flow empty — silent absence, same as the CLOUD_MEMORIES path.
+     *
+     * The size gate (AE5) runs here so [peopleCards] only pays
+     * `getPersonMedia`'s full-library + cloud-cache load for clusters that
+     * can produce a card; [PEOPLE_POOL_LIMIT] bounds the calls.
+     */
+    private fun loadPeople() {
+        val providers = providerRegistry.getPeopleProviders()
+            .filter { it.providerType == ProviderType.LOCAL_PEOPLE }
+        if (providers.isEmpty()) return
+        viewModelScope.launch {
+            for (provider in providers) {
+                provider.getPeople().collect { resource ->
+                    when (resource) {
+                        is Resource.Success -> {
+                            _personEntries.value = resource.data.orEmpty()
+                                .filter { it.assetCount >= MIN_PERSON_ASSET_COUNT }
+                                .sortedByDescending { it.assetCount }
+                                .take(PEOPLE_POOL_LIMIT)
+                                .map { PersonEntry(provider, it) }
+                        }
+                        is Resource.Error -> { /* Silently ignore — no people cards */ }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * R9/AE5: one PEOPLE card per local face cluster. Person media resolves
+     * through the same exclusion-filtered timeline set as every other card
+     * (KTD2) — locked or excluded media never enters the card's list or its
+     * cover, and a person whose media is entirely filtered out produces no
+     * card rather than an empty viewer.
+     *
+     * Cover (KTD5): the face-crop `thumbnailUri` renders only when the
+     * crop's source media (`PersonEntity.thumbnailMediaId` via [PersonDao])
+     * binds inside the filtered set; unbindable crops fall back to a
+     * filtered media item. `getCompleteMedia` is never consulted here.
+     */
+    val peopleCards: StateFlow<List<StoryCard>> = combine(
+        configFlow,
+        timelineMedia,
+        metadataFlow,
+        favoritesMedia,
+        _personEntries,
+    ) { config, media, metadata, favorites, persons ->
+        if (!config.enabled ||
+            StoryCardType.PEOPLE in config.disabledTypes ||
+            persons.isEmpty()
+        ) {
+            return@combine emptyList()
+        }
+        val scopedById = media.withoutExcludedSources(config, metadata)
+            .associateBy { it.id }
+        val covers = CoverContext(
+            favoriteIds = favorites.mapTo(HashSet()) { it.id },
+            categorizedIds = repository.getAllClassifiedMediaIds().toSet(),
+            metadataById = metadata.associateBy { it.mediaId },
+        )
+        persons.mapNotNull { (provider, person) ->
+            // A failing provider flow degrades to "no media" — the person
+            // is skipped by the empty guard rather than breaking the strip.
+            val personMedia = runCatching {
+                provider.getPersonMedia(person.id).first()
+                    .let { (it as? Resource.Success)?.data }
+            }.getOrNull()
+                .orEmpty()
+                .filterIsInstance<Media.UriMedia>()
+                .mapNotNull { scopedById[it.id] }
+                .sortedByDescending { it.definedTimestamp }
+            if (personMedia.isEmpty()) return@mapNotNull null
+            val cropMediaId = runCatching {
+                personDao.getById(person.id)?.thumbnailMediaId
+            }.getOrNull()
+            val cropBound = person.thumbnailUrl != null &&
+                cropMediaId != null && scopedById.containsKey(cropMediaId)
+            StoryCard(
+                id = PEOPLE_ID_BASE +
+                    (StoryCardSelection.stableIdHash(person.id) and PERSON_ID_MASK),
+                type = StoryCardType.PEOPLE,
+                title = person.name.takeIf { it.isNotBlank() }
+                    ?: context.getString(R.string.story_cards_person_unnamed),
+                subtitle = mediaCountString(personMedia.size),
+                thumbnailUri = if (cropBound) Uri.parse(person.thumbnailUrl) else null,
+                thumbnailMedia = if (cropBound) null else covers.cover(personMedia),
+                mediaList = personMedia.take(20),
+                personId = person.id,
+            )
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
     val categoryCards: StateFlow<List<StoryCard>> = combine(
         configFlow,
@@ -244,13 +363,27 @@ class StoryCardsViewModel @Inject constructor(
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
+    /**
+     * KTD4: the typed `combine` arity caps at five inputs, so the two
+     * provider-side card flows merge upstream into a single feed for
+     * [allCards].
+     */
+    private data class ProviderCards(
+        val cloud: List<StoryCard>,
+        val people: List<StoryCard>,
+    )
+
+    private val providerCards = combine(_cloudMemoryCards, peopleCards) { cloud, people ->
+        ProviderCards(cloud, people)
+    }
+
     val allCards: StateFlow<List<StoryCard>?> = combine(
         configFlow,
         storyCards,
         categoryCards,
-        _cloudMemoryCards,
+        providerCards,
         timelineMedia
-    ) { config, cards, catCards, cloudCards, media ->
+    ) { config, cards, catCards, provider, media ->
         // null = still loading (timeline hasn't loaded yet)
         if (media.isEmpty()) return@combine null
         if (!config.enabled) return@combine emptyList()
@@ -262,7 +395,8 @@ class StoryCardsViewModel @Inject constructor(
         for (type in orderedTypes) {
             val eligible = when (type) {
                 StoryCardType.CATEGORIES -> catCards
-                StoryCardType.CLOUD_MEMORIES -> cloudCards
+                StoryCardType.CLOUD_MEMORIES -> provider.cloud
+                StoryCardType.PEOPLE -> provider.people
                 else -> cards.filter { it.type == type }
             }
             // R5: per-type cap — defaults preserve the limits the builders
@@ -544,5 +678,26 @@ class StoryCardsViewModel @Inject constructor(
 
         /** Card-id namespace for HIGHLIGHTS windows (KTD4): base + window index. */
         const val HIGHLIGHT_ID_BASE = 7_000_000L
+
+        /** Minimum cluster size for a PEOPLE card (R9/AE5). */
+        const val MIN_PERSON_ASSET_COUNT = 3
+
+        /**
+         * Person pool bound — `getPersonMedia` runs a full-library +
+         * cloud-cache load per call, so the eligible pool is capped well
+         * above the maximum configurable card cap (slider range 1–10) while
+         * bounding the per-emission cost.
+         */
+        const val PEOPLE_POOL_LIMIT = 20
+
+        /** Card-id namespace for PEOPLE cards (KTD4): base + wide hash of personId. */
+        const val PEOPLE_ID_BASE = 8_000_000L
+
+        /**
+         * Mask applied to [StoryCardSelection.stableIdHash] for person card
+         * ids — 40 bits; a 20-bit mask collides across `local_<uuid>`
+         * strings (KTD4).
+         */
+        const val PERSON_ID_MASK = 0xFFFFFFFFFFL
     }
 }

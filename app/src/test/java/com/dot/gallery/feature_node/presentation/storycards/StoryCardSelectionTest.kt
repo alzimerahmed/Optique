@@ -348,6 +348,38 @@ class StoryCardSelectionTest {
         assertEquals(first, reversed)
     }
 
+    // ---------- U8: stableIdHash — people card-id spacing (KTD4) ----------
+
+    @Test
+    fun `stableIdHash is deterministic for the same input`() {
+        assertEquals(
+            StoryCardSelection.stableIdHash("local_9f8e7d6c-b4a2"),
+            StoryCardSelection.stableIdHash("local_9f8e7d6c-b4a2")
+        )
+    }
+
+    @Test
+    fun `stableIdHash differs across similar local uuid strings`() {
+        // `local_<uuid>` ids share long prefixes — the hash must spread
+        // them anyway (a 32-bit Java hash masked small collides easily).
+        val hashes = (1..500).mapTo(HashSet()) {
+            StoryCardSelection.stableIdHash("local_9f8e7d6c-b4a2-$it") and 0xFFFFFFFFFFL
+        }
+        assertEquals(500, hashes.size)
+    }
+
+    @Test
+    fun `stableIdHash uses more than the low 32 bits`() {
+        // At least one synthetic id must set a bit above bit 31 — proves
+        // the fold fills the wide mask rather than degenerating to the
+        // Java hashCode range.
+        val highBits = (1..500).any {
+            StoryCardSelection.stableIdHash("local_9f8e7d6c-b4a2-$it") and
+                0xFFFFFFFFFFL ushr 32 != 0L
+        }
+        assertTrue(highBits)
+    }
+
     private companion object {
         const val NOW = 1_000_000_000L
         const val DAY = 86_400L

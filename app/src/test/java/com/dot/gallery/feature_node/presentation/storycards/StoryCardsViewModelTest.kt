@@ -11,7 +11,15 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.test.core.app.ApplicationProvider
+import com.dot.gallery.cloud.core.LOCAL_PEOPLE_CONFIG_ID
+import com.dot.gallery.cloud.core.PersonInfo
+import com.dot.gallery.cloud.core.ProviderCapability
 import com.dot.gallery.cloud.core.ProviderRegistry
+import com.dot.gallery.cloud.core.ProviderType
+import com.dot.gallery.cloud.core.capabilities.PeopleCapableProvider
+import com.dot.gallery.cloud.data.dao.PersonDao
+import com.dot.gallery.cloud.data.entity.PersonEntity
+import com.dot.gallery.core.Resource
 import com.dot.gallery.core.activeDataStore
 import com.dot.gallery.core.encryption.EncryptedDataStoreProvider
 import com.dot.gallery.feature_node.data.data_source.CategoryWithMediaCount
@@ -27,10 +35,12 @@ import com.dot.gallery.feature_node.domain.repository.MediaRepository
 import com.dot.gallery.feature_node.presentation.util.MockedMediaDistributor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -41,6 +51,8 @@ import kotlinx.serialization.json.Json
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -161,6 +173,68 @@ class StoryCardsViewModelTest {
         ) as MediaRepository
     }
 
+    /**
+     * Same proxy trick as [FakeMediaRepository]: StoryCardsViewModel only
+     * calls `getById` (the KTD5 crop-binding lookup), everything else throws.
+     */
+    private class FakePersonDao(
+        var byId: Map<String, PersonEntity> = emptyMap(),
+    ) : InvocationHandler {
+
+        override fun invoke(proxy: Any, method: Method, args: Array<out Any?>?): Any? {
+            val arguments = args ?: emptyArray()
+            return when {
+                method.name == "getById" -> byId[arguments[0] as String]
+                method.name == "toString" -> "FakePersonDao"
+                method.name == "hashCode" -> System.identityHashCode(proxy)
+                method.name == "equals" -> proxy === arguments[0]
+                else -> throw UnsupportedOperationException(
+                    "PersonDao.${method.name} is not stubbed in StoryCardsViewModelTest"
+                )
+            }
+        }
+
+        fun asDao(): PersonDao = Proxy.newProxyInstance(
+            PersonDao::class.java.classLoader,
+            arrayOf(PersonDao::class.java),
+            this
+        ) as PersonDao
+    }
+
+    /**
+     * A [PeopleCapableProvider] for U8: [providerType] decides whether the
+     * ViewModel treats it as the local face-cluster source — only
+     * [ProviderType.LOCAL_PEOPLE] providers may produce cards (KTD4's
+     * local-only boundary), so an IMMICH fake exercises the exclusion.
+     */
+    private class FakePeopleProvider(
+        override val providerType: ProviderType,
+        private val people: List<PersonInfo> = emptyList(),
+        private val personMedia: Map<String, List<Media>> = emptyMap(),
+        override val isAvailable: Boolean = true,
+    ) : PeopleCapableProvider {
+        override val displayName: String = providerType.displayName
+        override val capabilities: Set<ProviderCapability> =
+            setOf(ProviderCapability.PEOPLE)
+
+        /** personIds [getPersonMedia] was invoked for — proves the size gate runs first. */
+        val personMediaCalls = mutableListOf<String>()
+
+        override fun getPeople(): Flow<Resource<List<PersonInfo>>> =
+            flowOf(Resource.Success(people))
+
+        override fun getPersonMedia(personId: String): Flow<Resource<List<Media>>> {
+            personMediaCalls += personId
+            return flowOf(Resource.Success(personMedia[personId].orEmpty()))
+        }
+
+        override fun getPersonThumbnailUrl(personId: String): String? = null
+        override suspend fun updatePersonName(personId: String, name: String) =
+            Result.success(Unit)
+        override suspend fun updatePersonBirthDate(personId: String, birthDate: String) =
+            Result.success(Unit)
+    }
+
     // ---------- Fixtures ----------
 
     private fun media(
@@ -256,10 +330,13 @@ class StoryCardsViewModelTest {
         repository: FakeMediaRepository,
         distributor: TestDistributor,
         clock: Clock = Clock.fixed(TEST_INSTANT, ZoneOffset.UTC),
+        registry: ProviderRegistry = ProviderRegistry(),
+        personDao: PersonDao = FakePersonDao().asDao(),
     ) = StoryCardsViewModel(
         repository.asRepository(),
         distributor,
-        ProviderRegistry(),
+        registry,
+        personDao,
         context,
         clock,
     )
@@ -746,6 +823,356 @@ class StoryCardsViewModelTest {
         assertTrue(highlights.all { card -> card.mediaList.none { it.albumID == 2L } })
         assertFalse(4L in allMediaIds(cards))
         assertFalse(5L in allMediaIds(cards))
+    }
+
+    // ---------- U8: PEOPLE cards (R9, AE5, KTD4/KTD5) ----------
+
+    private fun person(
+        id: String,
+        name: String = "",
+        assetCount: Int = 5,
+        thumbnailUrl: String? = "file:///faces/$id.jpg",
+    ) = PersonInfo(
+        id = id,
+        name = name,
+        providerType = ProviderType.LOCAL_PEOPLE,
+        serverConfigId = LOCAL_PEOPLE_CONFIG_ID,
+        thumbnailUrl = thumbnailUrl,
+        assetCount = assetCount,
+    )
+
+    private fun personEntity(
+        id: String,
+        thumbnailMediaId: Long?,
+        thumbnailUrl: String? = "file:///faces/$id.jpg",
+        name: String = "",
+    ) = PersonEntity(
+        id = id,
+        name = name,
+        providerType = ProviderType.LOCAL_PEOPLE,
+        thumbnailMediaId = thumbnailMediaId,
+        thumbnailUrl = thumbnailUrl,
+        faceCount = 5,
+    )
+
+    private fun peopleRegistry(
+        provider: FakePeopleProvider,
+        configId: Long = LOCAL_PEOPLE_CONFIG_ID,
+    ) = ProviderRegistry().apply { register(configId, provider) }
+
+    /**
+     * AE5: clusters under the minimum size produce no card — and the
+     * expensive `getPersonMedia` full-library load is never spent on them.
+     */
+    @Test
+    fun `persons below minimum cluster size produce no card`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        val items = (1L..6L).map { media(it, albumID = 1) }
+        distributor.timeline.value = MediaState(items)
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 6)))
+        val provider = FakePeopleProvider(
+            providerType = ProviderType.LOCAL_PEOPLE,
+            people = listOf(
+                person("local_a", name = "Alice", assetCount = 4),
+                person("local_tiny", name = "Tiny", assetCount = 2),
+            ),
+            personMedia = mapOf(
+                "local_a" to items.take(4),
+                "local_tiny" to items.take(2),
+            ),
+        )
+
+        val vm = viewModel(
+            FakeMediaRepository(), distributor,
+            registry = peopleRegistry(provider),
+        )
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
+
+        val people = cardsOfType(cards, StoryCardType.PEOPLE)
+        assertEquals(listOf("local_a"), people.map { it.personId })
+        assertFalse("local_tiny" in provider.personMediaCalls)
+    }
+
+    /** AE5: unnamed clusters persist as `""` and render the neutral label. */
+    @Test
+    fun `unnamed cluster renders the neutral person label`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        val items = (1L..4L).map { media(it, albumID = 1) }
+        distributor.timeline.value = MediaState(items)
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 4)))
+        val provider = FakePeopleProvider(
+            providerType = ProviderType.LOCAL_PEOPLE,
+            people = listOf(person("local_unnamed", name = "", assetCount = 4)),
+            personMedia = mapOf("local_unnamed" to items),
+        )
+
+        val vm = viewModel(
+            FakeMediaRepository(), distributor,
+            registry = peopleRegistry(provider),
+        )
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
+
+        val card = cardsOfType(cards, StoryCardType.PEOPLE).single()
+        assertEquals("Person", card.title)
+    }
+
+    /**
+     * Hidden persons never produce cards: the provider's visible-only query
+     * drops them upstream, and the ViewModel has no path that re-includes
+     * them — the hidden id is never emitted, so its media is never fetched
+     * and no card exists for it.
+     */
+    @Test
+    fun `hidden persons never produce cards`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        val items = (1L..4L).map { media(it, albumID = 1) }
+        distributor.timeline.value = MediaState(items)
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 4)))
+        val provider = FakePeopleProvider(
+            providerType = ProviderType.LOCAL_PEOPLE,
+            // Only the visible person is emitted — getVisibleByProvider
+            // already dropped "local_hidden" upstream.
+            people = listOf(person("local_visible", name = "Visible", assetCount = 4)),
+            personMedia = mapOf(
+                "local_visible" to items,
+                "local_hidden" to items,
+            ),
+        )
+
+        val vm = viewModel(
+            FakeMediaRepository(), distributor,
+            registry = peopleRegistry(provider),
+        )
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
+
+        val people = cardsOfType(cards, StoryCardType.PEOPLE)
+        assertEquals(listOf("local_visible"), people.map { it.personId })
+        assertFalse("local_hidden" in provider.personMediaCalls)
+    }
+
+    /**
+     * KTD4 local-only boundary: a registered remote (IMMICH)
+     * [PeopleCapableProvider] emits persons yet produces no cards — cloud
+     * people are deferred scope. The local provider beside it still works.
+     */
+    @Test
+    fun `non local people provider produces no cards`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        val items = (1L..5L).map { media(it, albumID = 1) }
+        distributor.timeline.value = MediaState(items)
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 5)))
+        val registry = ProviderRegistry().apply {
+            register(
+                LOCAL_PEOPLE_CONFIG_ID,
+                FakePeopleProvider(
+                    providerType = ProviderType.LOCAL_PEOPLE,
+                    people = listOf(person("local_a", name = "Alice", assetCount = 4)),
+                    personMedia = mapOf("local_a" to items.take(4)),
+                )
+            )
+            register(
+                42L,
+                FakePeopleProvider(
+                    providerType = ProviderType.IMMICH,
+                    people = listOf(person("remote_a", name = "Remote", assetCount = 9)),
+                    personMedia = mapOf("remote_a" to items),
+                )
+            )
+        }
+        val remote = registry.getByConfigId(42L) as FakePeopleProvider
+
+        val vm = viewModel(FakeMediaRepository(), distributor, registry = registry)
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
+
+        val people = cardsOfType(cards, StoryCardType.PEOPLE)
+        assertEquals(listOf("local_a"), people.map { it.personId })
+        assertTrue(remote.personMediaCalls.isEmpty())
+    }
+
+    /**
+     * KTD2 + KTD5: excluded-album media of a person is stripped from the
+     * card's mediaList, and a face crop whose source media is excluded can
+     * no longer bind — the cover falls back to a filtered media item.
+     */
+    @Test
+    fun `person media resolves through filtered set and unbound crop falls back`() = runBlocking {
+        writeConfig(StoryCardsConfig(excludedAlbumIds = setOf(2L)))
+        val distributor = TestDistributor()
+        val m1 = media(1, albumID = 1)
+        val m2 = media(2, albumID = 1)
+        val m3 = media(3, albumID = 1)
+        val excluded = media(4, albumID = 2, albumLabel = "Excluded")
+        distributor.timeline.value = MediaState(listOf(m1, m2, m3, excluded))
+        distributor.albums.value = AlbumState(
+            albums = listOf(album(1, "Camera", count = 3), album(2, "Excluded", count = 1))
+        )
+        val provider = FakePeopleProvider(
+            providerType = ProviderType.LOCAL_PEOPLE,
+            people = listOf(
+                person("local_a", name = "Alice", assetCount = 4,
+                    thumbnailUrl = "file:///faces/crop_a.jpg")
+            ),
+            personMedia = mapOf("local_a" to listOf(m1, m2, m3, excluded)),
+        )
+        val personDao = FakePersonDao(
+            byId = mapOf(
+                "local_a" to personEntity(
+                    "local_a", thumbnailMediaId = 4L,
+                    thumbnailUrl = "file:///faces/crop_a.jpg", name = "Alice"
+                )
+            )
+        )
+
+        val vm = viewModel(
+            FakeMediaRepository(), distributor,
+            registry = peopleRegistry(provider),
+            personDao = personDao.asDao(),
+        )
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
+
+        val card = cardsOfType(cards, StoryCardType.PEOPLE).single()
+        assertEquals(setOf(1L, 2L, 3L), card.mediaList.mapTo(HashSet()) { it.id })
+        assertNull(card.thumbnailUri)
+        assertNotNull(card.thumbnailMedia)
+        assertTrue(card.thumbnailMedia!!.id in setOf(1L, 2L, 3L))
+    }
+
+    /**
+     * KTD5 positive case: when the crop's `thumbnailMediaId` binds inside
+     * the filtered set, the card carries the face-crop `thumbnailUri` and
+     * no media cover — the row renders the crop (thumbnailUri path).
+     */
+    @Test
+    fun `bound face crop renders as card cover`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        val items = (1L..4L).map { media(it, albumID = 1) }
+        distributor.timeline.value = MediaState(items)
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 4)))
+        val provider = FakePeopleProvider(
+            providerType = ProviderType.LOCAL_PEOPLE,
+            people = listOf(
+                person("local_a", name = "Alice", assetCount = 4,
+                    thumbnailUrl = "file:///faces/crop_a.jpg")
+            ),
+            personMedia = mapOf("local_a" to items),
+        )
+        val personDao = FakePersonDao(
+            byId = mapOf(
+                "local_a" to personEntity(
+                    "local_a", thumbnailMediaId = 2L,
+                    thumbnailUrl = "file:///faces/crop_a.jpg", name = "Alice"
+                )
+            )
+        )
+
+        val vm = viewModel(
+            FakeMediaRepository(), distributor,
+            registry = peopleRegistry(provider),
+            personDao = personDao.asDao(),
+        )
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.PEOPLE } }
+
+        val card = cardsOfType(cards, StoryCardType.PEOPLE).single()
+        assertEquals(Uri.parse("file:///faces/crop_a.jpg"), card.thumbnailUri)
+        assertNull(card.thumbnailMedia)
+    }
+
+    /** Empty-intersection guard: a person with no visible media gets no card. */
+    @Test
+    fun `person whose media is entirely excluded produces no card`() = runBlocking {
+        writeConfig(StoryCardsConfig(excludedAlbumIds = setOf(2L)))
+        val distributor = TestDistributor()
+        val visible = (1L..3L).map { media(it, albumID = 1) }
+        val hidden = (4L..6L).map { media(it, albumID = 2, albumLabel = "Excluded") }
+        distributor.timeline.value = MediaState(visible + hidden)
+        distributor.albums.value = AlbumState(
+            albums = listOf(album(1, "Camera", count = 3), album(2, "Excluded", count = 3))
+        )
+        val provider = FakePeopleProvider(
+            providerType = ProviderType.LOCAL_PEOPLE,
+            people = listOf(person("local_a", name = "Alice", assetCount = 3)),
+            personMedia = mapOf("local_a" to hidden),
+        )
+
+        val vm = viewModel(
+            FakeMediaRepository(), distributor,
+            registry = peopleRegistry(provider),
+        )
+        val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.ALBUMS } }
+
+        assertTrue(cardsOfType(cards, StoryCardType.PEOPLE).isEmpty())
+    }
+
+    /**
+     * KTD4: card ids are `8_000_000L +` a 40-bit masked FNV-1a hash of the
+     * personId — asserted unique across a synthetic `local_*` id set. The
+     * run also documents the pool bound: far more emitted persons than
+     * `peopleCards` carries, so `getPersonMedia` stays bounded.
+     */
+    @Test
+    fun `people card ids are unique across a synthetic person set`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val distributor = TestDistributor()
+        val items = (1L..4L).map { media(it, albumID = 1) }
+        distributor.timeline.value = MediaState(items)
+        distributor.albums.value = AlbumState(albums = listOf(album(1, "Camera", count = 4)))
+        val persons = (1..250).map {
+            person("local_9f8e7d6c-b4a2-$it", name = "Person $it", assetCount = 5)
+        }
+        val provider = FakePeopleProvider(
+            providerType = ProviderType.LOCAL_PEOPLE,
+            people = persons,
+            personMedia = persons.associate { it.id to items.take(3) },
+        )
+
+        val vm = viewModel(
+            FakeMediaRepository(), distributor,
+            registry = peopleRegistry(provider),
+        )
+        val people = withTimeout(30_000) { vm.peopleCards.first { it.isNotEmpty() } }
+
+        // The eligible pool is bounded at PEOPLE_POOL_LIMIT (20) despite
+        // 250 emitted persons — each combine emission then fetches person
+        // media only within that bound.
+        assertEquals(20, people.size)
+        assertEquals(people.size, people.map { it.id }.toSet().size)
+        assertTrue(people.all { it.id >= 8_000_000L })
+        assertTrue(people.all { it.type == StoryCardType.PEOPLE })
+        // getPersonMedia is never consulted for persons outside the pool —
+        // every recorded call belongs to one of the 20 pooled ids.
+        val pooledIds = persons
+            .sortedByDescending { it.assetCount }
+            .take(20)
+            .mapTo(HashSet()) { it.id }
+        assertTrue(provider.personMediaCalls.all { it in pooledIds })
+    }
+
+    /**
+     * Provider absent (nothing registered) and provider present but
+     * unavailable (no face models / `ENABLE_INDEXING=false` debug) both
+     * leave the strip unchanged — silent, no crash.
+     */
+    @Test
+    fun `missing or unavailable people provider leaves the strip unchanged`() = runBlocking {
+        writeConfig(StoryCardsConfig())
+        val registries = listOf(
+            ProviderRegistry(),
+            peopleRegistry(
+                FakePeopleProvider(ProviderType.LOCAL_PEOPLE, isAvailable = false)
+            ),
+        )
+        for (registry in registries) {
+            val distributor = TestDistributor()
+            seedAlbumPool(distributor, albumCount = 3)
+            val vm = viewModel(FakeMediaRepository(), distributor, registry = registry)
+            val cards = awaitCards(vm) { c -> c.any { it.type == StoryCardType.ALBUMS } }
+            assertTrue(cardsOfType(cards, StoryCardType.PEOPLE).isEmpty())
+        }
     }
 
     /** Seeds [albumCount] albums with one timeline media item each. */
