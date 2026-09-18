@@ -69,22 +69,28 @@ class StoryCardsViewModel @Inject constructor(
     ) { config, media, albums, favorites, metadata ->
         if (!config.enabled || media.isEmpty()) return@combine emptyList()
 
+        val covers = CoverContext(
+            favoriteIds = favorites.mapTo(HashSet()) { it.id },
+            categorizedIds = repository.getAllClassifiedMediaIds().toSet(),
+            metadataById = metadata.associateBy { it.mediaId },
+        )
+
         val cards = mutableListOf<StoryCard>()
         for (type in config.activeTypes) {
             when (type) {
                 StoryCardType.MEMORIES -> {
-                    cards.addAll(buildMemoryCards(media))
+                    cards.addAll(buildMemoryCards(media, covers))
                 }
                 StoryCardType.ALBUMS -> {
-                    cards.addAll(buildAlbumCards(media, albums.albums))
+                    cards.addAll(buildAlbumCards(media, albums.albums, covers))
                 }
                 StoryCardType.FAVORITES -> {
                     if (favorites.isNotEmpty()) {
-                        cards.add(buildFavoritesCard(favorites))
+                        cards.add(buildFavoritesCard(favorites, covers))
                     }
                 }
                 StoryCardType.LOCATIONS -> {
-                    cards.addAll(buildLocationCards(media, metadata))
+                    cards.addAll(buildLocationCards(media, metadata, covers))
                 }
                 StoryCardType.CATEGORIES -> {
                     // Categories are handled in the separate combine below
@@ -137,7 +143,7 @@ class StoryCardsViewModel @Inject constructor(
                 title = if (yearsAgo > 0) "$yearsAgo ${if (yearsAgo == 1) "year" else "years"} ago"
                     else "This year",
                 subtitle = if (memory.year > 0) "${memory.year}" else null,
-                thumbnailMedia = memory.media.firstOrNull(),
+                thumbnailMedia = REMOTE_COVERS.cover(memory.media),
                 mediaList = memory.media,
                 year = memory.year
             )
@@ -147,12 +153,21 @@ class StoryCardsViewModel @Inject constructor(
     val categoryCards: StateFlow<List<StoryCard>> = combine(
         configFlow,
         topCategories,
-        timelineMedia
-    ) { config, categories, media ->
+        timelineMedia,
+        favoritesMedia,
+        metadataFlow
+    ) { config, categories, media, favorites, metadata ->
         if (!config.enabled || StoryCardType.CATEGORIES in config.disabledTypes) {
             return@combine emptyList()
         }
         val mediaMap = media.associateBy { it.id }
+        // Members are uniformly categorized, so the categorized signal carries
+        // no weight here — favorite/flagged/photo/screenshot still discriminate.
+        val covers = CoverContext(
+            favoriteIds = favorites.mapTo(HashSet()) { it.id },
+            categorizedIds = emptySet(),
+            metadataById = metadata.associateBy { it.mediaId },
+        )
         categories.mapNotNull { cat ->
             val mediaIds = repository.getMediaIdsInCategoryAsync(cat.id)
             val categoryMedia = mediaIds.mapNotNull { mediaMap[it] }
@@ -162,8 +177,8 @@ class StoryCardsViewModel @Inject constructor(
                 id = 3_000_000L + cat.id,
                 type = StoryCardType.CATEGORIES,
                 title = cat.name,
-                subtitle = "${cat.mediaCount} items",
-                thumbnailMedia = categoryMedia.firstOrNull(),
+                subtitle = mediaCountString(cat.mediaCount),
+                thumbnailMedia = covers.cover(categoryMedia),
                 mediaList = categoryMedia.take(20),
                 categoryId = cat.id
             )
@@ -207,7 +222,10 @@ class StoryCardsViewModel @Inject constructor(
         }
     }
 
-    private fun buildMemoryCards(media: List<Media.UriMedia>): List<StoryCard> {
+    private fun buildMemoryCards(
+        media: List<Media.UriMedia>,
+        covers: CoverContext
+    ): List<StoryCard> {
         val today = Calendar.getInstance()
         val todayMonth = today.get(Calendar.MONTH)
         val todayDay = today.get(Calendar.DAY_OF_MONTH)
@@ -259,12 +277,15 @@ class StoryCardsViewModel @Inject constructor(
 
         return byYear.map { (year, yearMedia) ->
             val yearsAgo = currentYear - year
+            val cover = covers.cover(yearMedia)
             StoryCard(
                 id = 1_000_000L + year.toLong(),
                 type = StoryCardType.MEMORIES,
                 title = "$yearsAgo ${if (yearsAgo == 1) "year" else "years"} ago",
-                subtitle = "$year",
-                thumbnailMedia = yearMedia.firstOrNull(),
+                // Date context (R1): the representative item's formatted date,
+                // falling back to the bare year.
+                subtitle = cover?.fullDate?.takeIf { it.isNotBlank() } ?: "$year",
+                thumbnailMedia = cover,
                 mediaList = yearMedia.sortedByDescending { it.definedTimestamp },
                 year = year
             )
@@ -273,7 +294,8 @@ class StoryCardsViewModel @Inject constructor(
 
     private fun buildAlbumCards(
         media: List<Media.UriMedia>,
-        albums: List<com.dot.gallery.feature_node.domain.model.Album>
+        albums: List<com.dot.gallery.feature_node.domain.model.Album>,
+        covers: CoverContext
     ): List<StoryCard> {
         // Pick recent/pinned albums with content, limit to 5
         val highlighted = albums
@@ -288,33 +310,36 @@ class StoryCardsViewModel @Inject constructor(
 
         return highlighted.mapNotNull { album ->
             val albumMedia = mediaByAlbum[album.id] ?: return@mapNotNull null
-            val thumbnail = albumMedia.maxByOrNull { it.definedTimestamp }
             StoryCard(
                 id = 2_000_000L + album.id,
                 type = StoryCardType.ALBUMS,
                 title = album.label,
-                subtitle = context.getString(R.string.category_media_count, album.count),
-                thumbnailMedia = thumbnail,
+                subtitle = mediaCountString(album.count.toInt()),
+                thumbnailMedia = covers.cover(albumMedia),
                 mediaList = albumMedia.sortedByDescending { it.definedTimestamp }.take(20),
                 albumId = album.id
             )
         }
     }
 
-    private fun buildFavoritesCard(favorites: List<Media.UriMedia>): StoryCard {
+    private fun buildFavoritesCard(
+        favorites: List<Media.UriMedia>,
+        covers: CoverContext
+    ): StoryCard {
         return StoryCard(
             id = 4_000_000L,
             type = StoryCardType.FAVORITES,
             title = context.getString(R.string.favorites),
-            subtitle = context.getString(R.string.category_media_count, favorites.size),
-            thumbnailMedia = favorites.firstOrNull(),
+            subtitle = mediaCountString(favorites.size),
+            thumbnailMedia = covers.cover(favorites),
             mediaList = favorites.take(20)
         )
     }
 
     private fun buildLocationCards(
         media: List<Media.UriMedia>,
-        metadata: List<MediaMetadata>
+        metadata: List<MediaMetadata>,
+        covers: CoverContext
     ): List<StoryCard> {
         val mediaById = media.associateBy { it.id }
         // Group metadata entries by "city, country", collecting all matching media
@@ -337,12 +362,50 @@ class StoryCardsViewModel @Inject constructor(
                     id = 5_000_000L + (location.hashCode().toLong() and 0xFFFFFFL),
                     type = StoryCardType.LOCATIONS,
                     title = location,
-                    subtitle = "${locationMedia.size} items",
-                    thumbnailMedia = sorted.firstOrNull(),
+                    subtitle = mediaCountString(locationMedia.size),
+                    thumbnailMedia = covers.cover(sorted),
                     mediaList = sorted.take(20),
                     locationCity = city,
                     locationCountry = country
                 )
             }
+    }
+
+    private fun mediaCountString(count: Int): String =
+        context.resources.getQuantityString(R.plurals.story_cards_media_count, count, count)
+
+    /**
+     * Signal bundle for [StoryCardSelection.cover] — captures the KTD6
+     * curation signals (favorites, category membership, `MediaMetadata`
+     * relevance flags) once per card-build pass.
+     */
+    private data class CoverContext(
+        val favoriteIds: Set<Long>,
+        val categorizedIds: Set<Long>,
+        val metadataById: Map<Long, MediaMetadata>,
+    ) {
+        fun cover(list: List<Media.UriMedia>): Media.UriMedia? =
+            StoryCardSelection.cover(list) { m ->
+                StoryCardSelection.Candidate(
+                    id = m.id,
+                    timestampSec = m.definedTimestamp,
+                    isFavorite = m.favorite == 1 || m.id in favoriteIds,
+                    isCategorized = m.id in categorizedIds,
+                    isFlagged = metadataById[m.id]?.isRelevant == true,
+                    isScreenshot = StoryCardSelection.isScreenshotLike(
+                        m.label, m.path, m.relativePath
+                    ),
+                    isPhoto = !m.mimeType.startsWith("video/"),
+                )
+            }
+    }
+
+    private companion object {
+        /**
+         * Cover context for remote (cloud-provider) media: local favorites,
+         * categories and metadata never apply, but the media's own
+         * `favorite` flag and screenshot/photo heuristics still do.
+         */
+        val REMOTE_COVERS = CoverContext(emptySet(), emptySet(), emptyMap())
     }
 }

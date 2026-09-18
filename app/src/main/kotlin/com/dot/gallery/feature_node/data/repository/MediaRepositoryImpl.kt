@@ -1272,6 +1272,9 @@ class MediaRepositoryImpl(
     override suspend fun getMediaIdsInCategoryAsync(categoryId: Long): List<Long> =
         categoryDao.getMediaIdsInCategoryAsync(categoryId)
 
+    override suspend fun getAllClassifiedMediaIds(): List<Long> =
+        categoryDao.getAllClassifiedMediaIds()
+
     override fun getCategoriesForMedia(mediaId: Long): Flow<List<Category>> =
         categoryDao.getCategoriesForMedia(mediaId)
 

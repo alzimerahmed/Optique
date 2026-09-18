@@ -288,6 +288,8 @@ interface MediaRepository {
     // Media-Category associations
     fun getMediaIdsInCategory(categoryId: Long): Flow<List<Long>>
     suspend fun getMediaIdsInCategoryAsync(categoryId: Long): List<Long>
+    /** Distinct ids of all media that belong to at least one category. */
+    suspend fun getAllClassifiedMediaIds(): List<Long>
     fun getCategoriesForMedia(mediaId: Long): Flow<List<Category>>
     suspend fun addMediaToCategory(mediaId: Long, categoryId: Long, similarity: Float = 1f, isManual: Boolean = true)
     suspend fun removeMediaFromCategory(mediaId: Long, categoryId: Long)
