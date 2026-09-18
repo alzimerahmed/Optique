@@ -2,9 +2,15 @@
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
+    <ID>MagicNumber:BaselineProfileGenerator.kt$BaselineProfileGenerator$20</ID>
+    <ID>MagicNumber:BaselineProfileGenerator.kt$BaselineProfileGenerator$3</ID>
+    <ID>MagicNumber:BaselineProfileGenerator.kt$BaselineProfileGenerator$4</ID>
+    <ID>MagicNumber:GridScrollBenchmarks.kt$3</ID>
+    <ID>MagicNumber:GridScrollBenchmarks.kt$30</ID>
+    <ID>MagicNumber:GridScrollBenchmarks.kt$4</ID>
     <ID>MaxLineLength:BaselineProfileGenerator.kt$BaselineProfileGenerator$*</ID>
+    <ID>MaxLineLength:GridScrollBenchmarks.kt$GridScrollBenchmarks$*</ID>
     <ID>MaxLineLength:StartupBenchmarks.kt$StartupBenchmarks$*</ID>
-    <ID>NewLineAtEndOfFile:BaselineProfileGenerator.kt$com.dot.baselineprofile.BaselineProfileGenerator.kt</ID>
     <ID>NewLineAtEndOfFile:StartupBenchmarks.kt$com.dot.baselineprofile.StartupBenchmarks.kt</ID>
   </CurrentIssues>
 </SmellBaseline>
