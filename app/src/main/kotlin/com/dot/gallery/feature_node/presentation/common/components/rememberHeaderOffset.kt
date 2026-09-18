@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.IntOffset
+import com.dot.gallery.ui.theme.MotionSpec
 
 @Composable
 fun StickyHeaderGrid(
@@ -108,7 +109,7 @@ inline fun <LazyState : ScrollableState, LazyItem> StickyHeaderLayout(
     val alphaAnimation by animateFloatAsState(
         targetValue = if (totalOffsetY < -100) 0f else 1f,
         label = "alphaAnimation",
-        animationSpec = tween(100, 10),
+        animationSpec = tween(MotionSpec.MicroMs, 10),
     )
 
     Box(modifier = modifier) {

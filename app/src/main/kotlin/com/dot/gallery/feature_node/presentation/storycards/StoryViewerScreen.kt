@@ -72,6 +72,7 @@ import com.dot.gallery.feature_node.presentation.mediaview.components.actionbutt
 import com.dot.gallery.feature_node.presentation.mediaview.components.media.MediaPreviewComponent
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.util.rememberWindowInsetsController
+import com.dot.gallery.ui.theme.rememberReduceMotion
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import dev.chrisbanes.haze.materials.HazeMaterials
@@ -207,11 +208,15 @@ private fun StoryCardViewer(
     val allowBlur by rememberAllowBlur()
     val hazeState = com.dot.gallery.feature_node.presentation.util.LocalHazeState.current
 
+    // Under reduce-motion the auto-advance timer is disabled entirely —
+    // the user steps through cards with taps instead.
+    val reduceMotion = rememberReduceMotion()
+
     val progress = remember { Animatable(0f) }
 
     // Auto-advance timer
-    LaunchedEffect(currentMediaIndex, isCurrentPage, isPaused, autoAdvance) {
-        if (!isCurrentPage || isPaused || !autoAdvance) return@LaunchedEffect
+    LaunchedEffect(currentMediaIndex, isCurrentPage, isPaused, autoAdvance, reduceMotion) {
+        if (!isCurrentPage || isPaused || !autoAdvance || reduceMotion) return@LaunchedEffect
         progress.snapTo(0f)
         progress.animateTo(
             targetValue = 1f,

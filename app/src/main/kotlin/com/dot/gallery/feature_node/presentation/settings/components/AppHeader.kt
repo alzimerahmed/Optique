@@ -5,11 +5,6 @@
 
 package com.dot.gallery.feature_node.presentation.settings.components
 
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,8 +34,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,6 +57,7 @@ import com.dot.gallery.core.presentation.components.DragHandle
 import com.dot.gallery.feature_node.presentation.support.SupportSheet
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
 import com.dot.gallery.ui.theme.GalleryTheme
+import com.dot.gallery.ui.theme.rememberDriftingFraction
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -98,15 +92,7 @@ fun SettingsAppHeader(
     val colorPrimary = MaterialTheme.colorScheme.primaryContainer
     val colorTertiary = MaterialTheme.colorScheme.tertiaryContainer
 
-    val transition = rememberInfiniteTransition()
-    val fraction by transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 8_000),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
+    val fraction = rememberDriftingFraction()
     val cornerRadius = 24.dp
 
     val dismissSheetState = rememberAppBottomSheetState()
@@ -448,6 +434,7 @@ fun SettingsAppHeaderCompact(
                 modifier = Modifier
                     .clip(RoundedCornerShape(4.dp))
                     .combinedClickable(
+                        onLongClickLabel = stringResource(R.string.restore_backup),
                         onClick = {},
                         onLongClick = {
                             scope.launch { restoreSheetState.show() }

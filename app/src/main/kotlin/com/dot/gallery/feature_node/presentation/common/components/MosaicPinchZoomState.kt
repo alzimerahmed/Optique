@@ -5,35 +5,19 @@
 
 package com.dot.gallery.feature_node.presentation.common.components
 
-import androidx.compose.animation.AnimatedVisibility
+import android.view.HapticFeedbackConstants
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.calculateCentroidSize
 import androidx.compose.foundation.gestures.calculateZoom
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -43,19 +27,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.lerp
-import android.view.HapticFeedbackConstants
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.dot.gallery.core.Constants.mosaicColumnsList
 import kotlinx.coroutines.launch
 import kotlin.math.abs
@@ -151,14 +128,14 @@ fun MosaicPinchZoomLayout(
                                     // Update progress: map scale to -1..1
                                     val s = state.accumulatedScale
                                     state.zoomProgress = when {
-                                        s > 1f -> ((s - 1f) / 0.15f).coerceIn(0f, 1f)
-                                        s < 1f -> -((1f - s) / 0.15f).coerceIn(0f, 1f)
+                                        s > 1f -> ((s - 1f) / PinchZoomSpec.ProgressSpan).coerceIn(0f, 1f)
+                                        s < 1f -> -((1f - s) / PinchZoomSpec.ProgressSpan).coerceIn(0f, 1f)
                                         else -> 0f
                                     }
 
                                     val snapZone = when {
-                                        s > 1.15f && state.currentColumnsIndex < mosaicColumnsList.lastIndex -> 1
-                                        s < 0.85f && state.currentColumnsIndex > 0 -> -1
+                                        s > PinchZoomSpec.ZoomInThreshold && state.currentColumnsIndex < mosaicColumnsList.lastIndex -> 1
+                                        s < PinchZoomSpec.ZoomOutThreshold && state.currentColumnsIndex > 0 -> -1
                                         else -> 0
                                     }
                                     if (snapZone != lastSnapZone) {
@@ -176,9 +153,9 @@ fun MosaicPinchZoomLayout(
                         if (pastTouchSlop) {
                             // Determine target column index based on accumulated scale
                             val scale = state.accumulatedScale
-                            val targetIndex = if (scale > 1.15f) {
+                            val targetIndex = if (scale > PinchZoomSpec.ZoomInThreshold) {
                                 (state.currentColumnsIndex + 1).coerceAtMost(mosaicColumnsList.lastIndex)
-                            } else if (scale < 0.85f) {
+                            } else if (scale < PinchZoomSpec.ZoomOutThreshold) {
                                 (state.currentColumnsIndex - 1).coerceAtLeast(0)
                             } else {
                                 state.currentColumnsIndex
@@ -199,10 +176,7 @@ fun MosaicPinchZoomLayout(
                                     state.scaleAnimatable.snapTo(compensationScale)
                                     state.scaleAnimatable.animateTo(
                                         1f,
-                                        spring(
-                                            dampingRatio = Spring.DampingRatioLowBouncy,
-                                            stiffness = Spring.StiffnessMedium
-                                        )
+                                        PinchZoomSpec.compensationSpring()
                                     )
                                     state.isZooming = false
                                 }
@@ -210,7 +184,7 @@ fun MosaicPinchZoomLayout(
                                 scope.launch {
                                     state.scaleAnimatable.animateTo(
                                         1f,
-                                        spring(stiffness = Spring.StiffnessMedium)
+                                        PinchZoomSpec.releaseSpring()
                                     )
                                     state.isZooming = false
                                 }
@@ -227,142 +201,17 @@ fun MosaicPinchZoomLayout(
             content(state.currentColumns)
         }
 
-        MosaicZoomIndicator(
-            state = state,
+        val idx = state.currentColumnsIndex
+        PinchZoomIndicator(
+            isZooming = state.isZooming,
+            zoomProgress = state.zoomProgress,
+            // Left = zoom-in target (fewer cols), Right = zoom-out target (more cols)
+            leftValue = if (idx < mosaicColumnsList.lastIndex) mosaicColumnsList[idx + 1] else null,
+            centerValue = state.currentColumns,
+            rightValue = if (idx > 0) mosaicColumnsList[idx - 1] else null,
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .padding(top = indicatorTopPadding)
         )
     }
-}
-
-private const val NUM_BARS = 5
-
-@Composable
-private fun MosaicZoomIndicator(
-    state: MosaicPinchZoomState,
-    modifier: Modifier = Modifier,
-) {
-    val isActive by remember {
-        derivedStateOf { state.isZooming && state.zoomProgress != 0f }
-    }
-
-    AnimatedVisibility(
-        visible = isActive,
-        modifier = modifier,
-        enter = fadeIn(spring(stiffness = Spring.StiffnessHigh)) + scaleIn(
-            initialScale = 0.8f,
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioMediumBouncy,
-                stiffness = Spring.StiffnessHigh
-            )
-        ),
-        exit = fadeOut(spring(stiffness = Spring.StiffnessMedium)) + scaleOut(
-            targetScale = 0.8f,
-            animationSpec = spring(stiffness = Spring.StiffnessMedium)
-        )
-    ) {
-        val idx = state.currentColumnsIndex
-        val currentCols = state.currentColumns
-        // Left = zoom-in target (fewer cols), Right = zoom-out target (more cols)
-        val leftCols = if (idx < mosaicColumnsList.lastIndex) mosaicColumnsList[idx + 1] else null
-        val rightCols = if (idx > 0) mosaicColumnsList[idx - 1] else null
-
-        val animatedProgress by animateFloatAsState(
-            targetValue = state.zoomProgress,
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioNoBouncy,
-                stiffness = Spring.StiffnessHigh
-            ),
-            label = "zoomBarProgress"
-        )
-
-        // positive progress = zoom in (toward left / fewer cols)
-        val leftFill = if (animatedProgress > 0f) animatedProgress else 0f
-        // negative progress = zoom out (toward right / more cols)
-        val rightFill = if (animatedProgress < 0f) -animatedProgress else 0f
-
-        val activeColor = MaterialTheme.colorScheme.primary
-        val inactiveColor = MaterialTheme.colorScheme.outlineVariant
-        val numberColor = MaterialTheme.colorScheme.onSurface
-        val dimColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.38f)
-
-        Row(
-            modifier = Modifier
-                .clip(RoundedCornerShape(50))
-                .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-                .padding(horizontal = 16.dp, vertical = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
-        ) {
-            // Left number (zoom-in target)
-            Text(
-                text = leftCols?.toString() ?: "",
-                color = if (leftCols != null) {
-                    if (leftFill >= 1f) activeColor else numberColor
-                } else dimColor,
-                fontSize = 13.sp,
-                fontWeight = if (leftFill >= 1f) FontWeight.Bold else FontWeight.Medium,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.width(14.dp)
-            )
-
-            // Left bars: fill from center (right) outward (left)
-            Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
-                for (i in 0 until NUM_BARS) {
-                    val barFill = if (leftCols != null) {
-                        (leftFill * NUM_BARS - (NUM_BARS - 1 - i)).coerceIn(0f, 1f)
-                    } else 0f
-                    ZoomBar(fill = barFill, activeColor = activeColor, inactiveColor = inactiveColor)
-                }
-            }
-
-            // Center number (current)
-            Text(
-                text = "$currentCols",
-                color = numberColor,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.width(14.dp)
-            )
-
-            // Right bars: fill from center (left) outward (right)
-            Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
-                for (i in 0 until NUM_BARS) {
-                    val barFill = if (rightCols != null) {
-                        (rightFill * NUM_BARS - i).coerceIn(0f, 1f)
-                    } else 0f
-                    ZoomBar(fill = barFill, activeColor = activeColor, inactiveColor = inactiveColor)
-                }
-            }
-
-            // Right number (zoom-out target)
-            Text(
-                text = rightCols?.toString() ?: "",
-                color = if (rightCols != null) {
-                    if (rightFill >= 1f) activeColor else numberColor
-                } else dimColor,
-                fontSize = 13.sp,
-                fontWeight = if (rightFill >= 1f) FontWeight.Bold else FontWeight.Medium,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.width(14.dp)
-            )
-        }
-    }
-}
-
-@Composable
-private fun ZoomBar(
-    fill: Float,
-    activeColor: Color,
-    inactiveColor: Color,
-) {
-    Box(
-        modifier = Modifier
-            .width(3.dp)
-            .height(14.dp)
-            .clip(RoundedCornerShape(1.5.dp))
-            .background(lerp(inactiveColor, activeColor, fill))
-    )
 }

@@ -54,6 +54,7 @@ import com.dot.gallery.feature_node.presentation.mediaview.components.media.Cuto
 import com.dot.gallery.feature_node.presentation.util.quantizeBlur
 import com.dot.gallery.feature_node.presentation.util.resizeBitmap
 import com.dot.gallery.feature_node.presentation.util.safeSystemGesturesPadding
+import com.dot.gallery.ui.theme.MotionSpec
 import com.github.panpf.zoomimage.GlideZoomAsyncImage
 import com.github.panpf.zoomimage.ZoomImage
 import com.github.panpf.zoomimage.compose.glide.ExperimentalGlideComposeApi
@@ -151,17 +152,17 @@ fun ImageViewer(
     val surfaceColor = MaterialTheme.colorScheme.surfaceContainerLowest
     val animatedCornerRadius by animateDpAsState(
         targetValue = if (showMarkup) 0.dp else 16.dp,
-        animationSpec = tween(350),
+        animationSpec = tween(MotionSpec.EmphasizedMs),
         label = "cornerRadius"
     )
     val animatedBgAlpha by animateFloatAsState(
         targetValue = if (showMarkup) 0f else 1f,
-        animationSpec = tween(350),
+        animationSpec = tween(MotionSpec.EmphasizedMs),
         label = "bgAlpha"
     )
     val animatedTopPadding by animateDpAsState(
         targetValue = if (showMarkup || isSupportingPanel) 0.dp else 16.dp,
-        animationSpec = tween(350),
+        animationSpec = tween(MotionSpec.EmphasizedMs),
         label = "topPadding"
     )
 
@@ -306,7 +307,7 @@ fun ImageViewer(
             AnimatedContent(
                 targetState = cropAspectRatio,
                 transitionSpec = {
-                    fadeIn(tween(100)) togetherWith fadeOut(tween(100))
+                    fadeIn(tween(MotionSpec.MicroMs)) togetherWith fadeOut(tween(MotionSpec.MicroMs))
                 },
                 modifier = modifier.fillMaxWidth(),
                 label = "cropper",

@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.dot.gallery.ui.theme.MotionSpec
 
 @Stable
 @NonRestartableComposable
@@ -48,7 +49,7 @@ fun StickyHeaderGrid(
     val alphaAnimation by animateFloatAsState(
         targetValue = remember(totalOffsetY) { if (totalOffsetY.y < -100) 0f else 1f },
         label = "alphaAnimation",
-        animationSpec = tween(100, 10),
+        animationSpec = tween(MotionSpec.MicroMs, 10),
     )
 
     Box(modifier = modifier) {

@@ -5,7 +5,6 @@
 
 package com.dot.gallery.feature_node.presentation.classifier.components
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -96,11 +95,9 @@ fun CategoryCarousel(
                 val isDarkTheme = isDarkTheme()
                 val allowBlur by rememberAllowBlur()
                 val followTheme = remember(allowBlur) { !allowBlur }
-                val gradientColor by animateColorAsState(
-                    if (followTheme) {
-                        if (isDarkTheme) BlackScrim else WhiterBlackScrim
-                    } else BlackScrim,
-                )
+                val gradientColor = if (followTheme) {
+                    if (isDarkTheme) BlackScrim else WhiterBlackScrim
+                } else BlackScrim
                 Box(
                     modifier = Modifier
                         .width(164.dp)
@@ -214,11 +211,9 @@ fun LocationCarousel(
                 val isDarkTheme = isDarkTheme()
                 val allowBlur by rememberAllowBlur()
                 val followTheme = remember(allowBlur) { !allowBlur }
-                val gradientColor by animateColorAsState(
-                    if (followTheme) {
-                        if (isDarkTheme) BlackScrim else WhiterBlackScrim
-                    } else BlackScrim,
-                )
+                val gradientColor = if (followTheme) {
+                    if (isDarkTheme) BlackScrim else WhiterBlackScrim
+                } else BlackScrim
                 Box(
                     modifier = Modifier
                         .width(164.dp)
@@ -303,11 +298,9 @@ fun SearchCarousel(
                 val isDarkTheme = isDarkTheme()
                 val allowBlur by rememberAllowBlur()
                 val followTheme = remember(allowBlur) { !allowBlur }
-                val gradientColor by animateColorAsState(
-                    if (followTheme) {
-                        if (isDarkTheme) BlackScrim else WhiterBlackScrim
-                    } else BlackScrim,
-                )
+                val gradientColor = if (followTheme) {
+                    if (isDarkTheme) BlackScrim else WhiterBlackScrim
+                } else BlackScrim
                 Box(
                     modifier = Modifier
                         .width(164.dp)

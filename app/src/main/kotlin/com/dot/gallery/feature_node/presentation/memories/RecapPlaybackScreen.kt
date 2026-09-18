@@ -82,6 +82,7 @@ import com.dot.gallery.feature_node.presentation.memories.audio.rememberRecapAud
 import com.dot.gallery.feature_node.presentation.util.GlideInvalidation
 import com.dot.gallery.feature_node.presentation.util.Screen
 import com.dot.gallery.feature_node.presentation.util.rememberWindowInsetsController
+import com.dot.gallery.ui.theme.rememberReduceMotion
 import kotlinx.coroutines.launch
 
 /** Playback state machine for the recap pager (U3, R5): Playing auto-advances,
@@ -187,9 +188,13 @@ private fun RecapPlaybackPager(
     var playbackState by rememberSaveable { mutableStateOf(RecapPlaybackState.Playing) }
     val progress = remember { Animatable(0f) }
 
+    // Under reduce-motion the auto-advance timer is disabled entirely —
+    // the user steps through photos with taps instead.
+    val reduceMotion = rememberReduceMotion()
+
     // Auto-advance timer — restarts whenever the settled page or state changes.
-    LaunchedEffect(pagerState.currentPage, playbackState, media) {
-        if (playbackState != RecapPlaybackState.Playing) return@LaunchedEffect
+    LaunchedEffect(pagerState.currentPage, playbackState, media, reduceMotion) {
+        if (playbackState != RecapPlaybackState.Playing || reduceMotion) return@LaunchedEffect
         progress.snapTo(0f)
         progress.animateTo(
             targetValue = 1f,

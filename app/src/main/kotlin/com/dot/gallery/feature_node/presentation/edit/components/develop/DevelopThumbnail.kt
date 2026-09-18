@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dot.gallery.core.decoder.RawDevelopParams
+import com.dot.gallery.ui.theme.rememberReduceMotion
 
 /**
  * A single develop option tile: an accurate thumbnail of the current RAW developed with
@@ -99,16 +100,22 @@ fun DevelopOptionTile(
     }
 }
 
-/** A pulsing placeholder shown while an option thumbnail is still being demosaiced. */
+/** A pulsing placeholder shown while an option thumbnail is still being demosaiced.
+ *  Static under reduce-motion. */
 @Composable
 private fun ShimmerBox(modifier: Modifier = Modifier) {
-    val transition = rememberInfiniteTransition(label = "shimmer")
-    val alpha by transition.animateFloat(
-        initialValue = 0.25f,
-        targetValue = 0.6f,
-        animationSpec = infiniteRepeatable(tween(900), RepeatMode.Reverse),
-        label = "shimmerAlpha",
-    )
+    val alpha = if (rememberReduceMotion()) {
+        0.6f
+    } else {
+        val transition = rememberInfiniteTransition(label = "shimmer")
+        val animatedAlpha by transition.animateFloat(
+            initialValue = 0.25f,
+            targetValue = 0.6f,
+            animationSpec = infiniteRepeatable(tween(900), RepeatMode.Reverse),
+            label = "shimmerAlpha",
+        )
+        animatedAlpha
+    }
     Box(
         modifier = modifier.background(
             MaterialTheme.colorScheme.surfaceContainerHighest.copy(alpha = alpha)

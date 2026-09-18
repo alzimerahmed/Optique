@@ -1,7 +1,7 @@
 package com.dot.gallery.core.presentation.components.util
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.snap
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
+import com.dot.gallery.ui.theme.MotionSpec
 import kotlin.math.roundToInt
 
 // Maximum distance (px) the content can be dragged down for the elastic pull effect.
@@ -32,10 +33,13 @@ fun Modifier.swipe(
     var isDragging by remember { mutableStateOf(false) }
     val feedbackManager = rememberFeedbackManager()
     var isVibrating by remember { mutableStateOf(false) }
+    // animatedDelta is only read after release — snap() while dragging keeps the
+    // value current without running a per-frame spring chase, then the spring
+    // handles the release-to-rest settle.
     val animatedDelta by animateFloatAsState(
         label = "animatedDelta",
         targetValue = if (isDragging) delta else 0f,
-        animationSpec = spring()
+        animationSpec = if (isDragging) snap() else MotionSpec.playfulSpring()
     )
     return this then Modifier
         .pointerInput(enabled) {

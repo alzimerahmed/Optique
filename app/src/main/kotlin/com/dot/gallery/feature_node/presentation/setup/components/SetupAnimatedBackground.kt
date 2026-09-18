@@ -5,17 +5,11 @@
 
 package com.dot.gallery.feature_node.presentation.setup.components
 
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.drawWithCache
@@ -24,6 +18,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
+import com.dot.gallery.ui.theme.rememberDriftingFraction
 
 /**
  * Animated, blurred radial-gradient background made of three slowly drifting colored
@@ -37,14 +32,10 @@ fun SetupAnimatedBackground(modifier: Modifier = Modifier) {
     val secondaryContainer = MaterialTheme.colorScheme.secondaryContainer
     val tertiaryContainer = MaterialTheme.colorScheme.tertiaryContainer
 
-    val transition = rememberInfiniteTransition(label = "setup-bg")
-    val fraction by transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 16_000),
-            repeatMode = RepeatMode.Reverse
-        ),
+    // Static 0.5f under reduce-motion — stops the per-frame cache invalidation
+    // (and the expensive re-blur it triggered) entirely.
+    val fraction = rememberDriftingFraction(
+        durationMillis = 16_000,
         label = "setup-bg-fraction"
     )
 

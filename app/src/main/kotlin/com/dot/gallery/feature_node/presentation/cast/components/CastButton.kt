@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dot.gallery.R
+import com.dot.gallery.ui.theme.rememberReduceMotion
 
 @Composable
 fun CastButton(
@@ -50,7 +51,8 @@ fun CastButton(
         label = "CastButtonTint"
     )
 
-    val alpha = if (isConnecting) {
+    val reduceMotion = rememberReduceMotion()
+    val alpha = if (isConnecting && !reduceMotion) {
         val transition = rememberInfiniteTransition(label = "cast_connecting")
         val a by transition.animateFloat(
             initialValue = 0.3f,

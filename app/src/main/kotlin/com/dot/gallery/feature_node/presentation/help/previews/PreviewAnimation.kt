@@ -5,7 +5,6 @@
 
 package com.dot.gallery.feature_node.presentation.help.previews
 
-import android.provider.Settings.Global
 import androidx.compose.animation.core.EaseInOutCubic
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.tween
@@ -20,10 +19,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.dot.gallery.ui.theme.rememberReduceMotion
 import kotlinx.coroutines.delay
 
 /**
@@ -50,14 +49,7 @@ fun rememberPreviewAnimation(
 ): PreviewAnimationState {
     val state = remember(stepCount) { PreviewAnimationState(stepCount) }
 
-    val context = LocalContext.current
-    val reduceMotion = remember {
-        Global.getFloat(
-            context.contentResolver,
-            Global.ANIMATOR_DURATION_SCALE,
-            1f
-        ) == 0f
-    }
+    val reduceMotion = rememberReduceMotion()
 
     if (!reduceMotion && stepCount > 1) {
         LaunchedEffect(stepCount) {
