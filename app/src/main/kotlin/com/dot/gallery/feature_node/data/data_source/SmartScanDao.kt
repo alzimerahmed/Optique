@@ -189,6 +189,9 @@ interface SmartScanDao {
     @Query("SELECT COALESCE(MAX(updatedAt), 0) FROM media_feature_state WHERE feature = :feature")
     suspend fun getFeatureGeneration(feature: MediaFeature): Long
 
+    @Query("DELETE FROM media_feature_state WHERE feature = :feature")
+    suspend fun deleteFeatureStates(feature: MediaFeature)
+
     @Upsert
     suspend fun upsertRun(run: SmartScanRunEntity)
 
