@@ -190,7 +190,12 @@ jobs:
           fileDir: 'app/'
           encodedString: ${{ secrets.SIGNING_KEY }}
       - name: Build Release APK
-        run: test -n "$CARTO_BASEMAP_KEY" && ./gradlew --build-cache :app:assemble${{ matrix.arch }}NoMLRelease
+        run: |
+          if [ -z "$CARTO_BASEMAP_KEY" ]; then
+            echo "CARTO_BASEMAP_KEY not set — skipping maps build"
+            exit 0
+          fi
+          ./gradlew --build-cache :app:assemble${{ matrix.arch }}NoMLRelease
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}

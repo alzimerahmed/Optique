@@ -152,7 +152,12 @@ jobs:
           fileDir: 'app/'
           encodedString: ${{ secrets.SIGNING_KEY }}
       - name: Build Release APK
-        run: test -n "$CARTO_BASEMAP_KEY" && ./gradlew --build-cache :app:assemble${{ matrix.arch }}NoMLRelease
+        run: |
+          if [ -z "$CARTO_BASEMAP_KEY" ]; then
+            echo "CARTO_BASEMAP_KEY not set — skipping maps build"
+            exit 0
+          fi
+          ./gradlew --build-cache :app:assemble${{ matrix.arch }}NoMLRelease
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -198,7 +203,9 @@ jobs:
           path: artifacts/withml
           merge-multiple: true
       - name: List downloaded artifacts
-        run: find artifacts -name "*.apk" -type f | sort
+        run: |
+          mkdir -p artifacts/offline artifacts/maps artifacts/withml
+          find artifacts -name "*.apk" -type f | sort
       - name: Generate changelog
         run: |
           generate_table() {

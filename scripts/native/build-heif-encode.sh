@@ -49,8 +49,8 @@ if [ -z "$NDK_VERSION" ] || [ ! -f "$TOOLCHAIN" ] ||
     exit 1
 fi
 # Prefer clang.exe (Windows NDK prebuilt); fall back to clang (Linux/macOS).
-NDK_CLANG="$(ls -d "$NDK_DIR"/toolchains/llvm/prebuilt/*/bin/clang.exe 2>/dev/null | head -n1)"
-[ -z "$NDK_CLANG" ] && NDK_CLANG="$(ls -d "$NDK_DIR"/toolchains/llvm/prebuilt/*/bin/clang 2>/dev/null | head -n1)"
+NDK_CLANG="$(ls -d "$NDK_DIR"/toolchains/llvm/prebuilt/*/bin/clang.exe 2>/dev/null | head -n1 || true)"
+[ -z "$NDK_CLANG" ] && NDK_CLANG="$(ls -d "$NDK_DIR"/toolchains/llvm/prebuilt/*/bin/clang 2>/dev/null | head -n1 || true)"
 if [ -z "$NDK_CLANG" ] || [ ! -x "$NDK_CLANG" ]; then
     echo "ERROR: NDK clang not found under $NDK_DIR" >&2
     exit 1

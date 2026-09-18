@@ -11,7 +11,7 @@ native_sha256() {
 
 native_normalize_archives() {
     local strip_bin
-    strip_bin="$(ls -d "$NDK_DIR"/toolchains/llvm/prebuilt/*/bin/llvm-strip 2>/dev/null | head -n1)"
+    strip_bin="$(ls -d "$NDK_DIR"/toolchains/llvm/prebuilt/*/bin/llvm-strip 2>/dev/null | head -n1 || true)"
     if [ -z "$strip_bin" ] || [ ! -x "$strip_bin" ]; then
         echo "ERROR: NDK llvm-strip not found under $NDK_DIR" >&2
         exit 1
