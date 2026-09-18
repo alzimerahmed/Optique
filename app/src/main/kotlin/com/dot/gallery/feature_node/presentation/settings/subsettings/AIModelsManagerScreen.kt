@@ -78,6 +78,10 @@ import com.dot.gallery.core.ml.ModelFileInfo
 import com.dot.gallery.core.ml.ModelGroup
 import com.dot.gallery.core.ml.ModelStatus
 import com.dot.gallery.core.presentation.components.NavigationBackButton
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
+import com.dot.gallery.ui.theme.SuccessGreen
+import com.dot.gallery.ui.theme.rememberReduceMotion
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -108,8 +112,8 @@ fun AIModelsManagerScreen(
             contentPadding = PaddingValues(
                 start = padding.calculateStartPadding(LocalLayoutDirection.current),
                 end = padding.calculateEndPadding(LocalLayoutDirection.current),
-                top = 16.dp + padding.calculateTopPadding(),
-                bottom = padding.calculateBottomPadding() + 16.dp
+                top = Spacing.Medium + padding.calculateTopPadding(),
+                bottom = padding.calculateBottomPadding() + Spacing.Medium
             )
         ) {
             // Description (includes privacy info)
@@ -121,8 +125,8 @@ fun AIModelsManagerScreen(
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 16.dp)
+                        .padding(horizontal = Spacing.ContentHorizontal)
+                        .padding(bottom = Spacing.Medium)
                 )
             }
 
@@ -134,13 +138,13 @@ fun AIModelsManagerScreen(
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 24.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                        .padding(horizontal = Spacing.ContentHorizontal)
+                        .padding(bottom = Spacing.Large),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
                     ) {
                         FeaturePreviewCard(
                             label = stringResource(R.string.ai_models_feature_search),
@@ -157,7 +161,7 @@ fun AIModelsManagerScreen(
                     }
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
                     ) {
                         FeaturePreviewCard(
                             label = stringResource(R.string.ai_models_feature_cutout),
@@ -320,14 +324,14 @@ private fun ModelGroupSection(
         modifier = Modifier
             .widthIn(max = 600.dp)
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 16.dp)
+            .padding(horizontal = Spacing.ScreenHorizontal)
+            .padding(bottom = Spacing.Medium)
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(Spacing.Medium),
+        verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
@@ -349,8 +353,8 @@ private fun ModelGroupSection(
                 .clip(RoundedCornerShape(16.dp))
                 .background(MaterialTheme.colorScheme.surfaceContainerHigh)
                 .clickable(enabled = action.enabled) { actionClick?.invoke() }
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+                .padding(Spacing.Medium),
+            verticalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             Text(
                 text = actionTitle,
@@ -362,7 +366,7 @@ private fun ModelGroupSection(
                     progress = { progress / 100f },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(8.dp)
+                        .height(Spacing.Small)
                         .clip(RoundedCornerShape(4.dp)),
                     trackColor = MaterialTheme.colorScheme.surfaceContainerHighest
                 )
@@ -376,7 +380,7 @@ private fun ModelGroupSection(
         }
 
         // Source (clickable)
-        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)) {
             Text(
                 text = stringResource(R.string.ai_models_source),
                 style = MaterialTheme.typography.labelLarge,
@@ -397,7 +401,7 @@ private fun ModelGroupSection(
 
         // File details when installed (full SHA-256 + verified status)
         if (fileInfos.isNotEmpty()) {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(Spacing.Small)) {
                 Text(
                     text = stringResource(R.string.ai_models_files),
                     style = MaterialTheme.typography.labelLarge,
@@ -476,7 +480,7 @@ private fun FeaturePreviewCard(
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 4.dp, bottom = 12.dp)
+            modifier = Modifier.padding(top = Spacing.ExtraSmall, bottom = Spacing.MediumSmall)
         )
     }
 }
@@ -489,32 +493,32 @@ private fun SearchPreview() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+            .padding(Spacing.Medium),
+        verticalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
     ) {
         // Search bar
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(20.dp)
+                .height(Spacing.MediumLarge)
                 .clip(RoundedCornerShape(10.dp))
                 .background(MaterialTheme.colorScheme.surfaceContainerHigh),
             contentAlignment = Alignment.CenterStart
         ) {
             Box(
                 modifier = Modifier
-                    .padding(start = 8.dp)
-                    .size(48.dp, 5.dp)
+                    .padding(start = Spacing.Small)
+                    .size(ComponentSize.MinimumTouchTarget, 5.dp)
                     .clip(RoundedCornerShape(2.dp))
                     .background(headerColor)
             )
         }
-        Spacer(Modifier.height(2.dp))
+        Spacer(Modifier.height(Spacing.Tiny))
         // Photo grid — best matches first (sequential at top)
         repeat(3) { row ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(2.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Tiny)
             ) {
                 repeat(4) { col ->
                     val index = row * 4 + col
@@ -530,8 +534,8 @@ private fun SearchPreview() {
                             Box(
                                 modifier = Modifier
                                     .align(Alignment.TopEnd)
-                                    .padding(2.dp)
-                                    .size(6.dp)
+                                    .padding(Spacing.Tiny)
+                                    .size(Spacing.Micro)
                                     .clip(RoundedCornerShape(1.dp))
                                     .background(MaterialTheme.colorScheme.primary)
                             )
@@ -556,7 +560,7 @@ private fun CategoriesPreview() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp)
+            .padding(vertical = Spacing.MediumSmall)
             .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
             .drawWithContent {
                 drawContent()
@@ -573,8 +577,8 @@ private fun CategoriesPreview() {
         Row(
             modifier = Modifier
                 .horizontalScroll(rememberScrollState())
-                .padding(horizontal = 12.dp),
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                .padding(horizontal = Spacing.MediumSmall),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Micro)
         ) {
             categories.forEachIndexed { idx, label ->
                 MiniCategoryCard(
@@ -593,7 +597,7 @@ private fun MiniCategoryCard(
 ) {
     Box(
         modifier = Modifier
-            .width(56.dp)
+            .width(ComponentSize.ThumbnailMedium)
             .aspectRatio(164f / 256f)
             .clip(RoundedCornerShape(10.dp))
             .background(backgroundColor)
@@ -607,7 +611,7 @@ private fun MiniCategoryCard(
                         colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.55f))
                     )
                 )
-                .padding(horizontal = 4.dp, vertical = 6.dp),
+                .padding(horizontal = Spacing.ExtraSmall, vertical = Spacing.Micro),
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -633,15 +637,15 @@ private fun FacesPreview() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+            .padding(Spacing.Medium),
+        verticalArrangement = Arrangement.spacedBy(Spacing.Small),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             // Detected face with a detection box (face detection model)
             Box(
@@ -661,7 +665,7 @@ private fun FacesPreview() {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(6.dp)
+                        .padding(Spacing.Micro)
                         .border(1.5.dp, boxColor, RoundedCornerShape(4.dp))
                 )
             }
@@ -683,15 +687,15 @@ private fun FacesPreview() {
                 Column(
                     modifier = Modifier
                         .matchParentSize()
-                        .padding(6.dp),
-                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                        .padding(Spacing.Micro),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
                 ) {
                     repeat(3) { r ->
                         Row(
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(2.dp)
+                            horizontalArrangement = Arrangement.spacedBy(Spacing.Tiny)
                         ) {
                             repeat(3) { c ->
                                 Box(
@@ -715,7 +719,7 @@ private fun FacesPreview() {
         Box(
             modifier = Modifier
                 .height(14.dp)
-                .width(32.dp)
+                .width(Spacing.ExtraLarge)
         ) {
             repeat(3) { i ->
                 Box(
@@ -736,12 +740,13 @@ private fun CutoutPreview() {
     val checkerLight = Color.LightGray.copy(alpha = 0.2f)
     val checkerDark = Color.LightGray.copy(alpha = 0.4f)
     val shapeColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f)
-    val dotColor = Color(0xFF4CAF50)
+    val dotColor = SuccessGreen
 
+    val reduceMotion = rememberReduceMotion()
     val infiniteTransition = rememberInfiniteTransition(label = "glowTransitionPreview")
     val glowRadius by infiniteTransition.animateFloat(
         initialValue = 1f,
-        targetValue = 4f,
+        targetValue = if (reduceMotion) 1f else 4f,
         animationSpec = infiniteRepeatable(
             animation = tween(1200, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
@@ -752,11 +757,11 @@ private fun CutoutPreview() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(Spacing.Medium)
             .clip(RoundedCornerShape(12.dp))
             .drawBehind {
                 // Draw checkerboard background
-                val sizeVal = 8.dp.toPx()
+                val sizeVal = Spacing.Small.toPx()
                 val cols = (size.width / sizeVal).toInt() + 1
                 val rows = (size.height / sizeVal).toInt() + 1
                 for (r in 0 until rows) {
@@ -775,7 +780,7 @@ private fun CutoutPreview() {
         // Draw subject (a circle representing a person/object) with white glow border
         Box(
             modifier = Modifier
-                .size(48.dp)
+                .size(ComponentSize.MinimumTouchTarget)
                 .background(shapeColor, shape = CircleShape)
                 .border(glowRadius.dp, Color.White, shape = CircleShape)
                 .shadow(2.dp, shape = CircleShape)
@@ -783,7 +788,7 @@ private fun CutoutPreview() {
         // Draw the prompt point marker (green dot)
         Box(
             modifier = Modifier
-                .size(8.dp)
+                .size(Spacing.Small)
                 .background(dotColor, shape = CircleShape)
                 .border(1.dp, Color.White, shape = CircleShape)
         )

@@ -73,6 +73,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -117,6 +118,8 @@ import com.dot.gallery.feature_node.presentation.settings.components.rememberPre
 import com.dot.gallery.feature_node.presentation.settings.components.rememberSwitchPreference
 import com.dot.gallery.feature_node.presentation.util.getDate
 import com.dot.gallery.feature_node.presentation.util.getEditImageCapableApps
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 import kotlin.math.roundToInt
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.core.graphics.drawable.toBitmap
@@ -564,7 +567,7 @@ private fun FullBrightnessPreview(isChecked: Boolean) {
     val bgBrightness = if (isChecked) 1f else 0.5f
     Box(
         modifier = Modifier
-            .padding(24.dp)
+            .padding(Spacing.Large)
             .size(width = 140.dp, height = 120.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(
@@ -580,7 +583,7 @@ private fun FullBrightnessPreview(isChecked: Boolean) {
         // Sun/brightness indicator
         Box(
             modifier = Modifier
-                .size(40.dp)
+                .size(ComponentSize.IconLarge)
                 .clip(CircleShape)
                 .background(
                     Color.White.copy(alpha = if (isChecked) 0.9f else 0.3f)
@@ -632,12 +635,15 @@ private fun DateHeaderPreview(isChecked: Boolean) {
         }
     }
 
+    // Static illustration — the buttons inside are no-ops, so the whole
+    // preview is hidden from TalkBack to avoid dead focus targets.
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(128.dp)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.Medium)
             .clip(RoundedCornerShape(12.dp))
+            .clearAndSetSemantics { }
     ) {
         Image(
             painter = painterResource(R.drawable.image_sample_2),
@@ -656,13 +662,13 @@ private fun DateHeaderPreview(isChecked: Boolean) {
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.Center)
-                .padding(horizontal = 8.dp),
+                .padding(horizontal = Spacing.Small),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             IconButton(
                 modifier = Modifier
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = Spacing.Small)
                     .clip(CircleShape)
                     .then(backgroundModifier)
                     .hazeEffect(
@@ -677,7 +683,7 @@ private fun DateHeaderPreview(isChecked: Boolean) {
                     imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
                     contentDescription = null,
                     tint = contentColor,
-                    modifier = Modifier.height(48.dp)
+                    modifier = Modifier.height(ComponentSize.MinimumTouchTarget)
                 )
             }
             if (isChecked) {
@@ -692,7 +698,7 @@ private fun DateHeaderPreview(isChecked: Boolean) {
             }
             IconButton(
                 modifier = Modifier
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = Spacing.Small)
                     .clip(CircleShape)
                     .then(backgroundModifier)
                     .hazeEffect(
@@ -707,7 +713,7 @@ private fun DateHeaderPreview(isChecked: Boolean) {
                     imageVector = Icons.Outlined.Info,
                     contentDescription = null,
                     tint = contentColor,
-                    modifier = Modifier.height(48.dp)
+                    modifier = Modifier.height(ComponentSize.MinimumTouchTarget)
                 )
             }
         }
@@ -723,7 +729,7 @@ private fun FavoriteButtonPreview(isChecked: Boolean) {
         modifier = Modifier
             .fillMaxWidth()
             .height(128.dp)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.Medium)
             .clip(RoundedCornerShape(12.dp))
     ) {
         Image(
@@ -743,7 +749,7 @@ private fun FavoriteButtonPreview(isChecked: Boolean) {
         Box(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 12.dp)
+                .padding(bottom = Spacing.MediumSmall)
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
@@ -751,30 +757,30 @@ private fun FavoriteButtonPreview(isChecked: Boolean) {
                 modifier = Modifier
                     .clip(RoundedCornerShape(100))
                     .background(surfaceContainer.copy(alpha = 0.85f))
-                    .padding(horizontal = 8.dp, vertical = 8.dp),
+                    .padding(horizontal = Spacing.Small, vertical = Spacing.Small),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall),
             ) {
                 // Share
-                Box(Modifier.size(32.dp).clip(CircleShape), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(Spacing.ExtraLarge).clip(CircleShape), contentAlignment = Alignment.Center) {
                     Icon(Icons.Outlined.Share, null, Modifier.size(18.dp), tint = iconTint)
                 }
                 // Copy to Clipboard
-                Box(Modifier.size(32.dp).clip(CircleShape), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(Spacing.ExtraLarge).clip(CircleShape), contentAlignment = Alignment.Center) {
                     Icon(Icons.Outlined.ContentCopy, null, Modifier.size(18.dp), tint = iconTint)
                 }
                 // Favorite (conditionally shown based on setting)
                 if (isChecked) {
-                    Box(Modifier.size(32.dp).clip(CircleShape), contentAlignment = Alignment.Center) {
+                    Box(Modifier.size(Spacing.ExtraLarge).clip(CircleShape), contentAlignment = Alignment.Center) {
                         Icon(Icons.Filled.Favorite, null, Modifier.size(18.dp), tint = iconTint)
                     }
                 }
                 // Edit
-                Box(Modifier.size(32.dp).clip(CircleShape), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(Spacing.ExtraLarge).clip(CircleShape), contentAlignment = Alignment.Center) {
                     Icon(Icons.Outlined.Edit, null, Modifier.size(18.dp), tint = iconTint)
                 }
                 // Trash
-                Box(Modifier.size(32.dp).clip(CircleShape), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(Spacing.ExtraLarge).clip(CircleShape), contentAlignment = Alignment.Center) {
                     Icon(Icons.Outlined.DeleteOutline, null, Modifier.size(18.dp), tint = iconTint)
                 }
             }
@@ -811,10 +817,10 @@ private fun EditorPreview(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 24.dp)
+                .padding(vertical = Spacing.Large)
                 .horizontalScroll(scrollState)
-                .padding(horizontal = 32.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                .padding(horizontal = Spacing.ExtraLarge),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
         ) {
             EditorOptionCard(
                 label = stringResource(R.string.default_image_editor_builtin),
@@ -826,7 +832,7 @@ private fun EditorPreview(
                         ),
                         contentDescription = stringResource(R.string.default_image_editor_builtin),
                         modifier = Modifier
-                            .size(64.dp)
+                            .size(ComponentSize.ButtonHeight)
                             .clip(CircleShape)
                     )
                 }
@@ -847,7 +853,7 @@ private fun EditorPreview(
                                 bitmap = appIcon,
                                 contentDescription = appLabel,
                                 modifier = Modifier
-                                    .size(64.dp)
+                                    .size(ComponentSize.ButtonHeight)
                                     .clip(CircleShape)
                             )
                         }
@@ -859,7 +865,7 @@ private fun EditorPreview(
         Box(
             modifier = Modifier
                 .align(Alignment.CenterStart)
-                .size(32.dp, 160.dp)
+                .size(Spacing.ExtraLarge, 160.dp)
                 .background(
                     Brush.horizontalGradient(
                         colors = listOf(
@@ -873,7 +879,7 @@ private fun EditorPreview(
         Box(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .size(32.dp, 160.dp)
+                .size(Spacing.ExtraLarge, 160.dp)
                 .background(
                     Brush.horizontalGradient(
                         colors = listOf(
@@ -902,9 +908,9 @@ private fun EditorOptionCard(
             .clip(RoundedCornerShape(16.dp))
             .border(width = 2.dp, color = borderColor, shape = RoundedCornerShape(16.dp))
             .background(containerColor)
-            .padding(horizontal = 24.dp, vertical = 16.dp),
+            .padding(horizontal = Spacing.Large, vertical = Spacing.Medium),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         icon()
         Text(
@@ -918,7 +924,7 @@ private fun EditorOptionCard(
             contentDescription = null,
             tint = if (selected) MaterialTheme.colorScheme.primary
             else MaterialTheme.colorScheme.outlineVariant,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(Spacing.Large)
         )
     }
 }
@@ -935,7 +941,7 @@ private fun SmoothingPreview(disableSmoothing: Boolean) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.Medium)
             .height(120.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(MaterialTheme.colorScheme.surface),

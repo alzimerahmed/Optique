@@ -44,12 +44,15 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.Gif
+import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -135,6 +138,10 @@ import com.dot.gallery.feature_node.presentation.common.components.OptionSheet
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.util.AppBottomSheetState
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
+import com.dot.gallery.ui.theme.Alpha
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.FavoriteRed
+import com.dot.gallery.ui.theme.Spacing
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
@@ -209,7 +216,7 @@ fun SettingsTimelineAlbumsScreen() {
                 description = stringResource(R.string.group_similar_media_description),
                 preview = { checked -> GroupSimilarPreview(checked) },
                 customContent = {
-                    Column(modifier = Modifier.padding(top = 16.dp)) {
+                    Column(modifier = Modifier.padding(top = Spacing.Medium)) {
                         SettingsItem(
                             item = SettingsEntity.SwitchPreference(
                                 title = stringResource(R.string.group_raw_jpg_title),
@@ -358,7 +365,7 @@ fun SettingsTimelineAlbumsScreen() {
                             )
                         }
 
-                        Spacer(Modifier.height(16.dp))
+                        Spacer(Modifier.height(Spacing.Medium))
 
                         SettingsItem(
                             item = SettingsEntity.Preference(
@@ -383,7 +390,7 @@ fun SettingsTimelineAlbumsScreen() {
                 title = stringResource(R.string.group_method_title),
                 description = stringResource(R.string.group_method_description),
                 customContent = {
-                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)) {
                         val sections = buildList {
                             add(Triple(R.string.group_method_timeline, groupMethodTimeline) { v: String ->
                                 if (v != groupMethodTimeline) {
@@ -710,14 +717,14 @@ private fun GroupByMonthPreview(isChecked: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(24.dp),
+            .padding(Spacing.Large),
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         if (isChecked) {
-            Box(Modifier.size(72.dp, 8.dp).clip(RoundedCornerShape(4.dp)).background(headerColor))
-            Spacer(Modifier.height(2.dp))
+            Box(Modifier.size(72.dp, Spacing.Small).clip(RoundedCornerShape(4.dp)).background(headerColor))
+            Spacer(Modifier.height(Spacing.Tiny))
             repeat(3) {
-                Row(Modifier.fillMaxWidth().height(48.dp), Arrangement.spacedBy(3.dp)) {
+                Row(Modifier.fillMaxWidth().height(ComponentSize.MinimumTouchTarget), Arrangement.spacedBy(3.dp)) {
                     repeat(4) {
                         Box(Modifier.weight(1f).fillMaxHeight().clip(RoundedCornerShape(4.dp)).background(cellColor))
                     }
@@ -725,14 +732,14 @@ private fun GroupByMonthPreview(isChecked: Boolean) {
             }
         } else {
             repeat(2) { group ->
-                Box(Modifier.size(56.dp, 8.dp).clip(RoundedCornerShape(4.dp)).background(headerColor))
-                Spacer(Modifier.height(2.dp))
-                Row(Modifier.fillMaxWidth().height(48.dp), Arrangement.spacedBy(3.dp)) {
+                Box(Modifier.size(ComponentSize.ThumbnailMedium, Spacing.Small).clip(RoundedCornerShape(4.dp)).background(headerColor))
+                Spacer(Modifier.height(Spacing.Tiny))
+                Row(Modifier.fillMaxWidth().height(ComponentSize.MinimumTouchTarget), Arrangement.spacedBy(3.dp)) {
                     repeat(4) {
                         Box(Modifier.weight(1f).fillMaxHeight().clip(RoundedCornerShape(4.dp)).background(cellColor))
                     }
                 }
-                if (group == 0) Spacer(Modifier.height(6.dp))
+                if (group == 0) Spacer(Modifier.height(Spacing.Micro))
             }
         }
     }
@@ -745,16 +752,16 @@ private fun HideTimelinePreview(isChecked: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(24.dp),
+            .padding(Spacing.Large),
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         repeat(3) { rowIndex ->
             if (!isChecked && rowIndex > 0 && rowIndex % 2 == 0) {
-                Spacer(Modifier.height(4.dp))
-                Box(Modifier.size(48.dp, 7.dp).clip(RoundedCornerShape(3.dp)).background(headerColor))
-                Spacer(Modifier.height(2.dp))
+                Spacer(Modifier.height(Spacing.ExtraSmall))
+                Box(Modifier.size(ComponentSize.MinimumTouchTarget, 7.dp).clip(RoundedCornerShape(3.dp)).background(headerColor))
+                Spacer(Modifier.height(Spacing.Tiny))
             }
-            Row(Modifier.fillMaxWidth().height(48.dp), Arrangement.spacedBy(3.dp)) {
+            Row(Modifier.fillMaxWidth().height(ComponentSize.MinimumTouchTarget), Arrangement.spacedBy(3.dp)) {
                 repeat(4) {
                     Box(Modifier.weight(1f).fillMaxHeight().clip(RoundedCornerShape(4.dp)).background(cellColor))
                 }
@@ -770,7 +777,7 @@ private fun TimelineLayoutPreview(currentLayout: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(24.dp),
+            .padding(Spacing.Large),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         listOf(Settings.Misc.LAYOUT_GRID, Settings.Misc.LAYOUT_MOSAIC).forEach { layoutType ->
@@ -788,21 +795,21 @@ private fun TimelineLayoutPreview(currentLayout: String) {
                     .clickable { }
                     .border(width = 2.dp, color = borderColor, shape = RoundedCornerShape(16.dp))
                     .background(containerColor)
-                    .padding(horizontal = 16.dp, vertical = 16.dp),
+                    .padding(horizontal = Spacing.Medium, vertical = Spacing.Medium),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(Spacing.Small)
             ) {
                 Box(
                     modifier = Modifier
                         .size(100.dp)
                         .clip(RoundedCornerShape(8.dp))
                         .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-                        .padding(4.dp)
+                        .padding(Spacing.ExtraSmall)
                 ) {
                     if (layoutType == Settings.Misc.LAYOUT_GRID) {
-                        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                        Column(verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)) {
                             repeat(4) {
-                                Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.Tiny)) {
                                     repeat(4) {
                                         Box(
                                             modifier = Modifier
@@ -816,10 +823,10 @@ private fun TimelineLayoutPreview(currentLayout: String) {
                             }
                         }
                     } else {
-                        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                        Column(verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)) {
                             Row(
                                 modifier = Modifier.weight(2f),
-                                horizontalArrangement = Arrangement.spacedBy(2.dp)
+                                horizontalArrangement = Arrangement.spacedBy(Spacing.Tiny)
                             ) {
                                 Box(
                                     modifier = Modifier.weight(2f).fillMaxSize()
@@ -827,12 +834,12 @@ private fun TimelineLayoutPreview(currentLayout: String) {
                                 )
                                 Column(
                                     modifier = Modifier.weight(2f),
-                                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                                    verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
                                 ) {
                                     repeat(2) {
                                         Row(
                                             modifier = Modifier.weight(1f),
-                                            horizontalArrangement = Arrangement.spacedBy(2.dp)
+                                            horizontalArrangement = Arrangement.spacedBy(Spacing.Tiny)
                                         ) {
                                             repeat(2) {
                                                 Box(
@@ -846,7 +853,7 @@ private fun TimelineLayoutPreview(currentLayout: String) {
                             }
                             Row(
                                 modifier = Modifier.weight(1f),
-                                horizontalArrangement = Arrangement.spacedBy(2.dp)
+                                horizontalArrangement = Arrangement.spacedBy(Spacing.Tiny)
                             ) {
                                 repeat(4) {
                                     Box(
@@ -869,7 +876,7 @@ private fun TimelineLayoutPreview(currentLayout: String) {
                     contentDescription = null,
                     tint = if (selected) MaterialTheme.colorScheme.primary
                     else MaterialTheme.colorScheme.outlineVariant,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(Spacing.Large)
                 )
             }
         }
@@ -883,10 +890,10 @@ private fun GroupSimilarPreview(isChecked: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+            .padding(Spacing.Medium),
+        verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
     ) {
-        Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(2.dp)) {
+        Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(Spacing.Tiny)) {
             if (isChecked) {
                 // Grouped: 4 items, first has stack indicator
                 Box(
@@ -900,7 +907,7 @@ private fun GroupSimilarPreview(isChecked: Boolean) {
                         modifier = Modifier
                             .align(Alignment.TopEnd)
                             .padding(3.dp)
-                            .size(12.dp, 8.dp)
+                            .size(Spacing.MediumSmall, Spacing.Small)
                             .clip(RoundedCornerShape(2.dp))
                             .background(MaterialTheme.colorScheme.primary)
                     )
@@ -916,7 +923,7 @@ private fun GroupSimilarPreview(isChecked: Boolean) {
                 }
             }
         }
-        Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(2.dp)) {
+        Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(Spacing.Tiny)) {
             repeat(4) {
                 Box(Modifier.weight(1f).aspectRatio(1f).clip(RoundedCornerShape(4.dp)).background(cellColor))
             }
@@ -931,10 +938,10 @@ private fun AnimateGifsPreview(isChecked: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+            .padding(Spacing.Medium),
+        verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
     ) {
-        Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(2.dp)) {
+        Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(Spacing.Tiny)) {
             repeat(4) { index ->
                 Box(
                     modifier = Modifier
@@ -948,19 +955,19 @@ private fun AnimateGifsPreview(isChecked: Boolean) {
                             imageVector = Icons.Outlined.Gif,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                            modifier = Modifier.align(Alignment.Center).size(20.dp)
+                            modifier = Modifier.align(Alignment.Center).size(Spacing.MediumLarge)
                         )
                         if (isChecked) {
                             Row(
                                 modifier = Modifier
                                     .align(Alignment.BottomCenter)
                                     .padding(bottom = 3.dp),
-                                horizontalArrangement = Arrangement.spacedBy(1.dp)
+                                horizontalArrangement = Arrangement.spacedBy(Spacing.Hairline)
                             ) {
                                 repeat(3) {
                                     Box(
                                         modifier = Modifier
-                                            .size(width = 4.dp, height = (3 + it * 2).dp)
+                                            .size(width = Spacing.ExtraSmall, height = (3 + it * 2).dp)
                                             .clip(RoundedCornerShape(1.dp))
                                             .background(MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.6f))
                                     )
@@ -971,7 +978,7 @@ private fun AnimateGifsPreview(isChecked: Boolean) {
                 }
             }
         }
-        Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(2.dp)) {
+        Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(Spacing.Tiny)) {
             repeat(4) {
                 Box(Modifier.weight(1f).aspectRatio(1f).clip(RoundedCornerShape(4.dp)).background(cellColor))
             }
@@ -986,9 +993,9 @@ private fun MergeAlbumsPreview(isChecked: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(24.dp),
+            .padding(Spacing.Large),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         if (isChecked) {
             // Merged: single album folder with link icon
@@ -1022,13 +1029,13 @@ private fun MergeAlbumsPreview(isChecked: Boolean) {
         } else {
             // Separate: two album folders
             Row(
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
             ) {
                 listOf("Camera", "Camera").forEachIndexed { index, name ->
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Box(
                             modifier = Modifier
-                                .size(56.dp)
+                                .size(ComponentSize.ThumbnailMedium)
                                 .clip(RoundedCornerShape(10.dp))
                                 .background(cellColor),
                             contentAlignment = Alignment.Center
@@ -1037,7 +1044,7 @@ private fun MergeAlbumsPreview(isChecked: Boolean) {
                                 imageVector = Icons.Outlined.Folder,
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                                modifier = Modifier.size(24.dp)
+                                modifier = Modifier.size(Spacing.Large)
                             )
                         }
                         Text(
@@ -1060,28 +1067,28 @@ private fun PinnedAlbumsGridPreview(isChecked: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(6.dp)
+            .padding(Spacing.Large),
+        verticalArrangement = Arrangement.spacedBy(Spacing.Micro)
     ) {
-        Box(Modifier.size(64.dp, 8.dp).clip(RoundedCornerShape(4.dp)).background(headerColor))
+        Box(Modifier.size(ComponentSize.ButtonHeight, Spacing.Small).clip(RoundedCornerShape(4.dp)).background(headerColor))
         if (isChecked) {
             // Pinned albums shown as regular tiles, wrapping to rows above the others
-            Row(Modifier.fillMaxWidth().height(40.dp), Arrangement.spacedBy(6.dp)) {
+            Row(Modifier.fillMaxWidth().height(ComponentSize.IconLarge), Arrangement.spacedBy(Spacing.Micro)) {
                 repeat(3) {
                     Box(Modifier.weight(1f).fillMaxHeight().clip(RoundedCornerShape(6.dp)).background(pinnedColor))
                 }
             }
         } else {
             // Pinned albums shown as a wide horizontal banner carousel
-            Row(Modifier.fillMaxWidth().height(56.dp), Arrangement.spacedBy(6.dp)) {
+            Row(Modifier.fillMaxWidth().height(ComponentSize.ThumbnailMedium), Arrangement.spacedBy(Spacing.Micro)) {
                 Box(Modifier.weight(2f).fillMaxHeight().clip(RoundedCornerShape(6.dp)).background(pinnedColor))
                 Box(Modifier.weight(1f).fillMaxHeight().clip(RoundedCornerShape(6.dp)).background(pinnedColor.copy(alpha = 0.5f)))
             }
         }
-        Spacer(Modifier.height(4.dp))
-        Box(Modifier.size(48.dp, 8.dp).clip(RoundedCornerShape(4.dp)).background(headerColor))
+        Spacer(Modifier.height(Spacing.ExtraSmall))
+        Box(Modifier.size(ComponentSize.MinimumTouchTarget, Spacing.Small).clip(RoundedCornerShape(4.dp)).background(headerColor))
         repeat(2) {
-            Row(Modifier.fillMaxWidth().height(40.dp), Arrangement.spacedBy(6.dp)) {
+            Row(Modifier.fillMaxWidth().height(ComponentSize.IconLarge), Arrangement.spacedBy(Spacing.Micro)) {
                 repeat(3) {
                     Box(Modifier.weight(1f).fillMaxHeight().clip(RoundedCornerShape(6.dp)).background(cellColor))
                 }
@@ -1107,8 +1114,8 @@ private fun FavoriteIconPreview(currentPosition: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(24.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally)
+            .padding(Spacing.Large),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall, Alignment.CenterHorizontally)
     ) {
         repeat(3) { index ->
             Box(
@@ -1122,10 +1129,10 @@ private fun FavoriteIconPreview(currentPosition: String) {
                     Icon(
                         modifier = Modifier
                             .align(favAlignment)
-                            .padding(6.dp)
+                            .padding(Spacing.Micro)
                             .size(14.dp),
                         imageVector = Icons.Filled.Favorite,
-                        tint = Color.Red.copy(alpha = heartAlpha),
+                        tint = FavoriteRed.copy(alpha = heartAlpha),
                         contentDescription = null
                     )
                 }
@@ -1141,12 +1148,12 @@ private fun FilterButtonPreview(isChecked: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 24.dp, vertical = 16.dp)
+            .padding(horizontal = Spacing.Large, vertical = Spacing.Medium)
             .clip(RoundedCornerShape(100))
             .background(surfaceColor)
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.MediumSmall),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         Icon(
             imageVector = Icons.Outlined.Search,
@@ -1182,18 +1189,18 @@ private fun SearchBarFavoriteButtonPreview(isChecked: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 24.dp, vertical = 16.dp),
+            .padding(horizontal = Spacing.Large, vertical = Spacing.Medium),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         Row(
             modifier = Modifier
                 .weight(1f)
                 .clip(RoundedCornerShape(100))
                 .background(surfaceColor)
-                .padding(start = 16.dp, end = 4.dp, top = 8.dp, bottom = 8.dp),
+                .padding(start = Spacing.Medium, end = Spacing.ExtraSmall, top = Spacing.Small, bottom = Spacing.Small),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             Icon(
                 imageVector = Icons.Outlined.Search,
@@ -1217,7 +1224,7 @@ private fun SearchBarFavoriteButtonPreview(isChecked: Boolean) {
         if (isChecked) {
             Box(
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(ComponentSize.IconLarge)
                     .clip(CircleShape)
                     .background(favColor),
                 contentAlignment = Alignment.Center
@@ -1226,13 +1233,13 @@ private fun SearchBarFavoriteButtonPreview(isChecked: Boolean) {
                     imageVector = Icons.Rounded.Favorite,
                     contentDescription = null,
                     tint = onFavColor,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(Spacing.MediumLarge)
                 )
             }
         }
         Box(
             modifier = Modifier
-                .size(40.dp)
+                .size(ComponentSize.IconLarge)
                 .clip(RoundedCornerShape(12.dp))
                 .background(settingsColor),
             contentAlignment = Alignment.Center
@@ -1241,7 +1248,7 @@ private fun SearchBarFavoriteButtonPreview(isChecked: Boolean) {
                 imageVector = Icons.Outlined.Settings,
                 contentDescription = null,
                 tint = onSettingsColor,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(Spacing.MediumLarge)
             )
         }
     }
@@ -1334,8 +1341,8 @@ private fun AlbumSectionsDetailScreen(
             contentPadding = PaddingValues(
                 start = padding.calculateStartPadding(LocalLayoutDirection.current),
                 end = padding.calculateEndPadding(LocalLayoutDirection.current),
-                top = 16.dp + padding.calculateTopPadding(),
-                bottom = padding.calculateBottomPadding() + 16.dp
+                top = Spacing.Medium + padding.calculateTopPadding(),
+                bottom = padding.calculateBottomPadding() + Spacing.Medium
             ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -1355,7 +1362,7 @@ private fun AlbumSectionsDetailScreen(
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(bottom = 16.dp)
+                        .padding(bottom = Spacing.Medium)
                 )
             }
 
@@ -1368,8 +1375,8 @@ private fun AlbumSectionsDetailScreen(
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 16.dp)
+                        .padding(horizontal = Spacing.ContentHorizontal)
+                        .padding(bottom = Spacing.Medium)
                 )
             }
 
@@ -1383,8 +1390,8 @@ private fun AlbumSectionsDetailScreen(
                         modifier = Modifier
                             .widthIn(max = 600.dp)
                             .fillMaxWidth()
-                            .padding(horizontal = 24.dp)
-                            .padding(bottom = 8.dp)
+                            .padding(horizontal = Spacing.ContentHorizontal)
+                            .padding(bottom = Spacing.Small)
                     )
                 }
 
@@ -1434,6 +1441,22 @@ private fun AlbumSectionsDetailScreen(
                             draggingIndex = -1
                             dragOffsetY = 0f
                         },
+                        onMoveUp = if (index > 0) {
+                            {
+                                val reordered = sections.map { it.id }.toMutableList()
+                                val item = reordered.removeAt(index)
+                                reordered.add(index - 1, item)
+                                albumsViewModel.reorderSections(reordered)
+                            }
+                        } else null,
+                        onMoveDown = if (index < sections.lastIndex) {
+                            {
+                                val reordered = sections.map { it.id }.toMutableList()
+                                val item = reordered.removeAt(index)
+                                reordered.add(index + 1, item)
+                                albumsViewModel.reorderSections(reordered)
+                            }
+                        } else null,
                         onToggleVisibility = { visible ->
                             albumsViewModel.toggleSectionVisibility(section.id, visible)
                         },
@@ -1460,8 +1483,8 @@ private fun AlbumSectionsDetailScreen(
                         modifier = Modifier
                             .widthIn(max = 600.dp)
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 16.dp),
+                            .padding(horizontal = Spacing.ScreenHorizontal)
+                            .padding(top = Spacing.Medium),
                         shape = RoundedCornerShape(24.dp)
                     ) {
                         Icon(
@@ -1469,7 +1492,7 @@ private fun AlbumSectionsDetailScreen(
                             contentDescription = null,
                             modifier = Modifier.size(18.dp)
                         )
-                        Spacer(Modifier.size(8.dp))
+                        Spacer(Modifier.size(Spacing.Small))
                         Text(stringResource(R.string.create_section))
                     }
                 }
@@ -1489,6 +1512,8 @@ private fun AlbumSectionListItem(
     onDragStart: () -> Unit = {},
     onDrag: (Float) -> Unit = {},
     onDragEnd: () -> Unit = {},
+    onMoveUp: (() -> Unit)? = null,
+    onMoveDown: (() -> Unit)? = null,
     onToggleVisibility: (Boolean) -> Unit,
     onClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
@@ -1522,10 +1547,10 @@ private fun AlbumSectionListItem(
     }
 
     val paddingModifier = when (position) {
-        Position.Alone -> Modifier.padding(bottom = 16.dp)
-        Position.Bottom -> Modifier.padding(top = 1.dp, bottom = 16.dp)
-        Position.Middle -> Modifier.padding(vertical = 1.dp)
-        Position.Top -> Modifier.padding(bottom = 1.dp)
+        Position.Alone -> Modifier.padding(bottom = Spacing.Medium)
+        Position.Bottom -> Modifier.padding(top = Spacing.Hairline, bottom = Spacing.Medium)
+        Position.Middle -> Modifier.padding(vertical = Spacing.Hairline)
+        Position.Top -> Modifier.padding(bottom = Spacing.Hairline)
     }
 
     val elevation by animateFloatAsState(
@@ -1571,27 +1596,27 @@ private fun AlbumSectionListItem(
         ) {
             Row(
                 modifier = modifier
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
                     .clip(shape)
                     .background(color = backgroundColor)
                     .then(
                         if (onClick != null) Modifier.clickable(onClick = onClick)
                         else Modifier
                     )
-                    .padding(horizontal = 8.dp, vertical = 4.dp),
+                    .padding(horizontal = Spacing.Small, vertical = Spacing.ExtraSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(
                     modifier = Modifier
-                        .padding(8.dp)
-                        .padding(vertical = 6.dp),
+                        .padding(Spacing.Small)
+                        .padding(vertical = Spacing.Micro),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Drag handle
                     Icon(
                         Icons.Outlined.DragHandle, null,
                         modifier = Modifier
-                            .padding(end = 12.dp)
+                            .padding(end = Spacing.MediumSmall)
                             .size(22.dp),
                         tint = if (isDragging) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
@@ -1608,7 +1633,7 @@ private fun AlbumSectionListItem(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = if (isVisible) MaterialTheme.colorScheme.onSurface
-                            else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                            else MaterialTheme.colorScheme.onSurface.copy(alpha = Alpha.Disabled)
                         )
                         Text(
                             text = if (albumCount > 0) {
@@ -1617,10 +1642,21 @@ private fun AlbumSectionListItem(
                             style = MaterialTheme.typography.bodySmall,
                             fontSize = 14.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                                alpha = if (isVisible) 1f else 0.38f
+                                alpha = if (isVisible) 1f else Alpha.Disabled
                             ),
-                            modifier = Modifier.padding(top = 2.dp)
+                            modifier = Modifier.padding(top = Spacing.Tiny)
                         )
+                    }
+
+                    if (onMoveUp != null) {
+                        IconButton(onClick = onMoveUp) {
+                            Icon(Icons.Outlined.KeyboardArrowUp, stringResource(R.string.move_up))
+                        }
+                    }
+                    if (onMoveDown != null) {
+                        IconButton(onClick = onMoveDown) {
+                            Icon(Icons.Outlined.KeyboardArrowDown, stringResource(R.string.move_down))
+                        }
                     }
 
                     // Visibility switch
@@ -1678,7 +1714,7 @@ private fun SectionActionsSheet(
                 text = sectionName,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
+                modifier = Modifier.padding(horizontal = Spacing.ContentHorizontal, vertical = Spacing.Small)
             )
         },
         optionList = arrayOf(options)
@@ -1718,20 +1754,20 @@ private fun GroupMethodSectionRow(
         )
     }
     val paddingModifier = when (position) {
-        Position.Alone -> Modifier.padding(bottom = 16.dp)
-        Position.Bottom -> Modifier.padding(top = 1.dp, bottom = 16.dp)
-        Position.Middle -> Modifier.padding(vertical = 1.dp)
-        Position.Top -> Modifier.padding(bottom = 1.dp)
+        Position.Alone -> Modifier.padding(bottom = Spacing.Medium)
+        Position.Bottom -> Modifier.padding(top = Spacing.Hairline, bottom = Spacing.Medium)
+        Position.Middle -> Modifier.padding(vertical = Spacing.Hairline)
+        Position.Top -> Modifier.padding(bottom = Spacing.Hairline)
     }
 
     Column(
         modifier = Modifier
             .then(paddingModifier)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.ScreenHorizontal)
             .clip(shape)
             .background(MaterialTheme.colorScheme.surfaceContainer)
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 14.dp),
+            .padding(horizontal = Spacing.Medium, vertical = 14.dp),
     ) {
         Text(
             text = title,
@@ -1742,7 +1778,7 @@ private fun GroupMethodSectionRow(
         )
         Spacer(Modifier.height(10.dp))
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
         ) {
             options.forEach { (value, label) ->
                 val isSelected = currentValue == value
@@ -1755,7 +1791,7 @@ private fun GroupMethodSectionRow(
                         .clip(RoundedCornerShape(100))
                         .background(backgroundColor)
                         .clickable { onValueChange(value) }
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
                 ) {
                     Text(
                         text = label,
@@ -1771,7 +1807,7 @@ private fun GroupMethodSectionRow(
                 text = stringResource(R.string.media_grouping_restart_note),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                modifier = Modifier.padding(top = 6.dp),
+                modifier = Modifier.padding(top = Spacing.Micro),
             )
         }
     }

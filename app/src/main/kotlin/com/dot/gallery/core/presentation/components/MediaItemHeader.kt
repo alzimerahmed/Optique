@@ -22,13 +22,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.dot.gallery.R
 import com.dot.gallery.core.Constants.Animation.enterAnimation
 import com.dot.gallery.core.Constants.Animation.exitAnimation
 import com.dot.gallery.core.LocalMediaSelector
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
+import com.dot.gallery.ui.theme.Spacing
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -44,15 +48,15 @@ fun MediaItemHeader(
     val smallModifier = remember(modifier) {
         modifier
             .padding(
-                horizontal = 16.dp,
-                vertical = 24.dp
+                horizontal = Spacing.ScreenHorizontal,
+                vertical = Spacing.Large
             )
             .fillMaxWidth()
     }
     val bigModifier = remember(modifier, bigHeaderOnly) {
         modifier
-            .padding(horizontal = 16.dp)
-            .padding(top = 80.dp, bottom = if (bigHeaderOnly) 16.dp else 0.dp)
+            .padding(horizontal = Spacing.ScreenHorizontal)
+            .padding(top = 80.dp, bottom = if (bigHeaderOnly) Spacing.Medium else 0.dp)
     }
     val bigTextStyle = MaterialTheme.typography.headlineMedium.copy(
         fontWeight = FontWeight.Bold
@@ -77,6 +81,8 @@ fun MediaItemHeader(
                 if (!showAsBig) Modifier.combinedClickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
+                    role = Role.Button,
+                    onLongClickLabel = stringResource(R.string.select_all),
                     onLongClick = {
                         onChecked?.invoke()
                     },

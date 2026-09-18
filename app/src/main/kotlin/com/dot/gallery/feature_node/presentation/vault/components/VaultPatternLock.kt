@@ -7,7 +7,6 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,10 +17,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.unit.dp
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
 
 /**
@@ -38,6 +35,7 @@ fun VaultPatternLock(
     val feedbackManager = rememberFeedbackManager()
     val dotColor = MaterialTheme.colorScheme.onSurfaceVariant
     val activeColor = MaterialTheme.colorScheme.primary
+    val onActiveColor = MaterialTheme.colorScheme.onPrimary
     val errorColor = MaterialTheme.colorScheme.error
 
     var selectedNodes by remember { mutableStateOf(listOf<Int>()) }
@@ -152,7 +150,7 @@ fun VaultPatternLock(
                 )
                 if (isSelected) {
                     drawCircle(
-                        color = Color.White.copy(alpha = 0.3f),
+                        color = onActiveColor.copy(alpha = 0.3f),
                         radius = dotRadius * 0.5f,
                         center = center
                     )

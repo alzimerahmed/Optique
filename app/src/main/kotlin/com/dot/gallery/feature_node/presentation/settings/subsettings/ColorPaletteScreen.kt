@@ -101,6 +101,8 @@ import com.dot.gallery.feature_node.presentation.settings.components.rememberPre
 import com.dot.gallery.feature_node.presentation.settings.components.rememberSwitchPreference
 import com.dot.gallery.feature_node.presentation.util.shouldShowManualCartoKeySetting
 import com.dot.gallery.ui.core.icons.Albums
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 import com.dot.gallery.ui.theme.colorSchemeFromSeed
 import com.dot.gallery.ui.theme.isDarkTheme
 import com.dot.gallery.ui.theme.neutralColorScheme
@@ -427,8 +429,8 @@ fun ColorPaletteScreen() {
             ) { tab ->
                 if (tab == 0) {
                     LazyRow(
-                        contentPadding = PaddingValues(horizontal = 24.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        contentPadding = PaddingValues(horizontal = Spacing.ContentHorizontal),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         item(key = "system") {
@@ -451,8 +453,8 @@ fun ColorPaletteScreen() {
                         item(key = "neutral_divider") {
                             Box(
                                 modifier = Modifier
-                                    .width(1.dp)
-                                    .height(40.dp)
+                                    .width(Spacing.Hairline)
+                                    .height(ComponentSize.IconLarge)
                                     .background(MaterialTheme.colorScheme.outlineVariant)
                             )
                         }
@@ -469,8 +471,8 @@ fun ColorPaletteScreen() {
                     }
                 } else {
                     LazyRow(
-                        contentPadding = PaddingValues(horizontal = 24.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        contentPadding = PaddingValues(horizontal = Spacing.ContentHorizontal),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
                     ) {
                         items(presetPalettes, key = { it.hexKey }) { palette ->
                             val isSelected = themeColorSeed == palette.hexKey
@@ -490,13 +492,13 @@ fun ColorPaletteScreen() {
 
         val tabsContent: @Composable () -> Unit = {
             Surface(
-                modifier = Modifier.padding(horizontal = 24.dp),
+                modifier = Modifier.padding(horizontal = Spacing.ContentHorizontal),
                 shape = CircleShape,
                 color = MaterialTheme.colorScheme.surfaceContainerHigh
             ) {
                 Row(
-                    modifier = Modifier.padding(4.dp),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    modifier = Modifier.padding(Spacing.ExtraSmall),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
                 ) {
                     PillTab(
                         selected = selectedTab == 0,
@@ -534,7 +536,7 @@ fun ColorPaletteScreen() {
                             .fillMaxWidth(0.55f)
                             .aspectRatio(0.5f)
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
                 }
 
                 // Right: Controls
@@ -545,48 +547,48 @@ fun ColorPaletteScreen() {
                         .verticalScroll(contentScrollState),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
 
                     Text(
                         text = stringResource(R.string.color_palette_preview_description),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(horizontal = 32.dp)
+                        modifier = Modifier.padding(horizontal = Spacing.ExtraLarge)
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
 
                     swatchesContent()
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
 
                     tabsContent()
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Large))
 
                     SettingsItem(item = followSystemPref)
                     SettingsItem(item = darkModePref)
                     SettingsItem(item = amoledModePref)
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
                     SettingsItem(item = effectsHeader)
                     SettingsItem(item = allowBlurPref)
                     SettingsItem(item = autoContrastPref)
                     SettingsItem(item = sharedElementsPref)
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
                     SettingsItem(item = fontHeader)
                     SettingsItem(item = useSystemFontPref)
 
                     if (BuildConfig.MAPS_ENABLED) {
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(Spacing.Medium))
                         SettingsItem(item = SettingsEntity.Header(title = stringResource(R.string.map_appearance_header)))
                         SettingsItem(item = mapAppearancePref)
                         if (showManualCartoKey) SettingsItem(item = cartoKeyPref)
                     }
 
-                    Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(Spacing.ExtraLarge))
                 }
             }
         } else {
@@ -597,7 +599,7 @@ fun ColorPaletteScreen() {
                     .verticalScroll(contentScrollState),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacing.Medium))
 
                 PhonePreview(
                     colorScheme = previewScheme,
@@ -606,48 +608,48 @@ fun ColorPaletteScreen() {
                         .aspectRatio(0.5f)
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(Spacing.Large))
 
                 Text(
                     text = stringResource(R.string.color_palette_preview_description),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(horizontal = 32.dp)
+                    modifier = Modifier.padding(horizontal = Spacing.ExtraLarge)
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacing.Medium))
 
                 swatchesContent()
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacing.Medium))
 
                 tabsContent()
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(Spacing.Large))
 
                 SettingsItem(item = followSystemPref)
                 SettingsItem(item = darkModePref)
                 SettingsItem(item = amoledModePref)
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacing.Medium))
                 SettingsItem(item = effectsHeader)
                 SettingsItem(item = allowBlurPref)
                 SettingsItem(item = autoContrastPref)
                 SettingsItem(item = sharedElementsPref)
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacing.Medium))
                 SettingsItem(item = fontHeader)
                 SettingsItem(item = useSystemFontPref)
 
                 if (BuildConfig.MAPS_ENABLED) {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
                     SettingsItem(item = SettingsEntity.Header(title = stringResource(R.string.map_appearance_header)))
                     SettingsItem(item = mapAppearancePref)
                     if (showManualCartoKey) SettingsItem(item = cartoKeyPref)
                 }
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(Spacing.ExtraLarge))
             }
         }
     }
@@ -660,7 +662,7 @@ fun ColorPaletteScreen() {
             },
             title = { Text(stringResource(R.string.carto_basemap_key_title)) },
             text = {
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)) {
                     Text(
                         text = stringResource(R.string.carto_basemap_key_description),
                         style = MaterialTheme.typography.bodyMedium,
@@ -711,7 +713,7 @@ private fun SystemColorOption(
     Box(
         modifier = modifier
             .settingsFocusTarget(focusState)
-            .size(56.dp)
+            .size(ComponentSize.ThumbnailMedium)
             .clip(CircleShape)
             .then(
                 if (isSelected || focusState.hasFocus) Modifier.border(
@@ -727,14 +729,14 @@ private fun SystemColorOption(
                 imageVector = Icons.Outlined.Check,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(Spacing.Large)
             )
         } else {
             Icon(
                 imageVector = Icons.Outlined.Palette,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(Spacing.Large)
             )
         }
     }
@@ -759,7 +761,7 @@ private fun ColorCircleItem(
     Box(
         modifier = Modifier
             .settingsFocusTarget(focusState)
-            .size(56.dp)
+            .size(ComponentSize.ThumbnailMedium)
             .clip(CircleShape)
             .border(borderWidth, borderColor, CircleShape)
             .padding(borderWidth)
@@ -806,7 +808,7 @@ private fun ColorCircleItem(
                     imageVector = Icons.Outlined.Check,
                     contentDescription = null,
                     tint = Color.White,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(Spacing.MediumLarge)
                 )
             }
         }
@@ -842,7 +844,7 @@ private fun PortraitPreviewContent() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 6.dp),
+                .padding(horizontal = Spacing.Medium, vertical = Spacing.Micro),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -864,28 +866,28 @@ private fun PortraitPreviewContent() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = Spacing.MediumSmall),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
         ) {
             // Search bar
             Surface(
                 modifier = Modifier
                     .weight(1f)
-                    .height(32.dp),
+                    .height(Spacing.ExtraLarge),
                 shape = CircleShape,
                 color = MaterialTheme.colorScheme.surfaceContainer
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 8.dp),
+                    modifier = Modifier.padding(horizontal = Spacing.Small),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Search,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(12.dp)
+                        modifier = Modifier.size(Spacing.MediumSmall)
                     )
                     Text(
                         text = stringResource(R.string.search),
@@ -896,7 +898,7 @@ private fun PortraitPreviewContent() {
             }
             // Favorites button
             Surface(
-                modifier = Modifier.size(32.dp),
+                modifier = Modifier.size(Spacing.ExtraLarge),
                 shape = CircleShape,
                 color = MaterialTheme.colorScheme.primaryFixed
             ) {
@@ -911,7 +913,7 @@ private fun PortraitPreviewContent() {
             }
             // Settings button
             Surface(
-                modifier = Modifier.size(32.dp),
+                modifier = Modifier.size(Spacing.ExtraLarge),
                 shape = RoundedCornerShape(6.dp),
                 color = MaterialTheme.colorScheme.tertiaryFixed
             ) {
@@ -940,13 +942,13 @@ private fun PortraitPreviewContent() {
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .padding(horizontal = 4.dp),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+                .padding(horizontal = Spacing.ExtraSmall),
+            verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
         ) {
             repeat(5) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(2.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.Tiny)
                 ) {
                     repeat(4) {
                         Box(
@@ -961,15 +963,15 @@ private fun PortraitPreviewContent() {
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(Spacing.Small))
 
         // Bottom GalleryNavBar
         Surface(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(horizontal = 32.dp)
+                .padding(horizontal = Spacing.ExtraLarge)
                 .fillMaxWidth()
-                .height(32.dp),
+                .height(Spacing.ExtraLarge),
             shape = CircleShape,
             color = MaterialTheme.colorScheme.surfaceContainer
         ) {
@@ -980,8 +982,8 @@ private fun PortraitPreviewContent() {
                 // Timeline (selected)
                 Box(
                     modifier = Modifier
-                        .width(32.dp)
-                        .height(16.dp)
+                        .width(Spacing.ExtraLarge)
+                        .height(Spacing.Medium)
                         .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.secondaryContainer),
                     contentAlignment = Alignment.Center
@@ -990,7 +992,7 @@ private fun PortraitPreviewContent() {
                         imageVector = Icons.Outlined.Photo,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                        modifier = Modifier.size(12.dp)
+                        modifier = Modifier.size(Spacing.MediumSmall)
                     )
                 }
                 // Albums
@@ -998,31 +1000,31 @@ private fun PortraitPreviewContent() {
                     imageVector = com.dot.gallery.ui.core.Icons.Albums,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(12.dp)
+                    modifier = Modifier.size(Spacing.MediumSmall)
                 )
                 // Library
                 Icon(
                     imageVector = Icons.Outlined.PhotoLibrary,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(12.dp)
+                    modifier = Modifier.size(Spacing.MediumSmall)
                 )
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Spacing.MediumSmall))
 
         // Home indicator
         Box(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .width(42.dp)
-                .height(2.dp)
+                .height(Spacing.Tiny)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Spacing.MediumSmall))
     }
 }
 
@@ -1058,7 +1060,7 @@ private fun PillTab(
     ) {
         Text(
             text = text,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            modifier = Modifier.padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
             style = MaterialTheme.typography.labelLarge,
             color = textColor
         )
@@ -1093,7 +1095,7 @@ private fun BlurPreview(isChecked: Boolean) {
     )
     Box(
         modifier = Modifier
-            .padding(24.dp)
+            .padding(Spacing.Large)
             .size(width = 120.dp, height = 200.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(backgroundColor)
@@ -1101,7 +1103,7 @@ private fun BlurPreview(isChecked: Boolean) {
     ) {
         // Media grid content (extends full height, behind bars)
         Column(
-            modifier = Modifier.fillMaxSize().padding(6.dp),
+            modifier = Modifier.fillMaxSize().padding(Spacing.Micro),
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
             repeat(5) { row ->
@@ -1125,13 +1127,13 @@ private fun BlurPreview(isChecked: Boolean) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(24.dp)
+                .height(Spacing.Large)
                 .background(surfaceColor.copy(alpha = barAlpha))
         ) {
             Box(
                 Modifier
                     .align(Alignment.CenterStart)
-                    .padding(start = 6.dp)
+                    .padding(start = Spacing.Micro)
                     .size(30.dp, 5.dp)
                     .clip(RoundedCornerShape(2.dp))
                     .background(contentColor.copy(alpha = 0.25f))
@@ -1142,7 +1144,7 @@ private fun BlurPreview(isChecked: Boolean) {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .height(20.dp)
+                .height(Spacing.MediumLarge)
                 .background(surfaceColor.copy(alpha = barAlpha))
         )
     }
@@ -1156,16 +1158,16 @@ private fun MiniPhoneFrame(
 ) {
     Box(
         modifier = Modifier
-            .padding(24.dp)
+            .padding(Spacing.Large)
             .size(width = 120.dp, height = 200.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(backgroundColor)
             .border(1.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(12.dp))
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            Box(Modifier.fillMaxWidth().height(24.dp).background(surfaceColor))
-            Column(Modifier.weight(1f).padding(6.dp), Arrangement.spacedBy(3.dp)) {
-                Box(Modifier.size(40.dp, 5.dp).clip(RoundedCornerShape(2.dp)).background(contentColor.copy(alpha = 0.25f)))
+            Box(Modifier.fillMaxWidth().height(Spacing.Large).background(surfaceColor))
+            Column(Modifier.weight(1f).padding(Spacing.Micro), Arrangement.spacedBy(3.dp)) {
+                Box(Modifier.size(ComponentSize.IconLarge, 5.dp).clip(RoundedCornerShape(2.dp)).background(contentColor.copy(alpha = 0.25f)))
                 repeat(3) {
                     Row(Modifier.weight(1f), Arrangement.spacedBy(3.dp)) {
                         repeat(3) {
@@ -1174,7 +1176,7 @@ private fun MiniPhoneFrame(
                     }
                 }
             }
-            Box(Modifier.fillMaxWidth().height(20.dp).background(surfaceColor))
+            Box(Modifier.fillMaxWidth().height(Spacing.MediumLarge).background(surfaceColor))
         }
     }
 }

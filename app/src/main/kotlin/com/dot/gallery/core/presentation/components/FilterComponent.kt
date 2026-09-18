@@ -34,13 +34,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.dot.gallery.R
 import com.dot.gallery.core.Settings
 import com.dot.gallery.core.Settings.Album.rememberLastSort
 import com.dot.gallery.feature_node.domain.util.MediaOrder
 import com.dot.gallery.feature_node.domain.util.OrderType
+import com.dot.gallery.ui.theme.Spacing
 
 @Composable
 fun FilterButton(
@@ -56,8 +57,8 @@ fun FilterButton(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 16.dp)
-            .padding(horizontal = 8.dp),
+            .padding(top = Spacing.Medium)
+            .padding(horizontal = Spacing.Small),
         contentAlignment = Alignment.TopEnd
     ) {
         Row(
@@ -87,10 +88,10 @@ fun FilterButton(
                 Text(
                     modifier = Modifier
                         .clip(RoundedCornerShape(100))
-                        .clickable {
+                        .clickable(role = Role.Button) {
                             expanded = true
                         }
-                        .padding(vertical = 4.dp, horizontal = 8.dp),
+                        .padding(vertical = Spacing.ExtraSmall, horizontal = Spacing.Small),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary,
@@ -103,13 +104,16 @@ fun FilterButton(
                     }
                 ) {
                     Icon(
-                        imageVector = remember(selectedFilter) {
+                        imageVector = remember(selectedFilter, order) {
                             if (order == OrderType.Descending)
                                 Icons.Outlined.KeyboardDoubleArrowDown
                             else Icons.Outlined.KeyboardDoubleArrowUp
                         },
                         tint = MaterialTheme.colorScheme.primary,
-                        contentDescription = null
+                        contentDescription = stringResource(
+                            if (order == OrderType.Descending) R.string.sort_descending
+                            else R.string.sort_ascending
+                        )
                     )
                 }
             }

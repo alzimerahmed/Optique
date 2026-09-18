@@ -13,7 +13,6 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -40,8 +39,6 @@ import com.dot.gallery.core.ScrollToTopController
 import com.dot.gallery.core.Settings.Misc.getSecureMode
 import com.dot.gallery.core.presentation.components.util.permissionGranted
 import com.dot.gallery.core.Settings.Misc.rememberAllowBlur
-import com.dot.gallery.core.Settings.Misc.rememberForceTheme
-import com.dot.gallery.core.Settings.Misc.rememberIsDarkMode
 import com.dot.gallery.core.presentation.components.AppBarContainer
 import com.dot.gallery.core.presentation.components.NavigationComp
 import com.dot.gallery.core.util.SetupMediaProviders
@@ -50,6 +47,7 @@ import com.dot.gallery.feature_node.domain.util.EventHandler
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.toggleOrientation
 import com.dot.gallery.ui.theme.GalleryTheme
+import com.dot.gallery.ui.theme.isDarkTheme
 import com.dot.gallery.core.image.thumbnail.ThumbnailTelemetry
 import com.dot.gallery.core.metrics.StartupTracer
 import dagger.hilt.android.AndroidEntryPoint
@@ -125,12 +123,7 @@ class MainActivity : AppCompatActivity() {
                 val isScrolling = remember { mutableStateOf(false) }
                 val bottomBarState = rememberSaveable { mutableStateOf(true) }
                 val systemBarFollowThemeState = rememberSaveable { mutableStateOf(true) }
-                val forcedTheme by rememberForceTheme()
-                val localDarkTheme by rememberIsDarkMode()
-                val systemDarkTheme = isSystemInDarkTheme()
-                val darkTheme by remember(forcedTheme, localDarkTheme, systemDarkTheme) {
-                    mutableStateOf(if (forcedTheme) localDarkTheme else systemDarkTheme)
-                }
+                val darkTheme = isDarkTheme()
                 LaunchedEffect(eventHandler, navController) {
                     lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                         val navigateAction: (String) -> Unit = { route ->

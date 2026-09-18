@@ -10,7 +10,6 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -46,8 +46,6 @@ import com.dot.gallery.core.Constants.Animation.navigateInAnimation
 import com.dot.gallery.core.Constants.Animation.navigateUpAnimation
 import com.dot.gallery.core.DefaultEventHandler
 import com.dot.gallery.core.LocalEventHandler
-import com.dot.gallery.core.Settings.Misc.rememberForceTheme
-import com.dot.gallery.core.Settings.Misc.rememberIsDarkMode
 import com.dot.gallery.core.navigateUp
 import com.dot.gallery.core.presentation.components.util.OnLifecycleEvent
 import com.dot.gallery.feature_node.domain.model.UIEvent
@@ -61,6 +59,7 @@ import com.dot.gallery.feature_node.presentation.vault.utils.VaultCredentialStat
 import com.dot.gallery.feature_node.presentation.vault.utils.VaultPasswordManager
 import com.dot.gallery.feature_node.presentation.vault.utils.VerifyResult
 import com.dot.gallery.feature_node.presentation.vault.utils.rememberBiometricState
+import com.dot.gallery.ui.theme.isDarkTheme
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -292,12 +291,7 @@ fun VaultScreen(
                 navBackStackEntry?.destination?.route?.contains("EncryptedMediaViewScreen") == false
             )
         }
-        val forcedTheme by rememberForceTheme()
-        val localDarkTheme by rememberIsDarkMode()
-        val systemDarkTheme = isSystemInDarkTheme()
-        val darkTheme by remember(forcedTheme, localDarkTheme, systemDarkTheme) {
-            mutableStateOf(if (forcedTheme) localDarkTheme else systemDarkTheme)
-        }
+        val darkTheme = isDarkTheme()
         LaunchedEffect(darkTheme, systemBarFollowThemeState.value) {
             (context as? ComponentActivity)?.enableEdgeToEdge(
                 statusBarStyle = SystemBarStyle.auto(
@@ -593,12 +587,18 @@ fun VaultScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.surface)
-                    .clickable(
-                        interactionSource = null,
-                        indication = null,
-                        onClick = {}
-                    )
             ) {
+                // Scrim that swallows touches without emitting an a11y node.
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable(
+                            interactionSource = null,
+                            indication = null,
+                            onClick = {}
+                        )
+                        .clearAndSetSemantics { }
+                )
                 VaultPasswordUnlockDialog(
                     authType = gateAuthType,
                     onDismiss = {
@@ -647,12 +647,18 @@ fun VaultScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.surface)
-                    .clickable(
-                        interactionSource = null,
-                        indication = null,
-                        onClick = {}
-                    )
             ) {
+                // Scrim that swallows touches without emitting an a11y node.
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable(
+                            interactionSource = null,
+                            indication = null,
+                            onClick = {}
+                        )
+                        .clearAndSetSemantics { }
+                )
                 VaultPasswordUnlockDialog(
                     authType = detectedAuthType,
                     onDismiss = {

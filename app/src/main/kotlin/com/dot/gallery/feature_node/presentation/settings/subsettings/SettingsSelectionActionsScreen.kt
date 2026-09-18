@@ -109,6 +109,8 @@ import com.dot.gallery.feature_node.domain.model.ActionZone
 import com.dot.gallery.feature_node.domain.model.SelectionAction
 import com.dot.gallery.feature_node.domain.model.SelectionSheetConfig
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -158,8 +160,8 @@ fun SettingsSelectionActionsScreen() {
             contentPadding = PaddingValues(
                 start = padding.calculateStartPadding(LocalLayoutDirection.current),
                 end = padding.calculateEndPadding(LocalLayoutDirection.current),
-                top = 16.dp + padding.calculateTopPadding(),
-                bottom = padding.calculateBottomPadding() + 16.dp
+                top = Spacing.Medium + padding.calculateTopPadding(),
+                bottom = padding.calculateBottomPadding() + Spacing.Medium
             ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -169,8 +171,8 @@ fun SettingsSelectionActionsScreen() {
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .padding(bottom = 24.dp)
+                        .padding(horizontal = Spacing.ScreenHorizontal)
+                        .padding(bottom = Spacing.Large)
                         .clip(RoundedCornerShape(24.dp))
                         .background(MaterialTheme.colorScheme.surfaceContainerHigh),
                     contentAlignment = Alignment.Center
@@ -188,8 +190,8 @@ fun SettingsSelectionActionsScreen() {
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 16.dp)
+                        .padding(horizontal = Spacing.ContentHorizontal)
+                        .padding(bottom = Spacing.Medium)
                 )
             }
 
@@ -199,8 +201,8 @@ fun SettingsSelectionActionsScreen() {
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .padding(bottom = 24.dp),
+                        .padding(horizontal = Spacing.ScreenHorizontal)
+                        .padding(bottom = Spacing.Large),
                     horizontalArrangement = Arrangement.End
                 ) {
                     FilledTonalButton(
@@ -211,7 +213,7 @@ fun SettingsSelectionActionsScreen() {
                             contentDescription = null,
                             modifier = Modifier.size(18.dp)
                         )
-                        Spacer(modifier = Modifier.size(8.dp))
+                        Spacer(modifier = Modifier.size(Spacing.Small))
                         Text(stringResource(R.string.reset_to_defaults))
                     }
                 }
@@ -224,8 +226,8 @@ fun SettingsSelectionActionsScreen() {
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 8.dp)
+                        .padding(horizontal = Spacing.ContentHorizontal)
+                        .padding(bottom = Spacing.Small)
                 )
             }
 
@@ -245,7 +247,7 @@ fun SettingsSelectionActionsScreen() {
                         .focusRequester(initialFocusRequester)
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(bottom = 8.dp)
+                        .padding(bottom = Spacing.Small)
                 )
             }
 
@@ -344,11 +346,11 @@ fun SettingsSelectionActionsScreen() {
                         modifier = Modifier
                             .widthIn(max = 600.dp)
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 4.dp, bottom = 16.dp)
+                            .padding(horizontal = Spacing.ScreenHorizontal)
+                            .padding(top = Spacing.ExtraSmall, bottom = Spacing.Medium)
                     )
                 } else {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
                 }
             }
 
@@ -359,8 +361,8 @@ fun SettingsSelectionActionsScreen() {
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 8.dp)
+                        .padding(horizontal = Spacing.ContentHorizontal)
+                        .padding(bottom = Spacing.Small)
                 )
             }
 
@@ -451,11 +453,11 @@ fun SettingsSelectionActionsScreen() {
                         modifier = Modifier
                             .widthIn(max = 600.dp)
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 4.dp, bottom = 16.dp)
+                            .padding(horizontal = Spacing.ScreenHorizontal)
+                            .padding(top = Spacing.ExtraSmall, bottom = Spacing.Medium)
                     )
                 } else {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(Spacing.Medium))
                 }
             }
 
@@ -466,8 +468,8 @@ fun SettingsSelectionActionsScreen() {
                     modifier = Modifier
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 8.dp)
+                        .padding(horizontal = Spacing.ContentHorizontal)
+                        .padding(bottom = Spacing.Small)
                 )
             }
 
@@ -560,8 +562,8 @@ fun SettingsSelectionActionsScreen() {
                         modifier = Modifier
                             .widthIn(max = 600.dp)
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 4.dp, bottom = 16.dp)
+                            .padding(horizontal = Spacing.ScreenHorizontal)
+                            .padding(top = Spacing.ExtraSmall, bottom = Spacing.Medium)
                     )
                 }
             }
@@ -643,9 +645,9 @@ internal fun SelectionSheetPreview(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(Spacing.Medium),
         horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
     ) {
         // Top row: addon pills — matching SelectionAddon, scrollable with fade
         val topScrollState = rememberScrollState()
@@ -656,7 +658,7 @@ internal fun SelectionSheetPreview(
                 .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
                 .drawWithContent {
                     drawContent()
-                    val fadeWidth = 32.dp.toPx()
+                    val fadeWidth = Spacing.ExtraLarge.toPx()
                     if (topScrollState.canScrollForward) {
                         drawRect(
                             brush = Brush.horizontalGradient(
@@ -672,7 +674,7 @@ internal fun SelectionSheetPreview(
             if (rightAligned) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.Medium),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // CLOSE stays on the left
@@ -684,12 +686,12 @@ internal fun SelectionSheetPreview(
                                     shape = pillShape
                                 )
                                 .clip(pillShape)
-                                .padding(horizontal = 16.dp, vertical = 8.dp),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
+                            horizontalArrangement = Arrangement.spacedBy(Spacing.Medium),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Image(
-                                modifier = Modifier.size(24.dp),
+                                modifier = Modifier.size(Spacing.Large),
                                 imageVector = Icons.Outlined.Close,
                                 colorFilter = ColorFilter.tint(tintColor),
                                 contentDescription = null
@@ -706,7 +708,7 @@ internal fun SelectionSheetPreview(
                         modifier = Modifier
                             .weight(1f)
                             .horizontalScroll(topScrollState),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Medium, Alignment.End),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         config.topActions.forEach { action ->
@@ -724,7 +726,7 @@ internal fun SelectionSheetPreview(
             } else {
                 Row(
                     modifier = Modifier.horizontalScroll(topScrollState),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.Medium),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     config.topActions.forEach { action ->
@@ -748,17 +750,17 @@ internal fun SelectionSheetPreview(
                         shape = pillShape
                     )
                     .clip(pillShape)
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                    .padding(horizontal = Spacing.Medium, vertical = Spacing.MediumSmall),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
                 Image(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(Spacing.Large),
                     imageVector = action.icon,
                     colorFilter = ColorFilter.tint(tintColor),
                     contentDescription = null
                 )
-                Spacer(modifier = Modifier.size(12.dp))
+                Spacer(modifier = Modifier.size(Spacing.MediumSmall))
                 Text(
                     text = stringResource(action.labelRes),
                     style = MaterialTheme.typography.titleMedium,
@@ -785,18 +787,18 @@ internal fun SelectionSheetPreview(
                     text = stringResource(R.string.minimum_one_action),
                     style = MaterialTheme.typography.bodyMedium,
                     color = tintColor.copy(alpha = 0.5f),
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(Spacing.Medium)
                 )
             } else {
                 config.bottomActions.forEach { action ->
                     Column(
                         modifier = Modifier
                             .defaultMinSize(
-                                minHeight = if (showTitles) 80.dp else 64.dp
+                                minHeight = if (showTitles) 80.dp else ComponentSize.NavigationBarHeight
                             )
                             .weight(1f)
                             .clip(RoundedCornerShape(12.dp))
-                            .padding(top = 12.dp, bottom = 16.dp),
+                            .padding(top = Spacing.MediumSmall, bottom = Spacing.Medium),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
@@ -804,10 +806,10 @@ internal fun SelectionSheetPreview(
                             imageVector = action.icon,
                             colorFilter = ColorFilter.tint(tintColor),
                             contentDescription = null,
-                            modifier = Modifier.height(32.dp)
+                            modifier = Modifier.height(Spacing.ExtraLarge)
                         )
                         if (showTitles) {
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(Spacing.ExtraSmall))
                             Text(
                                 text = stringResource(action.labelRes),
                                 fontWeight = FontWeight.Medium,
@@ -837,12 +839,12 @@ private fun TopActionPreviewPill(
                 shape = pillShape
             )
             .clip(pillShape)
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Medium),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier.size(Spacing.Large),
             imageVector = action.icon,
             colorFilter = ColorFilter.tint(tintColor),
             contentDescription = null
@@ -912,10 +914,10 @@ private fun ActionListItem(
     }
 
     val paddingModifier = when (position) {
-        Position.Alone -> Modifier.padding(bottom = 16.dp)
-        Position.Bottom -> Modifier.padding(top = 1.dp, bottom = 16.dp)
-        Position.Middle -> Modifier.padding(vertical = 1.dp)
-        Position.Top -> Modifier.padding(bottom = 1.dp)
+        Position.Alone -> Modifier.padding(bottom = Spacing.Medium)
+        Position.Bottom -> Modifier.padding(top = Spacing.Hairline, bottom = Spacing.Medium)
+        Position.Middle -> Modifier.padding(vertical = Spacing.Hairline)
+        Position.Top -> Modifier.padding(bottom = Spacing.Hairline)
     }
 
     val elevation by animateFloatAsState(
@@ -949,7 +951,7 @@ private fun ActionListItem(
             Row(
                 modifier = modifier
                     .settingsFocusTarget(focusState)
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
                     .clip(shape)
                     .background(
                         color = if (focusState.hasFocus) {
@@ -963,22 +965,22 @@ private fun ActionListItem(
                         color = if (focusState.hasFocus) MaterialTheme.colorScheme.primary else Color.Transparent,
                         shape = shape,
                     )
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                    .padding(horizontal = Spacing.Small, vertical = Spacing.ExtraSmall)
                     .widthIn(max = 600.dp)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(
                     modifier = Modifier
-                        .padding(8.dp)
-                        .padding(vertical = 6.dp),
+                        .padding(Spacing.Small)
+                        .padding(vertical = Spacing.Micro),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Drag handle
                     Icon(
                         Icons.Outlined.DragHandle, null,
                         modifier = Modifier
-                            .padding(end = 12.dp)
+                            .padding(end = Spacing.MediumSmall)
                             .size(22.dp),
                         tint = if (isDragging) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
@@ -989,7 +991,7 @@ private fun ActionListItem(
                         imageVector = action.icon,
                         contentDescription = null,
                         modifier = Modifier
-                            .padding(end = 12.dp)
+                            .padding(end = Spacing.MediumSmall)
                             .size(22.dp),
                         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
                     )
@@ -1011,7 +1013,7 @@ private fun ActionListItem(
                             style = MaterialTheme.typography.bodySmall,
                             fontSize = 14.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(top = 2.dp)
+                            modifier = Modifier.padding(top = Spacing.Tiny)
                         )
                     }
 
@@ -1035,7 +1037,7 @@ private fun ActionListItem(
                     if (isLocked) {
                         Icon(
                             Icons.Outlined.Lock, stringResource(R.string.action_locked),
-                            modifier = Modifier.size(20.dp),
+                            modifier = Modifier.size(Spacing.MediumLarge),
                             tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
                         )
                     }
@@ -1072,7 +1074,7 @@ private fun ActionListItem(
                         modifier = Modifier
                             .fillMaxSize()
                             .clip(shape)
-                            .padding(horizontal = 24.dp),
+                            .padding(horizontal = Spacing.ContentHorizontal),
                         contentAlignment = Alignment.CenterEnd
                     ) {
                         Icon(
@@ -1106,7 +1108,7 @@ private fun AddActionButton(
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.5f))
             .clickable(onClick = onClick)
-            .padding(16.dp),
+            .padding(Spacing.Medium),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -1115,7 +1117,7 @@ private fun AddActionButton(
             modifier = Modifier.size(22.dp),
             tint = MaterialTheme.colorScheme.primary
         )
-        Spacer(modifier = Modifier.size(8.dp))
+        Spacer(modifier = Modifier.size(Spacing.Small))
         Text(
             text = stringResource(R.string.add_action),
             style = MaterialTheme.typography.titleMedium,
@@ -1158,13 +1160,13 @@ private fun AddActionSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 32.dp)
+                .padding(bottom = Spacing.ExtraLarge)
         ) {
             Text(
                 text = stringResource(R.string.add_action),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
+                modifier = Modifier.padding(horizontal = Spacing.ContentHorizontal, vertical = Spacing.Small)
             )
 
             if (actions.isEmpty()) {
@@ -1172,7 +1174,7 @@ private fun AddActionSheet(
                     text = stringResource(R.string.no_actions_available),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp)
+                    modifier = Modifier.padding(horizontal = Spacing.ContentHorizontal, vertical = Spacing.Medium)
                 )
             } else {
                 actions.forEachIndexed { index, action ->
@@ -1214,34 +1216,34 @@ private fun AddActionSheetItem(
 
     val paddingModifier = when (position) {
         Position.Alone -> Modifier.padding(bottom = 0.dp)
-        Position.Bottom -> Modifier.padding(top = 1.dp)
-        Position.Middle -> Modifier.padding(vertical = 1.dp)
-        Position.Top -> Modifier.padding(bottom = 1.dp)
+        Position.Bottom -> Modifier.padding(top = Spacing.Hairline)
+        Position.Middle -> Modifier.padding(vertical = Spacing.Hairline)
+        Position.Top -> Modifier.padding(bottom = Spacing.Hairline)
     }
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .then(paddingModifier)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.ScreenHorizontal)
             .clip(shape)
             .background(color = backgroundColor)
             .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 4.dp),
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.ExtraSmall),
         contentAlignment = Alignment.Center
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
-                .padding(vertical = 6.dp),
+                .padding(Spacing.Small)
+                .padding(vertical = Spacing.Micro),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 imageVector = action.icon,
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(end = 12.dp)
+                    .padding(end = Spacing.MediumSmall)
                     .size(22.dp),
                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
             )
@@ -1261,7 +1263,7 @@ private fun AddActionSheetItem(
                     style = MaterialTheme.typography.bodySmall,
                     fontSize = 14.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(top = 2.dp)
+                    modifier = Modifier.padding(top = Spacing.Tiny)
                 )
             }
         }

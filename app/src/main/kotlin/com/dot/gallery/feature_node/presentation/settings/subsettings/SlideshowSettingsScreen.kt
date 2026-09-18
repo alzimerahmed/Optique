@@ -26,7 +26,8 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import com.dot.gallery.R
 import com.dot.gallery.core.Position
 import com.dot.gallery.core.Settings
@@ -34,6 +35,7 @@ import com.dot.gallery.core.SettingsEntity
 import com.dot.gallery.feature_node.domain.model.SlideshowTransition
 import com.dot.gallery.feature_node.presentation.settings.components.BaseSettingsScreen
 import com.dot.gallery.feature_node.presentation.util.Screen
+import com.dot.gallery.ui.theme.Spacing
 import kotlin.math.roundToInt
 
 @Composable
@@ -167,16 +169,18 @@ fun SlideshowSettingsScreen() {
                                 .fillMaxWidth()
                                 .selectable(
                                     selected = transition == option,
+                                    role = Role.RadioButton,
                                     onClick = {
                                         transition = option
                                         showTransitionDialog = false
                                     }
                                 )
-                                .padding(vertical = 8.dp),
+                                .padding(vertical = Spacing.Small),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             RadioButton(
                                 selected = transition == option,
+                                modifier = Modifier.clearAndSetSemantics { },
                                 onClick = {
                                     transition = option
                                     showTransitionDialog = false
@@ -185,7 +189,7 @@ fun SlideshowSettingsScreen() {
                             Text(
                                 text = transitionLabel(option),
                                 style = MaterialTheme.typography.bodyLarge,
-                                modifier = Modifier.padding(start = 8.dp)
+                                modifier = Modifier.padding(start = Spacing.Small)
                             )
                         }
                     }

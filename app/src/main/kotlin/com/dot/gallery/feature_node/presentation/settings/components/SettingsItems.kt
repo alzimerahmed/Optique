@@ -68,6 +68,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -93,6 +94,9 @@ import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedStat
 import com.dot.gallery.feature_node.presentation.util.PreviewHost
 import com.dot.gallery.feature_node.presentation.util.maybeApply
 import com.dot.gallery.ui.core.icons.RegularExpression
+import com.dot.gallery.ui.theme.Alpha
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 import com.github.panpf.sketch.AsyncImage
 import kotlin.math.roundToLong
 import com.dot.gallery.ui.core.Icons as GalleryIcons
@@ -170,7 +174,7 @@ fun SettingsItem(
             Text(
                 modifier = Modifier.maybeApply(
                     condition = !item.horizontalLayout,
-                    modifier = Modifier.padding(top = 2.dp)
+                    modifier = Modifier.padding(top = Spacing.Tiny)
                 ),
                 text = it,
                 style = MaterialTheme.typography.bodySmall,
@@ -202,9 +206,15 @@ fun SettingsItem(
             AsyncImage(
                 uri = imageUri,
                 modifier = if (tintIcon) {
-                    Modifier.size(48.dp).clip(CircleShape).background(color = Color.White).padding(4.dp)
+                    Modifier
+                        .size(ComponentSize.MinimumTouchTarget)
+                        .clip(CircleShape)
+                        .background(color = MaterialTheme.colorScheme.surfaceContainerHighest)
+                        .padding(Spacing.ExtraSmall)
                 } else {
-                    Modifier.size(48.dp).clip(RoundedCornerShape(12.dp))
+                    Modifier
+                        .size(ComponentSize.MinimumTouchTarget)
+                        .clip(RoundedCornerShape(12.dp))
                 },
                 contentDescription = null,
                 contentScale = if (tintIcon) ContentScale.Fit else ContentScale.Crop,
@@ -241,7 +251,7 @@ fun SettingsItem(
     val switch: @Composable () -> Unit = {
         Switch(
             modifier = Modifier
-                .padding(start = 16.dp)
+                .padding(start = Spacing.Medium)
                 .focusProperties { canFocus = false }
                 .clearAndSetSemantics { },
             checked = checked,
@@ -293,10 +303,10 @@ fun SettingsItem(
     }
     val paddingModifier =
         when (item.screenPosition) {
-            Position.Alone -> Modifier.padding(bottom = 16.dp)
-            Position.Bottom -> Modifier.padding(top = 1.dp, bottom = 16.dp)
-            Position.Middle -> Modifier.padding(vertical = 1.dp)
-            Position.Top -> Modifier.padding(bottom = 1.dp)
+            Position.Alone -> Modifier.padding(bottom = Spacing.Medium)
+            Position.Bottom -> Modifier.padding(top = Spacing.Hairline, bottom = Spacing.Medium)
+            Position.Middle -> Modifier.padding(vertical = Spacing.Hairline)
+            Position.Top -> Modifier.padding(bottom = Spacing.Hairline)
         }
 
     var currentSeekValue by remember(item.currentValue) {
@@ -317,8 +327,8 @@ fun SettingsItem(
     val seekContent: @Composable () -> Unit = {
         Column(
             modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 8.dp)
+                .padding(horizontal = Spacing.Medium)
+                .padding(bottom = Spacing.Small)
         ) {
             require(item.currentValue != null) { "Current value must not be null" }
             require(item.minValue != null) { "Min value must not be null" }
@@ -326,6 +336,7 @@ fun SettingsItem(
             require(item.onSeek != null) { "onSeek must not be null" }
             Slider(
                 value = currentSeekValue!!,
+                modifier = Modifier.semantics { contentDescription = item.title },
                 onValueChange = { currentSeekValue = it },
                 enabled = item.enabled,
                 valueRange = item.minValue!!..item.maxValue!!,
@@ -354,7 +365,7 @@ fun SettingsItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             VerticalDivider(
-                modifier = Modifier.height(32.dp).padding(horizontal = 16.dp),
+                modifier = Modifier.height(32.dp).padding(horizontal = Spacing.Medium),
                 color = MaterialTheme.colorScheme.outlineVariant
             )
             Switch(
@@ -430,12 +441,12 @@ fun SettingsItem(
                         .then(paddingModifier)
                         .maybeApply(
                             condition = applyPaddings,
-                            modifier = Modifier.padding(horizontal = 16.dp)
+                            modifier = Modifier.padding(horizontal = Spacing.Medium)
                         )
                         .clip(shape)
                         .semantics { heading() }
                         .then(clickableModifier)
-                        .padding(horizontal = 8.dp)
+                        .padding(horizontal = Spacing.Small)
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
                 ) {
@@ -444,14 +455,14 @@ fun SettingsItem(
                             text = item.titleAnnotated!!,
                             color = MaterialTheme.colorScheme.onSurface,
                             style = MaterialTheme.typography.titleMedium,
-                            modifier = Modifier.padding(start = 8.dp)
+                            modifier = Modifier.padding(start = Spacing.Small)
                         )
                     } else {
                         Text(
                             text = item.title,
                             color = MaterialTheme.colorScheme.onSurface,
                             style = MaterialTheme.typography.titleMedium,
-                            modifier = Modifier.padding(start = 8.dp)
+                            modifier = Modifier.padding(start = Spacing.Small)
                         )
                     }
                 }
@@ -486,7 +497,7 @@ fun SettingsItem(
                         .then(paddingModifier)
                         .maybeApply(
                             condition = applyPaddings,
-                            modifier = Modifier.padding(horizontal = 16.dp)
+                            modifier = Modifier.padding(horizontal = Spacing.Medium)
                         )
                         .graphicsLayer {
                             shadowElevation = focusElevation.toPx()
@@ -499,19 +510,19 @@ fun SettingsItem(
                         .then(borderModifier(shape))
                         .border(2.dp, focusBorderColor, shape)
                         .then(clickableModifier)
-                        .padding(horizontal = 8.dp)
-                        .then(if (!slimLayout) Modifier.padding(vertical = 4.dp) else Modifier)
+                        .padding(horizontal = Spacing.Small)
+                        .then(if (!slimLayout) Modifier.padding(vertical = Spacing.ExtraSmall) else Modifier)
                         .widthIn(max = 600.dp)
                         .fillMaxWidth()
                         .graphicsLayer { this.alpha = alpha }
                 ) {
                     Row(
-                        modifier = Modifier.padding(8.dp).padding(vertical = 6.dp),
+                        modifier = Modifier.padding(Spacing.Small).padding(vertical = Spacing.Micro),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         if (item.icon != null || item.iconUri != null || item.iconRes != null) {
                             Box(
-                                modifier = Modifier.padding(end = 12.dp)
+                                modifier = Modifier.padding(end = Spacing.MediumSmall)
                             ) {
                                 icon()
                             }
@@ -522,7 +533,7 @@ fun SettingsItem(
                                 modifier = Modifier
                                     .weight(1f)
                                     .then(
-                                        if (item.icon != null) Modifier.padding(end = 16.dp) else Modifier
+                                        if (item.icon != null) Modifier.padding(end = Spacing.Medium) else Modifier
                                     ),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
@@ -531,7 +542,7 @@ fun SettingsItem(
                                     supportingContent?.invoke()
                                 }
                                 Text(
-                                    modifier = Modifier.weight(1f).padding(start = 16.dp),
+                                    modifier = Modifier.weight(1f).padding(start = Spacing.Medium),
                                     text = item.titleAnnotated ?: AnnotatedString(item.title),
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.SemiBold,
@@ -547,7 +558,7 @@ fun SettingsItem(
                                     .weight(1f)
                                     .then(
                                         if (item.icon != null || item.iconUri != null) Modifier.padding(
-                                            end = 16.dp
+                                            end = Spacing.Medium
                                         ) else Modifier
                                     ),
                                 verticalArrangement = Arrangement.Center
@@ -590,7 +601,7 @@ fun SettingsItem(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(shape)
-                        .padding(horizontal = 24.dp),
+                        .padding(horizontal = Spacing.ContentHorizontal),
                     contentAlignment = Alignment.CenterEnd
                 ) {
                     Icon(
@@ -664,10 +675,10 @@ fun AlbumPreferenceItem(
     }
 
     val paddingModifier = when (item.screenPosition) {
-        Position.Alone -> Modifier.padding(bottom = 16.dp)
-        Position.Bottom -> Modifier.padding(top = 1.dp, bottom = 16.dp)
-        Position.Middle -> Modifier.padding(vertical = 1.dp)
-        Position.Top -> Modifier.padding(bottom = 1.dp)
+        Position.Alone -> Modifier.padding(bottom = Spacing.Medium)
+        Position.Bottom -> Modifier.padding(top = Spacing.Hairline, bottom = Spacing.Medium)
+        Position.Middle -> Modifier.padding(vertical = Spacing.Hairline)
+        Position.Top -> Modifier.padding(bottom = Spacing.Hairline)
     }
 
     val clickableModifier = if (item.onClick != null) {
@@ -704,7 +715,7 @@ fun AlbumPreferenceItem(
         modifier = modifier
             .settingsFocusTarget(focusState)
             .then(paddingModifier)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.Medium)
             .graphicsLayer {
                 shadowElevation = focusElevation.toPx()
                 this.shape = shape
@@ -713,15 +724,15 @@ fun AlbumPreferenceItem(
             .background(color = focusedBackgroundColor)
             .border(2.dp, focusBorderColor, shape)
             .then(clickableModifier)
-            .padding(12.dp)
+            .padding(Spacing.MediumSmall)
             .fillMaxWidth()
             .alpha(alpha),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Medium)
     ) {
         // Album Thumbnail(s) - Stacked for multiple albums
         Box(
-            modifier = Modifier.size(56.dp),
+            modifier = Modifier.size(ComponentSize.ThumbnailMedium),
             contentAlignment = Alignment.Center
         ) {
             if (item.isMultiple && item.albumUri != null && item.secondaryAlbumUri != null) {
@@ -729,7 +740,7 @@ fun AlbumPreferenceItem(
                 // Back thumbnail (secondary) - offset to top-left with dark scrim
                 Box(
                     modifier = Modifier
-                        .size(48.dp)
+                        .size(ComponentSize.MinimumTouchTarget)
                         .offset(x = (-4).dp, y = (-4).dp)
                         .clip(RoundedCornerShape(10.dp))
                         .background(MaterialTheme.colorScheme.surfaceContainerHighest)
@@ -748,13 +759,13 @@ fun AlbumPreferenceItem(
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Color.Black.copy(alpha = 0.4f))
+                            .background(Color.Black.copy(alpha = Alpha.ScrimMedium))
                     )
                 }
                 // Front thumbnail (primary) - offset to bottom-right
                 Box(
                     modifier = Modifier
-                        .size(48.dp)
+                        .size(ComponentSize.MinimumTouchTarget)
                         .offset(x = 4.dp, y = 4.dp)
                         .clip(RoundedCornerShape(10.dp))
                         .background(MaterialTheme.colorScheme.surfaceContainerHighest)
@@ -777,7 +788,7 @@ fun AlbumPreferenceItem(
                             .align(Alignment.Center)
                             .clip(RoundedCornerShape(6.dp))
                             .background(MaterialTheme.colorScheme.primary)
-                            .padding(horizontal = 6.dp, vertical = 2.dp),
+                            .padding(horizontal = Spacing.Micro, vertical = Spacing.Tiny),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -847,7 +858,7 @@ fun AlbumPreferenceItem(
             )
             if (!item.summary.isNullOrEmpty() || item.summaryAnnotated != null) {
                 Text(
-                    modifier = Modifier.padding(top = 2.dp),
+                    modifier = Modifier.padding(top = Spacing.Tiny),
                     text = item.summaryAnnotated ?: AnnotatedString(item.summary ?: ""),
                     style = MaterialTheme.typography.bodySmall,
                     fontSize = 13.sp,
@@ -1057,12 +1068,12 @@ fun CustomCircleIcon(
     contentColor: Color = MaterialTheme.colorScheme.onTertiary
 ) {
     val modifier = Modifier
-        .size(48.dp)
+        .size(ComponentSize.MinimumTouchTarget)
         .background(
             color = containerColor,
             shape = CircleShape
         )
-        .padding(12.dp)
+        .padding(Spacing.MediumSmall)
     if (iconRes != null) {
         Icon(
             modifier = modifier,
@@ -1097,7 +1108,7 @@ private fun SettingsItemPreview() {
                     color = MaterialTheme.colorScheme.surface
                 )
                 .fillMaxSize(),
-            contentPadding = PaddingValues(top = 16.dp)
+            contentPadding = PaddingValues(top = Spacing.Medium)
         ) {
             settings(
                 preferenceItemBuilder = { item, modifier ->

@@ -28,6 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,6 +41,7 @@ import com.dot.gallery.feature_node.presentation.settings.components.rememberSet
 import com.dot.gallery.feature_node.presentation.settings.components.settingsFocusTarget
 import com.dot.gallery.feature_node.presentation.util.GlideInvalidation
 import com.dot.gallery.feature_node.presentation.util.PreviewHost
+import com.dot.gallery.ui.theme.Spacing
 
 /**
  * A selectable album grid item with thumbnail, selection indicator,
@@ -74,13 +78,14 @@ fun SelectableAlbumItem(
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
             .border(focusBorderWidth, focusBorderColor, RoundedCornerShape(12.dp))
-            .clickable(enabled = !isDisabled, onClick = onClick)
+            .clickable(enabled = !isDisabled, role = Role.Button, onClick = onClick)
+            .semantics { selected = isSelected }
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(4.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+                .padding(Spacing.ExtraSmall),
+            verticalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
         ) {
             Box(
                 modifier = Modifier
@@ -111,7 +116,7 @@ fun SelectableAlbumItem(
                     Box(
                         modifier = Modifier
                             .align(Alignment.TopEnd)
-                            .padding(8.dp)
+                            .padding(Spacing.Small)
                             .size(24.dp)
                             .background(
                                 MaterialTheme.colorScheme.primary,
@@ -134,14 +139,14 @@ fun SelectableAlbumItem(
                 style = MaterialTheme.typography.bodyMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(top = 8.dp).padding(horizontal = 8.dp)
+                modifier = Modifier.padding(top = Spacing.Small).padding(horizontal = Spacing.Small)
             )
 
             Text(
                 text = "${album.count} items",
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 8.dp).padding(bottom = 8.dp)
+                modifier = Modifier.padding(horizontal = Spacing.Small).padding(bottom = Spacing.Small)
             )
         }
     }

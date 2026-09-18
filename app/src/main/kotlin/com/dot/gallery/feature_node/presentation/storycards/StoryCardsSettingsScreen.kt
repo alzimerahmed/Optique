@@ -31,8 +31,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DragHandle
 import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -241,6 +244,22 @@ fun StoryCardsSettingsScreen(
                         draggingIndex = -1
                         dragOffsetY = 0f
                     },
+                    onMoveUp = if (index > 0) {
+                        {
+                            val list = displayedOrder.toMutableList()
+                            val item = list.removeAt(index)
+                            list.add(index - 1, item)
+                            configState = config.copy(cardOrder = list)
+                        }
+                    } else null,
+                    onMoveDown = if (index < displayedOrder.lastIndex) {
+                        {
+                            val list = displayedOrder.toMutableList()
+                            val item = list.removeAt(index)
+                            list.add(index + 1, item)
+                            configState = config.copy(cardOrder = list)
+                        }
+                    } else null,
                     onToggle = { checked ->
                         val newDisabled = if (checked) {
                             config.disabledTypes - type
@@ -371,6 +390,8 @@ internal fun CardTypeListItem(
     onDragStart: () -> Unit = {},
     onDrag: (Float) -> Unit = {},
     onDragEnd: () -> Unit = {},
+    onMoveUp: (() -> Unit)? = null,
+    onMoveDown: (() -> Unit)? = null,
     onToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -538,6 +559,17 @@ internal fun CardTypeListItem(
                                 .padding(horizontal = 4.dp)
                                 .size(20.dp)
                         )
+                    }
+
+                    if (onMoveUp != null) {
+                        IconButton(onClick = onMoveUp) {
+                            Icon(Icons.Outlined.KeyboardArrowUp, stringResource(R.string.move_up))
+                        }
+                    }
+                    if (onMoveDown != null) {
+                        IconButton(onClick = onMoveDown) {
+                            Icon(Icons.Outlined.KeyboardArrowDown, stringResource(R.string.move_down))
+                        }
                     }
 
                     // Toggle — outside the detail tap target.
