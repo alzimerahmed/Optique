@@ -204,6 +204,8 @@
     <ID>CyclomaticComplexMethod:NavigationComp.kt$@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalPermissionsApi::class) @Stable @NonRestartableComposable @Composable fun NavigationComp( navController: NavHostController, paddingValues: PaddingValues, bottomBarState: MutableState&lt;Boolean&gt;, systemBarFollowThemeState: MutableState&lt;Boolean&gt;, toggleRotate: () -&gt; Unit, isScrolling: MutableState&lt;Boolean&gt; )</ID>
     <ID>CyclomaticComplexMethod:OfflineModeScreen.kt$@Composable fun OfflineModeScreen( viewModel: OfflineModeViewModel = hiltViewModel() )</ID>
     <ID>CyclomaticComplexMethod:OptionSheet.kt$fun LazyListScope.SettingsOptionLayout( modifier: Modifier = Modifier, optionList: List&lt;SettingsEntity&gt;, slimLayout: Boolean = false, swipeToDismiss: Boolean = false, onDismiss: ((SettingsEntity) -&gt; Unit)? = null )</ID>
+    <ID>CyclomaticComplexMethod:PersonDetailScreen.kt$@OptIn( ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class, ExperimentalSharedTransitionApi::class ) @Composable fun PersonDetailScreen( metadataState: State&lt;MediaMetadataState&gt;, sharedTransitionScope: SharedTransitionScope, animatedContentScope: AnimatedContentScope, )</ID>
+    <ID>CyclomaticComplexMethod:PersonDetailViewModel.kt$PersonDetailViewModel$private fun loadPerson()</ID>
     <ID>CyclomaticComplexMethod:PickerMediaScreen.kt$@OptIn(ExperimentalSharedTransitionApi::class) @Composable fun &lt;T: Media&gt; PickerMediaScreen( mediaState: StateFlow&lt;MediaState&lt;T&gt;&gt;, metadataState: State&lt;MediaMetadataState&gt;, allowSelection: Boolean, sharedTransitionScope: SharedTransitionScope? = null, animatedVisibilityScope: AnimatedVisibilityScope? = null, )</ID>
     <ID>CyclomaticComplexMethod:PickerScreen.kt$@Suppress("LABEL_NAME_CLASH") @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class) @Composable fun PickerScreen( title: String, allowedMedia: AllowedMedia, allowSelection: Boolean, onClose: () -&gt; Unit, sendMediaAsResult: (List&lt;Uri&gt;) -&gt; Unit, sendMediaAsMediaResult: (List&lt;Media&gt;) -&gt; Unit )</ID>
     <ID>CyclomaticComplexMethod:PinnedAlbumsCarousel.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable fun CarouselPinnedAlbums( modifier: Modifier = Modifier, albumList: List&lt;Album&gt;, onAlbumClick: (Album) -&gt; Unit, onAlbumLongClick: (Album) -&gt; Unit, mergedSubfolderIds: Set&lt;Long&gt; = emptySet(), subGalleryIds: Set&lt;Long&gt; = emptySet(), onToggleMergeSubfolders: ((Album) -&gt; Unit)? = null, onToggleMergedSubfolderDisplayMode: ((Album) -&gt; Unit)? = null )</ID>
@@ -646,6 +648,13 @@
     <ID>FunctionNaming:HelpScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun HelpScreen()</ID>
     <ID>FunctionNaming:HelpScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable private fun HelpSearchField( query: String, onQueryChange: (String) -&gt; Unit, onClear: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>FunctionNaming:HelpScreen.kt$@Preview(showBackground = true) @Composable private fun HelpScreenPreview()</ID>
+    <ID>FunctionNaming:HiddenPeopleScreen.kt$@Composable fun HiddenPeopleScreen()</ID>
+    <ID>FunctionNaming:HiddenPeopleScreen.kt$@Composable fun NoHiddenPeople(modifier: Modifier = Modifier)</ID>
+    <ID>FunctionNaming:HiddenPeopleScreen.kt$@OptIn(ExperimentalGlideComposeApi::class) @Composable private fun HiddenPersonThumbnail(thumbnailUrl: String?)</ID>
+    <ID>FunctionNaming:HiddenPeopleScreen.kt$@Preview(showBackground = true) @Composable private fun HiddenPeopleContentEmptyPreview()</ID>
+    <ID>FunctionNaming:HiddenPeopleScreen.kt$@Preview(showBackground = true) @Composable private fun HiddenPeopleContentWithPeoplePreview()</ID>
+    <ID>FunctionNaming:HiddenPeopleScreen.kt$@Preview(showBackground = true) @Composable private fun NoHiddenPeoplePreview()</ID>
+    <ID>FunctionNaming:HiddenPeopleScreen.kt$@SuppressLint("StringFormatInvalid") @OptIn(ExperimentalMaterial3Api::class) @Composable fun HiddenPeopleContent( state: HiddenPeopleState, onUnhide: (String) -&gt; Unit )</ID>
     <ID>FunctionNaming:HideButton.kt$@Composable fun &lt;T : Media&gt; HideButton( media: T, vaults: VaultState, enabled: Boolean, followTheme: Boolean = false )</ID>
     <ID>FunctionNaming:HorizontalScrubber.kt$@Composable fun HorizontalScrubber( modifier: Modifier = Modifier, allowNegative: Boolean = true, spacerWidth: Dp = 3.dp, normalWidth: Dp = 1.dp, normalHeight: Dp = 10.dp, arrowHeight: Dp = 18.dp, textColor: Color = MaterialTheme.colorScheme.onSurface, normalColor: Color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f), highlightedColor: Color = MaterialTheme.colorScheme.onSurface, arrowColor: Color = MaterialTheme.colorScheme.inversePrimary, @FloatRange(from = 0.0, to = 1.0) horizontalFade: Float = 0.3f, minValue: Float = -40f, maxValue: Float = 40f, defaultValue: Float = 0f, currentValue: Float = defaultValue, displayValue: (Float) -&gt; String = { (it * 10f).roundToInt().toString() }, onValueChanged: (isScrolling: Boolean, newValue: Float) -&gt; Unit )</ID>
     <ID>FunctionNaming:HorizontalScrubber.kt$@Preview @Composable private fun HorizontalScrubberPreview2()</ID>
@@ -1277,6 +1286,7 @@
     <ID>LongMethod:HelpPreviewRegistry.kt$@OptIn(ExperimentalSharedTransitionApi::class) @Composable private fun NavBarPreviewMini(modifier: Modifier = Modifier)</ID>
     <ID>LongMethod:HelpScreen.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun HelpScreen()</ID>
     <ID>LongMethod:HelpSearchIndex.kt$HelpSearchIndex$private fun toggleItems(context: Context): List&lt;HelpSearchItem&gt;</ID>
+    <ID>LongMethod:HiddenPeopleScreen.kt$@SuppressLint("StringFormatInvalid") @OptIn(ExperimentalMaterial3Api::class) @Composable fun HiddenPeopleContent( state: HiddenPeopleState, onUnhide: (String) -&gt; Unit )</ID>
     <ID>LongMethod:HideButton.kt$@Composable fun &lt;T : Media&gt; HideButton( media: T, vaults: VaultState, enabled: Boolean, followTheme: Boolean = false )</ID>
     <ID>LongMethod:HorizontalScrubber.kt$@Composable fun HorizontalScrubber( modifier: Modifier = Modifier, allowNegative: Boolean = true, spacerWidth: Dp = 3.dp, normalWidth: Dp = 1.dp, normalHeight: Dp = 10.dp, arrowHeight: Dp = 18.dp, textColor: Color = MaterialTheme.colorScheme.onSurface, normalColor: Color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f), highlightedColor: Color = MaterialTheme.colorScheme.onSurface, arrowColor: Color = MaterialTheme.colorScheme.inversePrimary, @FloatRange(from = 0.0, to = 1.0) horizontalFade: Float = 0.3f, minValue: Float = -40f, maxValue: Float = 40f, defaultValue: Float = 0f, currentValue: Float = defaultValue, displayValue: (Float) -&gt; String = { (it * 10f).roundToInt().toString() }, onValueChanged: (isScrolling: Boolean, newValue: Float) -&gt; Unit )</ID>
     <ID>LongMethod:IgnoredOptionsSheet.kt$@Composable fun IgnoredOptionsSheetContent( uiState: IgnoredOptionsUiState, albumState: State&lt;AlbumState&gt;, onAction: (IgnoredOptionsAction) -&gt; Unit )</ID>
@@ -1697,14 +1707,16 @@
     <ID>LongParameterList:SetupWizardScaffold.kt$( modifier: Modifier = Modifier, showBack: Boolean = true, onBack: () -&gt; Unit = {}, stepNumber: Int = 0, totalSteps: Int = 0, showProgress: Boolean = totalSteps &gt; 0, title: String? = null, subtitle: String? = null, bottomBar: @Composable ColumnScope.() -&gt; Unit = {}, content: @Composable ColumnScope.() -&gt; Unit )</ID>
     <ID>LongParameterList:ShadowModifier.kt$( color: Color = Color.Black, alpha: Float = 1f, cornersRadius: Dp = 0.dp, shadowBlurRadius: Dp = 0.dp, offsetY: Dp = 0.dp, offsetX: Dp = 0.dp )</ID>
     <ID>LongParameterList:SharedLinksViewModel.kt$SharedLinksViewModel$( link: SharedLinkInfo, description: String?, password: String?, expiresAt: Long?, allowDownload: Boolean, allowUpload: Boolean, showMetadata: Boolean, changeExpiration: Boolean )</ID>
+    <ID>LongParameterList:SmartFeaturesViewModel.kt$SmartFeaturesViewModel$( private val modelManager: ModelManager, private val workManager: WorkManager, private val smartScanScheduler: SmartScanScheduler, private val smartScanDao: SmartScanDao, private val personDao: PersonDao, private val detectedFaceDao: DetectedFaceDao, private val database: InternalDatabase, @param:ApplicationContext private val context: Context )</ID>
     <ID>LongParameterList:SmartScanDao.kt$SmartScanDao$( mediaId: Long, feature: MediaFeature, owner: String, status: MediaFeatureStatus, resultRevision: String, now: Long, nextRetryAt: Long? = null, lastErrorCode: String? = null )</ID>
     <ID>LongParameterList:SmartScanDao.kt$SmartScanDao$( mediaId: Long, feature: MediaFeature, runId: String, owner: String, now: Long, leaseExpiresAt: Long )</ID>
     <ID>LongParameterList:SmartScanDao.kt$SmartScanDao$( runId: String, phase: SmartScanPhase, owner: String, now: Long, leaseExpiresAt: Long, processorRevision: String )</ID>
     <ID>LongParameterList:SmartScanDao.kt$SmartScanDao$( runId: String, phase: SmartScanPhase, owner: String, status: SmartScanStatus, finishedAt: Long, lastErrorCode: String? = null )</ID>
     <ID>LongParameterList:SmartScanDao.kt$SmartScanDao$( runId: String, phase: SmartScanPhase, totalMedia: Int, processedMedia: Int, succeededMedia: Int, skippedMedia: Int, failedMedia: Int, now: Long )</ID>
     <ID>LongParameterList:SmartScanDao.kt$SmartScanDao$( runId: String, totalMedia: Int, processedMedia: Int, succeededMedia: Int, skippedMedia: Int, failedMedia: Int, now: Long )</ID>
+    <ID>LongParameterList:SmartScanPhaseProcessor.kt$( aLeft: Float, aTop: Float, aRight: Float, aBottom: Float, bLeft: Float, bTop: Float, bRight: Float, bBottom: Float )</ID>
     <ID>LongParameterList:SmartScanPhaseProcessor.kt$( existing: MediaFeatureStateEntity?, mediaId: Long, feature: MediaFeature, sourceRevision: String, resultRevision: String, fullRefresh: Boolean, now: Long, terminalOutputPresent: Boolean = true )</ID>
-    <ID>LongParameterList:SmartScanPhaseProcessor.kt$FaceIndexPhaseProcessor$( embedding: FloatArray, clusters: MutableList&lt;Cluster&gt;, media: Media.UriMedia, face: DetectedFaceBox, bitmap: Bitmap, touchedPeople: MutableSet&lt;String&gt; )</ID>
+    <ID>LongParameterList:SmartScanPhaseProcessor.kt$FaceIndexPhaseProcessor$( embedding: FloatArray, clusters: MutableList&lt;Cluster&gt;, media: Media.UriMedia, face: DetectedFaceBox, bitmap: Bitmap, touchedPeople: MutableSet&lt;String&gt;, hiddenPersonIds: Set&lt;String&gt; )</ID>
     <ID>LongParameterList:SmartScanPhaseProcessor.kt$FaceIndexPhaseProcessor$( repository: MediaRepository, database: InternalDatabase, private val modelManager: ModelManager, private val faceDao: DetectedFaceDao, private val personDao: PersonDao, private val thumbnailLoader: SmartThumbnailLoader, @ApplicationContext private val appContext: Context )</ID>
     <ID>LongParameterList:SmartScanPhaseProcessor.kt$MediaPhaseProcessor$( context: SmartScanPhaseContext, total: Int, processed: Int, succeeded: Int, skipped: Int, failed: Int )</ID>
     <ID>LongParameterList:SmartScanPreferenceDetailScreen.kt$( activeScan: SmartScanRunEntity?, activePhases: List&lt;SmartScanPhaseEntity&gt;, latestScan: SmartScanRunEntity?, searchReady: Boolean, personsReady: Boolean, semanticIndexingEnabled: Boolean, onMetadata: () -&gt; Unit, onEmbeddings: () -&gt; Unit, onCategories: () -&gt; Unit, onPersons: () -&gt; Unit, onAll: () -&gt; Unit, onFullRefresh: () -&gt; Unit, onCancel: () -&gt; Unit, onRetry: () -&gt; Unit )</ID>
@@ -2710,6 +2722,9 @@
     <ID>MagicNumber:HelpPreviewRegistry.kt$400</ID>
     <ID>MagicNumber:HelpPreviewRegistry.kt$4f</ID>
     <ID>MagicNumber:HelpSearchIndex.kt$HelpSearchIndex$320</ID>
+    <ID>MagicNumber:HiddenPeopleScreen.kt$12</ID>
+    <ID>MagicNumber:HiddenPeopleScreen.kt$27</ID>
+    <ID>MagicNumber:HiddenPeopleScreen.kt$3</ID>
     <ID>MagicNumber:Highlights.kt$Highlights$30f</ID>
     <ID>MagicNumber:HorizontalScrubber.kt$10</ID>
     <ID>MagicNumber:HorizontalScrubber.kt$100</ID>
@@ -4728,7 +4743,6 @@
     <ID>MaxLineLength:SharedLinksScreen.kt$val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden, enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded))</ID>
     <ID>MaxLineLength:SlideshowOptionsSheet.kt$TransitionChip</ID>
     <ID>MaxLineLength:SmartScanMigration.kt$"INSERT OR REPLACE INTO `face_clusters` (`personId`, `centroid`, `faceCount`, `updatedAt`) VALUES (?, ?, ?, ?)"</ID>
-    <ID>MaxLineLength:SmartScanPhaseProcessor.kt$FaceIndexPhaseProcessor$listOf(DetectedFaceEntity(mediaId = item.id, timestamp = item.timestamp, resultRevision = revision))</ID>
     <ID>MaxLineLength:SmartScanPhaseProcessor.kt$FaceIndexPhaseProcessor$val newPeople = clusters.mapNotNullTo(hashSetOf()) { it.personId.takeIf { id -&gt; id !in previousPeople } }</ID>
     <ID>MaxLineLength:SmartScanPlanTest.kt$SmartScanPlanTest$assertEquals(false, canAdoptExistingSearchEmbedding(embedding.copy(resultRevision = "clip-v1"), 100L, "clip-v2"))</ID>
     <ID>MaxLineLength:SmartScanPlanTest.kt$SmartScanPlanTest$smartSourceFingerprint(revisions) == smartSourceFingerprint(revisions.dropLast(1) + "id-2:201:image/png:path-b")</ID>
@@ -5237,6 +5251,7 @@
     <ID>PackageNaming:FCastProtocol.kt$package com.dot.gallery.feature_node.presentation.cast</ID>
     <ID>PackageNaming:FCastSession.kt$package com.dot.gallery.feature_node.presentation.cast</ID>
     <ID>PackageNaming:FCastViewModel.kt$package com.dot.gallery.feature_node.presentation.cast</ID>
+    <ID>PackageNaming:FaceDataPurgePolicyTest.kt$package com.dot.gallery.feature_node.presentation.settings.subsettings</ID>
     <ID>PackageNaming:FavoriteButton.kt$package com.dot.gallery.feature_node.presentation.mediaview.components.actionbuttons</ID>
     <ID>PackageNaming:FavoriteNavActions.kt$package com.dot.gallery.feature_node.presentation.favorites.components</ID>
     <ID>PackageNaming:FavoriteScreen.kt$package com.dot.gallery.feature_node.presentation.favorites</ID>
@@ -5269,6 +5284,8 @@
     <ID>PackageNaming:HelpScreen.kt$package com.dot.gallery.feature_node.presentation.help</ID>
     <ID>PackageNaming:HelpSearchIndex.kt$package com.dot.gallery.feature_node.presentation.help.data</ID>
     <ID>PackageNaming:HelpTip.kt$package com.dot.gallery.feature_node.presentation.help.data</ID>
+    <ID>PackageNaming:HiddenPeopleScreen.kt$package com.dot.gallery.feature_node.presentation.people</ID>
+    <ID>PackageNaming:HiddenPeopleViewModel.kt$package com.dot.gallery.feature_node.presentation.people</ID>
     <ID>PackageNaming:HideButton.kt$package com.dot.gallery.feature_node.presentation.mediaview.components.actionbuttons</ID>
     <ID>PackageNaming:Highlights.kt$package com.dot.gallery.feature_node.presentation.edit.adjustments.varfilter</ID>
     <ID>PackageNaming:HorizontalScrubber.kt$package com.dot.gallery.feature_node.presentation.edit.components.core</ID>
@@ -5528,6 +5545,7 @@
     <ID>PackageNaming:SmartFeaturesViewModel.kt$package com.dot.gallery.feature_node.presentation.settings.subsettings</ID>
     <ID>PackageNaming:SmartScanConverters.kt$package com.dot.gallery.feature_node.data.data_source</ID>
     <ID>PackageNaming:SmartScanDao.kt$package com.dot.gallery.feature_node.data.data_source</ID>
+    <ID>PackageNaming:SmartScanDaoFeatureStateTest.kt$package com.dot.gallery.feature_node.data.data_source</ID>
     <ID>PackageNaming:SmartScanEntities.kt$package com.dot.gallery.feature_node.data.data_source</ID>
     <ID>PackageNaming:SmartScanMigration.kt$package com.dot.gallery.feature_node.data.data_source.migration</ID>
     <ID>PackageNaming:SmartScanPreferenceDetailScreen.kt$package com.dot.gallery.feature_node.presentation.settings.subsettings</ID>
@@ -6163,6 +6181,9 @@
     <ID>UnusedPrivateMember:EncryptedDatabaseFactory.kt$EncryptedDatabaseFactory$private fun validatePassphrase(context: Context, passphrase: ByteArray)</ID>
     <ID>UnusedPrivateMember:ErrorComponent.kt$@Preview(showBackground = true, name = "Error with retry") @Composable private fun ErrorWithActionPreview()</ID>
     <ID>UnusedPrivateMember:HelpScreen.kt$@Preview(showBackground = true) @Composable private fun HelpScreenPreview()</ID>
+    <ID>UnusedPrivateMember:HiddenPeopleScreen.kt$@Preview(showBackground = true) @Composable private fun HiddenPeopleContentEmptyPreview()</ID>
+    <ID>UnusedPrivateMember:HiddenPeopleScreen.kt$@Preview(showBackground = true) @Composable private fun HiddenPeopleContentWithPeoplePreview()</ID>
+    <ID>UnusedPrivateMember:HiddenPeopleScreen.kt$@Preview(showBackground = true) @Composable private fun NoHiddenPeoplePreview()</ID>
     <ID>UnusedPrivateMember:HorizontalScrubber.kt$@Preview @Composable private fun HorizontalScrubberPreview2()</ID>
     <ID>UnusedPrivateMember:IgnoredOptionsSheet.kt$@Preview(showBackground = true, name = "Edit Albums - Multiple Selection") @Composable private fun EditAlbumsMultiplePreview()</ID>
     <ID>UnusedPrivateMember:IgnoredOptionsSheet.kt$@Preview(showBackground = true, name = "Edit Albums - Regex Empty") @Composable private fun EditAlbumsRegexEmptyPreview()</ID>
