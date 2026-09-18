@@ -72,6 +72,7 @@ import com.dot.gallery.R
 import com.dot.gallery.core.LocalEventHandler
 import com.dot.gallery.core.navigate
 import com.dot.gallery.core.navigateUp
+import com.dot.gallery.core.presentation.components.EmptyMedia
 import com.dot.gallery.core.presentation.components.SetupButton
 import com.dot.gallery.feature_node.domain.model.MediaMetadataState
 import com.dot.gallery.feature_node.domain.util.getUri
@@ -108,6 +109,21 @@ fun PersonDetailScreen(
 
     val eventHandler = LocalEventHandler.current
 
+    // Single person-gone exit path (R13): the loaded→gone transition in the VM's people
+    // collection owns this event — hiding or merging the person produces the same
+    // gone-signal, so no other path calls navigateUp.
+    LaunchedEffect(viewModel) {
+        viewModel.uiEvents.collect { event ->
+            when (event) {
+                PersonDetailViewModel.PersonDetailEvent.Exit -> eventHandler.navigateUp()
+            }
+        }
+    }
+
+    // Explicit "person unavailable" state (R13): the first people snapshot resolved
+    // without this person — a stale back-stack entry, not a loaded→gone exit.
+    val personUnavailable = state.person == null && state.error != null
+
     MediaScreen(
         albumName = personName,
         customDateHeader = stringResource(R.string.cloud_person_photo_count, mediaState.value.media.size),
@@ -126,22 +142,33 @@ fun PersonDetailScreen(
             }
         },
         navActionsContent = { _, _ -> },
-        aboveGridContent = {
-            PersonHeader(
-                state = state,
-                isLocalPerson = viewModel.isLocalPerson,
-                blurProgress = blurProgress,
-                onRenameClick = {
-                    editNameText = state.person?.name ?: ""
-                    showRenameSheet = true
-                },
-                onBirthdayClick = { showBirthdayPicker = true },
-                onHideClick = { viewModel.hidePerson { eventHandler.navigateUp() } },
-                onBlurEverywhereClick = { showBlurDialog = true },
-                canMerge = mergeCandidates.isNotEmpty(),
-                onMergeClick = { showMergeDialog = true },
-                onSetCoverClick = { showCoverDialog = true }
-            )
+        emptyContent = {
+            if (personUnavailable) {
+                EmptyMedia(title = stringResource(R.string.cloud_person_unavailable))
+            } else {
+                EmptyMedia()
+            }
+        },
+        aboveGridContent = if (personUnavailable) {
+            null
+        } else {
+            {
+                PersonHeader(
+                    state = state,
+                    isLocalPerson = viewModel.isLocalPerson,
+                    blurProgress = blurProgress,
+                    onRenameClick = {
+                        editNameText = state.person?.name ?: ""
+                        showRenameSheet = true
+                    },
+                    onBirthdayClick = { showBirthdayPicker = true },
+                    onHideClick = { viewModel.hidePerson() },
+                    onBlurEverywhereClick = { showBlurDialog = true },
+                    canMerge = mergeCandidates.isNotEmpty(),
+                    onMergeClick = { showMergeDialog = true },
+                    onSetCoverClick = { showCoverDialog = true }
+                )
+            }
         },
         onActivityResult = { },
         sharedTransitionScope = sharedTransitionScope,
@@ -297,7 +324,6 @@ fun PersonDetailScreen(
                                 .clickable {
                                     viewModel.mergeInto(candidate.id)
                                     showMergeDialog = false
-                                    eventHandler.navigateUp()
                                 }
                                 .padding(4.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -471,27 +497,31 @@ private fun PersonHeader(
                     iconContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             )
-            SuggestionChip(
-                onClick = onBirthdayClick,
-                label = {
-                    Text(
-                        text = state.person?.birthDate?.let { formatBirthDateDisplay(it) }
-                            ?: stringResource(R.string.cloud_person_add_birthday)
+            // Remote-only action (R9/KTD6): gated on a loaded person so the chip
+            // doesn't flash for local persons while `isLocalPerson` is still false.
+            if (birthdayChipVisible(state.person)) {
+                SuggestionChip(
+                    onClick = onBirthdayClick,
+                    label = {
+                        Text(
+                            text = state.person?.birthDate?.let { formatBirthDateDisplay(it) }
+                                ?: stringResource(R.string.cloud_person_add_birthday)
+                        )
+                    },
+                    icon = {
+                        Icon(
+                            Icons.Outlined.Cake,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    },
+                    colors = SuggestionChipDefaults.suggestionChipColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        labelColor = MaterialTheme.colorScheme.onSurface,
+                        iconContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                },
-                icon = {
-                    Icon(
-                        Icons.Outlined.Cake,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp)
-                    )
-                },
-                colors = SuggestionChipDefaults.suggestionChipColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    labelColor = MaterialTheme.colorScheme.onSurface,
-                    iconContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-            )
+            }
         }
         // On-device person management actions (hide + blur everywhere).
         if (isLocalPerson) {

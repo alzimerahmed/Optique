@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dot.gallery.cloud.core.PersonInfo
 import com.dot.gallery.cloud.core.ProviderRegistry
+import com.dot.gallery.cloud.core.ProviderType
 import com.dot.gallery.cloud.data.repository.CloudRepository
 import com.dot.gallery.core.Constants
 import com.dot.gallery.core.Resource
@@ -18,18 +19,53 @@ import com.dot.gallery.feature_node.domain.model.MediaState
 import com.dot.gallery.feature_node.domain.util.getUri
 import com.dot.gallery.feature_node.presentation.util.mapMediaToItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val PERSON_UNAVAILABLE = "Person account not available"
+
 data class PersonDetailUiState(
     val person: PersonInfo? = null,
     val isLoading: Boolean = false,
     val error: String? = null
 )
+
+/** Resolution of the open person against the latest people snapshot (R13). */
+internal enum class PersonPresence {
+    /** The person is (still) present in the snapshot. */
+    Loaded,
+
+    /** The person was shown but vanished — delete-all, merge, or hide. The screen exits. */
+    Gone,
+
+    /** The person never resolved — stale back-stack entry. The screen shows an unavailable state. */
+    Missing
+}
+
+/**
+ * Classifies a resolved person lookup against the previously shown person so the
+ * loaded→gone exit and the initial-load-missing unavailable state stay a single,
+ * distinguishable decision point.
+ */
+internal fun personPresence(previous: PersonInfo?, resolved: PersonInfo?): PersonPresence = when {
+    resolved != null -> PersonPresence.Loaded
+    previous != null -> PersonPresence.Gone
+    else -> PersonPresence.Missing
+}
+
+/**
+ * Birthday editing is a remote-provider action only (R9/KTD6). It must be gated on a
+ * loaded person — while [PersonDetailUiState.person] is null the local-person check is
+ * false, so an unguarded `!isLocalPerson` would flash the chip for local persons.
+ */
+internal fun birthdayChipVisible(person: PersonInfo?): Boolean =
+    person != null && person.providerType != ProviderType.LOCAL_PEOPLE
 
 @HiltViewModel
 class PersonDetailViewModel @Inject constructor(
@@ -60,6 +96,10 @@ class PersonDetailViewModel @Inject constructor(
     private val _personMedia = MutableStateFlow<List<Media.UriMedia>>(emptyList())
     val personMedia: StateFlow<List<Media.UriMedia>> = _personMedia.asStateFlow()
 
+    /** One-shot UI events; currently only [PersonDetailEvent.Exit] for the person-gone exit. */
+    private val _uiEvents = MutableSharedFlow<PersonDetailEvent>(extraBufferCapacity = 1)
+    val uiEvents: SharedFlow<PersonDetailEvent> = _uiEvents
+
     fun setCover(media: Media.UriMedia) {
         val id = _uiState.value.person?.id ?: return
         val uri = media.getUri().toString()
@@ -73,17 +113,14 @@ class PersonDetailViewModel @Inject constructor(
 
     /** True when the current person is an on-device (local) cluster that supports management. */
     val isLocalPerson: Boolean
-        get() = _uiState.value.person?.providerType == com.dot.gallery.cloud.core.ProviderType.LOCAL_PEOPLE
+        get() = _uiState.value.person?.providerType == ProviderType.LOCAL_PEOPLE
 
     private fun localProvider(): com.dot.gallery.cloud.local.LocalPeopleProvider? =
         registry.getByConfigId(configId) as? com.dot.gallery.cloud.local.LocalPeopleProvider
 
-    fun hidePerson(onDone: () -> Unit) {
+    fun hidePerson() {
         val id = _uiState.value.person?.id ?: return
-        viewModelScope.launch {
-            localProvider()?.setHidden(id, true)
-            onDone()
-        }
+        viewModelScope.launch { localProvider()?.setHidden(id, true) }
     }
 
     fun mergeInto(targetPersonId: String) {
@@ -115,17 +152,32 @@ class PersonDetailViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(isLoading = true)
 
         viewModelScope.launch {
+            var exitSignalled = false
             repository.getAllPeople().collect { resource ->
                 if (resource is Resource.Success) {
-                    val person = resource.data?.find {
+                    val resolved = resource.data?.find {
                         it.id == personId && it.serverConfigId == configId
                     }
-                    _uiState.value = _uiState.value.copy(person = person)
+                    when (personPresence(_uiState.value.person, resolved)) {
+                        PersonPresence.Loaded ->
+                            _uiState.value = _uiState.value.copy(person = resolved, error = null)
+                        PersonPresence.Gone -> if (!exitSignalled) {
+                            // Single person-gone exit path (R13): hiding or merging produces
+                            // the same gone-signal, so no explicit navigateUp anywhere else.
+                            exitSignalled = true
+                            _uiEvents.emit(PersonDetailEvent.Exit)
+                        }
+                        PersonPresence.Missing ->
+                            _uiState.value = _uiState.value.copy(
+                                isLoading = false,
+                                error = PERSON_UNAVAILABLE
+                            )
+                    }
                     _mergeCandidates.value = resource.data
                         ?.filter {
-                            it.accountKey != person?.accountKey &&
+                            it.accountKey != resolved?.accountKey &&
                                 it.serverConfigId == configId &&
-                                it.providerType == com.dot.gallery.cloud.core.ProviderType.LOCAL_PEOPLE
+                                it.providerType == ProviderType.LOCAL_PEOPLE
                         } ?: emptyList()
                 }
             }
@@ -139,7 +191,7 @@ class PersonDetailViewModel @Inject constructor(
             if (person == null) {
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
-                    error = "Person account not available"
+                    error = PERSON_UNAVAILABLE
                 )
                 return@launch
             }
@@ -208,5 +260,10 @@ class PersonDetailViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    sealed interface PersonDetailEvent {
+        /** The open person no longer exists — the detail screen leaves the back stack (R13). */
+        data object Exit : PersonDetailEvent
     }
 }
