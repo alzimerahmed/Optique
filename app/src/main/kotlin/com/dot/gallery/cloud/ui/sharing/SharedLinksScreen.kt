@@ -89,6 +89,7 @@ import com.dot.gallery.cloud.image.CloudMediaFetcher
 import com.dot.gallery.core.presentation.components.LoadingMedia
 import com.dot.gallery.core.presentation.components.NavigationBackButton
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
+import com.dot.gallery.ui.theme.Spacing
 import com.github.panpf.sketch.AsyncImage
 import com.github.panpf.sketch.request.ComposableImageRequest
 import dev.chrisbanes.haze.LocalHazeStyle
@@ -160,7 +161,7 @@ fun SharedLinksScreen() {
                             Text(
                                 text = error,
                                 color = MaterialTheme.colorScheme.error,
-                                modifier = Modifier.padding(16.dp)
+                                modifier = Modifier.padding(Spacing.Medium)
                             )
                         }
                     }
@@ -168,7 +169,7 @@ fun SharedLinksScreen() {
                         SharedLinksFilterRow(
                             currentFilter = state.filter,
                             onFilterSelected = { viewModel.setFilter(it) },
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                            modifier = Modifier.padding(horizontal = Spacing.Medium, vertical = Spacing.Small)
                         )
                     }
                     items(state.filteredLinks, key = { it.accountKey }) { link ->
@@ -262,8 +263,8 @@ private fun SharedLinksFilterRow(
         color = MaterialTheme.colorScheme.surfaceContainerHigh
     ) {
         Row(
-            modifier = Modifier.padding(4.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            modifier = Modifier.padding(Spacing.ExtraSmall),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
         ) {
             SharedLinksFilter.entries.forEach { filter ->
                 val label = when (filter) {
@@ -291,7 +292,7 @@ private fun SharedLinksFilterRow(
                 ) {
                     Text(
                         text = label,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+                        modifier = Modifier.padding(horizontal = Spacing.Small, vertical = Spacing.Small),
                         style = MaterialTheme.typography.labelLarge,
                         color = textColor,
                         textAlign = TextAlign.Center,
@@ -317,7 +318,7 @@ private fun SharedLinkItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Thumbnail
@@ -353,7 +354,7 @@ private fun SharedLinkItem(
             }
         }
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(Spacing.MediumSmall))
 
         // Info column
         Column(modifier = Modifier.weight(1f)) {
@@ -377,7 +378,7 @@ private fun SharedLinkItem(
                 overflow = TextOverflow.Ellipsis
             )
             // Badges row
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.Micro)) {
                 if (accountLabel != null) {
                     Text(
                         text = accountLabel,
@@ -390,7 +391,7 @@ private fun SharedLinkItem(
                                 MaterialTheme.colorScheme.primaryContainer,
                                 RoundedCornerShape(6.dp)
                             )
-                            .padding(horizontal = 8.dp, vertical = 2.dp)
+                            .padding(horizontal = Spacing.Small, vertical = Spacing.Tiny)
                     )
                 }
                 if (link.allowDownload) {
@@ -403,7 +404,7 @@ private fun SharedLinkItem(
                                 MaterialTheme.colorScheme.secondaryContainer,
                                 RoundedCornerShape(6.dp)
                             )
-                            .padding(horizontal = 8.dp, vertical = 2.dp)
+                            .padding(horizontal = Spacing.Small, vertical = Spacing.Tiny)
                     )
                 }
                 if (link.showMetadata) {
@@ -416,7 +417,7 @@ private fun SharedLinkItem(
                                 MaterialTheme.colorScheme.tertiaryContainer,
                                 RoundedCornerShape(6.dp)
                             )
-                            .padding(horizontal = 8.dp, vertical = 2.dp)
+                            .padding(horizontal = Spacing.Small, vertical = Spacing.Tiny)
                     )
                 }
             }
@@ -459,7 +460,7 @@ private fun EmptySharedLinks(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(top = 64.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium, Alignment.CenterVertically)
     ) {
         Icon(
             modifier = Modifier.size(128.dp),
@@ -509,8 +510,8 @@ private fun EditSharedLinkSheet(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp)
-                .padding(bottom = 32.dp)
+                .padding(horizontal = Spacing.ContentHorizontal)
+                .padding(bottom = Spacing.ExtraLarge)
         ) {
             // Header
             Row(
@@ -523,7 +524,7 @@ private fun EditSharedLinkSheet(
                     modifier = Modifier.size(24.dp),
                     tint = MaterialTheme.colorScheme.primary
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Spacing.Small))
                 Text(
                     text = stringResource(R.string.cloud_shared_links_edit_title),
                     style = MaterialTheme.typography.titleLarge,
@@ -533,7 +534,7 @@ private fun EditSharedLinkSheet(
 
             // Link type label
             if (link.isAlbumLink && link.albumName != null) {
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Spacing.Small))
                 Text(
                     text = "${stringResource(R.string.cloud_shared_links_public_album)} | ${link.albumName}",
                     style = MaterialTheme.typography.bodyMedium,
@@ -541,7 +542,7 @@ private fun EditSharedLinkSheet(
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(Spacing.MediumLarge))
 
             // Description
             Text(
@@ -549,7 +550,7 @@ private fun EditSharedLinkSheet(
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.SemiBold
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Spacing.Small))
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
@@ -558,7 +559,7 @@ private fun EditSharedLinkSheet(
                 shape = RoundedCornerShape(12.dp)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Spacing.Medium))
 
             // Password
             Text(
@@ -571,7 +572,7 @@ private fun EditSharedLinkSheet(
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Spacing.Small))
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -580,7 +581,7 @@ private fun EditSharedLinkSheet(
                 shape = RoundedCornerShape(12.dp)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Spacing.Medium))
 
             // Expire after
             Text(
@@ -588,11 +589,11 @@ private fun EditSharedLinkSheet(
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.SemiBold
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Spacing.Small))
 
             FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Small)
             ) {
                 data class ExpiryChip(val label: String, val daysFromNow: Int?)
 
@@ -637,7 +638,7 @@ private fun EditSharedLinkSheet(
                     ) {
                         Text(
                             text = chip.label,
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                            modifier = Modifier.padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
                             style = MaterialTheme.typography.labelMedium,
                             color = chipText
                         )
@@ -645,7 +646,7 @@ private fun EditSharedLinkSheet(
                 }
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(Spacing.MediumLarge))
 
             // Show metadata toggle
             Row(
@@ -663,7 +664,7 @@ private fun EditSharedLinkSheet(
                 )
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Spacing.Small))
 
             // Allow download toggle
             Row(
@@ -681,7 +682,7 @@ private fun EditSharedLinkSheet(
                 )
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Spacing.Small))
 
             // Allow upload toggle
             Row(
@@ -699,12 +700,12 @@ private fun EditSharedLinkSheet(
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Spacing.Large))
 
             // Action buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
             ) {
                 OutlinedButton(
                     onClick = onDismiss,

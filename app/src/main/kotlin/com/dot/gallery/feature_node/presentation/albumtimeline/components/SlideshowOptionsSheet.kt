@@ -30,6 +30,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dot.gallery.R
@@ -41,6 +43,7 @@ import com.dot.gallery.core.presentation.components.SetupButton
 import com.dot.gallery.feature_node.domain.model.SlideshowTransition
 import com.dot.gallery.feature_node.presentation.util.AppBottomSheetState
 import com.dot.gallery.feature_node.presentation.util.Screen
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,11 +75,11 @@ fun SlideshowOptionsSheet(
             contentWindowInsets = { WindowInsets(0, 0, 0, 0) }
         ) {
             Column(
-                verticalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall),
                 modifier = Modifier
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 24.dp, vertical = 8.dp)
+                    .padding(horizontal = Spacing.ContentHorizontal, vertical = Spacing.Small)
             ) {
                 Text(
                     text = stringResource(R.string.slideshow),
@@ -85,10 +88,11 @@ fun SlideshowOptionsSheet(
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 8.dp)
+                        .padding(bottom = Spacing.Small)
                 )
 
                 // Interval
+                val intervalLabel = stringResource(R.string.slideshow_interval)
                 Text(
                     text = stringResource(R.string.slideshow_interval_value, intervalSeconds),
                     style = MaterialTheme.typography.bodyLarge,
@@ -97,7 +101,8 @@ fun SlideshowOptionsSheet(
                 Slider(
                     value = intervalSeconds.toFloat(),
                     onValueChange = { intervalSeconds = it.toInt() },
-                    valueRange = Settings.Slideshow.MIN_INTERVAL.toFloat()..Settings.Slideshow.MAX_INTERVAL.toFloat()
+                    valueRange = Settings.Slideshow.MIN_INTERVAL.toFloat()..Settings.Slideshow.MAX_INTERVAL.toFloat(),
+                    modifier = Modifier.semantics { contentDescription = intervalLabel }
                 )
 
                 // Transition
@@ -105,14 +110,14 @@ fun SlideshowOptionsSheet(
                     text = stringResource(R.string.slideshow_transition),
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier.padding(top = Spacing.Small)
                 )
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
                     modifier = Modifier
                         .fillMaxWidth()
                         .horizontalScroll(rememberScrollState())
-                        .padding(vertical = 4.dp)
+                        .padding(vertical = Spacing.ExtraSmall)
                 ) {
                     TransitionChip(R.string.slideshow_transition_fade, transition == SlideshowTransition.FADE) {
                         transition = SlideshowTransition.FADE
@@ -134,7 +139,7 @@ fun SlideshowOptionsSheet(
                 SlideshowSwitchRow(R.string.slideshow_include_videos, includeVideos) { includeVideos = it }
                 SlideshowSwitchRow(R.string.slideshow_loop, loop) { loop = it }
 
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(Spacing.Small))
                 SetupButton(
                     text = stringResource(R.string.slideshow_start),
                     enabled = canStart,
@@ -162,7 +167,7 @@ fun SlideshowOptionsSheet(
                         }
                     }
                 )
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(Spacing.Small))
             }
         }
     }
@@ -188,7 +193,7 @@ private fun SlideshowSwitchRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = Spacing.ExtraSmall),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

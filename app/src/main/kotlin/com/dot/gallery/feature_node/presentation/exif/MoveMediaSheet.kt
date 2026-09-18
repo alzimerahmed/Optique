@@ -74,6 +74,8 @@ import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetStat
 import com.dot.gallery.feature_node.presentation.util.toastError
 import com.dot.gallery.feature_node.presentation.util.writeRequest
 import com.dot.gallery.feature_node.presentation.vault.utils.rememberBiometricState
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -317,7 +319,7 @@ fun <T: Media> MoveMediaSheet(
                     .wrapContentHeight()
                     .imePadding()
                     .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Small),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
@@ -326,7 +328,7 @@ fun <T: Media> MoveMediaSheet(
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
-                        .padding(24.dp)
+                        .padding(Spacing.Large)
                         .fillMaxWidth()
                 )
 
@@ -340,7 +342,7 @@ fun <T: Media> MoveMediaSheet(
                         onValueChange = { searchQuery = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp),
+                            .padding(horizontal = Spacing.Medium),
                         placeholder = { Text(stringResource(R.string.search_albums)) },
                         leadingIcon = {
                             Icon(
@@ -353,7 +355,7 @@ fun <T: Media> MoveMediaSheet(
                                 IconButton(onClick = { searchQuery = "" }) {
                                     Icon(
                                         imageVector = Icons.Outlined.Close,
-                                        contentDescription = null
+                                        contentDescription = stringResource(R.string.clear_search)
                                     )
                                 }
                             }
@@ -366,8 +368,8 @@ fun <T: Media> MoveMediaSheet(
                 AnimatedVisibility(
                     visible = progress > 0f,
                     modifier = Modifier
-                        .padding(32.dp)
-                        .padding(bottom = 64.dp)
+                        .padding(Spacing.ExtraLarge)
+                        .padding(bottom = ComponentSize.NavigationBarHeight)
                         .navigationBarsPadding()
                         .size(128.dp)
                         .align(Alignment.CenterHorizontally),
@@ -423,10 +425,10 @@ fun <T: Media> MoveMediaSheet(
 
                     LazyVerticalGrid(
                         state = rememberLazyGridState(),
-                        modifier = Modifier.padding(horizontal = 8.dp),
+                        modifier = Modifier.padding(horizontal = Spacing.Small),
                         columns = albumCellsList[albumSize],
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(Spacing.Small),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
                         contentPadding = PaddingValues(
                             bottom = WindowInsets.navigationBars.getBottom(
                                 LocalDensity.current

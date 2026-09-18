@@ -60,11 +60,15 @@ import com.dot.gallery.feature_node.domain.util.isCloud
 import androidx.compose.material.icons.outlined.Cloud
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import com.dot.gallery.core.presentation.components.util.advancedShadow
 import com.dot.gallery.feature_node.presentation.library.components.LibrarySmallItem
 import com.dot.gallery.feature_node.presentation.util.GlideInvalidation
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.Screen
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.LocalHazeStyle
 import dev.chrisbanes.haze.hazeEffect
 
@@ -152,10 +156,10 @@ internal fun ListLocationsContent(
                 contentPadding = PaddingValues(
                     top = paddingValues.calculateTopPadding(),
                     bottom = paddingValues.calculateBottomPadding() + 128.dp,
-                    start = 8.dp,
-                    end = 8.dp
+                    start = Spacing.Small,
+                    end = Spacing.Small
                 ),
-                verticalArrangement = Arrangement.spacedBy(2.dp)
+                verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
             ) {
                 items(
                     items = grouped.entries.toList(),
@@ -203,7 +207,7 @@ internal fun ListLocationsContent(
             ) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(Spacing.Medium)
                         .size(24.dp),
                     strokeWidth = 2.dp,
                     color = MaterialTheme.colorScheme.primary
@@ -229,9 +233,9 @@ internal fun MediaGridPanel(
         state = gridState,
         columns = GridCells.Fixed(4),
         modifier = modifier,
-        contentPadding = PaddingValues(start = 2.dp, end = 2.dp, bottom = 80.dp),
-        horizontalArrangement = Arrangement.spacedBy(2.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+        contentPadding = PaddingValues(start = Spacing.Tiny, end = Spacing.Tiny, bottom = 80.dp),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Tiny),
+        verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
     ) {
         items(
             items = gridItems,
@@ -273,8 +277,8 @@ internal fun MediaGridPanel(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(
-                                horizontal = 16.dp,
-                                vertical = 24.dp
+                                horizontal = Spacing.Medium,
+                                vertical = Spacing.Large
                             )
                     )
                 }
@@ -309,7 +313,8 @@ private fun MapMediaCell(
     Box(
         modifier = Modifier
             .aspectRatio(1f)
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClick, role = Role.Button)
+            .semantics { this.selected = selected }
             .then(
                 if (selected) Modifier.border(3.dp, MaterialTheme.colorScheme.primary)
                 else Modifier
@@ -330,7 +335,7 @@ private fun MapMediaCell(
             Icon(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(6.dp)
+                    .padding(Spacing.Micro)
                     .size(10.dp)
                     .advancedShadow(
                         cornersRadius = 5.dp,

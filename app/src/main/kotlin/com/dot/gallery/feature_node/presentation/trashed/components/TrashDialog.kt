@@ -48,6 +48,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -69,6 +70,7 @@ import com.dot.gallery.feature_node.presentation.util.AppBottomSheetState
 import com.dot.gallery.feature_node.presentation.util.GlideInvalidation
 import com.dot.gallery.feature_node.presentation.util.rememberFeedbackManager
 import com.dot.gallery.ui.theme.Shapes
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
@@ -129,7 +131,7 @@ fun <T : Media> TrashDialog(
                 if (confirmed) mainButtonConfirmText else mainButtonDefaultText
             }
             Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Small),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -172,7 +174,7 @@ fun <T : Media> TrashDialog(
                             },
                             textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .padding(24.dp)
+                                .padding(Spacing.Large)
                                 .fillMaxWidth()
                         )
                     }
@@ -194,7 +196,7 @@ fun <T : Media> TrashDialog(
                         style = MaterialTheme.typography.titleLarge,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
-                            .padding(24.dp)
+                            .padding(Spacing.Large)
                             .fillMaxWidth()
                     )
                 }
@@ -212,13 +214,13 @@ fun <T : Media> TrashDialog(
                     modifier = Modifier
                         .alpha(alpha)
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp),
+                        .padding(vertical = Spacing.Medium),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp, alignment),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.Small, alignment),
                 ) {
                     if (dataCopy.size > 1) {
                         item {
-                            Spacer(modifier = Modifier.width(16.dp))
+                            Spacer(modifier = Modifier.width(Spacing.Medium))
                         }
                     }
                     items(
@@ -242,6 +244,9 @@ fun <T : Media> TrashDialog(
                                 )
                                 .combinedClickable(
                                     enabled = !confirmed,
+                                    role = Role.Button,
+                                    onClickLabel = longPressText,
+                                    onLongClickLabel = stringResource(R.string.remove_selected),
                                     onLongClick = {
                                         feedbackManager.vibrate()
                                         scope.launch {
@@ -274,9 +279,9 @@ fun <T : Media> TrashDialog(
                 }
 
                 Row(
-                    modifier = Modifier.padding(24.dp),
+                    modifier = Modifier.padding(Spacing.Large),
                     horizontalArrangement = Arrangement
-                        .spacedBy(24.dp, Alignment.CenterHorizontally)
+                        .spacedBy(Spacing.Large, Alignment.CenterHorizontally)
                 ) {
                     AnimatedVisibility(
                         visible = !confirmed,

@@ -55,6 +55,8 @@ import com.dot.gallery.core.Position
 import com.dot.gallery.core.SettingsEntity
 import com.dot.gallery.feature_node.presentation.settings.components.BaseSettingsScreen
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
@@ -282,11 +284,11 @@ private fun NetworkingHeroCard(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.Small)
             .clip(RoundedCornerShape(28.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+            .padding(Spacing.MediumLarge),
+        verticalArrangement = Arrangement.spacedBy(Spacing.MediumLarge)
     ) {
         // Active address headline
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -296,7 +298,7 @@ private fun NetworkingHeroCard(
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(22.dp)
             )
-            Spacer(Modifier.width(12.dp))
+            Spacer(Modifier.width(Spacing.MediumSmall))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = stringResource(R.string.cloud_net_connection),
@@ -316,7 +318,7 @@ private fun NetworkingHeroCard(
         // Local <-> External mode selector
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             NetworkModeTile(
                 icon = Icons.Outlined.Router,
@@ -362,7 +364,7 @@ private fun NetworkingHeroCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            Spacer(Modifier.width(12.dp))
+            Spacer(Modifier.width(Spacing.MediumSmall))
             Switch(checked = autoUrlSwitch, onCheckedChange = onToggleAuto)
         }
     }
@@ -378,13 +380,13 @@ private fun NetworkModeTile(
     val containerColor by animateColorAsState(
         targetValue = if (active) MaterialTheme.colorScheme.primaryContainer
         else MaterialTheme.colorScheme.surfaceContainerHighest,
-        animationSpec = tween(300),
+        animationSpec = tween(MotionSpec.StandardInMs),
         label = "tileContainer"
     )
     val contentColor by animateColorAsState(
         targetValue = if (active) MaterialTheme.colorScheme.onPrimaryContainer
         else MaterialTheme.colorScheme.onSurfaceVariant,
-        animationSpec = tween(300),
+        animationSpec = tween(MotionSpec.StandardInMs),
         label = "tileContent"
     )
     Box(
@@ -396,7 +398,7 @@ private fun NetworkModeTile(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+            verticalArrangement = Arrangement.spacedBy(Spacing.Micro)
         ) {
             Icon(icon, contentDescription = null, tint = contentColor, modifier = Modifier.size(22.dp))
             Text(text = label, style = MaterialTheme.typography.labelLarge, color = contentColor)

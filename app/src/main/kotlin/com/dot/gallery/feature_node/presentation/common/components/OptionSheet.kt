@@ -42,6 +42,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,6 +58,7 @@ import com.dot.gallery.feature_node.presentation.common.components.OptionPositio
 import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedState
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
 import com.dot.gallery.feature_node.presentation.util.AppBottomSheetState
+import com.dot.gallery.ui.theme.Spacing
 
 @Composable
 fun OptionSheet(
@@ -179,15 +181,15 @@ fun LazyListScope.SettingsOptionLayout(
                     }
                     val paddingModifier by rememberedDerivedState(position) {
                         when (position) {
-                            Position.Alone -> Modifier.padding(bottom = 16.dp)
-                            Position.Bottom -> Modifier.padding(top = 1.dp, bottom = 16.dp)
-                            Position.Middle -> Modifier.padding(vertical = 1.dp)
-                            Position.Top -> Modifier.padding(bottom = 1.dp)
+                            Position.Alone -> Modifier.padding(bottom = Spacing.Medium)
+                            Position.Bottom -> Modifier.padding(top = Spacing.Hairline, bottom = Spacing.Medium)
+                            Position.Middle -> Modifier.padding(vertical = Spacing.Hairline)
+                            Position.Top -> Modifier.padding(bottom = Spacing.Hairline)
                         }
                     }
                     Box(
                         modifier = Modifier
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = Spacing.Medium)
                             .then(paddingModifier)
                             .fillMaxSize()
                             .background(
@@ -200,7 +202,7 @@ fun LazyListScope.SettingsOptionLayout(
                             imageVector = Icons.Outlined.Delete,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onErrorContainer,
-                            modifier = Modifier.padding(16.dp)
+                            modifier = Modifier.padding(Spacing.Medium)
                         )
                     }
                 },
@@ -258,8 +260,8 @@ private fun OptionGridLayout(
     Grid(
         config = {
             repeat(2) { column(GridTrackSize.MinMax(min = 0.dp, max = 1.fr)) }
-            columnGap(8.dp)
-            rowGap(8.dp)
+            columnGap(Spacing.Small)
+            rowGap(Spacing.Small)
         },
         modifier = modifier.fillMaxWidth(),
     ) {
@@ -286,7 +288,7 @@ private fun OptionColumnLayout(
                 color = MaterialTheme.colorScheme.surfaceContainer,
                 shape = OptionShape.Alone
             ),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
     ) {
         optionList.forEachIndexed { index, item ->
             val position: OptionPosition = remember(index, item) {
@@ -343,9 +345,9 @@ private fun OptionGridItem(
             .defaultMinSize(minHeight = 80.dp)
             .background(containerColor, GridItemShape)
             .clip(GridItemShape)
-            .clickable(enabled = item.enabled) { item.onClick(item.summary.toString()) }
+            .clickable(enabled = item.enabled, role = Role.Button) { item.onClick(item.summary.toString()) }
             .alpha(if (item.enabled) 1f else 0.4f)
-            .padding(16.dp),
+            .padding(Spacing.Medium),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -356,7 +358,7 @@ private fun OptionGridItem(
                 tint = contentColor,
                 modifier = Modifier.size(24.dp)
             )
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(Spacing.Small))
         }
         Text(
             text = item.text,
@@ -369,7 +371,7 @@ private fun OptionGridItem(
             overflow = TextOverflow.Ellipsis
         )
         if (!item.summary.isNullOrBlank()) {
-            Spacer(Modifier.height(2.dp))
+            Spacer(Modifier.height(Spacing.Tiny))
             Text(
                 text = item.summary,
                 style = MaterialTheme.typography.labelSmall,
@@ -404,15 +406,16 @@ fun OptionButton(
         .clip(position.shape())
         .clickable(
             enabled = enabled,
+            role = Role.Button,
             onClick = onClick
         )
         .alpha(if (enabled) 1f else 0.4f)
-        .padding(16.dp)
-        .padding(vertical = 4.dp)
+        .padding(Spacing.Medium)
+        .padding(vertical = Spacing.ExtraSmall)
     Row(
         modifier = mod,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.ExtraSmall)
     ) {
         if (icon != null) {
             Icon(
@@ -421,12 +424,12 @@ fun OptionButton(
                 tint = contentColor,
                 modifier = Modifier
                     .alpha(if (enabled) 1f else 0.4f)
-                    .padding(start = 4.dp, end = 12.dp)
+                    .padding(start = Spacing.ExtraSmall, end = Spacing.MediumSmall)
             )
         }
         if (summaryContainer != null) {
             Column(
-                verticalArrangement = Arrangement.spacedBy(2.dp)
+                verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)
             ) {
                 ProvideTextStyle(
                     value = MaterialTheme.typography.bodyMedium.copy(
@@ -515,7 +518,7 @@ fun OptionPosition.shape(): RoundedCornerShape = when (this) {
 @Composable
 private fun OptionLayoutAlonePreview() {
     MaterialTheme {
-        Box(Modifier.padding(16.dp)) {
+        Box(Modifier.padding(Spacing.Medium)) {
             val list = remember {
                 mutableStateListOf(
                     OptionItem(
@@ -534,7 +537,7 @@ private fun OptionLayoutAlonePreview() {
 @Composable
 private fun OptionLayoutTwoItemsPreview() {
     MaterialTheme {
-        Box(Modifier.padding(16.dp)) {
+        Box(Modifier.padding(Spacing.Medium)) {
             val list = remember {
                 mutableStateListOf(
                     OptionItem(
@@ -558,7 +561,7 @@ private fun OptionLayoutTwoItemsPreview() {
 @Composable
 private fun OptionLayoutGridPreview() {
     MaterialTheme {
-        Box(Modifier.padding(16.dp)) {
+        Box(Modifier.padding(Spacing.Medium)) {
             val customContainerColor = MaterialTheme.colorScheme.primaryContainer
             val customContentColor = MaterialTheme.colorScheme.onPrimaryContainer
             val list = remember(customContainerColor, customContentColor) {

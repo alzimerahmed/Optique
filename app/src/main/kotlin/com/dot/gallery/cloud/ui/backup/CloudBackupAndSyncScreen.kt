@@ -62,6 +62,9 @@ import com.dot.gallery.core.SettingsEntity
 import com.dot.gallery.core.presentation.components.NavigationBackButton
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.LocalHazeStyle
 import dev.chrisbanes.haze.hazeEffect
 
@@ -296,8 +299,8 @@ fun CloudBackupAndSyncScreen(
             contentPadding = PaddingValues(
                 start = padding.calculateStartPadding(LocalLayoutDirection.current),
                 end = padding.calculateEndPadding(LocalLayoutDirection.current),
-                top = 16.dp + padding.calculateTopPadding(),
-                bottom = padding.calculateBottomPadding() + 32.dp
+                top = Spacing.Medium + padding.calculateTopPadding(),
+                bottom = padding.calculateBottomPadding() + Spacing.ExtraLarge
             )
         ) {
             // Hero status card
@@ -319,7 +322,7 @@ fun CloudBackupAndSyncScreen(
                         text = error,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                        modifier = Modifier.padding(horizontal = Spacing.Medium, vertical = Spacing.Small)
                     )
                 }
             }
@@ -329,7 +332,7 @@ fun CloudBackupAndSyncScreen(
                         text = error,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                        modifier = Modifier.padding(horizontal = Spacing.Medium, vertical = Spacing.Small)
                     )
                 }
             }
@@ -356,8 +359,8 @@ private fun BackupStatusCard(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 8.dp),
+            .padding(horizontal = Spacing.ScreenHorizontal)
+            .padding(bottom = Spacing.Small),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -366,13 +369,13 @@ private fun BackupStatusCard(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(24.dp))
                 .background(MaterialTheme.colorScheme.surfaceContainer)
-                .padding(all = 24.dp),
+                .padding(all = Spacing.Large),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Status icon
             Box(
                 modifier = Modifier
-                    .size(56.dp)
+                    .size(ComponentSize.ThumbnailMedium)
                     .clip(CircleShape)
                     .background(
                         if (allDone) MaterialTheme.colorScheme.primaryContainer
@@ -389,12 +392,12 @@ private fun BackupStatusCard(
                 )
             }
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(Spacing.MediumSmall))
 
             // Status text
             if (isScanning) {
                 CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(Spacing.Small))
                 Text(
                     text = scanProgress.ifEmpty { stringResource(R.string.cloud_upload_syncing) },
                     style = MaterialTheme.typography.bodyMedium,
@@ -411,12 +414,12 @@ private fun BackupStatusCard(
 
             // Progress bar + stats
             if (!isScanning && totalAssets > 0) {
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(Spacing.Medium))
 
                 val progress = backedUpCount.toFloat() / totalAssets
                 val animatedProgress by animateFloatAsState(
                     targetValue = progress,
-                    animationSpec = tween(durationMillis = 600),
+                    animationSpec = tween(durationMillis = MotionSpec.ProgressMs),
                     label = "backupProgress"
                 )
                 val progressColor = if (allDone) MaterialTheme.colorScheme.primary
@@ -443,7 +446,7 @@ private fun BackupStatusCard(
                         }
                 )
 
-                Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(Spacing.MediumSmall))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),

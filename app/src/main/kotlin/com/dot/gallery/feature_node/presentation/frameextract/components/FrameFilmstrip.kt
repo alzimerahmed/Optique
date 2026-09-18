@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.dot.gallery.R
 import com.dot.gallery.feature_node.presentation.frameextract.FrameIdentity
 import com.dot.gallery.feature_node.presentation.frameextract.FramePreview
+import com.dot.gallery.ui.theme.Spacing
 
 @Composable
 fun FrameFilmstrip(
@@ -58,8 +59,8 @@ fun FrameFilmstrip(
             .fillMaxWidth()
             .height(76.dp),
         state = listState,
-        contentPadding = PaddingValues(horizontal = 2.dp),
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        contentPadding = PaddingValues(horizontal = Spacing.Tiny),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Micro),
     ) {
         items(frames, key = { it.identity.encode() }) { frame ->
             val isCurrent = frame.identity == current
@@ -100,20 +101,20 @@ fun FrameFilmstrip(
                         tint = Color.White,
                         modifier = Modifier
                             .align(Alignment.TopEnd)
-                            .padding(4.dp)
+                            .padding(Spacing.ExtraSmall)
                             .size(20.dp)
                             .background(MaterialTheme.colorScheme.primary, CircleShape)
-                            .padding(2.dp),
+                            .padding(Spacing.Tiny),
                     )
                 }
                 if (preferred) {
                     Icon(
                         imageVector = Icons.Outlined.Star,
                         contentDescription = null,
-                        tint = Color.Yellow,
+                        tint = MaterialTheme.colorScheme.tertiary,
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
-                            .padding(4.dp)
+                            .padding(Spacing.ExtraSmall)
                             .size(18.dp),
                     )
                 }

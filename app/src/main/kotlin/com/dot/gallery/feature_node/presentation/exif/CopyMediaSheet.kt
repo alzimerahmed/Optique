@@ -69,6 +69,7 @@ import com.dot.gallery.feature_node.presentation.mediaview.rememberedDerivedStat
 import com.dot.gallery.feature_node.presentation.util.AppBottomSheetState
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
 import com.dot.gallery.feature_node.presentation.vault.utils.rememberBiometricState
+import com.dot.gallery.ui.theme.Spacing
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
@@ -175,7 +176,7 @@ fun <T: Media> CopyMediaSheet(
                     .navigationBarsPadding()
                     .imePadding()
                     .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Small),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
@@ -184,7 +185,7 @@ fun <T: Media> CopyMediaSheet(
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
-                        .padding(24.dp)
+                        .padding(Spacing.Large)
                         .fillMaxWidth()
                 )
 
@@ -198,7 +199,7 @@ fun <T: Media> CopyMediaSheet(
                         onValueChange = { searchQuery = it },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp),
+                            .padding(horizontal = Spacing.Medium),
                         placeholder = { Text(stringResource(R.string.search_albums)) },
                         leadingIcon = {
                             Icon(
@@ -211,7 +212,7 @@ fun <T: Media> CopyMediaSheet(
                                 IconButton(onClick = { searchQuery = "" }) {
                                     Icon(
                                         imageVector = Icons.Outlined.Close,
-                                        contentDescription = null
+                                        contentDescription = stringResource(R.string.clear_search)
                                     )
                                 }
                             }
@@ -224,7 +225,7 @@ fun <T: Media> CopyMediaSheet(
                 AnimatedVisibility(
                     visible = progress > 0f,
                     modifier = Modifier
-                        .padding(32.dp)
+                        .padding(Spacing.ExtraLarge)
                         .align(Alignment.CenterHorizontally),
                     enter = enterAnimation,
                     exit = exitAnimation
@@ -287,10 +288,10 @@ fun <T: Media> CopyMediaSheet(
 
                     LazyVerticalGrid(
                         state = rememberLazyGridState(),
-                        modifier = Modifier.padding(horizontal = 8.dp),
+                        modifier = Modifier.padding(horizontal = Spacing.Small),
                         columns = albumCellsList[albumSize],
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(Spacing.Small),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
                         contentPadding = PaddingValues(
                             bottom = WindowInsets.navigationBars.getBottom(
                                 LocalDensity.current

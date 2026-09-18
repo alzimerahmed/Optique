@@ -64,6 +64,9 @@ import com.dot.gallery.core.presentation.components.NavigationBackButton
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.Screen
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.Dimens
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.LocalHazeStyle
 import dev.chrisbanes.haze.hazeEffect
 
@@ -110,7 +113,7 @@ fun PeopleListScreen(
                     if (viewModel.localScanAvailable) {
                         if (isScanning) {
                             Box(
-                                modifier = Modifier.size(48.dp),
+                                modifier = Modifier.size(ComponentSize.MinimumTouchTarget),
                                 contentAlignment = Alignment.Center
                             ) {
                                 if (scanProgress in 0f..100f) {
@@ -167,16 +170,16 @@ fun PeopleListScreen(
                 // own labelled section with a divider.
                 val grouped = state.people.groupBy { it.providerType to it.serverConfigId }
                 LazyVerticalGrid(
-                    columns = GridCells.Adaptive(100.dp),
+                    columns = GridCells.Adaptive(Dimens.Photo()),
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(
-                        start = innerPadding.calculateStartPadding(layoutDir) + 16.dp,
-                        end = innerPadding.calculateEndPadding(layoutDir) + 16.dp,
-                        top = innerPadding.calculateTopPadding() + 16.dp,
-                        bottom = innerPadding.calculateBottomPadding() + 16.dp
+                        start = innerPadding.calculateStartPadding(layoutDir) + Spacing.ScreenHorizontal,
+                        end = innerPadding.calculateEndPadding(layoutDir) + Spacing.ScreenHorizontal,
+                        top = innerPadding.calculateTopPadding() + Spacing.Medium,
+                        bottom = innerPadding.calculateBottomPadding() + Spacing.Medium
                     ),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
                 ) {
                     grouped.forEach { (account, people) ->
                         val (provider, configId) = account
@@ -218,7 +221,7 @@ private fun EmptyPeople(
     Column(
         modifier = modifier.padding(top = 64.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium, Alignment.CenterVertically)
     ) {
         Icon(
             modifier = Modifier.size(128.dp),
@@ -247,7 +250,7 @@ private fun EmptyPeople(
                 }
                 Text(
                     text = stringResource(R.string.scan_for_people),
-                    modifier = Modifier.padding(start = 8.dp)
+                    modifier = Modifier.padding(start = Spacing.Small)
                 )
             }
         }
@@ -262,7 +265,7 @@ private fun PersonGridItem(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
     ) {
         if (person.thumbnailUrl != null) {
             GlideImage(

@@ -66,8 +66,11 @@ import com.dot.gallery.core.Position
 import com.dot.gallery.core.SettingsEntity
 import com.dot.gallery.core.presentation.components.SetupButton
 import com.dot.gallery.feature_node.presentation.settings.components.BaseSettingsScreen
+import com.dot.gallery.ui.theme.Spacing
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import com.dot.gallery.R
 
 @Composable
@@ -255,9 +258,9 @@ fun OfflineModeScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 16.dp, bottom = 32.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                    .padding(horizontal = Spacing.ScreenHorizontal)
+                    .padding(top = Spacing.Medium, bottom = Spacing.ExtraLarge),
+                verticalArrangement = Arrangement.spacedBy(Spacing.Small)
             ) {
                 SetupButton(
                     text = if (state.downloading) {
@@ -373,8 +376,8 @@ private fun AccountCacheSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp)
-                .padding(bottom = 24.dp)
+                .padding(horizontal = Spacing.MediumLarge)
+                .padding(bottom = Spacing.Large)
         ) {
             Text(
                 text = state.label,
@@ -390,7 +393,7 @@ private fun AccountCacheSheet(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(Spacing.MediumSmall))
             SetupButton(
                 text = stringResource(R.string.cloud_offline_clear_account),
                 enabled = state.totalBytes > 0L,
@@ -402,13 +405,13 @@ private fun AccountCacheSheet(
                 onClick = onClearAccount
             )
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(Spacing.Medium))
             Text(
                 text = stringResource(R.string.cloud_offline_by_album),
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(Spacing.ExtraSmall))
 
             when {
                 state.error != null -> {
@@ -416,7 +419,7 @@ private fun AccountCacheSheet(
                         text = state.error,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.padding(vertical = 16.dp)
+                        modifier = Modifier.padding(vertical = Spacing.Medium)
                     )
                 }
 
@@ -424,12 +427,12 @@ private fun AccountCacheSheet(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 24.dp),
+                            .padding(vertical = Spacing.Large),
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
-                        Spacer(Modifier.width(12.dp))
+                        Spacer(Modifier.width(Spacing.MediumSmall))
                         Text(
                             stringResource(R.string.cloud_offline_loading_albums),
                             style = MaterialTheme.typography.bodyMedium,
@@ -442,7 +445,7 @@ private fun AccountCacheSheet(
                         text = stringResource(R.string.cloud_offline_no_albums),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(vertical = 16.dp)
+                        modifier = Modifier.padding(vertical = Spacing.Medium)
                     )
                 }
 
@@ -464,7 +467,7 @@ private fun AccountCacheSheet(
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 12.dp),
+                                    .padding(vertical = Spacing.MediumSmall),
                                 horizontalArrangement = Arrangement.Center
                             ) {
                                 CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
@@ -486,7 +489,7 @@ private fun AlbumCacheRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = Spacing.Small),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(modifier = Modifier.weight(1f)) {
@@ -502,7 +505,7 @@ private fun AlbumCacheRow(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
-        Spacer(Modifier.width(12.dp))
+        Spacer(Modifier.width(Spacing.MediumSmall))
         when {
             album.clearing -> CircularProgressIndicator(
                 modifier = Modifier.size(20.dp),
@@ -539,11 +542,11 @@ private fun StorageUsageCard(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
         shape = RoundedCornerShape(24.dp),
         color = MaterialTheme.colorScheme.surfaceContainerHigh
     ) {
-        Column(modifier = Modifier.padding(20.dp)) {
+        Column(modifier = Modifier.padding(Spacing.MediumLarge)) {
             Text(
                 text = formatBytes(autoBytes + pinnedBytes),
                 style = MaterialTheme.typography.headlineMedium,
@@ -572,10 +575,10 @@ private fun StorageUsageCard(
                     .fillMaxWidth()
                     .height(14.dp)
             )
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(Spacing.MediumSmall))
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Medium)
             ) {
                 StorageLegendItem(
                     color = autoColor,
@@ -599,7 +602,7 @@ private fun StorageUsageCard(
                     progress = { p },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 12.dp)
+                        .padding(top = Spacing.MediumSmall)
                 )
                 Text(
                     stringResource(
@@ -608,7 +611,7 @@ private fun StorageUsageCard(
                         downloadTotal,
                     ),
                     style = MaterialTheme.typography.labelMedium,
-                    modifier = Modifier.padding(top = 4.dp)
+                    modifier = Modifier.padding(top = Spacing.ExtraSmall)
                 )
             }
         }
@@ -655,7 +658,7 @@ private fun StorageLegendItem(color: Color, label: String, value: String) {
                 .clip(CircleShape)
                 .background(color)
         )
-        Spacer(Modifier.width(6.dp))
+        Spacer(Modifier.width(Spacing.Micro))
         Column {
             Text(text = label, style = MaterialTheme.typography.labelMedium)
             Text(
@@ -684,14 +687,22 @@ private fun BudgetDialog(currentMb: Int, onDismiss: () -> Unit, onSelect: (Int) 
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .selectable(selected = mb == currentMb, onClick = { onSelect(mb) })
-                            .padding(vertical = 12.dp),
+                            .selectable(
+                                selected = mb == currentMb,
+                                onClick = { onSelect(mb) },
+                                role = Role.RadioButton
+                            )
+                            .padding(vertical = Spacing.MediumSmall),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        RadioButton(selected = mb == currentMb, onClick = { onSelect(mb) })
+                        RadioButton(
+                            selected = mb == currentMb,
+                            onClick = null,
+                            modifier = Modifier.clearAndSetSemantics { }
+                        )
                         Text(
                             text = optionLabels.getValue(mb),
-                            modifier = Modifier.padding(start = 8.dp)
+                            modifier = Modifier.padding(start = Spacing.Small)
                         )
                     }
                 }

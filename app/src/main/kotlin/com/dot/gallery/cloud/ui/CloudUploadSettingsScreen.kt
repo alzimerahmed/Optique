@@ -69,6 +69,7 @@ import com.dot.gallery.core.presentation.components.SetupButton
 import com.dot.gallery.feature_node.presentation.ignored.setup.components.SelectableAlbumItem
 import com.dot.gallery.feature_node.presentation.settings.components.RequestInitialSettingsFocus
 import com.dot.gallery.feature_node.presentation.settings.components.settingsFocusGroup
+import com.dot.gallery.ui.theme.Spacing
 
 internal fun deleteLocalEnabledForSelection(
     enabledAlbums: Set<Long>,
@@ -132,7 +133,7 @@ fun CloudUploadSettingsScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
-                        Icon(Icons.AutoMirrored.Outlined.ArrowBack, contentDescription = null)
+                        Icon(Icons.AutoMirrored.Outlined.ArrowBack, contentDescription = stringResource(R.string.back_cd))
                     }
                 },
                 scrollBehavior = scrollBehavior
@@ -155,7 +156,7 @@ fun CloudUploadSettingsScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .navigationBarsPadding()
-                            .padding(horizontal = 16.dp, vertical = 12.dp)
+                            .padding(horizontal = Spacing.Medium, vertical = Spacing.MediumSmall)
                     ) {
                         SetupButton(
                             text = if (uploadRunning) stringResource(R.string.cloud_upload_syncing)
@@ -178,9 +179,9 @@ fun CloudUploadSettingsScreen(
                 .padding(paddingValues)
                 .settingsFocusGroup(),
             columns = gridCells,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+            verticalArrangement = Arrangement.spacedBy(Spacing.Small),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
+            contentPadding = PaddingValues(horizontal = Spacing.Medium, vertical = Spacing.Small)
         ) {
             // Album grid
             if (localAlbums.isEmpty()) {
@@ -189,7 +190,7 @@ fun CloudUploadSettingsScreen(
                         text = stringResource(R.string.cloud_destinations_no_albums),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(32.dp)
+                        modifier = Modifier.padding(Spacing.ExtraLarge)
                     )
                 }
             } else {
@@ -220,7 +221,7 @@ fun CloudUploadSettingsScreen(
                                 syncing = uploadRunning,
                                 modifier = Modifier
                                     .align(Alignment.TopStart)
-                                    .padding(12.dp)
+                                    .padding(Spacing.MediumSmall)
                             )
                         }
                     }
@@ -233,19 +234,19 @@ fun CloudUploadSettingsScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 16.dp)
+                            .padding(top = Spacing.Medium)
                     ) {
                         Text(
                             text = stringResource(R.string.cloud_upload_settings_header),
                             style = MaterialTheme.typography.titleSmall,
                             color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp)
+                            modifier = Modifier.padding(horizontal = Spacing.ExtraSmall, vertical = Spacing.Small)
                         )
 
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 4.dp, vertical = 4.dp),
+                                .padding(horizontal = Spacing.ExtraSmall, vertical = Spacing.ExtraSmall),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -281,13 +282,13 @@ fun CloudUploadSettingsScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp)
+                        .padding(top = Spacing.Medium)
                 ) {
                     Text(
                         text = stringResource(R.string.cloud_dedup_header),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp)
+                        modifier = Modifier.padding(horizontal = Spacing.ExtraSmall, vertical = Spacing.Small)
                     )
                     SetupButton(
                         text = stringResource(R.string.cloud_find_duplicates),
@@ -298,7 +299,7 @@ fun CloudUploadSettingsScreen(
                         applyInsets = false,
                         onClick = { showDedupDialog = true; viewModel.findDuplicates() }
                     )
-                    Spacer(Modifier.height(32.dp))
+                    Spacer(Modifier.height(Spacing.ExtraLarge))
                 }
             }
         }
@@ -315,7 +316,7 @@ fun CloudUploadSettingsScreen(
             title = { Text(stringResource(R.string.cloud_find_duplicates)) },
             text = {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(Spacing.Small)
                 ) {
                     Text(dedupState.message)
                     if (dedupState.isScanning && dedupState.totalCount > 0) {
@@ -327,7 +328,7 @@ fun CloudUploadSettingsScreen(
                         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
                     }
                     if (dedupState.duplicates.isNotEmpty() && !dedupState.isDeleting) {
-                        Spacer(Modifier.height(4.dp))
+                        Spacer(Modifier.height(Spacing.ExtraSmall))
                         Text(
                             text = stringResource(R.string.cloud_local_deletion_unavailable),
                             style = MaterialTheme.typography.bodySmall,
@@ -370,7 +371,7 @@ private fun AlbumStatusBadge(
         modifier = modifier
             .clip(CircleShape)
             .background(container.copy(alpha = 0.92f))
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = Spacing.Small, vertical = Spacing.ExtraSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (syncing) {
@@ -387,7 +388,7 @@ private fun AlbumStatusBadge(
                 modifier = Modifier.size(14.dp)
             )
         }
-        Spacer(Modifier.size(4.dp))
+        Spacer(Modifier.size(Spacing.ExtraSmall))
         Text(
             text = if (syncing) stringResource(R.string.cloud_backup_album_syncing)
             else stringResource(R.string.cloud_backup_album_queued),

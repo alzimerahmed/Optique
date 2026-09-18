@@ -71,6 +71,7 @@ import com.dot.gallery.core.presentation.components.NavigationBackButton
 import com.dot.gallery.feature_node.domain.model.Album
 import com.dot.gallery.feature_node.presentation.util.GlideInvalidation
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.LocalHazeStyle
 import dev.chrisbanes.haze.hazeEffect
 
@@ -150,12 +151,12 @@ fun CloudDestinationsScreen(
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
-                start = innerPadding.calculateStartPadding(layoutDir) + 16.dp,
-                end = innerPadding.calculateEndPadding(layoutDir) + 16.dp,
-                top = innerPadding.calculateTopPadding() + 8.dp,
-                bottom = innerPadding.calculateBottomPadding() + 32.dp
+                start = innerPadding.calculateStartPadding(layoutDir) + Spacing.ScreenHorizontal,
+                end = innerPadding.calculateEndPadding(layoutDir) + Spacing.ScreenHorizontal,
+                top = innerPadding.calculateTopPadding() + Spacing.Small,
+                bottom = innerPadding.calculateBottomPadding() + Spacing.ExtraLarge
             ),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
         ) {
             if (accounts.isEmpty()) {
                 item(key = "empty_accounts") {
@@ -254,8 +255,8 @@ private fun IntroLegend(
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(Spacing.Medium),
+        verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         Text(
             text = stringResource(R.string.cloud_destinations_subtitle),
@@ -264,8 +265,8 @@ private fun IntroLegend(
         )
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
+            verticalArrangement = Arrangement.spacedBy(Spacing.Small)
         ) {
             accounts.forEach { account ->
                 AccountLegendChip(
@@ -288,9 +289,9 @@ private fun AccountLegendChip(
         modifier = Modifier
             .clip(RoundedCornerShape(20.dp))
             .background(MaterialTheme.colorScheme.surfaceContainerHighest)
-            .padding(horizontal = 12.dp, vertical = 8.dp),
+            .padding(horizontal = Spacing.MediumSmall, vertical = Spacing.Small),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         CloudBadge(providerType = account.providerType, color = color)
         Column {
@@ -342,7 +343,7 @@ private fun IntroSubtitle(text: String) {
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(16.dp)
+            .padding(Spacing.Medium)
     ) {
         Text(
             text = text,
@@ -369,7 +370,7 @@ private fun AlbumPickerCard(
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
             .clickable { onToggle(!enabled) }
-            .padding(12.dp),
+            .padding(Spacing.MediumSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         GlideImage(
@@ -381,7 +382,7 @@ private fun AlbumPickerCard(
                 .clip(RoundedCornerShape(12.dp)),
             requestBuilderTransform = { it.signature(GlideInvalidation.signature(album)) }
         )
-        Spacer(Modifier.width(12.dp))
+        Spacer(Modifier.width(Spacing.MediumSmall))
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = album.label,
@@ -416,7 +417,7 @@ private fun AlbumDestinationCard(
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
             .clickable(onClick = onClick)
-            .padding(12.dp),
+            .padding(Spacing.MediumSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         GlideImage(
@@ -428,7 +429,7 @@ private fun AlbumDestinationCard(
                 .clip(RoundedCornerShape(12.dp)),
             requestBuilderTransform = { it.signature(GlideInvalidation.signature(album)) }
         )
-        Spacer(Modifier.width(12.dp))
+        Spacer(Modifier.width(Spacing.MediumSmall))
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = album.label,
@@ -454,13 +455,13 @@ private fun AlbumDestinationCard(
                 accounts.filter { it.configId in targets }.take(4).forEach { account ->
                     CloudBadge(
                         providerType = account.providerType,
-                        color = colorByConfig[account.configId] ?: Color.Gray,
+                        color = colorByConfig[account.configId] ?: MaterialTheme.colorScheme.outline,
                         badgeSize = 24,
                         iconSize = 14
                     )
                 }
             }
-            Spacer(Modifier.width(8.dp))
+            Spacer(Modifier.width(Spacing.Small))
         }
         Icon(
             imageVector = Icons.Outlined.ChevronRight,
@@ -487,9 +488,9 @@ private fun DestinationSheetContent(
         modifier = Modifier
             .fillMaxWidth()
             .navigationBarsPadding()
-            .padding(horizontal = 20.dp)
-            .padding(bottom = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .padding(horizontal = Spacing.MediumLarge)
+            .padding(bottom = Spacing.MediumSmall),
+        verticalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         // Header: album identity + the guiding question.
         Text(
@@ -504,11 +505,11 @@ private fun DestinationSheetContent(
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        Spacer(Modifier.size(4.dp))
+        Spacer(Modifier.size(Spacing.ExtraSmall))
 
         // All clouds master toggle.
         Row(
-            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+            modifier = Modifier.fillMaxWidth().padding(vertical = Spacing.ExtraSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -519,18 +520,18 @@ private fun DestinationSheetContent(
             )
             Switch(checked = allEnabled, onCheckedChange = onToggleAll)
         }
-        HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
 
         accounts.forEach { account ->
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                modifier = Modifier.fillMaxWidth().padding(vertical = Spacing.ExtraSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 CloudBadge(
                     providerType = account.providerType,
-                    color = colorByConfig[account.configId] ?: Color.Gray
+                    color = colorByConfig[account.configId] ?: MaterialTheme.colorScheme.outline
                 )
-                Spacer(Modifier.width(12.dp))
+                Spacer(Modifier.width(Spacing.MediumSmall))
                 Text(
                     text = account.label,
                     style = MaterialTheme.typography.bodyLarge,
@@ -547,9 +548,9 @@ private fun DestinationSheetContent(
 
         // Global per-album delete-local. Only meaningful once the album has a destination.
         if (targets.isNotEmpty()) {
-            HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                modifier = Modifier.fillMaxWidth().padding(vertical = Spacing.ExtraSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.weight(1f)) {
@@ -563,7 +564,7 @@ private fun DestinationSheetContent(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                Spacer(Modifier.width(12.dp))
+                Spacer(Modifier.width(Spacing.MediumSmall))
                 Switch(checked = deleteLocalEnabled, onCheckedChange = onToggleDeleteLocal)
             }
         }
@@ -582,9 +583,9 @@ private fun EmptyState(
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(32.dp),
+            .padding(Spacing.ExtraLarge),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
     ) {
         Icon(
             imageVector = icon,

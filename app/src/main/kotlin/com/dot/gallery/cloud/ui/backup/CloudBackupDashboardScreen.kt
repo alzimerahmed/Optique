@@ -84,6 +84,10 @@ import com.dot.gallery.core.SettingsEntity
 import com.dot.gallery.core.presentation.components.NavigationBackButton
 import com.dot.gallery.feature_node.presentation.settings.components.SettingsItem
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
+import com.dot.gallery.ui.theme.SuccessGreen
 import dev.chrisbanes.haze.LocalHazeStyle
 import dev.chrisbanes.haze.hazeEffect
 import kotlin.math.roundToInt
@@ -111,7 +115,7 @@ private fun rememberServicePalette(): List<Color> {
 
 /** Status dot color for a configured/active account — a fixed green that reads on dark surfaces. */
 @Composable
-private fun connectedDotColor(): Color = Color(0xFF34C759)
+private fun connectedDotColor(): Color = SuccessGreen
 
 /**
  * Maps an account's live [ConnectionState] to a status dot color + label. An errored account
@@ -206,14 +210,14 @@ fun CloudBackupDashboardScreen(
         // their own 16dp horizontal + bottom spacing via [cardModifier].
         val cardModifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = Spacing.ScreenHorizontal)
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
                 start = innerPadding.calculateStartPadding(layoutDir),
                 end = innerPadding.calculateEndPadding(layoutDir),
-                top = innerPadding.calculateTopPadding() + 8.dp,
-                bottom = innerPadding.calculateBottomPadding() + 32.dp
+                top = innerPadding.calculateTopPadding() + Spacing.Small,
+                bottom = innerPadding.calculateBottomPadding() + Spacing.ExtraLarge
             )
         ) {
             // Hero health bar with verified / filename-assumed / unknown provenance.
@@ -228,7 +232,7 @@ fun CloudBackupDashboardScreen(
                     isScanning = state.isScanning,
                     scanProgress = state.scanProgress,
                     uploadState = uploadState,
-                    modifier = cardModifier.padding(bottom = 16.dp)
+                    modifier = cardModifier.padding(bottom = Spacing.Medium)
                 )
             }
 
@@ -237,7 +241,7 @@ fun CloudBackupDashboardScreen(
                 AnimatedVisibility(visible = uploadState.isWorkerRunning) {
                     ActiveUploadCard(
                         state = uploadState,
-                        modifier = cardModifier.padding(bottom = 16.dp)
+                        modifier = cardModifier.padding(bottom = Spacing.Medium)
                     )
                 }
             }
@@ -247,7 +251,7 @@ fun CloudBackupDashboardScreen(
                 AnimatedVisibility(visible = indexState.isIndexing) {
                     IndexingCard(
                         state = indexState,
-                        modifier = cardModifier.padding(bottom = 16.dp)
+                        modifier = cardModifier.padding(bottom = Spacing.Medium)
                     )
                 }
             }
@@ -263,7 +267,7 @@ fun CloudBackupDashboardScreen(
                         canBackup = state.enabledAlbumCount > 0,
                         onBackupAll = { backupViewModel.triggerBackup() },
                         onSyncNow = { syncViewModel.triggerSync() },
-                        modifier = cardModifier.padding(bottom = 24.dp)
+                        modifier = cardModifier.padding(bottom = Spacing.Large)
                     )
                 }
             }
@@ -289,7 +293,7 @@ fun CloudBackupDashboardScreen(
                         onBackupNow = { backupViewModel.triggerBackup(account.configId) },
                         onSelectAlbums = { onNavigateToAlbumPicker(account.configId) },
                         onOpenSettings = { onNavigateToServiceSettings(account.configId) },
-                        modifier = cardModifier.padding(bottom = if (isLast) 24.dp else 8.dp)
+                        modifier = cardModifier.padding(bottom = if (isLast) Spacing.Large else Spacing.Small)
                     )
                 }
 
@@ -364,7 +368,7 @@ private fun HeroDashboard(
         (verifiedCount.toFloat() / totalAssets * 100f).roundToInt() else 0
     val reveal by animateFloatAsState(
         targetValue = if (isScanning) 0f else 1f,
-        animationSpec = tween(700),
+        animationSpec = tween(MotionSpec.ProgressMs),
         label = "barReveal"
     )
     val uploadIsVerifying = uploadState.phase == CloudUploadWorker.PHASE_VERIFYING
@@ -389,8 +393,8 @@ private fun HeroDashboard(
             .fillMaxWidth()
             .clip(RoundedCornerShape(28.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+            .padding(Spacing.Large),
+        verticalArrangement = Arrangement.spacedBy(Spacing.MediumLarge)
     ) {
         // Headline percent + status
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -492,6 +496,7 @@ private fun SegmentedHealthBar(
     // segment. Empty services still get a minimal slice so they remain visible.
     val weights = accounts.map { it.totalAssets.coerceAtLeast(1) }
     val totalWeight = weights.sum().coerceAtLeast(1)
+    val fallbackColor = MaterialTheme.colorScheme.outline
 
     Canvas(modifier = modifier) {
         val radius = CornerRadius(size.height / 2f, size.height / 2f)
@@ -507,7 +512,7 @@ private fun SegmentedHealthBar(
         accounts.forEachIndexed { index, account ->
             val fraction = weights[index].toFloat() / totalWeight
             val segWidth = usableWidth * fraction
-            val color = colorByConfig[account.configId] ?: Color.Gray
+            val color = colorByConfig[account.configId] ?: fallbackColor
 
             // Faint track (remaining portion)
             drawRoundRect(
@@ -538,7 +543,7 @@ private fun HealthBarLegend(
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(6.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Micro)
     ) {
         accounts.forEach { account ->
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -546,9 +551,9 @@ private fun HealthBarLegend(
                     modifier = Modifier
                         .size(10.dp)
                         .clip(CircleShape)
-                        .background(colorByConfig[account.configId] ?: Color.Gray)
+                        .background(colorByConfig[account.configId] ?: MaterialTheme.colorScheme.outline)
                 )
-                Spacer(Modifier.width(8.dp))
+                Spacer(Modifier.width(Spacing.Small))
                 Text(
                     text = account.accountLabel,
                     style = MaterialTheme.typography.bodySmall,
@@ -556,7 +561,7 @@ private fun HealthBarLegend(
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f)
                 )
-                Spacer(Modifier.width(8.dp))
+                Spacer(Modifier.width(Spacing.Small))
                 Text(
                     text = if (account.totalAssets > 0) {
                         "${account.verifiedCount} verified · ${account.assumedCount} assumed · " +
@@ -594,7 +599,7 @@ private fun ActiveUploadCard(state: UploadDetailsUiState, modifier: Modifier = M
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.primaryContainer)
             .animateContentSize()
-            .padding(20.dp),
+            .padding(Spacing.MediumLarge),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         Row(
@@ -689,7 +694,7 @@ private fun IndexingCard(
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.secondaryContainer)
             .animateContentSize()
-            .padding(20.dp),
+            .padding(Spacing.MediumLarge),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         Row(
@@ -765,14 +770,14 @@ private fun ServiceCard(
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceContainer)
-            .padding(horizontal = 16.dp, vertical = 16.dp),
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.Medium),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         // Header: brand icon avatar + name + connection status + auto-sync toggle
         Row(verticalAlignment = Alignment.CenterVertically) {
             Box(
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(ComponentSize.IconLarge)
                     .clip(RoundedCornerShape(12.dp))
                     .background(accentColor.copy(alpha = 0.16f)),
                 contentAlignment = Alignment.Center
@@ -783,7 +788,7 @@ private fun ServiceCard(
                     modifier = Modifier.size(22.dp)
                 )
             }
-            Spacer(Modifier.width(12.dp))
+            Spacer(Modifier.width(Spacing.MediumSmall))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = account.accountLabel,
@@ -800,7 +805,7 @@ private fun ServiceCard(
                             .clip(CircleShape)
                             .background(dotColor)
                     )
-                    Spacer(Modifier.width(6.dp))
+                    Spacer(Modifier.width(Spacing.Micro))
                     Text(
                         text = statusLabel,
                         style = MaterialTheme.typography.bodySmall,
@@ -848,7 +853,7 @@ private fun ServiceCard(
         // Controls
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
             verticalAlignment = Alignment.CenterVertically
         ) {
             DashboardButton(
@@ -904,7 +909,7 @@ private fun DashboardButton(
         enabled = enabled && !loading,
         modifier = modifier.height(52.dp),
         shape = RoundedCornerShape(20.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
+        contentPadding = PaddingValues(horizontal = Spacing.Medium),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor
@@ -919,7 +924,7 @@ private fun DashboardButton(
         } else {
             Icon(icon, contentDescription = null, modifier = Modifier.size(18.dp))
         }
-        Spacer(Modifier.width(8.dp))
+        Spacer(Modifier.width(Spacing.Small))
         Text(
             text = text,
             style = MaterialTheme.typography.titleSmall,
@@ -942,7 +947,7 @@ private fun GlobalActionButtons(
     // Primary actions, styled like SetupButton
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
     ) {
         DashboardButton(
             text = if (isBackingUpAll) stringResource(R.string.cloud_backup_uploading_short)
@@ -971,9 +976,9 @@ private fun EmptyServices(onAddService: () -> Unit, modifier: Modifier = Modifie
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 24.dp),
+            .padding(top = Spacing.Large),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
     ) {
         Icon(
             imageVector = Icons.Outlined.CloudOff,
@@ -988,7 +993,7 @@ private fun EmptyServices(onAddService: () -> Unit, modifier: Modifier = Modifie
         )
         Button(onClick = onAddService) {
             Icon(Icons.Outlined.Add, contentDescription = null, modifier = Modifier.size(18.dp))
-            Spacer(Modifier.width(8.dp))
+            Spacer(Modifier.width(Spacing.Small))
             Text(stringResource(R.string.cloud_backup_add_service))
         }
     }

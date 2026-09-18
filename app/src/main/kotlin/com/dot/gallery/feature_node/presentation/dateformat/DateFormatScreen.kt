@@ -88,7 +88,9 @@ import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.SystemDateFormatField
 import com.dot.gallery.feature_node.presentation.util.getDate
 import com.dot.gallery.feature_node.presentation.util.systemDateTimePattern
+import com.dot.gallery.ui.theme.ComponentSize
 import com.dot.gallery.ui.theme.GalleryTheme
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
@@ -160,7 +162,7 @@ fun DateFormatScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = Spacing.ScreenHorizontal)
                 .imePadding()
                 .verticalScroll(rememberScrollState())
         ) {
@@ -191,7 +193,7 @@ fun DateFormatScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.Center)
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = Spacing.Small),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
@@ -240,7 +242,7 @@ fun DateFormatScreen() {
                     }
                     IconButton(
                         modifier = Modifier
-                            .padding(horizontal = 8.dp)
+                            .padding(horizontal = Spacing.Small)
                             .clip(CircleShape)
                             .then(backgroundModifier)
                             .hazeEffect(
@@ -255,7 +257,7 @@ fun DateFormatScreen() {
                             imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
                             contentDescription = stringResource(R.string.back_cd),
                             tint = contentColor,
-                            modifier = Modifier.height(48.dp)
+                            modifier = Modifier.height(ComponentSize.MinimumTouchTarget)
                         )
                     }
                     Text(
@@ -267,7 +269,7 @@ fun DateFormatScreen() {
                     )
                     IconButton(
                         modifier = Modifier
-                            .padding(horizontal = 8.dp)
+                            .padding(horizontal = Spacing.Small)
                             .clip(CircleShape)
                             .then(backgroundModifier)
                             .hazeEffect(
@@ -282,7 +284,7 @@ fun DateFormatScreen() {
                             imageVector = Icons.Outlined.Info,
                             contentDescription = stringResource(R.string.date_format_info_action),
                             tint = contentColor,
-                            modifier = Modifier.height(48.dp)
+                            modifier = Modifier.height(ComponentSize.MinimumTouchTarget)
                         )
                     }
                 }
@@ -315,7 +317,7 @@ fun DateFormatScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.Center)
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = Spacing.Small),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
@@ -364,7 +366,7 @@ fun DateFormatScreen() {
                     }
                     IconButton(
                         modifier = Modifier
-                            .padding(horizontal = 8.dp)
+                            .padding(horizontal = Spacing.Small)
                             .clip(CircleShape)
                             .then(backgroundModifier)
                             .hazeEffect(
@@ -379,7 +381,7 @@ fun DateFormatScreen() {
                             imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
                             contentDescription = stringResource(R.string.back_cd),
                             tint = contentColor,
-                            modifier = Modifier.height(48.dp)
+                            modifier = Modifier.height(ComponentSize.MinimumTouchTarget)
                         )
                     }
                     Text(
@@ -391,7 +393,7 @@ fun DateFormatScreen() {
                     )
                     IconButton(
                         modifier = Modifier
-                            .padding(horizontal = 8.dp)
+                            .padding(horizontal = Spacing.Small)
                             .clip(CircleShape)
                             .then(backgroundModifier)
                             .hazeEffect(
@@ -406,7 +408,7 @@ fun DateFormatScreen() {
                             imageVector = Icons.Outlined.Info,
                             contentDescription = stringResource(R.string.date_format_info_action),
                             tint = contentColor,
-                            modifier = Modifier.height(48.dp)
+                            modifier = Modifier.height(ComponentSize.MinimumTouchTarget)
                         )
                     }
                 }
@@ -436,14 +438,14 @@ fun DateFormatScreen() {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = 16.dp)
-                        .padding(horizontal = 16.dp)
+                        .padding(top = Spacing.Medium)
+                        .padding(horizontal = Spacing.Medium)
                         .background(
                             color = MaterialTheme.colorScheme.surfaceContainerLowest,
                             shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
                         )
                         .align(Alignment.Center)
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = Spacing.Medium),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     DragHandle()
@@ -490,15 +492,15 @@ fun DateFormatScreen() {
                                     )
                                 )
                             )
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 24.dp, bottom = 24.dp)
+                            .padding(horizontal = Spacing.Medium)
+                            .padding(top = Spacing.Large, bottom = Spacing.Large)
                             .fillMaxWidth()
                     )
                     val gridColumns by rememberGridSize()
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(gridColumns),
-                        horizontalArrangement = Arrangement.spacedBy(1.dp),
-                        verticalArrangement = Arrangement.spacedBy(1.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Hairline),
+                        verticalArrangement = Arrangement.spacedBy(Spacing.Hairline)
                     ) {
                         items(gridColumns / 2) {
                             Box(
@@ -536,15 +538,15 @@ fun DateFormatScreen() {
                                     )
                                 )
                             )
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 24.dp, bottom = 24.dp)
+                            .padding(horizontal = Spacing.Medium)
+                            .padding(top = Spacing.Large, bottom = Spacing.Large)
                             .fillMaxWidth()
                     )
                     val gridColumns by rememberGridSize()
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(gridColumns),
-                        horizontalArrangement = Arrangement.spacedBy(1.dp),
-                        verticalArrangement = Arrangement.spacedBy(1.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Hairline),
+                        verticalArrangement = Arrangement.spacedBy(Spacing.Hairline)
                     ) {
                         items(gridColumns) {
                             Box(
@@ -582,15 +584,15 @@ fun DateFormatScreen() {
                                     )
                                 )
                             )
-                            .padding(horizontal = 16.dp)
-                            .padding(top = 24.dp, bottom = 24.dp)
+                            .padding(horizontal = Spacing.Medium)
+                            .padding(top = Spacing.Large, bottom = Spacing.Large)
                             .fillMaxWidth()
                     )
                     val gridColumns by rememberGridSize()
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(gridColumns),
-                        horizontalArrangement = Arrangement.spacedBy(1.dp),
-                        verticalArrangement = Arrangement.spacedBy(1.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Hairline),
+                        verticalArrangement = Arrangement.spacedBy(Spacing.Hairline)
                     ) {
                         items(gridColumns) {
                             Box(
@@ -625,7 +627,7 @@ fun DateFormatPreview(
         modifier = modifier
             .fillMaxWidth(if (isLandscape) 0.5f else 1f)
             .then(
-                if (isLandscape) Modifier.padding(8.dp) else Modifier
+                if (isLandscape) Modifier.padding(Spacing.Small) else Modifier
             )
     ) {
         ListItem(
@@ -708,7 +710,7 @@ fun DateFormatPreview(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 2.dp),
+                .padding(top = Spacing.Tiny),
             shape = RoundedCornerShape(
                 topStart = 2.dp,
                 topEnd = 2.dp,

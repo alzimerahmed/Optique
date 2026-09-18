@@ -78,6 +78,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -130,6 +131,7 @@ import com.dot.gallery.feature_node.presentation.vault.components.AddToVaultShee
 import com.dot.gallery.feature_node.presentation.vault.components.ConfirmationSheet
 import com.dot.gallery.feature_node.presentation.vault.components.SelectVaultSheet
 import com.dot.gallery.ui.theme.Shapes
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import dev.chrisbanes.haze.materials.HazeMaterials
@@ -340,14 +342,14 @@ fun <T : Media> BoxScope.SelectionSheet(
         val shape = Shapes.extraLarge
         Column(
             modifier = Modifier
-                .padding(horizontal = 32.dp)
+                .padding(horizontal = Spacing.ExtraLarge)
                 .navigationBarsPadding()
                 .then(sizeModifier)
                 .wrapContentHeight()
                 .clip(shape)
-                .padding(vertical = 16.dp)
+                .padding(vertical = Spacing.Medium)
                 .align(Alignment.BottomEnd),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
         ) {
             // Top row — driven by config, horizontally scrollable with fade
             val topScrollState = rememberScrollState()
@@ -375,7 +377,7 @@ fun <T : Media> BoxScope.SelectionSheet(
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Medium)
                     ) {
                         // CLOSE stays on the left
                         if (SelectionAction.CLOSE in sanitizedConfig.topActions) {
@@ -396,7 +398,7 @@ fun <T : Media> BoxScope.SelectionSheet(
                                 .weight(1f)
                                 .horizontalScroll(topScrollState),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End)
+                            horizontalArrangement = Arrangement.spacedBy(Spacing.Medium, Alignment.End)
                         ) {
                             sanitizedConfig.topActions.forEach { action ->
                                 if (action != SelectionAction.CLOSE) {
@@ -424,7 +426,7 @@ fun <T : Media> BoxScope.SelectionSheet(
                     Row(
                         modifier = Modifier.horizontalScroll(topScrollState),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.Medium)
                     ) {
                         sanitizedConfig.topActions.forEach { action ->
                             when (action) {
@@ -1103,13 +1105,13 @@ fun <T : Media> BoxScope.SelectionSheet(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp)
-                    .padding(bottom = 32.dp)
+                    .padding(horizontal = Spacing.ContentHorizontal)
+                    .padding(bottom = Spacing.ExtraLarge)
             ) {
                 Text(
                     text = stringResource(R.string.media_details),
                     style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(bottom = Spacing.Medium)
                 )
                 mediaInfoList.forEach { info ->
                     MediaInfoRow(
@@ -1236,9 +1238,9 @@ fun SelectionAddon(
                     containerColor = containerColor
                 )
             )
-            .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+            .clickable(onClick = onClick, role = Role.Button)
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.Small),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Medium)
     ) {
         Image(
             modifier = Modifier.size(24.dp),
@@ -1293,8 +1295,8 @@ private fun MiddleActionButton(
                     containerColor = surfaceColor
                 )
             )
-            .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .clickable(onClick = onClick, role = Role.Button)
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.MediumSmall),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -1304,7 +1306,7 @@ private fun MiddleActionButton(
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
             contentDescription = text
         )
-        Spacer(modifier = Modifier.size(12.dp))
+        Spacer(modifier = Modifier.size(Spacing.MediumSmall))
         Text(
             text = text,
             style = MaterialTheme.typography.titleMedium,
@@ -1344,9 +1346,11 @@ private fun RowScope.SelectionBarColumn(
             .then(minWidthSizeModifier)
             .combinedClickable(
                 onClick = onItemClick,
+                role = Role.Button,
+                onLongClickLabel = stringResource(R.string.more_options_cd),
                 onLongClick = onItemLongClick
             )
-            .padding(top = 12.dp, bottom = 16.dp),
+            .padding(top = Spacing.MediumSmall, bottom = Spacing.Medium),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -1358,7 +1362,7 @@ private fun RowScope.SelectionBarColumn(
                 .height(32.dp)
         )
         if (showTitles) {
-            Spacer(modifier = Modifier.size(4.dp))
+            Spacer(modifier = Modifier.size(Spacing.ExtraSmall))
             Text(
                 text = title,
                 modifier = Modifier,

@@ -6,11 +6,7 @@
 package com.dot.gallery.cloud.ui
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -71,6 +67,10 @@ import com.dot.gallery.feature_node.presentation.settings.components.BaseSetting
 import com.dot.gallery.feature_node.presentation.util.Screen
 import com.dot.gallery.feature_node.presentation.util.connectivityState
 import com.dot.gallery.feature_node.presentation.util.isLanRouteAvailable
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
+import com.dot.gallery.ui.theme.rememberDriftingFraction
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalCoroutinesApi::class)
@@ -150,7 +150,7 @@ fun CloudAccountsScreen(
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 32.dp, vertical = 12.dp)
+                        .padding(horizontal = Spacing.ExtraLarge, vertical = Spacing.MediumSmall)
                 )
             }
             val byCategory = remember(remoteProviderTypes) {
@@ -196,8 +196,8 @@ private fun ProviderCategorySection(
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 32.dp)
-            .padding(top = 8.dp, bottom = 12.dp)
+            .padding(horizontal = Spacing.ExtraLarge)
+            .padding(top = Spacing.Small, bottom = Spacing.MediumSmall)
     )
     types.forEach { providerType ->
         UnconnectedProviderCard(
@@ -224,19 +224,14 @@ private fun ServerCard(
     val colorPrimary = MaterialTheme.colorScheme.primaryContainer
     val colorTertiary = MaterialTheme.colorScheme.tertiaryContainer
 
-    val transition = rememberInfiniteTransition(label = "serverCard")
-    val fraction by transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 8_000),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "gradientFraction"
-    )
-    val cornerRadius = 24.dp
-
     val isSyncing = syncProgress?.isSyncing == true
+    // Ambient gradient drift only while the account is actively connecting or
+    // syncing; rememberDriftingFraction also pins to a static midpoint when the
+    // user has reduced motion enabled.
+    val fraction = if (isSyncing || connState == ConnectionState.AUTHENTICATING) {
+        rememberDriftingFraction(label = "serverCard")
+    } else 0.5f
+    val cornerRadius = 24.dp
 
     val stateText = when {
         isSyncing -> stringResource(R.string.cloud_syncing)
@@ -252,8 +247,8 @@ private fun ServerCard(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 16.dp),
+            .padding(horizontal = Spacing.ScreenHorizontal)
+            .padding(bottom = Spacing.Medium),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -280,14 +275,14 @@ private fun ServerCard(
                     color = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.6f),
                     shape = RoundedCornerShape(cornerRadius)
                 )
-                .padding(all = 24.dp)
+                .padding(all = Spacing.Large)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Provider icon
             Box(
                 modifier = Modifier
-                    .size(56.dp)
+                    .size(ComponentSize.ThumbnailMedium)
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.surface),
                 contentAlignment = Alignment.Center
@@ -299,7 +294,7 @@ private fun ServerCard(
                 )
             }
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(Spacing.MediumSmall))
 
             // Display name + version chip
             Row(
@@ -313,12 +308,12 @@ private fun ServerCard(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 if (version != null) {
-                    Spacer(Modifier.size(8.dp))
+                    Spacer(Modifier.size(Spacing.Small))
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(12.dp))
                             .background(MaterialTheme.colorScheme.primary)
-                            .padding(horizontal = 8.dp, vertical = 2.dp)
+                            .padding(horizontal = Spacing.Small, vertical = Spacing.Tiny)
                     ) {
                         Text(
                             text = version,
@@ -330,7 +325,7 @@ private fun ServerCard(
                 }
             }
 
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(Spacing.ExtraSmall))
 
             // Status text
             Text(
@@ -341,11 +336,11 @@ private fun ServerCard(
 
             // Capability chips (+ LAN-only chip for network shares)
             if (isLanOnly || capabilities.isNotEmpty()) {
-                Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(Spacing.MediumSmall))
                 FlowRow(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
-                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.Micro, Alignment.CenterHorizontally),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.Micro)
                 ) {
                     if (isLanOnly) {
                         CapabilityChip(
@@ -368,19 +363,19 @@ private fun ServerCard(
                     text = syncProgress?.message ?: "",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(top = 4.dp)
+                    modifier = Modifier.padding(top = Spacing.ExtraSmall)
                 )
             }
 
             // Storage bar
             if (storage != null) {
-                Spacer(Modifier.height(20.dp))
+                Spacer(Modifier.height(Spacing.MediumLarge))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(16.dp))
                         .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.7f))
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                        .padding(horizontal = Spacing.Medium, vertical = Spacing.MediumSmall)
                 ) {
                     Column {
                         Row(
@@ -402,24 +397,24 @@ private fun ServerCard(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
-                        Spacer(Modifier.height(8.dp))
+                        Spacer(Modifier.height(Spacing.Small))
                         StorageProgressBar(storage = storage)
                     }
                 }
             }
 
             // Action buttons - horizontal side by side
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(Spacing.MediumLarge))
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.Small)
             ) {
                 Button(
                     onClick = onSync,
                     enabled = !isSyncing,
                     modifier = Modifier
                         .weight(1f)
-                        .height(48.dp),
+                        .height(ComponentSize.MinimumTouchTarget),
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
@@ -436,7 +431,7 @@ private fun ServerCard(
                     onClick = onSettings,
                     modifier = Modifier
                         .weight(1f)
-                        .height(48.dp),
+                        .height(ComponentSize.MinimumTouchTarget),
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
@@ -464,8 +459,8 @@ private fun UnconnectedProviderCard(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 16.dp),
+            .padding(horizontal = Spacing.ScreenHorizontal)
+            .padding(bottom = Spacing.Medium),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -474,14 +469,14 @@ private fun UnconnectedProviderCard(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(cornerRadius))
                 .background(MaterialTheme.colorScheme.surfaceContainer)
-                .padding(all = 24.dp)
+                .padding(all = Spacing.Large)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Provider icon
             Box(
                 modifier = Modifier
-                    .size(56.dp)
+                    .size(ComponentSize.ThumbnailMedium)
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.surfaceContainerHighest),
                 contentAlignment = Alignment.Center
@@ -493,7 +488,7 @@ private fun UnconnectedProviderCard(
                 )
             }
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(Spacing.MediumSmall))
 
             Text(
                 text = providerType.displayName,
@@ -502,13 +497,13 @@ private fun UnconnectedProviderCard(
                 color = MaterialTheme.colorScheme.onSurface
             )
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(Spacing.Medium))
 
             Button(
                 onClick = onAdd,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(48.dp),
+                    .height(ComponentSize.MinimumTouchTarget),
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -530,13 +525,13 @@ private fun LanOfflineBanner() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 16.dp)
+            .padding(horizontal = Spacing.ScreenHorizontal)
+            .padding(bottom = Spacing.Medium)
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.errorContainer)
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.MediumSmall),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         Icon(
             imageVector = Icons.Outlined.WifiOff,
@@ -579,7 +574,7 @@ private fun CapabilityChip(label: String, highlighted: Boolean = false) {
         modifier = Modifier
             .clip(RoundedCornerShape(8.dp))
             .background(container)
-            .padding(horizontal = 10.dp, vertical = 4.dp)
+            .padding(horizontal = 10.dp, vertical = Spacing.ExtraSmall)
     ) {
         Text(
             text = label,
@@ -595,7 +590,7 @@ private fun StorageProgressBar(storage: CloudStorageInfo) {
     val fraction = (storage.usedPercentage / 100.0).toFloat().coerceIn(0f, 1f)
     val animatedFraction by animateFloatAsState(
         targetValue = fraction,
-        animationSpec = tween(durationMillis = 600),
+        animationSpec = tween(durationMillis = MotionSpec.ProgressMs),
         label = "storageFraction"
     )
     val progressColor = when {

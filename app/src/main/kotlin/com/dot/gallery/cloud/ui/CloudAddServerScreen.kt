@@ -95,6 +95,8 @@ import com.dot.gallery.feature_node.domain.model.Album
 import com.dot.gallery.feature_node.presentation.setup.components.SetupWizardScaffold
 import com.dot.gallery.feature_node.presentation.util.LocalHazeState
 import com.dot.gallery.feature_node.presentation.util.rememberAppBottomSheetState
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
 import dev.chrisbanes.haze.LocalHazeStyle
 import dev.chrisbanes.haze.hazeEffect
 import kotlinx.coroutines.launch
@@ -253,8 +255,8 @@ fun CloudAddServerScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = Spacing.ScreenHorizontal),
+            verticalArrangement = Arrangement.spacedBy(Spacing.Medium)
         ) {
             if (isEditMode) {
                 ServerStep(state, descriptor, isUrlValid, viewModel)
@@ -271,14 +273,14 @@ fun CloudAddServerScreen(
                     transitionSpec = {
                         val forward = targetState >= initialState
                         val dir = if (forward) 1 else -1
-                        (slideInHorizontally(tween(300)) { full -> dir * full } + fadeIn(tween(300)))
+                        (slideInHorizontally(tween(MotionSpec.StandardInMs)) { full -> dir * full } + fadeIn(tween(MotionSpec.StandardInMs)))
                             .togetherWith(
-                                slideOutHorizontally(tween(300)) { full -> -dir * full } + fadeOut(tween(300))
+                                slideOutHorizontally(tween(MotionSpec.StandardInMs)) { full -> -dir * full } + fadeOut(tween(MotionSpec.StandardInMs))
                             )
                     },
                     label = "cloud-add-steps"
                 ) { idx ->
-                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(Spacing.Medium)) {
                         when (steps[idx]) {
                             WizardStep.SERVER -> ServerStep(state, descriptor, isUrlValid, viewModel)
                             WizardStep.CREDENTIALS -> CredentialsStep(
@@ -371,7 +373,7 @@ private fun ServerStep(
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri)
     )
     if (descriptor.isLanOnly) {
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(Spacing.Small))
         Text(
             stringResource(R.string.cloud_network_share_lan_note),
             style = MaterialTheme.typography.bodySmall,
@@ -379,7 +381,7 @@ private fun ServerStep(
         )
     }
     descriptor.setupHintRes?.let { hintRes ->
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(Spacing.Small))
         SetupHelpCard(hintText = stringResource(hintRes))
     }
 }
@@ -468,7 +470,7 @@ private fun CredentialsStep(
     }
 
     if (supportsInteractiveAuth) {
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(Spacing.Medium))
         val authBusy = authState is CloudAuthenticationState.Starting ||
             authState is CloudAuthenticationState.WaitingForBrowser ||
             authState is CloudAuthenticationState.Polling ||
@@ -556,10 +558,10 @@ private fun CredentialsStep(
                     CredentialFieldKind.USERNAME -> viewModel::updateUsername
                     CredentialFieldKind.PASSWORD -> viewModel::updatePassword
                 }
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(Spacing.Medium))
                 CredentialTextField(field = field, value = value, onValueChange = onValueChange)
             }
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(Spacing.Medium))
             SetupButton(
                 text = if (state.isTesting) stringResource(R.string.cloud_testing)
                     else stringResource(R.string.cloud_test_connection),
@@ -584,10 +586,10 @@ private fun CredentialsStep(
 
 @Composable
 private fun AuthResultRow(success: Boolean, text: String) {
-    Spacer(Modifier.height(8.dp))
+    Spacer(Modifier.height(Spacing.Small))
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Small),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -690,7 +692,7 @@ private fun NetworkingStep(
         )
     }
     AnimatedVisibility(visible = state.autoUrlSwitch) {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(Spacing.Medium)) {
             AppTextField(
                 value = state.localServerUrl,
                 onValueChange = viewModel::updateLocalServerUrl,
@@ -705,7 +707,7 @@ private fun NetworkingStep(
             Column(
                 modifier = frostedFieldModifier()
                     .clickable { scope.launch { wifiSheetState.show() } }
-                    .padding(16.dp)
+                    .padding(Spacing.Medium)
             ) {
                 Text(
                     text = stringResource(R.string.cloud_net_wifi_name),
@@ -760,7 +762,7 @@ private fun SyncStep(
 
 @Composable
 private fun SyncSectionHeader(title: String, subtitle: String) {
-    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Spacing.Tiny)) {
         Text(
             text = title,
             style = MaterialTheme.typography.titleSmall,
@@ -787,7 +789,7 @@ private fun SyncEmptyHint(text: String) {
 private fun SyncLoadingRow(text: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
         Text(
@@ -821,9 +823,9 @@ private fun SelectableRow(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onToggle)
-            .padding(horizontal = 12.dp, vertical = 10.dp),
+            .padding(horizontal = Spacing.MediumSmall, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
     ) {
         Icon(
             imageVector = icon,
@@ -854,7 +856,7 @@ private fun ReviewStep(
     descriptor: com.dot.gallery.cloud.ui.descriptor.ProviderUiDescriptor
 ) {
     val none = stringResource(R.string.cloud_review_none)
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)) {
         ReviewRow(stringResource(R.string.cloud_review_provider), descriptor.providerType.displayName)
         ReviewRow(stringResource(R.string.cloud_display_name), state.displayName.ifBlank { none })
         ReviewRow(stringResource(R.string.cloud_review_external_url), state.serverUrl.ifBlank { none })
@@ -898,7 +900,7 @@ private fun SetupHelpCard(hintText: String) {
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.surfaceContainerHigh)
             .clickable { expanded = !expanded }
-            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .padding(horizontal = Spacing.Medium, vertical = Spacing.MediumSmall)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
@@ -906,7 +908,7 @@ private fun SetupHelpCard(hintText: String) {
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary
             )
-            Spacer(Modifier.width(8.dp))
+            Spacer(Modifier.width(Spacing.Small))
             Text(
                 text = stringResource(R.string.cloud_setup_help),
                 style = MaterialTheme.typography.titleSmall,
@@ -925,7 +927,7 @@ private fun SetupHelpCard(hintText: String) {
                 text = hintText,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = Spacing.Small)
             )
         }
     }

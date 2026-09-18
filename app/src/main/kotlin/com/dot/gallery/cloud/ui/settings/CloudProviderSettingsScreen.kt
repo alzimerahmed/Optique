@@ -68,6 +68,9 @@ import com.dot.gallery.core.navigate
 import com.dot.gallery.core.presentation.components.SetupButton
 import com.dot.gallery.feature_node.presentation.settings.components.BaseSettingsScreen
 import com.dot.gallery.feature_node.presentation.util.Screen
+import com.dot.gallery.ui.theme.ComponentSize
+import com.dot.gallery.ui.theme.MotionSpec
+import com.dot.gallery.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -100,11 +103,11 @@ fun CloudProviderSettingsScreen(
             onDismissRequest = { if (!isDeleting) showDeleteDialog = false },
             title = { Text(stringResource(R.string.cloud_delete_confirm_title)) },
             text = {
-                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(Spacing.Medium)) {
                     Text(stringResource(R.string.cloud_delete_confirm))
                     if (isDeleting) {
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             CircularProgressIndicator(Modifier.size(24.dp))
@@ -390,8 +393,8 @@ fun CloudProviderSettingsScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 16.dp, bottom = 32.dp),
+                    .padding(horizontal = Spacing.ScreenHorizontal)
+                    .padding(top = Spacing.Medium, bottom = Spacing.ExtraLarge),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 SetupButton(
@@ -437,8 +440,8 @@ private fun ProviderSettingsHeader(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 8.dp),
+            .padding(horizontal = Spacing.ScreenHorizontal)
+            .padding(bottom = Spacing.Small),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -447,16 +450,16 @@ private fun ProviderSettingsHeader(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(24.dp))
                 .background(MaterialTheme.colorScheme.surfaceContainer)
-                .padding(all = 20.dp)
+                .padding(all = Spacing.MediumLarge)
         ) {
             // Provider icon + name + status
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(Spacing.MediumSmall)
             ) {
                 Box(
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(ComponentSize.IconLarge)
                         .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.surfaceContainerHighest),
                     contentAlignment = Alignment.Center
@@ -484,16 +487,16 @@ private fun ProviderSettingsHeader(
 
             // Server Storage section — only shown when the provider reports usage.
             if (storage != null) {
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(Spacing.Medium))
                 Text(
                     text = stringResource(R.string.cloud_profile_storage),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(Spacing.Small))
                 SettingsStorageBar(storage = storage)
-                Spacer(Modifier.height(6.dp))
+                Spacer(Modifier.height(Spacing.Micro))
                 Text(
                     text = stringResource(
                         R.string.cloud_storage_used,
@@ -507,18 +510,18 @@ private fun ProviderSettingsHeader(
 
             // Info rows inside the card. Server version is only shown when the
             // provider actually reports one; the URL is always shown.
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(Spacing.Medium))
             HorizontalDivider(
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
             )
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(Spacing.MediumSmall))
             if (!version.isNullOrBlank()) {
                 InfoRow(
                     label = stringResource(R.string.cloud_server_version_label),
                     value = version
                 )
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(Spacing.Small))
             }
             InfoRow(
                 label = stringResource(R.string.cloud_server_url_label),
@@ -535,7 +538,7 @@ private fun InfoRow(label: String, value: String) {
     // instead of overlapping the label.
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.Medium),
         verticalAlignment = Alignment.Top
     ) {
         Text(
@@ -558,7 +561,7 @@ private fun SettingsStorageBar(storage: CloudStorageInfo?) {
     val fraction = ((storage?.usedPercentage ?: 0.0) / 100.0).toFloat().coerceIn(0f, 1f)
     val animatedFraction by animateFloatAsState(
         targetValue = fraction,
-        animationSpec = tween(durationMillis = 600),
+        animationSpec = tween(durationMillis = MotionSpec.ProgressMs),
         label = "storageFraction"
     )
     val pct = storage?.usedPercentage ?: 0.0
@@ -628,7 +631,7 @@ private fun SyncIntervalDialog(
                                     MaterialTheme.colorScheme.surface
                             )
                             .clickable { onSelect(minutes) }
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                            .padding(horizontal = Spacing.Medium, vertical = Spacing.MediumSmall),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
