@@ -253,7 +253,7 @@ jobs:
             fi
           }
 
-          TAG="${{ needs.prepare.outputs.versionName }}"
+          TAG="v${{ needs.prepare.outputs.versionName }}"
           CHANGELOG="${VERSION}-changelog.txt"
 
           cat .github/RELEASE_BODY.md >> "$CHANGELOG"
@@ -281,10 +281,10 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v3
         with:
-          name: ${{ env.VERSION }} Release
+          name: v${{ needs.prepare.outputs.versionName }}
           body_path: ${{ env.VERSION }}-changelog.txt
           prerelease: false
-          tag_name: ${{ needs.prepare.outputs.versionName }}
+          tag_name: v${{ needs.prepare.outputs.versionName }}
           files: |
             artifacts/**/*.apk
         env:
