@@ -69,6 +69,16 @@ class StoryCardsViewModel @Inject constructor(
     ) { config, media, albums, favorites, metadata ->
         if (!config.enabled || media.isEmpty()) return@combine emptyList()
 
+        // KTD2/R4 source scoping: excluded albums/categories/locations produce
+        // no card AND contribute no media to any card's mediaList. Computed
+        // once per emission so every builder resolves through the same set.
+        // Locked albums compose on top: their media is already absent from
+        // [media] (the main timeline drops it) but NOT from [favorites], so
+        // favorites are intersected with the filtered set below — closing the
+        // FAVORITES locked-media leak (AE2).
+        val scopedMedia = media.withoutExcludedSources(config, metadata)
+        val scopedIds = scopedMedia.mapTo(HashSet()) { it.id }
+
         val covers = CoverContext(
             favoriteIds = favorites.mapTo(HashSet()) { it.id },
             categorizedIds = repository.getAllClassifiedMediaIds().toSet(),
@@ -79,18 +89,21 @@ class StoryCardsViewModel @Inject constructor(
         for (type in config.activeTypes) {
             when (type) {
                 StoryCardType.MEMORIES -> {
-                    cards.addAll(buildMemoryCards(media, covers))
+                    cards.addAll(buildMemoryCards(scopedMedia, covers))
                 }
                 StoryCardType.ALBUMS -> {
-                    cards.addAll(buildAlbumCards(media, albums.albums, covers))
+                    cards.addAll(
+                        buildAlbumCards(scopedMedia, albums.albums, config.excludedAlbumIds, covers)
+                    )
                 }
                 StoryCardType.FAVORITES -> {
-                    if (favorites.isNotEmpty()) {
-                        cards.add(buildFavoritesCard(favorites, covers))
+                    val scopedFavorites = favorites.filter { it.id in scopedIds }
+                    if (scopedFavorites.isNotEmpty()) {
+                        cards.add(buildFavoritesCard(scopedFavorites, covers))
                     }
                 }
                 StoryCardType.LOCATIONS -> {
-                    cards.addAll(buildLocationCards(media, metadata, covers))
+                    cards.addAll(buildLocationCards(scopedMedia, metadata, covers))
                 }
                 StoryCardType.CATEGORIES -> {
                     // Categories are handled in the separate combine below
@@ -108,6 +121,44 @@ class StoryCardsViewModel @Inject constructor(
         }
         cards
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    /**
+     * KTD2 source scoping: removes media belonging to excluded albums,
+     * excluded `"city, country"` location keys (the same key
+     * [buildLocationCards] groups by), and excluded categories — categories
+     * are media-filtered like the other kinds, resolved to member media ids
+     * via [MediaRepository.getMediaIdsInCategoryAsync].
+     *
+     * Identity-based (id/albumID) exclusions can never match remote media:
+     * cloud media ids are strictly negative and their albumID is a cloud
+     * constant, so cloud-memory card mediaLists pass through this same filter
+     * harmlessly without special-casing.
+     */
+    private suspend fun List<Media.UriMedia>.withoutExcludedSources(
+        config: StoryCardsConfig,
+        metadata: List<MediaMetadata>,
+    ): List<Media.UriMedia> {
+        if (config.excludedAlbumIds.isEmpty() &&
+            config.excludedLocationKeys.isEmpty() &&
+            config.excludedCategoryIds.isEmpty()
+        ) {
+            return this
+        }
+        val excludedMediaIds = HashSet<Long>()
+        if (config.excludedLocationKeys.isNotEmpty()) {
+            for (meta in metadata) {
+                val city = meta.gpsLocationNameCity ?: continue
+                val country = meta.gpsLocationNameCountry ?: continue
+                if ("$city, $country" in config.excludedLocationKeys) {
+                    excludedMediaIds += meta.mediaId
+                }
+            }
+        }
+        for (categoryId in config.excludedCategoryIds) {
+            excludedMediaIds += repository.getMediaIdsInCategoryAsync(categoryId)
+        }
+        return filter { it.albumID !in config.excludedAlbumIds && it.id !in excludedMediaIds }
+    }
 
     private val _cloudMemoryCards = MutableStateFlow<List<StoryCard>>(emptyList())
 
@@ -160,7 +211,9 @@ class StoryCardsViewModel @Inject constructor(
         if (!config.enabled || StoryCardType.CATEGORIES in config.disabledTypes) {
             return@combine emptyList()
         }
-        val mediaMap = media.associateBy { it.id }
+        // KTD2: the same exclusion filter gates both card eligibility (below)
+        // and member media (the lookup map resolves through the filtered set).
+        val mediaMap = media.withoutExcludedSources(config, metadata).associateBy { it.id }
         // Members are uniformly categorized, so the categorized signal carries
         // no weight here — favorite/flagged/photo/screenshot still discriminate.
         val covers = CoverContext(
@@ -169,6 +222,7 @@ class StoryCardsViewModel @Inject constructor(
             metadataById = metadata.associateBy { it.mediaId },
         )
         categories.mapNotNull { cat ->
+            if (cat.id in config.excludedCategoryIds) return@mapNotNull null
             val mediaIds = repository.getMediaIdsInCategoryAsync(cat.id)
             val categoryMedia = mediaIds.mapNotNull { mediaMap[it] }
                 .sortedByDescending { it.definedTimestamp }
@@ -295,11 +349,14 @@ class StoryCardsViewModel @Inject constructor(
     private fun buildAlbumCards(
         media: List<Media.UriMedia>,
         albums: List<com.dot.gallery.feature_node.domain.model.Album>,
+        excludedAlbumIds: Set<Long>,
         covers: CoverContext
     ): List<StoryCard> {
-        // Pick recent/pinned albums with content, limit to 5
+        // Pick recent/pinned albums with content, limit to 5.
+        // Excluded albums are dropped from card eligibility alongside locked
+        // ones; their media is already absent from [media] (KTD2).
         val highlighted = albums
-            .filter { it.count > 0 && !it.isLocked }
+            .filter { it.count > 0 && !it.isLocked && it.id !in excludedAlbumIds }
             .sortedWith(
                 compareByDescending<com.dot.gallery.feature_node.domain.model.Album> { it.isPinned }
                     .thenByDescending { it.timestamp }
